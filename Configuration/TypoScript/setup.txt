@@ -1,0 +1,28 @@
+plugin.tx_tkblog{
+	settings {
+      
+	}
+	view {
+		templateRootPath = {$plugin.tx_tkblog.view.templateRootPath}
+		partialRootPath = {$plugin.tx_tkblog.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_tkblog.view.layoutRootPath}
+		}
+	}
+
+# Module configuration
+module.tx_tkblog {
+	settings < plugin.tx_tkblog.settings
+	persistence < plugin.tx_tkblog.persistence
+	view < plugin.tx_tkblog.view
+	view {
+		templateRootPath = {$module.tx_tkblog.view.templateRootPath}
+		partialRootPath = {$module.tx_tkblog.view.partialRootPath}
+		layoutRootPath = {$module.tx_tkblog.view.layoutRootPath}
+	}
+}
+
+lib.contentObject = COA
+    lib.contentObject {
+        10 = TEXT
+        10.value = juhu
+    }

@@ -1,0 +1,16 @@
+<f:layout name="default" />
+<f:section name="content">
+	<f:flashMessages />
+
+	<h1><f:translate key="tx_tkblog_domain_model_post.title" /></h1>
+
+	<f:for each="{posts}" as="post">
+		{post.title}<br>
+		{post.author}<br>
+		{post.tagclouds}<br>
+		{post.date -> f:format.date(format:'d.m.Y')}<br>
+		{post.archive -> f:format.date(format:'d.m.Y')}<br>
+		c<f:cObject typoscriptObjectPath="lib.contentObject22" />o<br><br>
+		</f:for>
+
+		</f:section>

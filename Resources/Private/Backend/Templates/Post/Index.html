@@ -1,0 +1,31 @@
+<f:layout name="default" />
+
+<f:section name="iconButtons">
+	
+</f:section>
+
+This Template is responsible for creating a table of domain objects.
+
+<f:section name="content">
+<h1>Listing for Post</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th><f:translate key="tx_tkblog_domain_model_post.title" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{posts}" as="post">
+		<tr>
+			<td><f:link.action action="show" arguments="{post : post}"> {post.title}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{post : post}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{post : post}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Post</f:link.action>
+</f:section>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Simple Blog extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_tkblog_domain_model_post">Post</label>
+			<label index="tx_tkblog_domain_model_post.title">title</label>
+			<label index="tx_tkblog_domain_model_post.category">post categories</label>
+			<label index="tx_tkblog_domain_model_post.comments">post comments</label>
+			<label index="tx_tkblog_domain_model_category">Category</label>
+			<label index="tx_tkblog_domain_model_comment">Comment</label>
+		</languageKey>
+	</data>
+</T3locallang>

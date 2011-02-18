@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'tkblog'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">		
+			<!--Flexform-->
+			<label index="flexform_options_general">TKBlog</label>
+			<label index="flexform_options_general_widgets">Widgets</label>
+			<label index="flexform_options_general_widgets_list">Bloglist</label>
+			<label index="flexform_options_general_widgets_single">Single View</label>
+			<label index="flexform_options_general_widgets_category">Categories</label>
+			
+			<!--Post-->
+			<label index="post">Post</label>
+			<label index="post_tab_post">Post</label>
+			<label index="post_tab_categorize">Categorize</label>
+			<label index="post_tab_interactive">Interactivity</label>
+			<label index="post_tab_access">Access</label>
+			<label index="post_palette_content">Content</label>
+			<label index="post_palette_tags">Tags</label>
+			<label index="post_palette_category">Category</label>
+			<label index="post_title">Title</label>
+			<label index="post_category">Categories</label>
+			<label index="post_author">Author</label>
+			<label index="post_date">Date &amp; Time</label>
+			<label index="post_archive">Archive Date</label>
+			<label index="post_content">Content Elements</label>
+			<label index="post_comments">Comments</label>
+			<label index="post_related">Related Posts</label>
+			<label index="post_allowComments">allow Comments</label>
+			<label index="post_allowComments.I.0">Everybody can comment this post</label>
+			<label index="post_allowComments.I.1">Nobody can comment this post</label>
+			<label index="post_allowComments.I.2">Only registered users can comment</label>
+			<label index="post_tags">Tag clouds (comma separated list)</label>
+			<label index="post_numberViews">Number of Views</label>
+			<label index="category">Category</label>
+			<label index="category_tab_categorize">Category</label>
+			<label index="category_tab_access">Access</label>
+			<label index="category_title">Category name</label>
+			<label index="category_description">Description</label>
+			<label index="category_parentcategory">Parent Category</label>
+			<label index="comment">Comment</label>
+		</languageKey>
+	</data>
+</T3locallang>

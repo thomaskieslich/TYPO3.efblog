@@ -1,0 +1,17 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+<f:section name="main">
+<h1>Edit Post</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="update" name="post" object="{post}">
+	<label for="title"><f:translate key="tx_tkblog_domain_model_post.title" /></label><br />
+	<f:form.textbox property="title" /><br />
+	<f:form.submit value="Edit" />
+</f:form>
+</f:section>
