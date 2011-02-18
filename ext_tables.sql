@@ -6,10 +6,10 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	
 	title varchar(255) DEFAULT '' NOT NULL,
 	author varchar(255) DEFAULT '' NOT NULL,
-	tag_cloud varchar(255) DEFAULT '' NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
 	archive int(11) DEFAULT '0' NOT NULL,
 	content int(11) DEFAULT '0' NOT NULL,
+	tags varchar(255) DEFAULT '' NOT NULL,
 	allow_comments int(11) DEFAULT '0' NOT NULL,
 	views int(11) DEFAULT '0' NOT NULL,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
@@ -37,6 +37,7 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
+
 
 
 CREATE TABLE tt_content (
