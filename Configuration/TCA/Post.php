@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_tkblog_domain_model_post'] = array (
 	'ctrl' => $TCA['tx_tkblog_domain_model_post']['ctrl'],
 	'interface' => array (
-		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,views,category,related_post'
+		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,views,category,related_post,fe_group'
 	),
 	'types' => array (
 		'0' => array (
@@ -24,7 +24,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
-					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_access;access,'
 		)
 	),
 	'palettes' => array (
@@ -43,7 +43,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'tags' => array (
 			'showitem' =>
-			'tagClouds;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags,',
+			'tags;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags,',
 			'canNotCollapse' => 1,
 		),
 		'category' => array (
@@ -53,17 +53,17 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'related' => array (
 			'showitem' =>
-			'related;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related,',
+			'related_post;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
 			'canNotCollapse' => 1,
 		),
 		'comments' => array (
 			'showitem' =>
-			'allowComments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments,',
+			'allow_comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments,',
 			'canNotCollapse' => 1,
 		),
 		'views' => array (
 			'showitem' =>
-			'numberViews;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_numberViews,',
+			'views;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_views,',
 			'canNotCollapse' => 1,
 		),
 		'visibility' => array (
@@ -73,58 +73,82 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'access' => array (
 			'showitem' =>
-			'starttime;LLL:EXT:cms/locallang_ttc.xml:starttime_formlabel, 
-			endtime;LLL:EXT:cms/locallang_ttc.xml:endtime_formlabel, --linebreak--, 
-			fe_group;LLL:EXT:cms/locallang_ttc.xml:fe_group_formlabel',
+			'fe_group;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_access,',
 			'canNotCollapse' => 1,
 		),
 	),
 	'columns' => array (
-		'sys_language_uid' => array(
-			'exclude'			=> 1,
-			'label'				=> 'LLL:EXT:lang/locallang_general.php:LGL.language',
-			'config'			=> array(
-				'type'					=> 'select',
-				'foreign_table'			=> 'sys_language',
-				'foreign_table_where'	=> 'ORDER BY sys_language.title',
-				'items' => array(
-					array('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
+		'sys_language_uid' => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'config' => array (
+				'type' => 'select',
+				'foreign_table' => 'sys_language',
+				'foreign_table_where' => 'ORDER BY sys_language.title',
+				'items' => array (
+					array ('LLL:EXT:lang/locallang_general.php:LGL.allLanguages', -1),
+					array ('LLL:EXT:lang/locallang_general.php:LGL.default_value', 0)
 				),
 			)
 		),
-		'l18n_parent' => array(
-			'displayCond'	=> 'FIELD:sys_language_uid:>:0',
-			'exclude'		=> 1,
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
-			'config'		=> array(
-				'type'			=> 'select',
-				'items'			=> array(
-					array('', 0),
+		'l18n_parent' => array (
+			'displayCond' => 'FIELD:sys_language_uid:>:0',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'config' => array (
+				'type' => 'select',
+				'items' => array (
+					array ('', 0),
 				),
 				'foreign_table' => 'tx_tkblog_domain_model_post',
 				'foreign_table_where' => 'AND tx_tkblog_domain_model_post.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_post.sys_language_uid IN (-1,0)',
 			)
 		),
-		'l18n_diffsource' => array(
-			'config'		=>array(
-				'type'		=>'passthrough',
+		'l18n_diffsource' => array (
+			'config' => array (
+				'type' => 'passthrough',
 			)
 		),
-		't3ver_label' => array(
-			'displayCond'	=> 'FIELD:t3ver_label:REQ:true',
-			'label'			=> 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
-			'config'		=> array(
-				'type'		=>'none',
-				'cols'		=> 27,
+		't3ver_label' => array (
+			'displayCond' => 'FIELD:t3ver_label:REQ:true',
+			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+			'config' => array (
+				'type' => 'none',
+				'cols' => 27,
 			)
 		),
-		'hidden' => array(
-			'exclude'	=> 1,
-			'label'		=> 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-			'config'	=> array(
-				'type'	=> 'check',
+		'hidden' => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'config' => array (
+				'type' => 'check',
 			)
+		),
+		'fe_group' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.fe_group',
+			'config' => array(
+				'type' => 'select',
+				'size' => 5,
+				'maxitems' => 20,
+				'items' => array(
+					array(
+						'LLL:EXT:lang/locallang_general.xml:LGL.hide_at_login',
+						-1,
+					),
+					array(
+						'LLL:EXT:lang/locallang_general.xml:LGL.any_login',
+						-2,
+					),
+					array(
+						'LLL:EXT:lang/locallang_general.xml:LGL.usergroups',
+						'--div--',
+					),
+				),
+				'exclusiveKeys' => '-1,-2',
+				'foreign_table' => 'fe_groups',
+				'foreign_table_where' => 'ORDER BY fe_groups.title',
+			),
 		),
 		'title' => array (
 			'exclude' => 0,
@@ -150,12 +174,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'max' => '20',
 				'eval' => 'datetime',
 				'checkbox' => '0',
-				'default' => mktime(date("H"),
-						date("i"),
-						0,
-						date("m"),
-						date("d"),
-						date("Y"))
+				'default' => mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"))
 			)
 		),
 		'archive' => Array (
@@ -177,7 +196,9 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'foreign_table' => 'tt_content',
 				'foreign_field' => 'irre_parentid',
 				'foreign_table_field' => 'irre_parenttable',
-				'maxitems' => 100,
+				'foreign_label' => 'header',
+				'foreign_selector' => 'layout',
+				'maxitems' => 99,
 				//'localisationMode' => 'keep',
 				'appearance' => array (
 					'showSynchronizationLink' => 1,
@@ -268,7 +289,5 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 			)
 		),
 	),
-	
-	
 );
 ?>

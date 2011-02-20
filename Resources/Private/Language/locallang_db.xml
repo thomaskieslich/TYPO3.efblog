@@ -22,6 +22,7 @@
 			<label index="post_palette_content">Content</label>
 			<label index="post_palette_tags">Tags</label>
 			<label index="post_palette_category">Category</label>
+			<label index="post_palette_access">Access Rights</label>
 			<label index="post_title">Title</label>
 			<label index="post_category">Categories</label>
 			<label index="post_author">Author</label>

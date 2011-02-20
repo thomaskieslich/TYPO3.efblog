@@ -118,7 +118,7 @@ t3lib_extMgm::addToInsertRecords('tx_tkblog_domain_model_post');
 
 $TCA['tx_tkblog_domain_model_post'] = array (
 	'ctrl' => array (
-		'title'             => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post',
+		'title'             => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post',
 		'label' 			=> 'title',
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',
@@ -130,10 +130,12 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
-			'disabled' => 'hidden'
+			'disabled' => 'hidden',
+			'fe_group' => 'fe_group',
 			),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Post.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_tkblog_domain_model_post.gif'
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_tkblog_domain_model_post.gif',
+		'dividers2tabs' => 1
 	)
 );
 

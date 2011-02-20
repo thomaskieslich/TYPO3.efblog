@@ -19,6 +19,7 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	fe_group varchar(100) DEFAULT '0' NOT NULL,
 
 	t3ver_oid int(11) DEFAULT '0' NOT NULL,
 	t3ver_id int(11) DEFAULT '0' NOT NULL,
@@ -45,6 +46,15 @@ CREATE TABLE tt_content (
 	irre_parenttable tinytext NOT NULL,
 
 	KEY tkblog (irre_parentid,sorting)
+);
+
+CREATE TABLE tx_tkblog_domain_model_post_content_rel (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	postid int(11) NOT NULL auto_increment,
+	contentid int(11) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid),
+	KEY parent (pid)
 );
 
 CREATE TABLE tx_tkblog_domain_model_post_category_mm (
