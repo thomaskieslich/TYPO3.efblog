@@ -1,0 +1,26 @@
+/*Paginator*/
+.tx-tkblog-widget-paginator{
+	height: 22px;
+	background-color: #eee;
+	padding-top: 6px;
+}
+.tx-tkblog-widget-paginator ul{
+	list-style: none inside none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+.tx-tkblog-widget-paginator li{
+	display: inline;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0 5px 0 0;
+}
+
+.tx-tkblog-widget-paginator li a{
+	font-size: 14px;
+	font-weight: bold;
+	color: #f90;
+}
+

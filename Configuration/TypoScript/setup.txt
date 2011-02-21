@@ -1,12 +1,46 @@
+page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
+//page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
+
 plugin.tx_tkblog{
 	settings {
-      
+      displayList{
+		renderFluid = 1
+		renderTS = 0	
+		cropText = 122
+		images = 2
+		imageWidth = 
+		imageHeight = 100m
+		pagerEnabled = 1
+		itemsPerPage = 1
+		pagerAbove = 1
+		pagerBelow = 
+	  }
+	}
+	persistence{
+		classes{
+			Tx_Tkblog_Domain_Model_Content{
+				mapping {
+					tableName = tt_content
+					columns{
+					}
+				}
+		}
+		}
 	}
 	view {
 		templateRootPath = {$plugin.tx_tkblog.view.templateRootPath}
 		partialRootPath = {$plugin.tx_tkblog.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_tkblog.view.layoutRootPath}
 		}
+	renderElement = COA
+	renderElement {
+				10 = RECORDS
+				10 {
+					source.field = uid
+					tables = tt_content
+					conf.tt_content < tt_content
+				}
+			}
 	}
 
 # Module configuration
@@ -20,9 +54,4 @@ module.tx_tkblog {
 		layoutRootPath = {$module.tx_tkblog.view.layoutRootPath}
 	}
 }
-
-lib.contentObject = COA
-    lib.contentObject {
-        10 = TEXT
-        10.value = juhu
-    }
+   

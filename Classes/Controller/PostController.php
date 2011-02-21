@@ -53,13 +53,25 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 * @return string The rendered list action
 	 */
 	public function listAction() {
-//		t3lib_utility_Debug::debug($this->postRepository->findAll());
-//		var_dump($this->postRepository->findByUid(1));
+		$pagerConfig = array(
+//			'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
+//			'insertAbove' => $this->settings['displayList']['pagerAbove'],
+//			'insertBelow' => $this->settings['displayList']['pagerBelow'],
+			'itemsPerPage' => 1,
+			'insertAbove' => 1,
+			'insertBelow' => 1,
+			'pagesAfter' => 2,
+			'pagesBefore' => 2,
+			'lessPages' => 0,
+			'forcedNumberOfLinks' => 3
+		);
+		$this->view->assign('pagerConfig', $pagerConfig);
+		
 		$this->view->assign('posts', $this->postRepository->findAll());
 	}
 	
-	public function singleAction() {
-		//$this->view->assign('posts', $this->postRepository->findAll());
+	public function singleAction(Tx_Tkblog_Domain_Model_Post $post) {
+		$this->view->assign('post', $post);
 	}
 	
 }

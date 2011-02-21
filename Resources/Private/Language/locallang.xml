@@ -6,12 +6,19 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_tkblog_domain_model_post">Post</label>
-			<label index="tx_tkblog_domain_model_post.title">title</label>
-			<label index="tx_tkblog_domain_model_post.category">post categories</label>
-			<label index="tx_tkblog_domain_model_post.comments">post comments</label>
-			<label index="tx_tkblog_domain_model_category">Category</label>
-			<label index="tx_tkblog_domain_model_comment">Comment</label>
+			<label index="post">Post</label>
+			<label index="post_title">title</label>
+			<label index="post_category">post categories</label>
+			<label index="post_comments">post comments</label>
+			<label index="category">Category</label>
+			<label index="comment">Comment</label>
+			<!--Links-->
+			<label index="link_backToList">Back to List</label>
+<!--			Paginator-->
+			<label index="paginator_first">&lt;&lt; first</label>
+			<label index="paginator_previous">&lt; previous</label>
+			
+			
 		</languageKey>
 	</data>
 </T3locallang>

@@ -1,16 +1,53 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
 	<f:flashMessages />
+	<tk:widget.paginate objects="{posts}"  as="pagedPosts" configuration="{pagerConfig}">
+		<f:for each="{pagedPosts}" as="post">
+				<div style="display: block; border: 1px solid #ccc; margin-bottom: 8px;">
+		{post.title},
+		{post.author},		
+		{post.tags},
+		{post.date -> f:format.date(format:'d.m.Y')},
+		{post.archive -> f:format.date(format:'d.m.Y')},
+		Allow Comments: {post.allowComments}<br>
+				<f:for each="{post.category}" as="category">
+		  {category.title},
+				</f:for>
+				<f:link.action action="single" arguments="{post : post}" title="view">single</f:link.action>
+				<f:for each="{post.relatedPost}" as="related">
+		  {related.title}
+				</f:for>
 
-	<h1><f:translate key="tx_tkblog_domain_model_post.title" /></h1>
+				<f:for each="{post.content}" as="element"  iteration="elementIterator">
+					<f:if condition="{elementIterator.isFirst}">
+						<f:if condition="{settings.displayList.renderFluid}">
+							<!--Fluid Teaser-->
+							<h1>{element.header}</h1>
+							<f:format.crop maxCharacters="{settings.displayList.cropText}">
+								<f:format.html>						
+						{element.bodytext}						
+								</f:format.html>
+							</f:format.crop>
 
-	<f:for each="{posts}" as="post">
-		{post.title}<br>
-		{post.author}<br>
-		{post.tagclouds}<br>
-		{post.date -> f:format.date(format:'d.m.Y')}<br>
-		{post.archive -> f:format.date(format:'d.m.Y')}<br>
-		c<f:cObject typoscriptObjectPath="lib.contentObject22" />o<br><br>
+
+							<f:for each="{element.image}" as="image" key="imageNumber">	
+								<f:if condition="{imageNumber} < {settings.displayList.images}">
+									<f:image src="uploads/pics/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
+								</f:if>
+							</f:for>
+						</f:if>
+						<f:if condition="{settings.displayList.renderTS}">
+							<!-- TS Teaser -->
+							<f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+						</f:if>
+
+					</f:if>
+
+				</f:for>
+
+
+			</div>
 		</f:for>
-
-		</f:section>
+	</tk:widget.paginate>
+</f:section>

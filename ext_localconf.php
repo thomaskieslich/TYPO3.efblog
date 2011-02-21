@@ -5,13 +5,13 @@ if (!defined ('TYPO3_MODE')) {
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi1',
+	'fe1',
 	array(
 		'Post' => 'list,single',
 		'Category' => 'list,single'
 	),
 	array(
-		'Post' => 'list,single',
+		//'Post' => 'list,single',
 	)
 );
 
