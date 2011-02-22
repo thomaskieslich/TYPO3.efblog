@@ -17,6 +17,8 @@
 <!--			Paginator-->
 			<label index="paginator_first">&lt;&lt; first</label>
 			<label index="paginator_previous">&lt; previous</label>
+			<label index="paginator_next">next &gt;</label>
+			<label index="paginator_last">last &gt;&gt;</label>
 			
 			
 		</languageKey>

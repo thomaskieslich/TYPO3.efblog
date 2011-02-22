@@ -9,28 +9,30 @@
 </f:if>
 
 <f:section name="paginator">
-	before: {pagination.pagesBefore} <br />
- 	after: {pagination.pagesAfter}
 	<div class="tx-tkblog-widget-paginator">
 		<ul>
 			<li class="first">
-			<f:widget.link arguments="{currentPage: 0}"><f:translate key='paginator_first' /></f:widget.link>
+			<f:if condition="{pagination.previousPage} > 0">
+				<f:then>
+					<f:widget.link arguments="{currentPage: 1}"><f:translate key='paginator_first' /></f:widget.link>
+				</f:then>
+				<f:else>
+					<f:translate key='paginator_first' />
+				</f:else>
+			</f:if>
 			</li>
-			<f:if condition="{pagination.previousPage}">
-				<li class="previous">
-				<f:if condition="{pagination.previousPage} > 1">
-					<f:then>
-						<f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key='paginator_previous' /></f:widget.link>
-					</f:then>
-					<f:else>
-						<f:widget.link><f:translate key='paginator_previous' /></f:widget.link>
-					</f:else>
-				</f:if>
-				</li>
+			<!--Previous-->
+			<li class="previous">
+			<f:if condition="{pagination.previousPage} > 0">
+				<f:then>
+					<f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key='paginator_previous' /></f:widget.link>
+				</f:then>
+				<f:else>
+					<f:translate key='paginator_previous' />
+				</f:else>
 			</f:if>
-			<f:if condition="{pagination.lessPages}">
-				<li>....</li>
-			</f:if>
+			</li>
+
 			<f:for each="{pagination.pages}" as="page">
 				<f:if condition="{page.isCurrent}">
 					<f:then>
@@ -52,13 +54,25 @@
 					</f:else>
 				</f:if>
 			</f:for>
-			<f:if condition="{pagination.morePages}">
-				<li>....</li>
-			</f:if>	
+
+
 			<f:if condition="{pagination.nextPage}">
-				<li class="next">
-				<f:widget.link arguments="{currentPage: pagination.nextPage}">next</f:widget.link>
-				</li>
+				<f:then>
+					<li class="next">
+					<f:widget.link arguments="{currentPage: pagination.nextPage}"><f:translate key='paginator_next' /></f:widget.link>
+					</li>
+					<li class="last">
+					<f:widget.link arguments="{currentPage: pagination.numberOfPages}"><f:translate key='paginator_last' /></f:widget.link>
+					</li>
+				</f:then>
+				<f:else>
+					<li class="next">
+					<f:translate key='paginator_next' />
+					</li>
+					<li class="last">
+					<f:translate key='paginator_last' />
+					</li>
+				</f:else>
 			</f:if>
 		</ul>
 	</div>

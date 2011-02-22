@@ -36,7 +36,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	/**
 	 * @var array
 	 */
-	protected $configuration = array ('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'pagesAfter' => 3, 'pagesBefore' => 3, 'lessPages' => TRUE, 'forcedNumberOfLinks' => 8);
+	protected $configuration = array ('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maxPages' => 5);
 	/**
 	 * @var Tx_Extbase_Persistence_QueryResultInterface
 	 */
@@ -52,19 +52,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	/**
 	 * @var integer
 	 */
-	protected $pagesBefore = 1;
-	/**
-	 * @var integer
-	 */
-	protected $pagesAfter = 1;
-	/**
-	 * @var boolean
-	 */
-	protected $lessPages = FALSE;
-	/**
-	 * @var integer
-	 */
-	protected $forcedNumberOfLinks = 8;
+	protected $maxPages = 5;
 
 	/**
 	 * @return void
@@ -73,45 +61,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 		$this->objects = $this->widgetConfiguration['objects'];
 		$this->configuration = t3lib_div::array_merge_recursive_overrule($this->configuration, $this->widgetConfiguration['configuration'], TRUE);
 		$this->numberOfPages = ceil(count($this->objects) / (integer) $this->configuration['itemsPerPage']);
-		$this->pagesBefore = (integer) $this->configuration['pagesBefore'];
-		$this->pagesAfter = (integer) $this->configuration['pagesAfter'];
-		$this->lessPages = (boolean) $this->configuration['lessPages'];
-		$this->forcedNumberOfLinks = (integer) $this->configuration['forcedNumberOfLinks'];
-	}
-
-	/**
-	 * If a certain number of links should be displayed, adjust before and after
-	 * amounts accordingly.
-	 *
-	 * @return void
-	 */
-	protected function adjustForForcedNumberOfLinks() {
-		$forcedNumberOfLinks = $this->forcedNumberOfLinks;
-		if ($forcedNumberOfLinks > $this->numberOfPages) {
-			$forcedNumberOfLinks = $this->numberOfPages;
-		}
-		$totalNumberOfLinks = min($this->currentPage, $this->pagesBefore) +
-				min($this->pagesAfter, $this->numberOfPages - $this->currentPage) + 1;
-
-		echo $totalNumberOfLinks . ' -. ' . $forcedNumberOfLinks;
-		;
-		if ($totalNumberOfLinks <= $forcedNumberOfLinks) {
-			$delta = intval(ceil(($forcedNumberOfLinks - $totalNumberOfLinks) / 2));
-			$incr = ($forcedNumberOfLinks & 1) == 0 ? 1 : 0;
-			if ($this->currentPage - ($this->pagesBefore + $delta) < 1) {
-				// Too little from the right to adjust
-				$this->pagesAfter = $forcedNumberOfLinks - $this->currentPage - 1;
-				$this->pagesBefore = $forcedNumberOfLinks - $this->pagesAfter - 1;
-			}
-			elseif ($this->currentPage + ($this->pagesAfter + $delta) >= $this->numberOfPages) {
-				$this->pagesBefore = $forcedNumberOfLinks - ($this->numberOfPages - $this->currentPage);
-				$this->pagesAfter = $forcedNumberOfLinks - $this->pagesBefore - 1;
-			}
-			else {
-				$this->pagesBefore += $delta;
-				$this->pagesAfter += $delta - $incr;
-			}
-		}
+		$this->maxPages = (integer) $this->configuration['maxPages'];
 	}
 
 	/**
@@ -150,34 +100,23 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	 * @return array
 	 */
 	protected function buildPager() {
-		$this->adjustForForcedNumberOfLinks();
 		$pages = array ();
-		$start = max($this->currentPage - $this->pagesBefore, 1);
-		$end = min($this->numberOfPages, $this->currentPage + $this->pagesAfter + 1);
-		for ($i = $start; $i < $end; $i++) {
-			$pages[] = array ('number' => $i, 'isCurrent' => ($i === $this->currentPage));
+		$start = min($this->currentPage, $this->numberOfPages - $this->maxPages + 1);
+		$end = min($this->numberOfPages, $this->currentPage + $this->maxPages - 1);
+		for ($i = $start; $i <= $end; $i++) {
+			$pages[] = array ('number' => $i, 'isCurrent' => ($i == $this->currentPage));
 		}
-		var_dump($pages);
+
 		$pagination = array (
 			'pages' => $pages,
 			'current' => $this->currentPage,
-			'numberOfPages' => $this->numberOfPages,
-			'pagesBefore' => $this->pagesBefore,
-			'pagesAfter' => $this->pagesAfter,
+			'numberOfPages' => $this->numberOfPages
 		);
 		if ($this->currentPage < $this->numberOfPages) {
 			$pagination['nextPage'] = $this->currentPage + 1;
 		}
 		if ($this->currentPage > 1) {
 			$pagination['previousPage'] = $this->currentPage - 1;
-		}
-		// Less pages
-		if ($start > 0 && $this->lessPages) {
-			$pagination['lessPages'] = TRUE;
-		}
-		// More pages
-		if ($end != $this->numberOfPages && $this->lessPages) {
-			$pagination['morePages'] = TRUE;
 		}
 		return $pagination;
 	}

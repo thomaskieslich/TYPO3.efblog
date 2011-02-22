@@ -3,18 +3,25 @@ page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
 
 plugin.tx_tkblog{
 	settings {
-      displayList{
+		displayList{
 		renderFluid = 1
 		renderTS = 0	
 		cropText = 122
 		images = 2
 		imageWidth = 
 		imageHeight = 100m
-		pagerEnabled = 1
-		itemsPerPage = 1
-		pagerAbove = 1
-		pagerBelow = 
-	  }
+
+		itemsPerPage = 2
+		insertAbove = 1
+		insertBelow = 1
+		maxPages = 3
+		}
+
+		displaySingle{
+			pagerEnabled = 1
+			divType = div
+			hideDivider = 1
+		}
 	}
 	persistence{
 		classes{
@@ -22,6 +29,7 @@ plugin.tx_tkblog{
 				mapping {
 					tableName = tt_content
 					columns{
+						CType.mapOnProperty = ctype
 					}
 				}
 		}
