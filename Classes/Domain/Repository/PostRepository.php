@@ -31,5 +31,16 @@
  */
 class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 	
+	public function findLatest($limit) {
+		$query = $this->createQuery();
+		$query->setOrderings(
+					array(
+						'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+					)
+			);
+		$query->setLimit($limit);
+
+		return $query->execute();
+	}
 }
 ?>

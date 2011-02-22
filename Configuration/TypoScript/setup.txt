@@ -4,23 +4,27 @@ page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
 plugin.tx_tkblog{
 	settings {
 		displayList{
-		renderFluid = 1
-		renderTS = 0	
-		cropText = 122
-		images = 2
-		imageWidth = 
-		imageHeight = 100m
+			renderFluid = 1
+			renderTS = 0	
+			cropText = 122
+			images = 2
+			imageWidth = 
+			imageHeight = 100m
 
-		itemsPerPage = 2
-		insertAbove = 1
-		insertBelow = 1
-		maxPages = 3
+			itemsPerPage = 2
+			insertAbove = 1
+			insertBelow = 1
+			maxPages = 3
 		}
 
 		displaySingle{
 			pagerEnabled = 1
 			divType = div
 			hideDivider = 1
+		}
+
+		latestWidget{
+			maxEntrys = 6
 		}
 	}
 	persistence{

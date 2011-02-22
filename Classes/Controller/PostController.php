@@ -108,6 +108,11 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$post->setViews($currentViews + 1);
 		}
 	}
+	
+	public function latestWidgetAction(){
+		$this->view->assign('posts', $this->postRepository->findLatest((int)$this->settings['latestWidget']['maxEntrys']));
+		$this->view->assign('backURI', $this->request->getRequestURI());
+	}
 
 }
 

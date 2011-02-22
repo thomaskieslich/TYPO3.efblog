@@ -11,6 +11,7 @@
 			<label index="flexform_options_general_widgets">Widgets</label>
 			<label index="flexform_options_general_widgets_list">Bloglist</label>
 			<label index="flexform_options_general_widgets_single">Single View</label>
+			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
 			<label index="flexform_options_general_widgets_category">Categories</label>
 			
 			<!--Post-->

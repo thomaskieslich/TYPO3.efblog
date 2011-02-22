@@ -22,12 +22,8 @@
 										<numIndex index="1">Post->list;Post->single</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_single</numIndex>
-										<numIndex index="1">Post->single;Post->list</numIndex>
-									</numIndex>
-									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_category</numIndex>
-										<numIndex index="1">Category->list</numIndex>
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latest</numIndex>
+										<numIndex index="1">Post->latestWidget;Post->single</numIndex>
 									</numIndex>
 								</items>
 								<minitems>1</minitems>
