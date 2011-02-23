@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_tkblog_domain_model_post'] = array (
 	'ctrl' => $TCA['tx_tkblog_domain_model_post']['ctrl'],
 	'interface' => array (
-		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,views,category,related_post,fe_group'
+		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,crop_teaser,views,category,related_post,fe_group'
 	),
 	'types' => array (
 		'0' => array (
@@ -21,6 +21,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related;related,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments;comments,
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser;crop,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
@@ -59,6 +60,11 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		'comments' => array (
 			'showitem' =>
 			'allow_comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments,',
+			'canNotCollapse' => 1,
+		),		
+		'crop' => array (
+			'showitem' =>
+			'crop_teaser;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser,',
 			'canNotCollapse' => 1,
 		),
 		'views' => array (
@@ -273,6 +279,14 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.2', '2'),
 				),
 			)
+		),
+		'crop_teaser' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.crop_teaser',
+			'config'	=> array(
+				'type' => 'check',
+				'default' => 1
+			),
 		),
 		'views' => Array (
 			'exclude' => 0,

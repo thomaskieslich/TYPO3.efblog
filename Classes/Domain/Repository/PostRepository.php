@@ -42,5 +42,17 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 
 		return $query->execute();
 	}
+	
+	public function findViews($limit) {
+		$query = $this->createQuery();
+		$query->setOrderings(
+					array(
+						'views' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+					)
+			);
+		$query->setLimit($limit);
+
+		return $query->execute();
+	}
 }
 ?>

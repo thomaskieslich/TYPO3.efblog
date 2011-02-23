@@ -2,9 +2,24 @@
 <f:section name="content">
 	<div>
 		<f:for each="{posts}" as="post">
-			<f:link.action action="single" arguments="{post : post, backURI : backURI, counter : 1}">
-				{post.title}
-			</f:link.action><br>
+			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'single', post : post, backURI : backURI, counter : 1}}">
+
+				<f:if condition="{settings.latestWidget.teaserHeader} == 0">
+					<f:then>
+						<f:format.crop maxCharacters="{settings.latestWidget.cropLink}" append="{f:translate(key : 'widget_latest_more')}">
+							{post.title}
+						</f:format.crop>
+					</f:then>
+					<f:else>
+						<f:for each="{post.content}" as="element"  iteration="elementIterator">
+							<f:if condition="{elementIterator.isFirst}">			
+								{element.header -> f:format.crop(maxCharacters: '{settings.latestWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
+							</f:if>
+						</f:for>
+					</f:else>
+				</f:if>
+				<f:if condition="{settings.latestWidget.showViews}">({post.views})</f:if>
+			</f:link.page><br>
 		</f:for>
 	</div>
 </f:section>

@@ -11,6 +11,7 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	content int(11) DEFAULT '0' NOT NULL,
 	tags varchar(255) DEFAULT '' NOT NULL,
 	allow_comments int(11) DEFAULT '0' NOT NULL,
+	crop_teaser int(11) DEFAULT '0' NOT NULL,
 	views int(11) DEFAULT '0' NOT NULL,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
 	related_post int(11) unsigned DEFAULT '0' NOT NULL,

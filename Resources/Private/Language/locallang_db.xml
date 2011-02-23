@@ -5,14 +5,19 @@
 		<description>Language labels for database tables/fields belonging to extension 'tkblog'</description>
 	</meta>
 	<data type="array">
-		<languageKey index="default" type="array">		
+		<languageKey index="default" type="array">	
+			<!--Plugin-->
+			<label index="plugin_fe1_title">TK Simple Blog</label>
+			
 			<!--Flexform-->
-			<label index="flexform_options_general">TKBlog</label>
+			<label index="flexform_options_general">TKBlog</label>			
 			<label index="flexform_options_general_widgets">Widgets</label>
 			<label index="flexform_options_general_widgets_list">Bloglist</label>
 			<label index="flexform_options_general_widgets_single">Single View</label>
 			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
+			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
 			<label index="flexform_options_general_widgets_category">Categories</label>
+			<label index="flexform_options_general_storage">Startingpoint</label>
 			
 			<!--Post-->
 			<label index="post">Post</label>
@@ -37,6 +42,7 @@
 			<label index="post_allowComments.I.1">Nobody can comment this post</label>
 			<label index="post_allowComments.I.2">Only registered users can comment</label>
 			<label index="post_tags">Tag clouds (comma separated list)</label>
+			<label index="post_cropTeaser">Crop Teaser</label>
 			<label index="post_numberViews">Number of Views</label>
 			<label index="category">Category</label>
 			<label index="category_tab_categorize">Category</label>

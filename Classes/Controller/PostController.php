@@ -33,6 +33,14 @@
 class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
+	 * @var	array
+	 */
+	protected $settings;
+	/**
+	 * @var	array
+	 */
+	protected $persistence;
+	/**
 	 * @var Tx_Tkblog_Domain_Repository_PostRepository
 	 */
 	protected $postRepository;
@@ -44,6 +52,9 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 */
 	protected function initializeAction() {
 		$this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
+		$framework = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$this->settings = $framework['settings'];
+		$this->persistence = $framework['persistence'];
 	}
 
 	/**
@@ -107,11 +118,31 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
 		}
+		
+		//render Description
+		$singleCounter = 0;
+		foreach ($content as $element) {
+			if($singleCounter == 0 && $element->getBodytext()){
+				$description = $element->getBodytext();
+				$singleCounter++;
+			}			
+		}
+		
+		$this->view->assign('description', strip_tags($description));
+	}
+
+	public function latestWidgetAction() {
+		$this->view->assign('pageUri', $this->persistence['storagePid']);
+		$this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
+		$this->view->assign('backURI', $this->request->getRequestURI());
 	}
 	
-	public function latestWidgetAction(){
-		$this->view->assign('posts', $this->postRepository->findLatest((int)$this->settings['latestWidget']['maxEntrys']));
+	public function viewsWidgetAction() {
+//		t3lib_utility_Debug::debug($GLOBALS['TSFE']->config['config']['noPageTitle']);
+		$this->view->assign('pageUri', $this->persistence['storagePid']);
+		$this->view->assign('posts', $this->postRepository->findViews((int) $this->settings['viewsWidget']['maxEntrys']));
 		$this->view->assign('backURI', $this->request->getRequestURI());
+		$this->view->assign('backTitle', 'HuHu');
 	}
 
 }

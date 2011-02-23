@@ -3,10 +3,15 @@ page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
 
 plugin.tx_tkblog{
 	settings {
+		replaceTitle = 1
+		replaceDescription = 1
+		replaceKeywords = 1
+
 		displayList{
+			blogTitle = Testblog
 			renderFluid = 1
 			renderTS = 0	
-			cropText = 122
+			cropText = 188
 			images = 2
 			imageWidth = 
 			imageHeight = 100m
@@ -25,6 +30,15 @@ plugin.tx_tkblog{
 
 		latestWidget{
 			maxEntrys = 6
+			cropLink = 12
+			showViews = 1
+			teaserHeader = 1
+		}
+
+		viewsWidget{
+			maxEntrys = 4
+			cropLink = 12
+			teaserHeader = 1
 		}
 	}
 	persistence{

@@ -83,6 +83,13 @@
 	 * @var string $allowComments
 	 */
 	protected $allowComments;
+	
+	/**
+	 * crop Teaser
+	 *
+	 * @var integer
+	 */
+	protected $cropTeaser;
 
 	/**
 	 * number of views
@@ -180,6 +187,25 @@
 	public function getArchive() {
 		return $this->archive;
 	}
+	
+	/**
+	 * Returns the tags
+	 *
+	 * @return string $tags
+	 */
+	public function getTags() {
+		return $this->tags;
+	}
+
+	/**
+	 * Sets the tags
+	 *
+	 * @param string $tags
+	 * @return void
+	 */
+	public function setTags($tags) {
+		$this->tags = $tags;
+	}
 
 	/**
 	 * Sets the archive
@@ -208,6 +234,25 @@
 	 */
 	public function setAllowComments($allowComments) {
 		$this->allowComments = $allowComments;
+	}
+	
+	/**
+	 * Returns the cropTeaser
+	 *
+	 * @return integer $cropTeaser
+	 */
+	public function getCropTeaser() {
+		return $this->cropTeaser;
+	}
+
+	/**
+	 * Sets the cropTeaser
+	 *
+	 * @param integer $cropTeaser
+	 * @return void
+	 */
+	public function setCropTeaser($cropTeaser) {
+		$this->cropTeaser = $cropTeaser;
 	}
 
 	/**
@@ -340,25 +385,6 @@
 	 */
 	public function setContent($content) {
 		$this->content = $content;
-	}
-
-	/**
-	 * Returns the tags
-	 *
-	 * @return string $tags
-	 */
-	public function getTags() {
-		return $this->tags;
-	}
-
-	/**
-	 * Sets the tags
-	 *
-	 * @param string $tags
-	 * @return void
-	 */
-	public function setTags($tags) {
-		$this->tags = $tags;
 	}
 
 }

@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) die('Access denied.');
 Tx_Extbase_Utility_Extension::registerPlugin(
 				$_EXTKEY,
 				'fe1',
-				'TK Simple Blog'
+				'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:plugin_fe1_title'
 );
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_fe1'] = 'layout,select_key,recursive';
