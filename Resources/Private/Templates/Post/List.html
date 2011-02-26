@@ -2,7 +2,7 @@
 <f:layout name="default" />
 <f:section name="content">
 	<f:flashMessages />
-	
+
 	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'prepend')}
 	<tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
 		<f:for each="{paginatedPosts}" as="post">
@@ -16,7 +16,7 @@
 				<f:for each="{post.category}" as="category">
 		  {category.title},
 				</f:for>
-				<f:link.action action="single" arguments="{post : post, backURI : backURI, counter : 1}" title="view">single</f:link.action>
+				<f:link.action action="single" arguments="{post : post, backURI : backURI, backTitle: pageTitle, counter : 1}" title="view">single</f:link.action>
 				<f:for each="{post.relatedPost}" as="related">
 		  {related.title}
 				</f:for>
@@ -26,16 +26,16 @@
 						<f:if condition="{settings.displayList.renderFluid}">
 							<!--Fluid Teaser-->
 							<h1>{element.header}</h1>
-								<f:if condition="{post.cropTeaser} == 1">
-									<f:then>
+							<f:if condition="{post.cropTeaser} == 1">
+								<f:then>
 										{element.bodytext -> f:format.html() -> 
 										f:format.crop(maxCharacters: '{settings.displayList.cropText}',  
 										append: '{f:translate(key : "teaser_more")}')}
-									</f:then>
-									<f:else>			
+								</f:then>
+								<f:else>			
 										{element.bodytext -> f:format.html()}
-									</f:else>
-								</f:if>
+								</f:else>
+							</f:if>
 
 
 							<f:for each="{element.image}" as="image" key="imageNumber">	

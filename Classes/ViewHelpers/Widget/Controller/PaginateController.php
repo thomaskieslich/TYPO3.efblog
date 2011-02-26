@@ -101,7 +101,10 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	 */
 	protected function buildPager() {
 		$pages = array ();
-		$start = min($this->currentPage, $this->numberOfPages - $this->maxPages + 1);
+		$start = 1;
+		if($this->numberOfPages > $this->maxPages){
+			$start = min($this->currentPage, $this->numberOfPages - $this->maxPages + 1);
+		}
 		$end = min($this->numberOfPages, $this->currentPage + $this->maxPages - 1);
 		for ($i = $start; $i <= $end; $i++) {
 			$pages[] = array ('number' => $i, 'isCurrent' => ($i == $this->currentPage));
@@ -118,7 +121,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 		if ($this->currentPage > 1) {
 			$pagination['previousPage'] = $this->currentPage - 1;
 		}
-		return $pagination;
+		return $pagination;		
 	}
 
 }

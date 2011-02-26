@@ -2,7 +2,7 @@
 <f:section name="content">
 	<div>
 		<f:for each="{posts}" as="post">
-			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'single', post : post, backURI : backURI, counter : 1}}">
+			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'single', post : post, backURI : backURI, backTitle: pageTitle, counter : 1}}">
 
 				<f:if condition="{settings.latestWidget.teaserHeader} == 0">
 					<f:then>

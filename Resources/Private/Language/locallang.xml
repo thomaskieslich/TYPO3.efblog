@@ -14,7 +14,7 @@
 			<label index="comment">Comment</label>
 			
 			<!--Links-->
-			<label index="link_backToList">Back to List</label>
+			<label index="link_backTo">Back to: </label>
 			
 			<!--Paginator-->
 			<label index="paginator_first">&lt;&lt; first</label>

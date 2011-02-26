@@ -9,10 +9,10 @@
 					->tk:document.description()}
 	<f:if condition="{backURI}">
 		<f:then>
-			<f:link.external uri="{backURI}">{f:translate(key : 'link_backToList')}</f:link.external><br>
+			<f:link.external uri="{backURI}">{f:translate(key : 'link_backTo')} {backTitle}</f:link.external><br>
 		</f:then>
 		<f:else>
-			<f:link.action  action="list">{f:translate(key : 'link_backToList')}</f:link.action><br>
+			<f:link.action  action="list">{f:translate(key : 'link_backTo')} {backTitle}</f:link.action><br>
 		</f:else>
 	</f:if>	
 

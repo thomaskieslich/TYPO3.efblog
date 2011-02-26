@@ -72,7 +72,9 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerConfig', $pagerConfig);
 
 		$this->view->assign('posts', $this->postRepository->findAll());
+//		$this->view->assign('posts', $this->postRepository->findPosts(0, 'none'));
 		$this->view->assign('backURI', $this->request->getRequestURI());
+		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
 	}
 
 	/**
@@ -110,6 +112,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerEnabled', $pagerEnabled);
 		$this->view->assign('page', $page);
 		$this->view->assign('backURI', $this->request->getArgument('backURI'));
+		$this->view->assign('backTitle', $this->request->getArgument('backTitle'));
 		$this->view->assign('post', $post);
 
 		//Update Views
@@ -135,14 +138,18 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pageUri', $this->persistence['storagePid']);
 		$this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
 		$this->view->assign('backURI', $this->request->getRequestURI());
+		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
 	}
 	
 	public function viewsWidgetAction() {
-//		t3lib_utility_Debug::debug($GLOBALS['TSFE']->config['config']['noPageTitle']);
 		$this->view->assign('pageUri', $this->persistence['storagePid']);
 		$this->view->assign('posts', $this->postRepository->findViews((int) $this->settings['viewsWidget']['maxEntrys']));
 		$this->view->assign('backURI', $this->request->getRequestURI());
-		$this->view->assign('backTitle', 'HuHu');
+		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
+	}
+	
+	public function searchWidgetAction(){
+		$this->view->assign('posts', $this->postRepository->findAll());
 	}
 
 }

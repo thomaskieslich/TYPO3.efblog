@@ -1,0 +1,17 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<f:layout name="default" />
+<f:section name="content">
+	<div>
+		<h1>Search Title</h1>
+		<form>
+			<input type="text" id="title" />
+			<tk:widget.autocomplete for="title" objects="{posts}" searchProperty="title" />
+		</form>
+		
+		<h1>Search author</h1>
+		<form>
+			<input type="text" id="author" />
+			<tk:widget.autocomplete for="author" objects="{posts}" searchProperty="author" />
+		</form>
+	</div>
+</f:section>

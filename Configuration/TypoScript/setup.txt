@@ -9,6 +9,8 @@ plugin.tx_tkblog{
 
 		displayList{
 			blogTitle = Testblog
+			maxEntrys = 0
+			displayArchived = none
 			renderFluid = 1
 			renderTS = 0	
 			cropText = 188
