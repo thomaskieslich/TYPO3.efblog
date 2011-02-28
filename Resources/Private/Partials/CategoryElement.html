@@ -1,0 +1,16 @@
+<f:if condition="{category.children}">
+	<f:then>
+		<li><f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">{category.title} ({category.posts})</f:link.page>
+		<ul>
+				<f:for each="{category.children}" as="child">
+					<f:render partial="CategoryElement" arguments="{category: child, pageUri: pageUri}" />
+				</f:for>
+			</ul>
+		</li>
+	</f:then>
+	<f:else>
+		<li>
+		<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">{category.title} ({category.posts})</f:link.page>
+		</li>
+	</f:else>
+</f:if> 

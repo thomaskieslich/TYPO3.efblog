@@ -3,10 +3,11 @@
 <f:section name="content">
 	<div>
 		<h1>Search Title</h1>
-		<form>
-			<input type="text" id="title" />
-			<tk:widget.autocomplete for="title" objects="{posts}" searchProperty="title" />
-		</form>
+		<f:form  action="search">
+			<f:form.textbox name="searchPhrase" value="{searchPhrase}" class="search" />
+			<tk:widget.autocomplete for="searchPhrase" objects="{posts}" searchProperty="title" />
+			<f:form.submit value="Send Search" />
+		</f:form>
 		
 		<h1>Search author</h1>
 		<form>

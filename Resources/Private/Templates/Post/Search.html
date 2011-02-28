@@ -1,13 +1,9 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-	<f:flashMessages />
-
-	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'prepend')}
-	Posts: <f:count subject="{posts}" /><br>
-	<tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
-		<f:for each="{paginatedPosts}" as="post">
-			<div style="display: block; border: 1px solid #ccc; margin-bottom: 8px;">
+	<div>{searchPhrase}</div>
+	
+	<f:for each="{posts}" as="post">
+		<div style="display: block; border: 1px solid #ccc; margin-bottom: 8px;">
 				<h2>{post.title}</h2>
 				<p>Author: {post.author}<br>
 				Tags: {post.tags}<br>
@@ -18,7 +14,7 @@
 					<f:link.action  action="list" arguments="{category : category}">{category.title},</f:link.action>
 				</f:for>
 				<br>
-				<f:link.action action="single" arguments="{post : post, backURI : backURI, backTitle: pageTitle, counter : 1}" title="view">single</f:link.action>
+				<f:link.action action="single" arguments="{post : post, backURI : backURI, backTitle: pageTitle, counter : 1, searchPhrase : searchPhrase}" title="view">single</f:link.action>
 				<f:for each="{post.relatedPost}" as="related">
 		  {related.title}
 				</f:for>
@@ -57,6 +53,5 @@
 
 
 			</div>
-		</f:for>
-	</tk:widget.paginate>
+	</f:for>
 </f:section>

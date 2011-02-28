@@ -293,7 +293,7 @@
 	/**
 	 * Adds a Category
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Categoryegory $categoryegory
+	 * @param Tx_Tkblog_Domain_Model_Categoryegory $category
 	 * @return void
 	 */
 	public function addCategory(Tx_Tkblog_Domain_Model_Category $category) {
@@ -313,7 +313,7 @@
 	/**
 	 * Returns the category
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoryegory> $categoryegory
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
 	 */
 	public function getCategory() {
 		return $this->category;
@@ -322,7 +322,7 @@
 	/**
 	 * Sets the category
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoryegory> $categoryegory
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
 	 * @return void
 	 */
 	public function setCategory($category) {

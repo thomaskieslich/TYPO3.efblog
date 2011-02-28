@@ -36,12 +36,35 @@
 									</numIndex>
 									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
-										<numIndex index="1">Post->searchWidget</numIndex>
+										<numIndex index="1">Post->searchWidget;Post->search;Post->single</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
 					</switchableControllerActions>
+					<!-- Category -->
+					<settings.displayList.category>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category</label>
+							<config>
+								<type>select</type>
+								<renderMode>tree</renderMode>
+								<treeConfig>
+									<parentField>parent_category</parentField>
+									<appearance>
+										<expandAll>TRUE</expandAll>
+										<showHeader>TRUE</showHeader>
+									</appearance>
+								</treeConfig>
+								<foreign_table>tx_tkblog_domain_model_category</foreign_table>
+								<foreign_table_where> AND (tx_tkblog_domain_model_category.sys_language_uid = 0)</foreign_table_where>
+								<size>10</size>
+								<autoSizeMax>20</autoSizeMax>
+								<minitems>0</minitems>
+								<maxitems>20</maxitems>
+							</config>
+						</TCEforms>
+					</settings.displayList.category>
 					<!--startingpoint-->
 					<persistence.storagePid>
 						<TCEforms>

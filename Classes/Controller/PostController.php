@@ -70,11 +70,18 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			'maxPages' => $this->settings['displayList']['maxPages']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
-
-		$this->view->assign('posts', $this->postRepository->findAll());
-//		$this->view->assign('posts', $this->postRepository->findPosts(0, 'none'));
+		
+		
+		$request = $this->request->getArguments();
+		if (isset($request['category'])) {
+			$this->settings['displayList']['category'] = $this->request->getArgument('category');
+		}
+		
+		
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 		$this->view->assign('backURI', $this->request->getRequestURI());
 		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
+		
 	}
 
 	/**
@@ -113,6 +120,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('page', $page);
 		$this->view->assign('backURI', $this->request->getArgument('backURI'));
 		$this->view->assign('backTitle', $this->request->getArgument('backTitle'));
+		$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
 		$this->view->assign('post', $post);
 
 		//Update Views
@@ -150,6 +158,27 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	
 	public function searchWidgetAction(){
 		$this->view->assign('posts', $this->postRepository->findAll());
+	}
+	
+	public function searchAction(){
+		$searchPhrase = NULL;
+		$request = $this->request->getArguments();
+		if (isset($request['searchPhrase'])) {
+			$searchPhrase = $this->request->getArgument('searchPhrase');
+		}
+		else $searchPhrase = 'mit';
+		
+		$this->view->assign('posts', $this->postRepository->searchPost($searchPhrase));
+		$this->view->assign('searchPhrase', $searchPhrase);
+		$this->view->assign('backURI', $this->request->getRequestURI());
+		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
+	}
+	
+	public function categoryWidgetAction(){
+		$this->view->assign('posts', $this->postRepository->findAll());
+		$this->view->assign('pageUri', $this->persistence['storagePid']);
+		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+		$this->view->assign('categories', $categoryRepository->findMainCategory());		
 	}
 
 }

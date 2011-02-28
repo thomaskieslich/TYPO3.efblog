@@ -3,14 +3,26 @@ page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
 
 plugin.tx_tkblog{
 	settings {
+		//Page
 		replaceTitle = 1
 		replaceDescription = 1
 		replaceKeywords = 1
+		
+		//Archive
+		daysToArchive =
+
 
 		displayList{
 			blogTitle = Testblog
-			maxEntrys = 0
-			displayArchived = none
+
+			//Sorting
+			orderBy = date,title
+			sortDirection = desc,asc
+			maxEntrys = 
+			displayArchived = 
+			category =
+
+			//Rendering
 			renderFluid = 1
 			renderTS = 0	
 			cropText = 188
@@ -18,7 +30,8 @@ plugin.tx_tkblog{
 			imageWidth = 
 			imageHeight = 100m
 
-			itemsPerPage = 2
+			//Pager
+			itemsPerPage = 12
 			insertAbove = 1
 			insertBelow = 1
 			maxPages = 3
@@ -38,7 +51,7 @@ plugin.tx_tkblog{
 		}
 
 		viewsWidget{
-			maxEntrys = 4
+			maxEntrys = 8
 			cropLink = 12
 			teaserHeader = 1
 		}

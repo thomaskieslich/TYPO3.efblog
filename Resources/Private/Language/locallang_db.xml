@@ -16,8 +16,9 @@
 			<label index="flexform_options_general_widgets_single">Single View</label>
 			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
 			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
-			<label index="flexform_options_general_widgets_category">Categories</label>
+			<label index="flexform_options_general_widgets_category">Category Widget</label>
 			<label index="flexform_options_general_widgets_search">Search Widget</label>
+			<label index="flexform_options_general_category">Categories</label>
 			<label index="flexform_options_general_storage">Startingpoint</label>
 			
 			<!--Post-->
