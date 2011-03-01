@@ -36,7 +36,11 @@
 									</numIndex>
 									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
-										<numIndex index="1">Post->searchWidget;Post->search;Post->single</numIndex>
+										<numIndex index="1">Post->searchWidget;Post->list;Post->single</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_date</numIndex>
+										<numIndex index="1">Post->dateMenuWidget;Post->list;Post->single</numIndex>
 									</numIndex>
 								</items>
 							</config>

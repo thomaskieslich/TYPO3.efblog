@@ -76,10 +76,22 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		if (isset($request['category'])) {
 			$this->settings['displayList']['category'] = $this->request->getArgument('category');
 		}
+
+		if (isset($request['searchPhrase'])) {
+			$this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
+		}
 		
+		if (isset($request['year'])) {
+			$this->settings['displayList']['year'] = $this->request->getArgument('year');
+		}
 		
+		if (isset($request['month'])) {
+			$this->settings['displayList']['month'] = $this->request->getArgument('month');
+		}
+		$this->configurationManager->setConfiguration($this->settings);
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-		$this->view->assign('backURI', $this->request->getRequestURI());
+		$this->view->assign('searchPhrase', $this->settings['displayList']['searchPhrase']);
+		$this->view->assign('category', $this->settings['displayList']['category']);
 		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
 		
 	}
@@ -90,6 +102,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 * @param integer $page 
 	 */
 	public function singleAction(Tx_Tkblog_Domain_Model_Post $post, $page = 1) {
+		var_dump($this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS));
 		$pagerEnabled = $this->settings['displaySingle']['pagerEnabled'];
 		if ($page == 0) $pagerEnabled = 0;
 
@@ -120,7 +133,6 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('page', $page);
 		$this->view->assign('backURI', $this->request->getArgument('backURI'));
 		$this->view->assign('backTitle', $this->request->getArgument('backTitle'));
-		$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
 		$this->view->assign('post', $post);
 
 		//Update Views
@@ -128,6 +140,14 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		if (isset($request['counter'])) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
+		}
+		
+		if (isset($request['category'])) {
+			$this->view->assign('category', $this->request->getArgument('category'));
+		}
+		
+		if (isset($request['searchPhrase'])) {
+			$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
 		}
 		
 		//render Description
@@ -158,20 +178,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	
 	public function searchWidgetAction(){
 		$this->view->assign('posts', $this->postRepository->findAll());
-	}
-	
-	public function searchAction(){
-		$searchPhrase = NULL;
-		$request = $this->request->getArguments();
-		if (isset($request['searchPhrase'])) {
-			$searchPhrase = $this->request->getArgument('searchPhrase');
-		}
-		else $searchPhrase = 'mit';
-		
-		$this->view->assign('posts', $this->postRepository->searchPost($searchPhrase));
-		$this->view->assign('searchPhrase', $searchPhrase);
-		$this->view->assign('backURI', $this->request->getRequestURI());
-		$this->view->assign('pageTitle', $GLOBALS['TSFE']->page['title']);
+		$this->view->assign('pageUri', $this->persistence['storagePid']);
 	}
 	
 	public function categoryWidgetAction(){
@@ -179,6 +186,11 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pageUri', $this->persistence['storagePid']);
 		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
 		$this->view->assign('categories', $categoryRepository->findMainCategory());		
+	}
+	
+	public function dateMenuWidgetAction(){
+		$this->view->assign('posts', $this->postRepository->findAll());
+		
 	}
 
 }

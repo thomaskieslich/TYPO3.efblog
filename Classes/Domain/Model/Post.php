@@ -386,6 +386,14 @@
 	public function setContent($content) {
 		$this->content = $content;
 	}
+	
+	public function getYearOf() {
+		return $this->date->format('Y');
+	}
+	
+	public function getMonthOf() {
+		return $this->date->format('m');
+	}
 
 }
 ?>

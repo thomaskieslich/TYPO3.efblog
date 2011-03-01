@@ -33,6 +33,7 @@
 class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findPosts($settings) {
+//		var_dump($settings);
 		$query = $this->createQuery();
 
 		if ($constraints = $this->createConstraintsFromSettings($query, $settings)) {
@@ -82,11 +83,26 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	protected function createConstraintsfromSettings(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 		$constraints = array ();
 
-		//
+		//categories
 		if ($settings['displayList']['category']) {
 			$constraints[] = $this->createCategoryConstraint($query, $settings);
 		}
 
+		//search
+		if ($settings['displayList']['searchPhrase']) {
+			$constraints[] = $this->createSearchConstraint($query, $settings);
+		}
+		
+		//Month
+		if ($settings['displayList']['year'] > 0 && $settings['displayList']['month'] > 0) {
+			$begin = mktime(0, 0, 0, $settings['displayList']['month'], 0, $settings['displayList']['year']);
+			$end = mktime(0, 0, 0, ($settings['displayList']['month'] + 1), 0, $settings['displayList']['year']);
+
+			$constraints[] = $query->logicalAnd(
+					$query->greaterThanOrEqual('date', $begin),
+					$query->lessThanOrEqual('date', $end)
+				);
+		}
 
 		$archiveMode = $settings['displayList']['displayArchived'];
 		// daysToArchive
@@ -129,6 +145,22 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 
 		$constraint = $query->logicalOr($categoryConstraints);
 
+		return $constraint;
+	}
+
+	protected function createSearchConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraint = NULL;
+		$searchConstraints = array ();
+		$terms = t3lib_div::trimExplode(' ', $settings['displayList']['searchPhrase'], TRUE);
+		$fields = t3lib_div::trimExplode(',', $settings['displayList']['searchFields'], TRUE);
+
+		foreach ($terms as $term) {
+			foreach ($fields as $field) {
+				$searchConstraints[] = $query->like($field, '%' . $term . '%');
+			}
+		}
+
+		$constraint = $query->logicalOr($searchConstraints);
 		return $constraint;
 	}
 

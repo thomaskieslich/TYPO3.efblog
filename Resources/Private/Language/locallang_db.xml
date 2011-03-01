@@ -18,6 +18,7 @@
 			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
 			<label index="flexform_options_general_widgets_category">Category Widget</label>
 			<label index="flexform_options_general_widgets_search">Search Widget</label>
+			<label index="flexform_options_general_widgets_date">Date Menu Widget</label>
 			<label index="flexform_options_general_category">Categories</label>
 			<label index="flexform_options_general_storage">Startingpoint</label>
 			

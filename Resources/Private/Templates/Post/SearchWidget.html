@@ -3,7 +3,7 @@
 <f:section name="content">
 	<div>
 		<h1>Search Title</h1>
-		<f:form  action="search">
+		<f:form  action="list" pageUid="{pageUri}">
 			<f:form.textbox name="searchPhrase" value="{searchPhrase}" class="search" />
 			<tk:widget.autocomplete for="searchPhrase" objects="{posts}" searchProperty="title" />
 			<f:form.submit value="Send Search" />

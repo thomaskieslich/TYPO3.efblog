@@ -1,0 +1,19 @@
+<f:layout name="default" />
+<f:section name="content">
+	<ul>
+		<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
+			<li>{year}
+				<ul>
+					<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
+						<li>
+						<f:link.action pageUid="26" arguments="{year: year, month: month}">
+							<f:translate key="month.{month}" />{month} {year}</f:link.action>
+							(<f:count subject="{postsByMonth}" /> 
+						<f:translate key="{f:if(condition: '{f:count(subject: postsByMonth} == 1', then: 'entry', else: 'entries')}" />)
+						</li>
+					</f:groupedFor>
+				</ul>
+			</li>
+		</f:groupedFor>
+	</ul>
+</f:section>

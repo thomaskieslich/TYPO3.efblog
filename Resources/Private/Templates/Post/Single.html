@@ -12,7 +12,7 @@
 			<f:link.external uri="{backURI}">{f:translate(key : 'link_backTo')} {backTitle}</f:link.external><br>
 		</f:then>
 		<f:else>
-			<f:link.action  action="list">{f:translate(key : 'link_backTo')} {backTitle}</f:link.action><br>
+			<f:link.action  action="list" arguments="{category : category, searchPhrase:searchPhrase, backTitle:backTitle}">{f:translate(key : 'link_backTo')} {backTitle}</f:link.action><br>
 		</f:else>
 	</f:if>	
 
@@ -20,10 +20,10 @@
 	<f:if condition="{pagerEnabled}">
 		<f:then>
 			<f:if condition="{pages -> f:count()} > 1">
-				<f:link.action action="single" arguments="{post : post, page : 0, backURI : backURI}">not paginated</f:link.action> <br>
-				<f:link.action action="single" arguments="{post : post, page : 1, backURI : backURI}">paginated</f:link.action> <br>
+				<f:link.action action="single" arguments="{post : post, page : 0, backURI : backURI, backTitle:backTitle}">not paginated</f:link.action> <br>
+				<f:link.action action="single" arguments="{post : post, page : 1, backURI : backURI, backTitle:backTitle}">paginated</f:link.action> <br>
 				<f:for each="{pages}" as="pageNumber">
-					<f:link.action action="single" arguments="{post : post, page : pageNumber, backURI : backURI}">page {pageNumber}</f:link.action> 
+					<f:link.action action="single" arguments="{post : post, page : pageNumber, backURI : backURI, backTitle:backTitle}">page {pageNumber}</f:link.action> 
 				</f:for>
 			</f:if>			
 			<f:for each="{elements}" as="element">
