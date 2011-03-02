@@ -13,14 +13,57 @@
 			<label index="flexform_options_general">TKBlog</label>			
 			<label index="flexform_options_general_widgets">Widgets</label>
 			<label index="flexform_options_general_widgets_list">Bloglist</label>
-			<label index="flexform_options_general_widgets_single">Single View</label>
+			<label index="flexform_options_general_widgets_detail">Detail View</label>
 			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
 			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
 			<label index="flexform_options_general_widgets_category">Category Widget</label>
 			<label index="flexform_options_general_widgets_search">Search Widget</label>
 			<label index="flexform_options_general_widgets_date">Date Menu Widget</label>
 			<label index="flexform_options_general_category">Categories</label>
-			<label index="flexform_options_general_storage">Startingpoint</label>
+			<label index="flexform_options_general_storage">Pages with Posts or/and Categories</label>
+			
+			<label index="flexform_options_general_orderBy">Order by</label>
+			<label index="flexform_options_general_orderBy_date">Date</label>
+			<label index="flexform_options_general_orderBy_archive">Archive Date</label>
+			<label index="flexform_options_general_orderBy_title">Title</label>
+			
+			<label index="flexform_options_general_sortDirection">Ascending or Descending (LIST &amp; LATEST):</label>
+			<label index="flexform_options_general_sortDirection_asc">Ascending</label>
+			<label index="flexform_options_general_sortDirection_desc">Descending</label>			
+			
+			<label index="flexform_options_general_categoryMode">Category Mode</label>
+			<label index="flexform_options_general_categoryMode_all">Don't care, show all</label>
+			<label index="flexform_options_general_categoryMode_or">Show items with selected categories (OR)</label>
+			<label index="flexform_options_general_categoryMode_and">Show items with selected categories (AND)</label>
+			<label index="flexform_options_general_categoryMode_notor">Do NOT show items with selected categories (AND)</label>
+			<label index="flexform_options_general_categoryMode_notand">Do NOT show items with selected categories (OR)</label>
+			
+			
+			<label index="flexform_options_general_archive">Archive Mode</label>
+			<label index="flexform_options_general_archive_active">Active ONLY</label>
+			<label index="flexform_options_general_archive_archived">Archived</label>
+			
+			<label index="flexform_options_general_daysToArchive">Days to Archive</label>
+			
+			<label index="flexform_options_general_latest_detailUri">Page for Detail View</label>
+			<label index="flexform_options_general_latest_maxEntrys">Max Entries</label>
+			<label index="flexform_options_general_latest_cropLink">Crop Links after(min 8)</label>
+			<label index="flexform_options_general_latest_showViews">Show Views after Link</label>
+			<label index="flexform_options_general_latest_teaserHeader">Linktext from Teaser(first header)</label>
+			
+			<label index="flexform_options_general_views_detailUri">Page for Detail View</label>
+			<label index="flexform_options_general_views_maxEntrys">Max Entries</label>
+			<label index="flexform_options_general_views_cropLink">Crop Links after(min 8)</label>
+			<label index="flexform_options_general_views_teaserHeader">Linktext from Teaser(first header)</label>
+			
+			<label index="flexform_options_general_category_listUri">Page with Bloglist</label>
+			<label index="flexform_options_general_category_cropLink">Crop Links after(min 8)</label>
+			<label index="flexform_options_general_category_viewCounts">View Category Counts</label>
+			<label index="flexform_options_general_category_viewEmpty">View empty categories</label>
+			
+			<label index="flexform_options_general_search_listUri">Page with Bloglist</label>
+			
+			<label index="flexform_options_general_dateMenu_listUri">Page with Archive(Blog)list</label>
 			
 			<!--Post-->
 			<label index="post">Post</label>

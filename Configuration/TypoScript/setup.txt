@@ -3,13 +3,13 @@ page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
 
 plugin.tx_tkblog{
 	settings {
+
+		overrideFlexformSettingsIfEmpty = latestWidget.maxEntrys,latestWidget.cropLink,viewsWidget.maxEntrys,viewsWidget.cropLink,categoryWidget.cropLink
 		//Page
 		replaceTitle = 1
 		replaceDescription = 1
 		replaceKeywords = 1
 		
-		//Archive
-		daysToArchive =
 		
 
 
@@ -18,9 +18,11 @@ plugin.tx_tkblog{
 
 			//Sorting
 			orderBy = date,title
-			sortDirection = desc,asc
+			sortDirection = asc
 			maxEntrys = 
 			displayArchived = 
+			daysToArchive =
+			categoryMode = or
 			category =
 
 			//Rendering
@@ -32,7 +34,7 @@ plugin.tx_tkblog{
 			imageHeight = 100m
 
 			//Pager
-			itemsPerPage = 12
+			itemsPerPage = 2
 			insertAbove = 1
 			insertBelow = 1
 			maxPages = 3
@@ -48,6 +50,7 @@ plugin.tx_tkblog{
 		}
 
 		latestWidget{
+			detailUri = 
 			maxEntrys = 6
 			cropLink = 12
 			showViews = 1
@@ -55,9 +58,25 @@ plugin.tx_tkblog{
 		}
 
 		viewsWidget{
+			detailUri = 
 			maxEntrys = 8
 			cropLink = 12
 			teaserHeader = 1
+		}
+		
+		categoryWidget{
+			listUri = 
+			cropLink = 12
+			viewCounts = 1
+			viewEmpty	= 1
+		}
+
+		searchWidget{
+			listUri = 
+		}
+
+		dateMenuWidget{
+			listUri = 
 		}
 	}
 	persistence{

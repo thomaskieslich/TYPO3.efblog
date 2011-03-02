@@ -2,7 +2,6 @@
 <f:layout name="default" />
 <f:section name="content">
 	<f:flashMessages />
-
 	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'prepend')}
 	Posts: <f:count subject="{posts}" /><br>
 	<tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
@@ -18,7 +17,11 @@
 					<f:link.action  action="list" arguments="{category : scategory}">{scategory.title},</f:link.action>
 				</f:for>
 				<br>
-				<f:link.action action="single" arguments="{post : post, backURI : backURI, backTitle: pageTitle, counter : 1, searchPhrase : searchPhrase, category : category}" title="view">single</f:link.action>
+				<!--Detail Link-->
+<f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">single get</f:link.action><br>
+
+
+				
 				<f:for each="{post.relatedPost}" as="related">
 		  {related.title}
 				</f:for>

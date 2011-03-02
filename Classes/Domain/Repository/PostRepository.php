@@ -33,7 +33,6 @@
 class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findPosts($settings) {
-//		var_dump($settings);
 		$query = $this->createQuery();
 
 		if ($constraints = $this->createConstraintsFromSettings($query, $settings)) {
@@ -92,22 +91,21 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		if ($settings['displayList']['searchPhrase']) {
 			$constraints[] = $this->createSearchConstraint($query, $settings);
 		}
-		
-		//Month
+
+		//Month for archive
 		if ($settings['displayList']['year'] > 0 && $settings['displayList']['month'] > 0) {
 			$begin = mktime(0, 0, 0, $settings['displayList']['month'], 0, $settings['displayList']['year']);
 			$end = mktime(0, 0, 0, ($settings['displayList']['month'] + 1), 0, $settings['displayList']['year']);
 
 			$constraints[] = $query->logicalAnd(
-					$query->greaterThanOrEqual('date', $begin),
-					$query->lessThanOrEqual('date', $end)
-				);
+							$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
+			);
 		}
 
 		$archiveMode = $settings['displayList']['displayArchived'];
 		// daysToArchive
-		if ($settings['daysToArchive']) {
-			$archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int) $settings['daysToArchive'], date("Y"));
+		if ($settings['displayList']['daysToArchive']) {
+			$archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int) $settings['displayList']['daysToArchive'], date("Y"));
 
 			if ($archiveMode == 'archived') {
 				$constraints[] = $query->lessThan('date', $archiveDate);
@@ -143,12 +141,26 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			$categoryConstraints[] = $query->contains('category', $category);
 		}
 
-		$constraint = $query->logicalOr($categoryConstraints);
+		switch (strtolower($settings['displayList']['categoryMode'])) {
+			case 'or':
+				$constraint = $query->logicalOr($categoryConstraints);
+				break;
+			case 'notor':
+				$constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+				break;
+			case 'notand':
+				$constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+				break;
+			case 'and':
+			default:
+				$constraint = $query->logicalAnd($categoryConstraints);
+		}
 
 		return $constraint;
 	}
 
 	protected function createSearchConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		
 		$constraint = NULL;
 		$searchConstraints = array ();
 		$terms = t3lib_div::trimExplode(' ', $settings['displayList']['searchPhrase'], TRUE);
@@ -159,7 +171,6 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 				$searchConstraints[] = $query->like($field, '%' . $term . '%');
 			}
 		}
-
 		$constraint = $query->logicalOr($searchConstraints);
 		return $constraint;
 	}

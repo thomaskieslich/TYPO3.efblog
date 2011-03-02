@@ -2,9 +2,9 @@
 <f:section name="content">
 	<div>
 		<f:for each="{posts}" as="post">
-			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'single', post : post, backURI : backURI, backTitle: pageTitle, counter : 1}}">
+			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'detail', post : post, backPid : backPid, counter : 1}}">
 				{post.title -> f:format.crop(maxCharacters: '{settings.viewsWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
-				<f:if condition="{settings.latestWidget.showViews}">({post.views})</f:if>
+				({post.views})
 			</f:link.page><br>
 		</f:for>
 	</div>

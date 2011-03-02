@@ -28,6 +28,12 @@
 			<!--Latest Widget-->
 			<label index="widget_latest_more"><![CDATA[ …]]></label>
 			
+			<!--CategoryWidget-->
+			<label index="widget_category_more"><![CDATA[ …]]></label>
+			
+			<!--Error Messages-->
+			<label index="notice_error">Error!</label>
+			<label index="notice_noPost">There is no Post to show!</label>
 		</languageKey>
 	</data>
 </T3locallang>

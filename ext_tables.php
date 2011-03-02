@@ -3,15 +3,19 @@
 if (!defined('TYPO3_MODE')) die('Access denied.');
 
 
+//Flexform
+
 Tx_Extbase_Utility_Extension::registerPlugin(
 				$_EXTKEY,
 				'fe1',
 				'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:plugin_fe1_title'
 );
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_fe1'] = 'layout,select_key,recursive';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_fe1'] = 'layout,select_key,recursive,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_fe1'] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_fe1', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform.xml');
+
+
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'Configuration/TypoScript','TK Simple Blog');

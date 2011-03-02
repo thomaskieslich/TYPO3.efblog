@@ -11,7 +11,7 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Simple Blog',
+	'title' => 'TK Simple Blog',
 	'description' => 'testblog',
 	'category' => 'plugin',
 	'author' => 'Thomas Kieslich',

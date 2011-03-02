@@ -20,32 +20,120 @@
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_list</numIndex>
-										<numIndex index="1">Post->list;Post->single</numIndex>
+										<numIndex index="1">Post->list;Post->detail</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_detail</numIndex>
+										<numIndex index="1">Post->detail;Post->list</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latest</numIndex>
 										<numIndex index="1">Post->latestWidget</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
+									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_views</numIndex>
 										<numIndex index="1">Post->viewsWidget</numIndex>
 									</numIndex>
-									<numIndex index="3" type="array">
+									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_category</numIndex>
 										<numIndex index="1">Post->categoryWidget</numIndex>
 									</numIndex>
-									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
-										<numIndex index="1">Post->searchWidget;Post->list;Post->single</numIndex>
-									</numIndex>
 									<numIndex index="5" type="array">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
+										<numIndex index="1">Post->searchWidget</numIndex>
+									</numIndex>
+									<numIndex index="6" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_date</numIndex>
-										<numIndex index="1">Post->dateMenuWidget;Post->list;Post->single</numIndex>
+										<numIndex index="1">Post->dateMenuWidget</numIndex>
 									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
 					</switchableControllerActions>
+					<!-- order -->
+					<settings.displayList.orderBy>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_orderBy</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_orderBy_date</numIndex>
+										<numIndex index="1">date</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_orderBy_archive</numIndex>
+										<numIndex index="1">archive</numIndex>
+									</numIndex>
+									<numIndex index="3">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_orderBy_title</numIndex>
+										<numIndex index="1">title</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.displayList.orderBy>
+					
+					<!-- order direction  -->
+					<settings.displayList.sortDirection>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_sortDirection</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_sortDirection_asc</numIndex>
+										<numIndex index="1">asc</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_sortDirection_desc</numIndex>
+										<numIndex index="1">desc</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.displayList.sortDirection>
+					
+					<!-- Category Mode -->
+					<settings.displayList.categoryMode>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode_all</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode_or</numIndex>
+										<numIndex index="1">or</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode_and</numIndex>
+										<numIndex index="1">and</numIndex>
+									</numIndex>
+									<numIndex index="3">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode_notor</numIndex>
+										<numIndex index="1">notor</numIndex>
+									</numIndex>
+									<numIndex index="4">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode_notand</numIndex>
+										<numIndex index="1">notand</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.displayList.categoryMode>
+					
 					<!-- Category -->
 					<settings.displayList.category>
 						<TCEforms>
@@ -61,7 +149,9 @@
 									</appearance>
 								</treeConfig>
 								<foreign_table>tx_tkblog_domain_model_category</foreign_table>
-								<foreign_table_where> AND (tx_tkblog_domain_model_category.sys_language_uid = 0)</foreign_table_where>
+								<foreign_table_where>AND (tx_tkblog_domain_model_category.pid IN (###PAGE_TSCONFIG_IDLIST###) OR
+								tx_tkblog_domain_model_category.pid = ###CURRENT_PID###)
+								AND tx_tkblog_domain_model_category.sys_language_uid = 0</foreign_table_where>
 								<size>10</size>
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
@@ -69,6 +159,212 @@
 							</config>
 						</TCEforms>
 					</settings.displayList.category>
+					<!-- Archive -->
+					<settings.displayList.displayArchived>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_archive</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_archive_active</numIndex>
+										<numIndex index="1">active</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_archive_archived</numIndex>
+										<numIndex index="1">archived</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.displayList.displayArchived>
+					
+					<!-- days to archive-->
+					<settings.displayList.daysToArchive>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_daysToArchive</label>
+							<config>
+								<checkbox>1</checkbox>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.displayList.daysToArchive>
+					
+					<!-- latest Widget-->
+					<settings.latestWidget.detailUri>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_detailUri</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.latestWidget.detailUri>
+					<settings.latestWidget.maxEntrys>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_maxEntrys</label>
+							<config>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.latestWidget.maxEntrys>
+					<settings.latestWidget.cropLink>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_cropLink</label>
+							<config>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.latestWidget.cropLink>
+					<settings.latestWidget.showViews>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_showViews</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.latestWidget.showViews>
+					<settings.latestWidget.teaserHeader>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_teaserHeader</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.latestWidget.teaserHeader>
+					
+					<!-- views Widget-->
+					<settings.viewsWidget.detailUri>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_detailUri</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.viewsWidget.detailUri>
+					<settings.viewsWidget.maxEntrys>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_maxEntrys</label>
+							<config>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.viewsWidget.maxEntrys>
+					<settings.viewsWidget.cropLink>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_cropLink</label>
+							<config>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.viewsWidget.cropLink>
+					<settings.viewsWidget.teaserHeader>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_teaserHeader</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.viewsWidget.teaserHeader>
+					
+					<!-- category Widget-->
+					<settings.categoryWidget.listUri>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_listUri</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.categoryWidget.listUri>
+					<settings.categoryWidget.cropLink>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_cropLink</label>
+							<config>
+								<type>input</type>
+								<size>15</size>
+							</config>
+						</TCEforms>
+					</settings.categoryWidget.cropLink>
+					<settings.categoryWidget.viewCounts>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_viewCounts</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.categoryWidget.viewCounts>
+					<settings.categoryWidget.viewEmpty>
+						<TCEforms>
+						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_viewEmpty</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.categoryWidget.viewEmpty>
+					
+					<!-- search Widget-->
+					<settings.searchWidget.listUri>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_search_listUri</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.searchWidget.listUri>
+					
+					<!-- date Menu Widget-->
+					<settings.dateMenuWidget.listUri>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_dateMenu_listUri</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.dateMenuWidget.listUri>
+					
 					<!--startingpoint-->
 					<persistence.storagePid>
 						<TCEforms>
@@ -78,7 +374,7 @@
 								<type>group</type>
 								<internal_type>db</internal_type>
 								<allowed>pages</allowed>
-								<size>1</size>
+								<size>6</size>
 								<maxitems>50</maxitems>
 								<minitems>0</minitems>
 								<show_thumbs>1</show_thumbs>
