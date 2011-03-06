@@ -58,7 +58,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @return void
 	 */
 	protected function updateFlexforms(array &$dataStructure, array $row) {
-		$selectedView = '';
+		$selectedView = 'Post->list';
 		// get the first selected action
 		$flexformSelection = t3lib_div::xml2array($row['pi_flexform']);
 		if (is_array($flexformSelection) && is_array($flexformSelection['data'])) {

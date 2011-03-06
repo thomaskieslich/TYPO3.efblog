@@ -88,7 +88,7 @@ plugin.tx_tkblog{
 						CType.mapOnProperty = ctype
 					}
 				}
-		}
+			}
 		}
 	}
 	view {

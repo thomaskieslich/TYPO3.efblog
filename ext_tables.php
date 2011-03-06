@@ -22,10 +22,28 @@ t3lib_extMgm::addStaticFile($_EXTKEY,'Configuration/TypoScript','TK Simple Blog'
 
 
 if (TYPO3_MODE === 'BE') {
+	
+	/**
+	* Registers a Backend Module
+	*/
+	Tx_Extbase_Utility_Extension::registerModule(
+		$_EXTKEY,
+		'web',					
+		'tx_tkblog_be1',
+		'',		
+		array(					
+			'Module' => 'list'
+			),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:tkblog/ext_icon.gif',
+			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xml',
+		)
+	);
 
 	/**
 	 * Registers a Backend Module
-	 */
+	 */	
 	if (!isset($TBE_MODULES['TkblogTxtkblog'])) {
 		$temp_TBE_MODULES = array ();
 
@@ -41,11 +59,11 @@ if (TYPO3_MODE === 'BE') {
 		$TBE_MODULES = $temp_TBE_MODULES;
 	}
 	
-	t3lib_extMgm::addNavigationComponent('TkblogTxtkblog_categories', 'tkblog-bloglist');
-	
-	t3lib_extMgm::addNavigationComponent('TkblogTxtkblog', 'typo3-pagetree', array(
-    'TYPO3.Components.PageTree'
-	));
+	t3lib_extMgm::addNavigationComponent('txtkblog', 'tkblog-blogpanel', array(
+			'TYPO3.Tkblog.Blogpanel'
+		));
+	t3lib_extMgm::addNavigationComponent('txtkblog_categories', 'typo3-pagetree');
+
 
 	Tx_Extbase_Utility_Extension::registerModule(
 					$_EXTKEY,
@@ -61,20 +79,21 @@ if (TYPO3_MODE === 'BE') {
 					)
 	);
 
-
+	
+	
 	Tx_Extbase_Utility_Extension::registerModule(
 					$_EXTKEY,
 					'txtkblog',
 					'post',
 					'',
 					array (
-						'Module' => 'mod1'
+						'Module' => 'list'
 					),
 					array (
-				'access' => 'user,group',
-				'icon' => 'EXT:tkblog/ext_icon.gif',
-				'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod1.xml',
-				'navigationComponentId' => 'typo3-pagetree',
+						'access' => 'user,group',
+						'icon' => 'EXT:tkblog/ext_icon.gif',
+						'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod1.xml',
+						'navigationComponentId' => 'tkblog-blogpanel'
 					)
 	);
 
@@ -84,13 +103,13 @@ if (TYPO3_MODE === 'BE') {
 					'comment',
 					'',
 					array (
-				'Module' => 'mod2'
+				'Module' => 'list'
 					),
 					array (
 						'access' => 'user,group',
 						'icon' => 'EXT:tkblog/ext_icon.gif',
-						'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod2.xml',						
-						'navigationComponentId' => 'typo3-pagetree',
+						'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod2.xml',	
+						'navigationComponentId' => 'tkblog-blogpanel'
 					)
 	);
 
@@ -100,25 +119,25 @@ if (TYPO3_MODE === 'BE') {
 					'categories',
 					'',
 					array (
-				'Module' => 'mod3'
+				'Module' => 'list'
 					),
 					array (
 						'access' => 'user,group',
 						'icon' => 'EXT:tkblog/ext_icon.gif',
 						'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod3.xml',
-						'navigationComponentId' => 'tkblog-bloglist',
+						'navigationComponentId' => 'typo3-pagetree'
 					)
 	);
 
-	$TCA['pages']['columns']['module']['config']['items'][] = array ('TK Blog', 'txtkblog', 'EXT:tkblog/ext_icon.gif');
+	
+	$TCA['pages']['columns']['module']['config']['items'][] = array ('TK Simple Blog', 'tkblog', 'EXT:tkblog/ext_icon.gif');
 	t3lib_SpriteManager::addTcaTypeIcon('pages','contains-txtkblog',t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif');
 }
 
 
 t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_post');
-t3lib_div::loadTCA('pages');
-$TCA['pages']['columns']['module']['config']['items'][] = Array('TKBlog', 'tkblog');
-t3lib_extMgm::addToInsertRecords('tx_tkblog_domain_model_post');	
+//t3lib_div::loadTCA('pages');
+//t3lib_extMgm::addToInsertRecords('tx_tkblog_domain_model_post');	
 
 $TCA['tx_tkblog_domain_model_post'] = array (
 	'ctrl' => array (

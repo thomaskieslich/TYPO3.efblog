@@ -1,0 +1,11 @@
+config.tx_extbase{
+persistence{
+		classes{
+			Tx_Tkblog_Domain_Model_Pages{
+				mapping {
+					tableName = pages
+				}
+			}
+		}
+	}
+}

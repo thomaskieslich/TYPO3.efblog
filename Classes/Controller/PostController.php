@@ -138,16 +138,13 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 			if ($pagerEnabled == 1) {
 				foreach ($content as $single) {
-					if ($single->getCtype() == $this->settings['displaySingle']['divType']) {						
-						//$pages[$divider++] = $divider++;
+					if ($single->getCtype() == $this->settings['displaySingle']['divType']) {	
 						$pages[$divider++] = $single->getHeader();
-//						$divider++;
 					}
 					if ($divider == $page + 1 && $single->getCtype() != $this->settings['displaySingle']['divType']) {
 						$elements->attach($single);
 					}
 				}
-				t3lib_utility_Debug::debug($pages);
 			}
 			else {
 				foreach ($content as $single) {

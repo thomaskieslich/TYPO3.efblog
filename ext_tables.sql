@@ -2,8 +2,6 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
-	post int(11) unsigned DEFAULT '0' NOT NULL,
-	
 	title varchar(255) DEFAULT '' NOT NULL,
 	author varchar(255) DEFAULT '' NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
@@ -49,46 +47,28 @@ CREATE TABLE tt_content (
 );
 
 CREATE TABLE tx_tkblog_post_category_mm (
-	uid int(10) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
-	tstamp int(10) unsigned DEFAULT '0' NOT NULL,
-	crdate int(10) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(3) unsigned DEFAULT '0' NOT NULL,
-
-	PRIMARY KEY (uid),
-	KEY parent (pid)
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );
 
 CREATE TABLE tx_tkblog_post_post_mm (
-	uid int(10) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 
-	tstamp int(10) unsigned DEFAULT '0' NOT NULL,
-	crdate int(10) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(3) unsigned DEFAULT '0' NOT NULL,
-
-	PRIMARY KEY (uid),
-	KEY parent (pid)
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );
 
 CREATE TABLE tx_tkblog_domain_model_category (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-	
-	post int(11) unsigned DEFAULT '0' NOT NULL,
 	
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
