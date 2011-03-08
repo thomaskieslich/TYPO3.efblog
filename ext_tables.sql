@@ -10,9 +10,11 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	tags varchar(255) DEFAULT '' NOT NULL,
 	allow_comments int(11) DEFAULT '0' NOT NULL,
 	crop_teaser int(11) DEFAULT '0' NOT NULL,
+        teaser_image text,
+        show_teaser_image int(11) DEFAULT '0' NOT NULL,
 	views int(11) DEFAULT '0' NOT NULL,
-	category int(11) unsigned DEFAULT '0' NOT NULL,
-	related_post int(11) unsigned DEFAULT '0' NOT NULL,
+	categories int(11) unsigned DEFAULT '0' NOT NULL,
+	related_posts int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -72,6 +74,7 @@ CREATE TABLE tx_tkblog_domain_model_category (
 	
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
+        image text,
 	parent_category int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

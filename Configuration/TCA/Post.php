@@ -18,10 +18,13 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_categorize,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
+                                --div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserImage;teaserImage,
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser;crop,
 				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related;related,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments;comments,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser;crop,
+					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments;comments,					
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
@@ -49,24 +52,34 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'category' => array (
 			'showitem' =>
-			'category;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_category,',
+			'categories;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_category,',
+			'canNotCollapse' => 1,
+		),
+                'teaserImage' => array (
+			'showitem' =>
+			'teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserImage,',
+			'canNotCollapse' => 1,
+		),
+                'showTeaserImage' => array (
+			'showitem' =>
+			'show_teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage,',
+			'canNotCollapse' => 1,
+		),
+                'crop' => array (
+			'showitem' =>
+			'crop_teaser;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser,',
 			'canNotCollapse' => 1,
 		),
 		'related' => array (
 			'showitem' =>
-			'related_post;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
+			'related_posts;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
 			'canNotCollapse' => 1,
 		),
 		'comments' => array (
 			'showitem' =>
 			'allow_comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments,',
 			'canNotCollapse' => 1,
-		),		
-		'crop' => array (
-			'showitem' =>
-			'crop_teaser;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_cropTeaser,',
-			'canNotCollapse' => 1,
-		),
+		),			
 		'views' => array (
 			'showitem' =>
 			'views;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_views,',
@@ -221,7 +234,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'eval' => 'trim, lower',
 			)
 		),
-		'category' => Array (
+		'categories' => Array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_category',
 			'config' => array (
@@ -244,7 +257,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'maxitems' => 20,
 			),
 		),
-		'related_post' => array (
+		'related_posts' => array (
 			'exclude' => 0,
 			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post',
 			'config' => array (
@@ -269,14 +282,14 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'allow_comments' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments',
+			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments',
 			'config' => Array (
 				'type' => 'radio',
 				'default' => 0,
 				'items' => Array (
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.0', '0'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.1', '1'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.2', '2'),
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments.I.0', '0'),
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments.I.1', '1'),
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments.I.2', '2'),
 				),
 			)
 		),
@@ -287,6 +300,35 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'type' => 'check',
 				'default' => 1
 			),
+		),
+                'teaser_image' => array(
+			'exclude' => 0,
+			'l10n_mode' => 'mergeIfNotBlank',
+			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.post_teaserImage',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'file',
+				'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+				'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
+				'uploadfolder' => 'uploads/tx_tkblog',
+				'show_thumbs' => 1,
+				'size' => 3,
+				'minitems' => 0,
+				'maxitems' => 3,
+			)
+		),
+                'show_teaser_image' => Array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage',
+			'config' => Array (
+				'type' => 'radio',
+				'default' => 2,
+				'items' => Array (
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.0', '0'),
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.1', '1'),
+					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.2', '2'),
+				),
+			)
 		),
 		'views' => Array (
 			'exclude' => 0,

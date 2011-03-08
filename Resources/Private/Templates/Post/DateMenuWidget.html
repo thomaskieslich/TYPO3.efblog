@@ -1,19 +1,26 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-	<ul>
-		<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
-			<li>{year}
-				<ul>
-					<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
-						<li>
-						<f:link.action pageUid="{pageUri}" arguments="{year: year, month: month}">
-							<f:translate key="month.{month}" />{month} {year}</f:link.action>
-							(<f:count subject="{postsByMonth}" /> 
-						<f:translate key="{f:if(condition: '{f:count(subject: postsByMonth} == 1', then: 'entry', else: 'entries')}" />)
-						</li>
-					</f:groupedFor>
-				</ul>
-			</li>
-		</f:groupedFor>
-	</ul>
+    <div class="tx-tkblog-date-container">
+        <h1>{f:translate(key : 'widget_date')}</h1>
+        <div class="tx-tkblog-date-content">
+            <f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
+                <h3 class="year"><a href="#">{year} ({postsByYear -> f:count()})</a></h3>
+                    <ul id="{year}" style="display:none;">
+                        <f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
+                            <li id="{year}_{month}">
+                            <f:link.action pageUid="{pageUri}" arguments="{year: year, month: month}">
+                                <tk:format.monthName month="{month}" /> {year}</f:link.action>
+				({postsByMonth -> f:count()}
+                            <f:if condition="<f:count subject='{postsByMonth}' /> == 1">
+                                <f:then>{f:translate(key : 'widget_date_item')}</f:then>
+                                <f:else>{f:translate(key : 'widget_date_items')}</f:else>
+                            </f:if>
+                            )
+                            </li>
+                        </f:groupedFor>
+                    </ul>
+            </f:groupedFor>
+        </div>
+    </div>
 </f:section>

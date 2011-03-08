@@ -138,7 +138,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$categories = t3lib_div::trimExplode(',', $settings['displayList']['category'], TRUE);
 
 		foreach ($categories as $category) {
-			$categoryConstraints[] = $query->contains('category', $category);
+			$categoryConstraints[] = $query->contains('categories', $category);
 		}
 
 		switch (strtolower($settings['displayList']['categoryMode'])) {
@@ -198,7 +198,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	public function countCategoryPosts(Tx_Tkblog_Domain_Model_Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
-				$query->contains('category', $category)
+				$query->contains('categories', $category)
 		);
 		return $query->execute()->count();
 	}
@@ -218,6 +218,25 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$query->matching(
 				$query->logicalOr($constraints)
 		);
+
+		return $query->execute();
+	}
+	
+	public function findBeList($limit = 50) {
+		$query = $this->createQuery();
+		
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+                
+                $query->matching(
+				$query->equals('deleted', 0)
+		);
+		
+		$query->setOrderings(
+				array (
+					'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				)
+		);
+		$query->setLimit($limit);
 
 		return $query->execute();
 	}

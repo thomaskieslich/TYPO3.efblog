@@ -69,6 +69,7 @@
 			<label index="post">Post</label>
 			<label index="post_tab_post">Post</label>
 			<label index="post_tab_categorize">Categorize</label>
+			<label index="post_tab_teaser">Teaser</label>
 			<label index="post_tab_interactive">Interactivity</label>
 			<label index="post_tab_access">Access</label>
 			<label index="post_palette_content">Content</label>
@@ -89,13 +90,19 @@
 			<label index="post_allowComments.I.2">Only registered users can comment</label>
 			<label index="post_tags">Tag clouds (comma separated list)</label>
 			<label index="post_cropTeaser">Crop Teaser</label>
+			<label index="post_teaserImage">Teaser Image</label>
+                        <label index="post_showTeaserImage">allow Teaser Images</label>
+			<label index="post_showTeaserImage.I.0">no Image</label>
+			<label index="post_showTeaserImage.I.1">use from Post</label>
+			<label index="post_showTeaserImage.I.2">use from first Element</label>
 			<label index="post_numberViews">Number of Views</label>
 			<label index="category">Category</label>
 			<label index="category_tab_categorize">Category</label>
 			<label index="category_tab_access">Access</label>
 			<label index="category_title">Category name</label>
 			<label index="category_description">Description</label>
-			<label index="category_parentcategory">Parent Category</label>
+			<label index="category_image">Category Image</label>
+			<label index="category_parent_category">Parent Category</label>
 			<label index="comment">Comment</label>
 		</languageKey>
 	</data>

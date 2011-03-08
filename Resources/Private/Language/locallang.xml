@@ -24,16 +24,78 @@
 			
 			<!--List-->
 			<label index="teaser_more"><![CDATA[ …]]></label>
+			<label index="read_more">read more &gt;&gt;</label>
+                        
+                        <!--Detail-->
+			<label index="pager_page">page</label>
+			<label index="pager_on">pager on</label>
+			<label index="pager_off">pager off</label>
 			
 			<!--Latest Widget-->
+			<label index="widget_latest">latest entries</label>
 			<label index="widget_latest_more"><![CDATA[ …]]></label>
+                        
+                        <!--Views Widget-->
+			<label index="widget_views">most readed</label>
+			<label index="widget_views_more"><![CDATA[ …]]></label>
+                        
+                        <!--Search Widget-->
+			<label index="widget_search">Search</label>
 			
 			<!--CategoryWidget-->
+                        <label index="widget_category">Categories</label>
 			<label index="widget_category_more"><![CDATA[ …]]></label>
+                        
+                        <!--DateMenu Widget-->
+			<label index="widget_date">Archive</label>
+			<label index="widget_date_item">Item</label>
+			<label index="widget_date_items">Items</label>
 			
 			<!--Error Messages-->
 			<label index="notice_error">Error!</label>
 			<label index="notice_noPost">There is no Post to show!</label>
 		</languageKey>
+                <languageKey index="de" type="array">
+                    
+                        <!--Links-->
+			<label index="link_backTo">zurück zu: </label>
+			
+			<!--Paginator-->
+			<label index="paginator_first">&lt;&lt; erster</label>
+			<label index="paginator_previous">&lt; vorheriger</label>
+			<label index="paginator_next">nächster &gt;</label>
+			<label index="paginator_last">letzter &gt;&gt;</label>
+                        
+                        <!--List-->
+			<label index="teaser_more"><![CDATA[ …]]></label>
+			<label index="read_more">mehr lesen &gt;&gt;</label>
+                        
+                        <!--Detail-->
+			<label index="pager_page">Seite</label>
+                        <label index="pager_on">Einzelseiten an</label>
+			<label index="pager_off">Einzelseiten aus</label>
+                        
+                        <!--Latest Widget-->
+			<label index="widget_latest">Letzte Einträge</label>
+			<label index="widget_latest_more"><![CDATA[ …]]></label>
+                        
+                        <!--Views Widget-->
+			<label index="widget_views">am meisten gelesen</label>
+			<label index="widget_views_more"><![CDATA[ …]]></label>
+                        
+                        <!--Search Widget-->
+			<label index="widget_search">Suche</label>
+                        
+                        <!--CategoryWidget-->
+                        <label index="widget_category">Kategorien</label>
+			<label index="widget_category_more"><![CDATA[ …]]></label>
+                        
+                        <!--DateMenu Widget-->
+			<label index="widget_date">Archiv</label>
+                        <label index="widget_date_item">Eintrag</label>
+			<label index="widget_date_items">Einträge</label>
+                        
+                </languageKey>
+                
 	</data>
 </T3locallang>

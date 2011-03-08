@@ -19,8 +19,4 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['getFlexFormDSClass'][$_EXTKEY] =
 	'EXT:' . $_EXTKEY. '/Classes/Hooks/T3libBefunc.php:tx_Tkblog_Hooks_T3libBefunc';
 
-//$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']['TYPO3.Tkblog.blogpanel'] = 'typo3conf/ext/tkblog/blogpanel.php:blogpanel';
-
-//$GLOBALS['TYPO3_CONF_VARS']['typo3/backend.php']['additionalBackendItems'][] = 	t3lib_extMgm::extPath('tkblog', 'backend_ext.php');
-
 ?>

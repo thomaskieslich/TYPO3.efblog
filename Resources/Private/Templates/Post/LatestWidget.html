@@ -1,23 +1,30 @@
 <f:layout name="default" />
 <f:section name="content">
-	<div>
-		<f:for each="{posts}" as="post">
-			<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'detail', post : post, backPid : backPid, counter : 1}}">
+    <div class="tx-tkblog-latest-container">
+        <h1>{f:translate(key : 'widget_latest')}</h1>
+        <div class="tx-tkblog-latest-content">
+            <ul>
+                <f:for each="{posts}" as="post">
+                    <li>
+                    <f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'detail', post : post, backPid : backPid, counter : 1}}">
 
-				<f:if condition="{settings.latestWidget.teaserHeader} == 0">
-					<f:then>
+                        <f:if condition="{settings.latestWidget.teaserHeader} == 0">
+                            <f:then>
 							{post.title -> f:format.crop(maxCharacters: '{settings.latestWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
-					</f:then>
-					<f:else>
-						<f:for each="{post.content}" as="element"  iteration="elementIterator">
-							<f:if condition="{elementIterator.isFirst}">			
+                            </f:then>
+                            <f:else>
+                                <f:for each="{post.content}" as="element"  iteration="elementIterator">
+                                    <f:if condition="{elementIterator.isFirst}">			
 								{element.header -> f:format.crop(maxCharacters: '{settings.latestWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
-							</f:if>
-						</f:for>
-					</f:else>
-				</f:if>
-				<f:if condition="{settings.latestWidget.showViews}">({post.views})</f:if>
-			</f:link.page><br>
-		</f:for>
-	</div>
+                                    </f:if>
+                                </f:for>
+                            </f:else>
+                        </f:if>
+                        <f:if condition="{settings.latestWidget.showViews}">({post.views})</f:if>
+                    </f:link.page>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </div>
 </f:section>

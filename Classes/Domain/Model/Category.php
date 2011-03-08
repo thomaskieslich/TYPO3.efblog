@@ -46,6 +46,13 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var string $description
 	 */
 	protected $description;
+        
+        /**
+	 * category image
+	 *
+	 * @var string $image
+	 */
+	protected $image;
 	/**
 	 * parentCategory
 	 *
@@ -114,7 +121,23 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	public function setDescription($description) {
 		$this->description = $description;
 	}
+        /**
+         * category image
+         * @return string $image 
+         */
+        public function getImage() {
+            return $this->image;
+        }
+        
+        /**
+         * set image
+         * @param string $image 
+         */
+        public function setImage($image) {
+            $this->image = $image;
+        }
 
+        
 	/**
 	 * Returns the parentCategory
 	 *

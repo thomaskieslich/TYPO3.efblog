@@ -1,65 +1,99 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-	<f:flashMessages />
+    <f:flashMessages />
 	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'prepend')}
-	Posts: <f:count subject="{posts}" /><br>
-	<tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
-		<f:for each="{paginatedPosts}" as="post">
-			<div style="display: block; border: 1px solid #ccc; margin-bottom: 8px;">
-				<h2>{post.title}</h2>
-				<p>Author: {post.author}<br>
-				Tags: {post.tags}<br>
-				Date: {post.date -> f:format.date(format:'d.m.Y')}<br>
-				Archive: {post.archive -> f:format.date(format:'d.m.Y')}
-				</p>
-				<f:for each="{post.category}" as="scategory">
-					<f:link.action  action="list" arguments="{category : scategory}">{scategory.title},</f:link.action>
-				</f:for>
-				<br>
-				<!--Detail Link-->
-<f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">single get</f:link.action><br>
+
+    <tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
+        <f:for each="{paginatedPosts}" as="post">
+            <div class="tx-tkblog-list-entry">                
+                <div class="tx-tkblog-list-body">
+                    <f:for each="{post.content}" as="element"  iteration="elementIterator">
+                        <f:if condition="{elementIterator.isFirst}">
+                            <f:if condition="{settings.displayList.renderFluid}">
+                                <!--Fluid Teaser-->
+                                <div class="tx-tkblog-list-images">
+                                    <f:if condition="{post.showTeaserImage} == 1">
+                                        <f:for each="{post.teaserImage}" as="image" key="imageNumber">
+                                            <f:if condition="{image}">  
+                                                <f:if condition="{imageNumber} < {settings.displayList.images}">
+                                                    <div class="tx-tkblog-list-imagerow">
+                                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                                            <f:image src="uploads/tx_tkblog/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
+                                                        </f:link.action>
+                                                    </div>
+                                                </f:if>
+                                            </f:if>
+                                        </f:for>
+                                    </f:if>
+
+                                    <f:if condition="{post.showTeaserImage} == 2">
+                                        <f:for each="{element.image}" as="image" key="imageNumber">
+                                            <f:if condition="{image}">  
+                                                <f:if condition="{imageNumber} < {settings.displayList.images}">
+                                                    <div class="tx-tkblog-list-imagerow">
+                                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                                            <f:image src="uploads/pics/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
+                                                        </f:link.action>
+                                                    </div>
+                                                </f:if>
+                                            </f:if>
+                                        </f:for>
+                                    </f:if>
+                                </div>
+
+                                <div class="tx-tkblog-list-text">
+                                    <h1>
+                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                            {post.title}
+                                        </f:link.action>
+                                    </h1>
+                                    <f:if condition="{post.cropTeaser} == 1">
+                                        <f:then>
+                                            {element.bodytext -> f:format.html() -> 
+                                            f:format.crop(maxCharacters: '{settings.displayList.cropText}',  
+                                            append: '{f:translate(key : "teaser_more")}')}
+                                        </f:then>
+                                        <f:else>			
+                                            {element.bodytext -> f:format.html()}
+                                        </f:else>
+                                    </f:if>
+                                </div>  
 
 
-				
-				<f:for each="{post.relatedPost}" as="related">
-		  {related.title}
-				</f:for>
+                            </f:if>
+                            <f:if condition="{settings.displayList.renderTS}">
+                                <!-- TS Teaser -->
+                                <f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+                            </f:if>
 
-				<f:for each="{post.content}" as="element"  iteration="elementIterator">
-					<f:if condition="{elementIterator.isFirst}">
-						<f:if condition="{settings.displayList.renderFluid}">
-							<!--Fluid Teaser-->
-							<h1>{element.header}</h1>
-							<f:if condition="{post.cropTeaser} == 1">
-								<f:then>
-										{element.bodytext -> f:format.html() -> 
-										f:format.crop(maxCharacters: '{settings.displayList.cropText}',  
-										append: '{f:translate(key : "teaser_more")}')}
-								</f:then>
-								<f:else>			
-										{element.bodytext -> f:format.html()}
-								</f:else>
-							</f:if>
+                        </f:if>
 
+                    </f:for>
 
-							<f:for each="{element.image}" as="image" key="imageNumber">	
-								<f:if condition="{imageNumber} < {settings.displayList.images}">
-									<f:image src="uploads/pics/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
-								</f:if>
-							</f:for>
-						</f:if>
-						<f:if condition="{settings.displayList.renderTS}">
-							<!-- TS Teaser -->
-							<f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
-						</f:if>
+                </div>
 
-					</f:if>
-
-				</f:for>
-
-
-			</div>
-		</f:for>
-	</tk:widget.paginate>
+                <div class="tx-tkblog-list-footer">
+                    <div class="more">
+                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                            {f:translate(key : "read_more")}
+                        </f:link.action>
+                    </div>
+                    <div class="info">
+                        {post.views} | {post.date -> tk:format.date(format:'%d.%B.%Y')} | 
+                        <f:for each="{post.categories}" as="category"  iteration="catIterator">
+                            <f:if condition="{catIterator.isLast}">
+                                <f:then>
+                                     {category.title}
+                                </f:then>
+                                <f:else>
+                                    {category.title}, 
+                                </f:else>
+                            </f:if>                            
+                        </f:for>
+                    </div>
+                </div>
+            </div>               
+        </f:for>
+    </tk:widget.paginate>
 </f:section>

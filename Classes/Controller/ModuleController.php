@@ -52,17 +52,13 @@ class Tx_Tkblog_Controller_ModuleController extends Tx_Extbase_MVC_Controller_Ac
 		$originalSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$this->settings = $originalSettings['settings'];
 		$this->persistence = $originalSettings['persistence'];
-
-		var_dump($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ExtDirect']);
 	}
 
 	public function listAction() {
-//		var_dump($this->persistence);
-//		$this->view->assign('storagePid', $this->persistence['storagePid']);
 
 		$this->view->assign('pages', $this->pagesRepository->findPages());
 		if ($this->persistence['storagePid']) {
-			$this->view->assign('posts', $this->postRepository->findAll());
+			$this->view->assign('posts', $this->postRepository->findBeList());
 		}
 	}
 

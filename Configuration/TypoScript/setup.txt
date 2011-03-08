@@ -1,5 +1,7 @@
 page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
-//page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
+page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
+page.includeJS.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
+page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
 
 plugin.tx_tkblog{
 	settings {
@@ -18,7 +20,7 @@ plugin.tx_tkblog{
 
 			//Sorting
 			orderBy = date,title
-			sortDirection = asc
+			sortDirection = desc
 			maxEntrys = 
 			displayArchived = 
 			daysToArchive =
@@ -30,14 +32,14 @@ plugin.tx_tkblog{
 			renderTS = 0	
 			cropText = 188
 			images = 2
-			imageWidth = 
-			imageHeight = 100m
+			imageWidth = 100m
+			imageHeight = 
 
 			//Pager
-			itemsPerPage = 2
+			itemsPerPage = 10
 			insertAbove = 1
 			insertBelow = 1
-			maxPages = 3
+			maxPages = 5
 
 			//Search
 		    searchFields = title, content.header, content.bodytext

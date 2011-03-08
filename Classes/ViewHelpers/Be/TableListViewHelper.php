@@ -62,7 +62,6 @@ class Tx_Tkblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_
 	 */
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
-		$doc = $this->getDocInstance();
 	}
 
 	/**
@@ -94,6 +93,7 @@ class Tx_Tkblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_
 			$dblist->calcPerms = $GLOBALS['BE_USER']->calcPerms($pageinfo);
 		}
 		$dblist->showClipboard = FALSE;
+		$dblist->newWizards = FALSE;
 		$dblist->disableSingleTableView = TRUE;
 		$dblist->clickTitleMode = $clickTitleMode;
 		$dblist->alternateBgColors = $alternateBackgroundColors;
@@ -103,13 +103,15 @@ class Tx_Tkblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_
 			$frameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 			$storagePid = $frameworkConfiguration['persistence']['storagePid'];
 		}
+		
+		$dblist->makeControl($tableName,$fieldList);
 
 		$dblist->start($storagePid, $tableName, (integer)t3lib_div::_GP('pointer'), $filter, $levels, $recordsPerPage);
 		$dblist->allFields = TRUE;
-		$dblist->dontShowClipControlPanels = TRUE;
-		$dblist->displayFields = FALSE;
+		$dblist->dontShowClipControlPanels = FALSE;
+		$dblist->displayFields = TRUE;
 		$dblist->setFields = array($tableName => $fieldList);
-		$dblist->noControlPanels = TRUE;
+		$dblist->noControlPanels = FALSE;
 		$dblist->sortField = $sortField;
 		$dblist->sortRev = $sortDescending;
 

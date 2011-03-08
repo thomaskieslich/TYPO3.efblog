@@ -41,6 +41,14 @@
 	 * @validate NotEmpty
 	 */
 	protected $title;
+	
+	/**
+	 * hidden
+	 *
+	 * @var string $hidden
+	 * @validate NotEmpty
+	 */
+	protected $hidden;
 
 	/**
 	 * Author
@@ -90,6 +98,20 @@
 	 * @var integer
 	 */
 	protected $cropTeaser;
+        
+        /**
+	 * Teaser image
+	 *
+	 * @var string
+	 */
+	protected $teaserImage;
+        
+        /**
+	 * show Teaser image
+	 *
+	 * @var string
+	 */
+	protected $showTeaserImage;
 
 	/**
 	 * number of views
@@ -99,18 +121,18 @@
 	protected $views;
 
 	/**
-	 * category
+	 * categories
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $categories
 	 */
-	protected $category;
+	protected $categories;
 
 	/**
 	 * related post
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPost
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
 	 */
-	protected $relatedPost;
+	protected $relatedPosts;
 
 	/**
 	 * The constructor of this Post
@@ -140,7 +162,16 @@
 	public function setTitle($title) {
 		$this->title = $title;
 	}
+	
+	public function getHidden() {
+		return $this->hidden;
+	}
 
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
+	}
+
+	
 	/**
 	 * Returns the author
 	 *
@@ -254,7 +285,42 @@
 	public function setCropTeaser($cropTeaser) {
 		$this->cropTeaser = $cropTeaser;
 	}
+        
+        /**
+         * get teaser image
+         * @return string void
+         */
+        public function getTeaserImage() {
+            return explode(',', $this->teaserImage);
+        }
+        
+        /**
+	 * Sets the teaser Image
+	 *
+	 * @param string $teaserImage
+	 * @return void
+	 */
+        public function setTeaserImage($teaserImage) {
+            $this->teaserImage = $teaserImage;
+        }
 
+        /**
+         * get show teaser image
+         * @return string $showTeaserImage
+         */
+        public function getShowTeaserImage() {
+            return $this->showTeaserImage;
+        }
+        
+        /**
+         * set show teaser image
+         * @param string $showTeaserImage 
+         */
+        public function setShowTeaserImage($showTeaserImage) {
+            $this->showTeaserImage = $showTeaserImage;
+        }
+
+                
 	/**
 	 * Returns the views
 	 *
@@ -285,87 +351,87 @@
 		* It will be rewritten on each save in the kickstarter
 		* You may modify the constructor of this class instead
 		*/
-		$this->category = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->relatedPost = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->content = new Tx_Extbase_Persistence_ObjectStorage();
 	}
 
 	/**
 	 * Adds a Category
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Categoryegory $category
+	 * @param Tx_Tkblog_Domain_Model_Categoriesegory $categoriesegory
 	 * @return void
 	 */
 	public function addCategory(Tx_Tkblog_Domain_Model_Category $category) {
-		$this->category->attach($category);
+		$this->categories->attach($categories);
 	}
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Categoryegory $categoryegoryToRemove The Categoryegory to be removed
+	 * @param Tx_Tkblog_Domain_Model_Categoriesegory $categoriesegoryToRemove The Categoriesegory to be removed
 	 * @return void
 	 */
 	public function removeCategory(Tx_Tkblog_Domain_Model_Category $categoryToRemove) {
-		$this->category->detach($categoryToRemove);
+		$this->categories->detach($categoryToRemove);
 	}
 
 	/**
-	 * Returns the category
+	 * Returns the categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoriesegory> $categoriesegory
 	 */
-	public function getCategory() {
-		return $this->category;
+	public function getCategories() {
+		return $this->categories;
 	}
 
 	/**
-	 * Sets the category
+	 * Sets the categories
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoriesegory> $categoriesegory
 	 * @return void
 	 */
-	public function setCategory($category) {
-		$this->category = $category;
+	public function setCategories($categories) {
+		$this->categories = $categories;
 	}
 
 	/**
 	 * Adds a Post
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Post $relatedPost
+	 * @param Tx_Tkblog_Domain_Model_Post $relatedPosts
 	 * @return void
 	 */
 	public function addRelatedPost(Tx_Tkblog_Domain_Model_Post $relatedPost) {
-		$this->relatedPost->attach($relatedPost);
+		$this->relatedPosts->attach($relatedPosts);
 	}
 
 	/**
 	 * Removes a Post
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Post $relatedPostToRemove The Post to be removed
+	 * @param Tx_Tkblog_Domain_Model_Post $relatedPostsToRemove The Post to be removed
 	 * @return void
 	 */
 	public function removeRelatedPost(Tx_Tkblog_Domain_Model_Post $relatedPostToRemove) {
-		$this->relatedPost->detach($relatedPostToRemove);
+		$this->relatedPosts->detach($relatedPostToRemove);
 	}
 
 	/**
-	 * Returns the relatedPost
+	 * Returns the relatedPosts
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPost
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
 	 */
-	public function getRelatedPost() {
-		return $this->relatedPost;
+	public function getRelatedPosts() {
+		return $this->relatedPosts;
 	}
 
 	/**
-	 * Sets the relatedPost
+	 * Sets the relatedPosts
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPost
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
 	 * @return void
 	 */
-	public function setRelatedPost($relatedPost) {
-		$this->relatedPost = $relatedPost;
+	public function setRelatedPosts($relatedPosts) {
+		$this->relatedPosts = $relatedPosts;
 	}
 	
 	/**

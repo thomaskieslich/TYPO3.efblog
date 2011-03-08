@@ -1,34 +1,23 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="iconButtons">
-	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {post : post, blog: post.blog})}" icon="closedok" title="Cancel" />
-	<f:be.buttons.icon uri="javascript: document.post.submit();" icon="saveandclosedok" title="Save" />
-	<f:be.buttons.icon uri="{f:uri.action(action: 'delete', arguments: {post : post, blog: post.blog})}" icon="deletedok" title="Delete this blog" />
+
 </f:section>	
 
 <f:section name="content">
-	<f:be.container>
+    <f:be.container>
 	More Blogs:
-		<f:for each="{pages}" as="page">
-			<f:if condition="{page.module}">
-				<a href="mod.php?M=web_TkblogTxTkblogBe1&id={page.uid}">{page.title}</a> |
-			</f:if>		
-		</f:for>
+        <f:for each="{pages}" as="page">
+            <f:if condition="{page.module}">
+                <a href="mod.php?M=web_TkblogTxTkblogBe1&id={page.uid}">{page.title}</a> |
+            </f:if>		
+        </f:for>
 
 <tk:be.tableList tableName="tx_tkblog_domain_model_post"  fieldList="{0: 'title', 1: 'date', 2: 'archive'}"  
-				sortField="date"  sortDescending="true" readOnly="false"
+				sortField="date"  sortDescending="true" readOnly="false" recordsPerPage="14"
 				 enableClickMenu="true" clickTitleMode="edit" alternateBackgroundColors="true"
 				/>
 <tk:be.tableList tableName="tx_tkblog_domain_model_category" />
 
-
-	Posts: <f:count subject="{posts}" /><br>
-		<f:for each="{posts}" as="post">
-			<tr>
-				<td><f:link.action action="show" arguments="{post : post}"> {post.title}</f:link.action></td>
-			<td>lkhlihbiu</td>
-			<td><f:link.action action="delete" arguments="{post : post}">Delete</f:link.action></td>
-			</tr>
-		</f:for>
-	</f:be.container>
+    </f:be.container>
 </f:section>
