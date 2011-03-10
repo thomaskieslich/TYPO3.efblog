@@ -20,7 +20,11 @@
 			<label index="flexform_options_general_widgets_search">Search Widget</label>
 			<label index="flexform_options_general_widgets_date">Date Menu Widget</label>
 			<label index="flexform_options_general_category">Categories</label>
+			
 			<label index="flexform_options_general_storage">Pages with Posts or/and Categories</label>
+                        
+                        <label index="flexform_options_general_target_detailUid">Page with Detail View</label>
+                        <label index="flexform_options_general_target_listUid">Page with Bloglist</label>
 			
 			<label index="flexform_options_general_orderBy">Order by</label>
 			<label index="flexform_options_general_orderBy_date">Date</label>
@@ -45,25 +49,18 @@
 			
 			<label index="flexform_options_general_daysToArchive">Days to Archive</label>
 			
-			<label index="flexform_options_general_latest_detailUri">Page for Detail View</label>
 			<label index="flexform_options_general_latest_maxEntrys">Max Entries</label>
 			<label index="flexform_options_general_latest_cropLink">Crop Links after(min 8)</label>
 			<label index="flexform_options_general_latest_showViews">Show Views after Link</label>
 			<label index="flexform_options_general_latest_teaserHeader">Linktext from Teaser(first header)</label>
 			
-			<label index="flexform_options_general_views_detailUri">Page for Detail View</label>
 			<label index="flexform_options_general_views_maxEntrys">Max Entries</label>
 			<label index="flexform_options_general_views_cropLink">Crop Links after(min 8)</label>
 			<label index="flexform_options_general_views_teaserHeader">Linktext from Teaser(first header)</label>
-			
-			<label index="flexform_options_general_category_listUri">Page with Bloglist</label>
+
 			<label index="flexform_options_general_category_cropLink">Crop Links after(min 8)</label>
 			<label index="flexform_options_general_category_viewCounts">View Category Counts</label>
 			<label index="flexform_options_general_category_viewEmpty">View empty categories</label>
-			
-			<label index="flexform_options_general_search_listUri">Page with Bloglist</label>
-			
-			<label index="flexform_options_general_dateMenu_listUri">Page with Archive(Blog)list</label>
 			
 			<!--Post-->
 			<label index="post">Post</label>

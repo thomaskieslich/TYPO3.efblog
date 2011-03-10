@@ -6,7 +6,7 @@
             <ul>
                 <f:for each="{posts}" as="post">
                     <li>
-                    <f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'detail', post : post, backPid : backPid, counter : 1}}">
+                    <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
 
                         <f:if condition="{settings.latestWidget.teaserHeader} == 0">
                             <f:then>
@@ -21,7 +21,7 @@
                             </f:else>
                         </f:if>
                         <f:if condition="{settings.latestWidget.showViews}">({post.views})</f:if>
-                    </f:link.page>
+                    </f:link.action>
                     </li>
                 </f:for>
             </ul>

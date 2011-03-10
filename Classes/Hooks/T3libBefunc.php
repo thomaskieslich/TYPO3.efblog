@@ -110,11 +110,10 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 */
 	protected function updateForPostListAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
-			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'searchWidget' => 'listUri',
-			'dateMenuWidget' => 'listUri'
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
+			'target' => 'listUid'
 		);
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
 	}
@@ -128,11 +127,10 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForPostDetailAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'searchWidget' => 'listUri',
-			'dateMenuWidget' => 'listUri'
+			'target' => 'detailUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -147,10 +145,9 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForPostLatestAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
-			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'searchWidget' => 'listUri',
-			'dateMenuWidget' => 'listUri'
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
+			'target' => 'listUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -165,10 +162,9 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForPostViewsAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'searchWidget' => 'listUri',
-			'dateMenuWidget' => 'listUri'
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
+			'target' => 'listUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -183,10 +179,9 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForPostCategoryAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
-			'searchWidget' => 'listUri',
-			'dateMenuWidget' => 'listUri'
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'target' => 'detailUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -204,7 +199,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
 			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'dateMenuWidget' => 'listUri'
+			'target' => 'detailUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -219,10 +214,10 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForPostDateAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,categoryMode,category',
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
-			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
-			'searchWidget' => 'listUri'
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
+			'target' => 'detailUid'
 		);
 		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);

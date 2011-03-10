@@ -1,50 +1,50 @@
 <f:if condition="{category.children}">
-	<f:then>
-		<f:if condition="{settings.categoryWidget.viewEmpty}">
-			<f:then>
-				<li>
-				<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">
+    <f:then>
+        <f:if condition="{settings.categoryWidget.viewEmpty}">
+            <f:then>
+                <li>
+                <f:link.action action="list" pageUid="{settings.target.listUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
 					{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-					<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-				</f:link.page>
-			</f:then>
-			<f:else>
-				<f:if condition="{category.posts} > 0">
-					<li>
-					<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">
+                    <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+                </f:link.action>
+            </f:then>
+            <f:else>
+                <f:if condition="{category.posts} > 0">
+                    <li>
+                    <f:link.action action="list" pageUid="{settings.target.listUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
 						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-						<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-					</f:link.page>
-				</f:if>
-			</f:else>
-		</f:if>
-		<ul>
-			<f:for each="{category.children}" as="child">
-				<f:render partial="CategoryElement" arguments="{category: child, pageUri: pageUri}" />
-			</f:for>
-		</ul>
-		</li>
-	</f:then>
-	<f:else>
+                        <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+                    </f:link.action>
+                </f:if>
+            </f:else>
+        </f:if>
+        <ul>
+            <f:for each="{category.children}" as="child">
+                <f:render partial="CategoryElement" arguments="{category: child, pageUri: pageUri}" />
+            </f:for>
+        </ul>
+        </li>
+    </f:then>
+    <f:else>
 
-		<f:if condition="{settings.categoryWidget.viewEmpty}">
-			<f:then>
-				<li>
-				<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">
+        <f:if condition="{settings.categoryWidget.viewEmpty}">
+            <f:then>
+                <li>
+                <f:link.action action="list" pageUid="{settings.target.listUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
 					{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-					<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-				</f:link.page>
-			</f:then>
-			<f:else>
-				<f:if condition="{category.posts} > 0">
-					<li>
-					<f:link.page pageUid="{pageUri}" additionalParams="{tx_tkblog_fe1: {action: 'list', category : category}}">
+                    <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+                </f:link.action>
+            </f:then>
+            <f:else>
+                <f:if condition="{category.posts} > 0">
+                    <li>
+                    <f:link.action action="list" pageUid="{settings.target.listUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
 						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-						<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-					</f:link.page>
-				</f:if>
-			</f:else>
-		</f:if>
+                        <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+                    </f:link.action>
+                </f:if>
+            </f:else>
+        </f:if>
 
-	</f:else>
+    </f:else>
 </f:if> 

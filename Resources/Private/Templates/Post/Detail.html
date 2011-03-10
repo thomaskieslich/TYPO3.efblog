@@ -8,10 +8,6 @@
 	{description -> f:if(condition: '{settings.replaceTitle}') 
 					->	f:format.crop(maxCharacters: '200', append: '{f:translate(key : "teaser_more")}', respectHtml: 0) 
 					->tk:document.description()}
-
-        <f:link.page pageUid="{backPid}" additionalParams="{tx_tkblog_fe1: getVars}">{f:translate(key : 'link_backTo')} {backTitle}</f:link.page>
-
-
         <h1>{post.title}</h1>
         <f:if condition="{pagerEnabled}">
             <f:then>
@@ -43,9 +39,6 @@
                 </f:for>
             </f:else>
         </f:if>
-        <div>
-           <f:link.page pageUid="{backPid}" additionalParams="{tx_tkblog_fe1: getVars}">{f:translate(key : 'link_backTo')} {backTitle}</f:link.page> 
-        </div>
-        
+
     </f:if>
 </f:section>

@@ -1,5 +1,5 @@
 page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
-page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
+//page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
 page.includeJS.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
 
@@ -52,7 +52,6 @@ plugin.tx_tkblog{
 		}
 
 		latestWidget{
-			detailUri = 
 			maxEntrys = 6
 			cropLink = 12
 			showViews = 1
@@ -60,25 +59,21 @@ plugin.tx_tkblog{
 		}
 
 		viewsWidget{
-			detailUri = 
 			maxEntrys = 8
 			cropLink = 12
 			teaserHeader = 1
 		}
 		
 		categoryWidget{
-			listUri = 
 			cropLink = 12
 			viewCounts = 1
 			viewEmpty	= 1
 		}
 
 		searchWidget{
-			listUri = 
 		}
 
-		dateMenuWidget{
-			listUri = 
+		dateMenuWidget{ 
 		}
 	}
 	persistence{

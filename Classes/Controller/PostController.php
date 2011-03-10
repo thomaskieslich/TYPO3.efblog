@@ -87,36 +87,26 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 
         $request = $this->request->getArguments();
-        $getVars = array();
         if (isset($request['category'])) {
             $this->settings['displayList']['category'] = $this->request->getArgument('category');
-            $getVars['category'] = $this->settings['displayList']['category'];
         }
 
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            $getVars['searchPhrase'] = $this->settings['displayList']['searchPhrase'];
+            Tx_Extbase_Utility_Cache::clearPageCache(array($GLOBALS['TSFE']->id));
         }
 
         if (isset($request['year'])) {
             $this->settings['displayList']['year'] = $this->request->getArgument('year');
-            $getVars['year'] = $this->settings['displayList']['year'];
         }
 
         if (isset($request['month'])) {
             $this->settings['displayList']['month'] = $this->request->getArgument('month');
-            $getVars['month'] = $this->settings['displayList']['month'];
-        }
-        //Paginator
-        if (isset($request['__widget_0'])) {
-            $getVars['__widget_0'] = $this->request->getArgument('__widget_0');
         }
 
 
 
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-        $getVars['backPid'] = $GLOBALS['TSFE']->id;
-        $this->view->assign('getVars', $getVars);
     }
 
     /**
@@ -227,8 +217,6 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
     }
 
     public function latestWidgetAction() {
-        $target = ($this->settings['latestWidget']['detailUri'] ? $this->settings['latestWidget']['detailUri'] : $this->persistence['storagePid']);
-        $this->view->assign('pageUri', $target);
         $this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
         $this->view->assign('backPid', $GLOBALS['TSFE']->id);
     }
@@ -241,8 +229,6 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
     }
 
     public function searchWidgetAction() {
-        $target = ($this->settings['searchWidget']['listUri'] ? $this->settings['searchWidget']['listUri'] : $this->persistence['storagePid']);
-        $this->view->assign('pageUri', $target);
         $this->view->assign('posts', $this->postRepository->findAll());
     }
 

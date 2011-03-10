@@ -14,7 +14,7 @@
 			<label index="comment">Comment</label>
 			
 			<!--Links-->
-			<label index="link_backTo">Back to: </label>
+			<label index="link_backTo">&lt;&lt; back</label>
 			
 			<!--Paginator-->
 			<label index="paginator_first">&lt;&lt; first</label>
@@ -58,7 +58,7 @@
                 <languageKey index="de" type="array">
                     
                         <!--Links-->
-			<label index="link_backTo">zurück zu: </label>
+			<label index="link_backTo">&lt;&lt; zurück</label>
 			
 			<!--Paginator-->
 			<label index="paginator_first">&lt;&lt; erster</label>

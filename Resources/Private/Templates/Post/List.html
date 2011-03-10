@@ -18,7 +18,7 @@
                                             <f:if condition="{image}">  
                                                 <f:if condition="{imageNumber} < {settings.displayList.images}">
                                                     <div class="tx-tkblog-list-imagerow">
-                                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                                        <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
                                                             <f:image src="uploads/tx_tkblog/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
                                                         </f:link.action>
                                                     </div>
@@ -32,7 +32,7 @@
                                             <f:if condition="{image}">  
                                                 <f:if condition="{imageNumber} < {settings.displayList.images}">
                                                     <div class="tx-tkblog-list-imagerow">
-                                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                                        <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
                                                             <f:image src="uploads/pics/{image}" alt="{element.header}" width="{settings.displayList.imageWidth}" height="{settings.displayList.imageHeight}" />
                                                         </f:link.action>
                                                     </div>
@@ -44,7 +44,7 @@
 
                                 <div class="tx-tkblog-list-text">
                                     <h1>
-                                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                                        <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
                                             {post.title}
                                         </f:link.action>
                                     </h1>
@@ -75,7 +75,7 @@
 
                 <div class="tx-tkblog-list-footer">
                     <div class="more">
-                        <f:link.action action="detail" arguments="{getVars}" additionalParams="{tx_tkblog_fe1:{post:post, counter:1}}" title="view">
+                        <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
                             {f:translate(key : "read_more")}
                         </f:link.action>
                     </div>

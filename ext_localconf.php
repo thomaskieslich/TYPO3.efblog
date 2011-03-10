@@ -8,7 +8,6 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'fe1',
 	array(
 		'Post' => 'list,detail'
-		//'Category' => 'list,detail'
 	),
 	array(
 		//'Post' => 'list,single',

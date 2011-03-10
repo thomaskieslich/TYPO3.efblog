@@ -24,7 +24,7 @@
 									</numIndex>
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_detail</numIndex>
-										<numIndex index="1">Post->detail;Post->list</numIndex>
+										<numIndex index="1">Post->detail</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
 										<numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latest</numIndex>
@@ -196,21 +196,6 @@
 					</settings.displayList.daysToArchive>
 					
 					<!-- latest Widget-->
-					<settings.latestWidget.detailUri>
-						<TCEforms>
-							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_detailUri</label>
-							<exclude>1</exclude>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.latestWidget.detailUri>
 					<settings.latestWidget.maxEntrys>
 						<TCEforms>
 						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_maxEntrys</label>
@@ -247,21 +232,6 @@
 					</settings.latestWidget.teaserHeader>
 					
 					<!-- views Widget-->
-					<settings.viewsWidget.detailUri>
-						<TCEforms>
-							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_detailUri</label>
-							<exclude>1</exclude>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.viewsWidget.detailUri>
 					<settings.viewsWidget.maxEntrys>
 						<TCEforms>
 						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_maxEntrys</label>
@@ -289,22 +259,7 @@
 						</TCEforms>
 					</settings.viewsWidget.teaserHeader>
 					
-					<!-- category Widget-->
-					<settings.categoryWidget.listUri>
-						<TCEforms>
-							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_listUri</label>
-							<exclude>1</exclude>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.categoryWidget.listUri>
+					<!-- category Widget-->					
 					<settings.categoryWidget.cropLink>
 						<TCEforms>
 						<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_cropLink</label>
@@ -332,26 +287,15 @@
 					</settings.categoryWidget.viewEmpty>
 					
 					<!-- search Widget-->
-					<settings.searchWidget.listUri>
-						<TCEforms>
-							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_search_listUri</label>
-							<exclude>1</exclude>
-							<config>
-								<type>group</type>
-								<internal_type>db</internal_type>
-								<allowed>pages</allowed>
-								<size>1</size>
-								<maxitems>1</maxitems>
-								<minitems>0</minitems>
-								<show_thumbs>1</show_thumbs>
-							</config>
-						</TCEforms>
-					</settings.searchWidget.listUri>
+	
 					
 					<!-- date Menu Widget-->
-					<settings.dateMenuWidget.listUri>
+	
+					
+					<!--startingpoint-->
+                                        <settings.target.detailUid>
 						<TCEforms>
-							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_dateMenu_listUri</label>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_target_detailUid</label>
 							<exclude>1</exclude>
 							<config>
 								<type>group</type>
@@ -363,10 +307,23 @@
 								<show_thumbs>1</show_thumbs>
 							</config>
 						</TCEforms>
-					</settings.dateMenuWidget.listUri>
-					
-					<!--startingpoint-->
-					<persistence.storagePid>
+					</settings.target.detailUid>
+                                        <settings.target.listUid>
+						<TCEforms>
+							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_target_listUid</label>
+							<exclude>1</exclude>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+								<show_thumbs>1</show_thumbs>
+							</config>
+						</TCEforms>
+					</settings.target.listUid>
+					<persistence.storagePid>                                            
 						<TCEforms>
 							<label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_storage</label>
 							<exclude>1</exclude>

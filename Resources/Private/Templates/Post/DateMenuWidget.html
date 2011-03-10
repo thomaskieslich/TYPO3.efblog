@@ -9,7 +9,7 @@
                     <ul id="{year}" style="display:none;">
                         <f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
                             <li id="{year}_{month}">
-                            <f:link.action pageUid="{pageUri}" arguments="{year: year, month: month}">
+                            <f:link.action action="list" pageUid="{settings.target.listUid}" arguments="{year: year, month: month}">
                                 <tk:format.monthName month="{month}" /> {year}</f:link.action>
 				({postsByMonth -> f:count()}
                             <f:if condition="<f:count subject='{postsByMonth}' /> == 1">
