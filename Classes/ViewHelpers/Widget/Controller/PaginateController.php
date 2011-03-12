@@ -65,7 +65,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	}
 
 	/**
-	 * @param integer $currentPage
+	 * @param mixed $currentPage
 	 * @return void
 	 */
 	public function indexAction($currentPage = 1) {

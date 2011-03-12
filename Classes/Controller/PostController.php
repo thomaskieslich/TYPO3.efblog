@@ -104,15 +104,13 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
             $this->settings['displayList']['month'] = $this->request->getArgument('month');
         }
 
-
-
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
     }
 
     /**
      * post detail
      * @param Tx_Tkblog_Domain_Model_Post $post
-     * @param integer $page 
+     * @param mixed $page 
      * 
      */
     public function detailAction(Tx_Tkblog_Domain_Model_Post $post = NULL, $page = 1) {
@@ -137,9 +135,11 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
                     }
                 }
             } else {
+                $pageCount = 0;
                 foreach ($content as $single) {
-                    if ($this->settings['displaySingle']['hideDivider'] == 1 && $single->getCtype() == $this->settings['displaySingle']['divType'])
-                        ;
+                    if ($this->settings['displaySingle']['hideDivider'] == 1 && $single->getCtype() == $this->settings['displaySingle']['divType']) {
+                        $pageCount++;
+                    }
                     else
                         $elements->attach($single);
                 }
@@ -148,101 +148,63 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
             $this->view->assign('elements', $elements);
             $this->view->assign('pagerEnabled', $pagerEnabled);
             $this->view->assign('page', $page);
+            $this->view->assign('pageCount', $pageCount);
             $this->view->assign('post', $post);
 
             //Update Views
-
-            $request = $this->request->getArguments();
-            $getVars = array();
-            if (isset($request['counter'])) {
-                $currentViews = $post->getViews();
-                $post->setViews($currentViews + 1);
-            }
-
-            if (isset($request['category'])) {
-                $getVars['category'] = $this->request->getArgument('category');
-            }
-
-            if (isset($request['searchPhrase'])) {
-                $getVars['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            }
-
-            if (isset($request['year'])) {
-                $getVars['year'] = $this->request->getArgument('year');
-            }
-
-            if (isset($request['month'])) {
-                $getVars['month'] = $this->request->getArgument('month');
-            }
-
-            if (isset($request['backPid'])) {
-                $backPid = $this->request->getArgument('backPid');
-
-                $tmp['L'] = intval(t3lib_div::_GP('L'));
-                if ($tmp['L'] > 0) {
-                    $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('title', 'pages_language_overlay', 'pid = ' . $backPid . ' AND sys_language_uid = ' . $tmp['L']);
-                } else {
-                    $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('title', 'pages', 'uid = ' . $backPid);
-                }
-                $trow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-                $this->view->assign('backPid', $backPid);
-                $this->view->assign('backTitle', $trow['title']);
-            }
-
-            //Paginator
-            //Paginator
-            if (isset($request['__widget_0'])) {
-                $getVars['__widget_0'] = $this->request->getArgument('__widget_0');
-            }
+            $currentViews = $post->getViews();
+            $post->setViews($currentViews + 1);
 
             //render Description
-            $singleCounter = 0;
-            foreach ($content as $element) {
-                if ($singleCounter == 0 && $element->getBodytext()) {
-                    $description = $element->getBodytext();
-                    $singleCounter++;
+            if ($post->getTeaserDescription()) {
+                $description = $post->getTeaserDescription();
+            } else {
+                $singleCounter = 0;
+                foreach ($content as $element) {
+                    if ($singleCounter == 0 && $element->getBodytext()) {
+                        $description = $element->getBodytext();
+                        $singleCounter++;
+                    }
                 }
             }
-
             $this->view->assign('description', strip_tags($description));
-
-            $this->view->assign('getVars', $getVars);
         } else {
             $this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
         }
     }
 
-    public function hideAction(Tx_Tkblog_Domain_Model_Post $post = NULL) {
-        var_dump($post);
-    }
-
     public function latestWidgetAction() {
         $this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
-        $this->view->assign('backPid', $GLOBALS['TSFE']->id);
     }
 
     public function viewsWidgetAction() {
-        $target = ($this->settings['viewsWidget']['detailUri'] ? $this->settings['viewsWidget']['detailUri'] : $this->persistence['storagePid']);
-        $this->view->assign('pageUri', $target);
         $this->view->assign('posts', $this->postRepository->findViews((int) $this->settings['viewsWidget']['maxEntrys']));
-        $this->view->assign('backPid', $GLOBALS['TSFE']->id);
     }
 
     public function searchWidgetAction() {
-        $this->view->assign('posts', $this->postRepository->findAll());
+        
+    }
+    
+    public function searchViewAction() {
+        $request = $this->request->getArguments();
+        if (isset($request['searchPhrase'])) {
+            $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
+            Tx_Extbase_Utility_Cache::clearPageCache(array($GLOBALS['TSFE']->id));
+        }
+        $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
     }
 
     public function categoryWidgetAction() {
-        $target = ($this->settings['categoryWidget']['listUri'] ? $this->settings['categoryWidget']['listUri'] : $this->persistence['storagePid']);
-        $this->view->assign('pageUri', $target);
-        $this->view->assign('posts', $this->postRepository->findAll());
+        $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+        $this->view->assign('categories', $categoryRepository->findMainCategory());
+    }
+    
+    public function categoryViewAction() {
         $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
         $this->view->assign('categories', $categoryRepository->findMainCategory());
     }
 
     public function dateMenuWidgetAction() {
-        $target = ($this->settings['dateMenuWidget']['listUri'] ? $this->settings['dateMenuWidget']['listUri'] : $this->persistence['storagePid']);
-        $this->view->assign('pageUri', $target);
         $this->settings['displayList']['orderBy'] = 'date';
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
     }

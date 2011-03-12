@@ -120,6 +120,7 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 				'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
 				'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
 				'uploadfolder' => 'uploads/tx_tkblog',
+                                'disable_controls' => upload,
 				'show_thumbs' => 1,
 				'size' => 1,
 				'minitems' => 0,

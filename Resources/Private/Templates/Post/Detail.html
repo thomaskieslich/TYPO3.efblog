@@ -4,19 +4,19 @@
     <f:flashMessages renderMode="div" />
     <f:if condition="{post}">
 	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
-	{post.tags -> f:if(condition: '{settings.replaceTitle}') -> tk:document.keywords()}
-	{description -> f:if(condition: '{settings.replaceTitle}') 
-					->	f:format.crop(maxCharacters: '200', append: '{f:translate(key : "teaser_more")}', respectHtml: 0) 
+	{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
+	{description -> f:if(condition: '{settings.replaceDescription}') 
+					->	f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0) 
 					->tk:document.description()}
         <h1>{post.title}</h1>
         <f:if condition="{pagerEnabled}">
             <f:then>
                 <f:if condition="{pages -> f:count()} > 1">
-                    <f:link.action action="detail" arguments="{post : post, page : 0, backPid:backPid}" additionalParams="{tx_tkblog_fe1: getVars}">
+                    <f:link.action action="detail" arguments="{post : post, page : 0}">
                         {f:translate(key : 'pager_off')}
                     </f:link.action> <br>
                     <f:for each="{pages}" as="pageTitle" key="pageNumber">
-                        <f:link.action action="detail" arguments="{post : post, page : pageNumber, backPid:backPid}" additionalParams="{tx_tkblog_fe1: getVars}">							
+                        <f:link.action action="detail" arguments="{post : post, page : pageNumber}">							
                             <f:if condition="{pageTitle}">
                                 <f:then>{pageTitle}</f:then>
                                 <f:else>{f:translate(key : 'pager_page')} {pageNumber}</f:else>
@@ -29,16 +29,22 @@
                     <f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
                 </f:for>
             </f:then>
-            <f:else> 
-                <f:link.action action="detail" arguments="{post : post, page : 1, backPid:backPid}" additionalParams="{tx_tkblog_fe1: getVars}">
-                    {f:translate(key : 'pager_on')}
-                </f:link.action> <br>
-
+            <f:else>
+                <f:if condition="{pageCount} > 0">
+                    <f:link.action action="detail" arguments="{post : post, page : 1}">
+                        {f:translate(key : 'pager_on')}
+                    </f:link.action> <br>
+                </f:if>
                 <f:for each="{elements}" as="element">
                     <f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
                 </f:for>
             </f:else>
         </f:if>
-
+        <f:for each="{post.relatedPosts}" as="relatedPost">
+            <f:link.action action="detail" additionalParams="{tx_tkblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
+            {relatedPost.title}<br>
+            </f:link.action>
+        </f:for>
     </f:if>
+
 </f:section>

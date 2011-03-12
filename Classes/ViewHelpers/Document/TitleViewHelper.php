@@ -61,14 +61,14 @@ class Tx_Tkblog_ViewHelpers_Document_TitleViewHelper extends Tx_Fluid_Core_ViewH
 	 */
 	public function render($mode = 'replace', $glue = ' - ', $maxCharacters = 0, $append = '...', $respectWordBoundaries = TRUE) {
 		$renderedContent = $this->renderChildren();
-		$existingTitle = $GLOBALS['TSFE']->page['title'];
+		$existingTitle = $GLOBALS['TSFE']->page['title'];                
 		$newTitle = '';
 		if ($renderedContent) {
 			//reset noPageTitle
 			if ($GLOBALS['TSFE']->config['config']['noPageTitle'] > 0) {
 				$GLOBALS['TSFE']->config['config']['noPageTitle'] = 0;
 			}
-
+                        
 			//crop existing Title
 			if ($maxCharacters > 0) {
 				$existingTitle = $this->contentObject->crop($existingTitle, $maxCharacters . '|' . $append . '|' . $respectWordBoundaries);
@@ -83,7 +83,7 @@ class Tx_Tkblog_ViewHelpers_Document_TitleViewHelper extends Tx_Fluid_Core_ViewH
 			else {
 				$newTitle = $renderedContent;
 			}
-
+                        
 			$GLOBALS['TSFE']->page['title'] = $newTitle;
 			$GLOBALS['TSFE']->indexedDocTitle = $newTitle;
 		}

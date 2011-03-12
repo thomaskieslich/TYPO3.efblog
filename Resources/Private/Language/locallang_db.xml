@@ -12,19 +12,21 @@
 			<!--Flexform-->
 			<label index="flexform_options_general">TKBlog</label>			
 			<label index="flexform_options_general_widgets">Widgets</label>
-			<label index="flexform_options_general_widgets_list">Bloglist</label>
-			<label index="flexform_options_general_widgets_detail">Detail View</label>
+			<label index="flexform_options_general_list">Post List</label>
+			<label index="flexform_options_general_detail">Detail View</label>
+			<label index="flexform_options_general_view_category">Category View</label>
+			<label index="flexform_options_general_view_search">Search View</label>
 			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
 			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
 			<label index="flexform_options_general_widgets_category">Category Widget</label>
 			<label index="flexform_options_general_widgets_search">Search Widget</label>
 			<label index="flexform_options_general_widgets_date">Date Menu Widget</label>
-			<label index="flexform_options_general_category">Categories</label>
+			<label index="flexform_options_general_categories">Categories</label>
 			
 			<label index="flexform_options_general_storage">Pages with Posts or/and Categories</label>
                         
                         <label index="flexform_options_general_target_detailUid">Page with Detail View</label>
-                        <label index="flexform_options_general_target_listUid">Page with Bloglist</label>
+                        <label index="flexform_options_general_target_listUid">Page with List View</label>
 			
 			<label index="flexform_options_general_orderBy">Order by</label>
 			<label index="flexform_options_general_orderBy_date">Date</label>
@@ -78,6 +80,8 @@
 			<label index="post_author">Author</label>
 			<label index="post_date">Date &amp; Time</label>
 			<label index="post_archive">Archive Date</label>
+			<label index="post_teaserLink">Teaserlink</label>
+			<label index="post_teaserLink_title">Teaserlink Title</label>
 			<label index="post_content">Content Elements</label>
 			<label index="post_comments">Comments</label>
 			<label index="post_related">Related Posts</label>
@@ -87,6 +91,7 @@
 			<label index="post_allowComments.I.2">Only registered users can comment</label>
 			<label index="post_tags">Tag clouds (comma separated list)</label>
 			<label index="post_cropTeaser">Crop Teaser</label>
+			<label index="post_teaserDescription">Teaser Description</label>
 			<label index="post_teaserImage">Teaser Image</label>
                         <label index="post_showTeaserImage">allow Teaser Images</label>
 			<label index="post_showTeaserImage.I.0">no Image</label>

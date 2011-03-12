@@ -1,79 +1,81 @@
 <f:if condition="{configuration.insertAbove}">
-	<f:render section="paginator" arguments="{pagination: pagination}" />
+    <f:render section="paginator" arguments="{pagination: pagination}" />
 </f:if>
 
 <f:renderChildren arguments="{contentArguments}" />
 
 <f:if condition="{configuration.insertBelow}">
-	<f:render section="paginator" arguments="{pagination: pagination}" />
+    <f:render section="paginator" arguments="{pagination: pagination}" />
 </f:if>
 
 <f:section name="paginator">
-	<div class="tx-tkblog-widget-paginator">
-		<ul>
-			<li class="first">
-			<f:if condition="{pagination.previousPage} > 0">
-				<f:then>
-					<f:widget.link arguments="{currentPage: 1}"><f:translate key='paginator_first' /></f:widget.link>
-				</f:then>
-				<f:else>
-					<f:translate key='paginator_first' />
-				</f:else>
-			</f:if>
-			</li>
-			<!--Previous-->
-			<li class="previous">
-			<f:if condition="{pagination.previousPage} > 0">
-				<f:then>
-					<f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key='paginator_previous' /></f:widget.link>
-				</f:then>
-				<f:else>
-					<f:translate key='paginator_previous' />
-				</f:else>
-			</f:if>
-			</li>
+    <div class="tx-tkblog-widget-paginator">
+        <f:if condition="{pagination.numberOfPages} > 1">
+            <ul>
+                <li class="first">
+                <f:if condition="{pagination.previousPage} > 0">
+                    <f:then>
+                        <f:widget.link arguments="{currentPage: 1}"><f:translate key='paginator_first' /></f:widget.link>
+                    </f:then>
+                    <f:else>
+                        <f:translate key='paginator_first' />
+                    </f:else>
+                </f:if>
+                </li>
+                <!--Previous-->
+                <li class="previous">
+                <f:if condition="{pagination.previousPage} > 0">
+                    <f:then>
+                        <f:widget.link arguments="{currentPage: pagination.previousPage}"><f:translate key='paginator_previous' /></f:widget.link>
+                    </f:then>
+                    <f:else>
+                        <f:translate key='paginator_previous' />
+                    </f:else>
+                </f:if>
+                </li>
 
-			<f:for each="{pagination.pages}" as="page">
-				<f:if condition="{page.isCurrent}">
-					<f:then>
-						<li class="current">
+                <f:for each="{pagination.pages}" as="page">
+                    <f:if condition="{page.isCurrent}">
+                        <f:then>
+                            <li class="current">
 						{page.number}
-						</li>
-					</f:then>
-					<f:else>
-						<li>
-						<f:if condition="{page.number} > 1">
-							<f:then>
-								<f:widget.link arguments="{currentPage: page.number}">{page.number}</f:widget.link>
-							</f:then>
-							<f:else>
-								<f:widget.link>{page.number}</f:widget.link>
-							</f:else>
-						</f:if>
-						</li>
-					</f:else>
-				</f:if>
-			</f:for>
+                            </li>
+                        </f:then>
+                        <f:else>
+                            <li>
+                            <f:if condition="{page.number} > 1">
+                                <f:then>
+                                    <f:widget.link arguments="{currentPage: page.number}">{page.number}</f:widget.link>
+                                </f:then>
+                                <f:else>
+                                    <f:widget.link>{page.number}</f:widget.link>
+                                </f:else>
+                            </f:if>
+                            </li>
+                        </f:else>
+                    </f:if>
+                </f:for>
 
 
-			<f:if condition="{pagination.nextPage}">
-				<f:then>
-					<li class="next">
-					<f:widget.link arguments="{currentPage: pagination.nextPage}"><f:translate key='paginator_next' /></f:widget.link>
-					</li>
-					<li class="last">
-					<f:widget.link arguments="{currentPage: pagination.numberOfPages}"><f:translate key='paginator_last' /></f:widget.link>
-					</li>
-				</f:then>
-				<f:else>
-					<li class="next">
-					<f:translate key='paginator_next' />
-					</li>
-					<li class="last">
-					<f:translate key='paginator_last' />
-					</li>
-				</f:else>
-			</f:if>
-		</ul>
-	</div>
+                <f:if condition="{pagination.nextPage}">
+                    <f:then>
+                        <li class="next">
+                        <f:widget.link arguments="{currentPage: pagination.nextPage}"><f:translate key='paginator_next' /></f:widget.link>
+                        </li>
+                        <li class="last">
+                        <f:widget.link arguments="{currentPage: pagination.numberOfPages}"><f:translate key='paginator_last' /></f:widget.link>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="next">
+                        <f:translate key='paginator_next' />
+                        </li>
+                        <li class="last">
+                        <f:translate key='paginator_last' />
+                        </li>
+                    </f:else>
+                </f:if>
+            </ul>
+        </f:if>
+    </div>
 </f:section>

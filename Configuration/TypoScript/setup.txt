@@ -28,10 +28,8 @@ plugin.tx_tkblog{
 			category =
 
 			//Rendering
-			renderFluid = 1
-			renderTS = 0	
 			cropText = 188
-			images = 2
+			images = 4
 			imageWidth = 100m
 			imageHeight = 
 

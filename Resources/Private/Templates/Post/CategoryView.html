@@ -1,0 +1,13 @@
+<f:layout name="default" />
+<f:section name="content">
+	<div class="tx-tkblog-category-container">
+            <h1>{f:translate(key : 'widget_category')}</h1>
+        <div class="tx-tkblog-category-content">
+		<ul>
+			<f:for each="{categories}" as="category">
+				<f:render partial="CategoryElement" arguments="{category: category, pageUri: pageUri}" /> 
+			</f:for>
+		</ul>
+	</div>
+        </div>
+</f:section>

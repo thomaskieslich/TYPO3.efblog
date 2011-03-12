@@ -78,25 +78,31 @@ class tx_Tkblog_Hooks_T3libBefunc {
 			// modify the flexform structure depending on the first found action
 			switch ($selectedView) {
 				case 'Post->list':
-					$this->updateForPostListAction($dataStructure);
+					$this->updateForListAction($dataStructure);
 					break;
 				case 'Post->detail':
-					$this->updateForPostDetailAction($dataStructure);
+					$this->updateForDetailAction($dataStructure);
+					break;
+                                case 'Post->searchView':
+					$this->updateForSearchViewAction($dataStructure);
+					break;
+                                case 'Post->categoryView':
+					$this->updateForCategoryViewAction($dataStructure);
 					break;
 				case 'Post->latestWidget':
-					$this->updateForPostLatestAction($dataStructure);
+					$this->updateForLatestWidgetAction($dataStructure);
 					break;
 				case 'Post->viewsWidget':
-					$this->updateForPostViewsAction($dataStructure);
+					$this->updateForViewsWidgetAction($dataStructure);
 					break;
 				case 'Post->categoryWidget':
-					$this->updateForPostCategoryAction($dataStructure);
+					$this->updateForCategoryWidgetAction($dataStructure);
 					break;
 				case 'Post->searchWidget':
-					$this->updateForPostSearchAction($dataStructure);
+					$this->updateForSearchWidgetAction($dataStructure);
 					break;
 				case 'Post->dateMenuWidget':
-					$this->updateForPostDateAction($dataStructure);
+					$this->updateForDateMenuWidgetAction($dataStructure);
 					break;
 			}
 		}
@@ -108,7 +114,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostListAction(array &$dataStructure) {
+	protected function updateForListAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
 			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
@@ -124,15 +130,36 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostDetailAction(array &$dataStructure) {
+	protected function updateForDetailAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
 			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
 			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
 			'target' => 'detailUid'
-		);
-		
+		);		
+		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
+	}
+        
+        protected function updateForSearchViewAction(array &$dataStructure) {
+		$fieldsToBeRemoved = array (
+			'displayList' => 'categoryMode,category,displayArchived,daysToArchive',
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
+			'target' => 'listUid'
+		);		
+		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
+	}
+        
+         protected function updateForCategoryViewAction(array &$dataStructure) {
+		$fieldsToBeRemoved = array (
+			'displayList' => 'orderBy,sortDirection,displayArchived,daysToArchive',
+			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
+			'target' => 'detailUid'
+		);		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
 	}
 	
@@ -142,7 +169,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostLatestAction(array &$dataStructure) {
+	protected function updateForLatestWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
 			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
@@ -159,7 +186,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostViewsAction(array &$dataStructure) {
+	protected function updateForViewsWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
 			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
@@ -176,7 +203,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostCategoryAction(array &$dataStructure) {
+	protected function updateForCategoryWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
 			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
@@ -193,7 +220,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostSearchAction(array &$dataStructure) {
+	protected function updateForSearchWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
 			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
@@ -211,7 +238,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 * @param array $dataStructure flexform structure
 	 * @return void
 	 */
-	protected function updateForPostDateAction(array &$dataStructure) {
+	protected function updateForDateMenuWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,categoryMode,category',
 			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
