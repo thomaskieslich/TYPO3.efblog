@@ -20,11 +20,11 @@
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_list</numIndex>
-                                        <numIndex index="1">Post->list;Post->detail</numIndex>
+                                        <numIndex index="1">Post->list;Post->detail;Post->rss</numIndex>
                                     </numIndex>
                                     <numIndex index="1" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_detail</numIndex>
-                                        <numIndex index="1">Post->detail</numIndex>
+                                        <numIndex index="1">Post->detail;Comment->create</numIndex>
                                     </numIndex>
                                     <numIndex index="2" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_view_search</numIndex>

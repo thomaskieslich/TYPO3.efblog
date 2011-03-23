@@ -5,12 +5,13 @@ if (!defined ('TYPO3_MODE')) {
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'fe1',
+	'Fe1',
 	array(
-		'Post' => 'list,detail'
+		'Post' => 'list, detail, rss',
+		'Comment' => 'create',
 	),
 	array(
-		//'Post' => 'list,single',
+                'Comment' => 'create',
 	)
 );
 

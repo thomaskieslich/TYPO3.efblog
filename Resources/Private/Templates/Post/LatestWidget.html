@@ -1,8 +1,8 @@
 <f:layout name="default" />
 <f:section name="content">
-    <div class="tx-tkblog-latest-container">
-        <h1>{f:translate(key : 'widget_latest')}</h1>
-        <div class="tx-tkblog-latest-content">
+    <div class="tx-tkblog-widget-container">
+        <h1>{header}</h1>
+        <div class="tx-tkblog-widget-content">
             <ul>
                 <f:for each="{posts}" as="post">
                     <li>
@@ -10,7 +10,7 @@
 
                         <f:if condition="{settings.latestWidget.teaserHeader} == 0">
                             <f:then>
-							{post.title -> f:format.crop(maxCharacters: '{settings.latestWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
+				{post.title -> f:format.crop(maxCharacters: '{settings.latestWidget.cropLink}',  append: "{f:translate(key : 'widget_latest_more')}")}
                             </f:then>
                             <f:else>
                                 <f:for each="{post.content}" as="element"  iteration="elementIterator">

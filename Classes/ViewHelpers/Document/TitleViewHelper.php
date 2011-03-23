@@ -64,7 +64,7 @@ class Tx_Tkblog_ViewHelpers_Document_TitleViewHelper extends Tx_Fluid_Core_ViewH
 		$existingTitle = $GLOBALS['TSFE']->page['title'];                
 		$newTitle = '';
 		if ($renderedContent) {
-			//reset noPageTitle
+			//reset noPageTitle                    
 			if ($GLOBALS['TSFE']->config['config']['noPageTitle'] > 0) {
 				$GLOBALS['TSFE']->config['config']['noPageTitle'] = 0;
 			}

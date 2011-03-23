@@ -44,13 +44,13 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      * hidden
      *
      * @var string $hidden
-     * @validate NotEmpty
      */
     protected $hidden;
     /**
      * Author
      *
      * @var string $author
+     * @validate String
      */
     protected $author;
     /**
@@ -101,14 +101,12 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      * @var integer
      */
     protected $cropTeaser;
-    
     /**
      * Teaser description
      *
      * @var string
      */
     protected $teaserDescription;
-    
     /**
      * Teaser image
      *
@@ -139,6 +137,12 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
      */
     protected $relatedPosts;
+    /**
+     * post comments
+     *
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     */
+    protected $comments;
 
     /**
      * The constructor of this Post
@@ -210,7 +214,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     public function setTeaserLink($teaserLink) {
         $this->teaserLink = $teaserLink;
     }
-    
+
     public function getTeaserLinkTitle() {
         return $this->teaserLinkTitle;
     }
@@ -219,7 +223,6 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
         $this->teaserLinkTitle = $teaserLinkTitle;
     }
 
-    
     /**
      * Returns the date
      *
@@ -314,7 +317,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     public function setCropTeaser($cropTeaser) {
         $this->cropTeaser = $cropTeaser;
     }
-    
+
     public function getTeaserDescription() {
         return $this->teaserDescription;
     }
@@ -323,7 +326,6 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
         $this->teaserDescription = $teaserDescription;
     }
 
-    
     /**
      * get teaser image
      * @return string void
@@ -391,12 +393,13 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
         $this->categories = new Tx_Extbase_Persistence_ObjectStorage();
         $this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
         $this->content = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->comments = new Tx_Extbase_Persistence_ObjectStorage();
     }
 
     /**
      * Adds a Category
      *
-     * @param Tx_Tkblog_Domain_Model_Categoriesegory $categoriesegory
+     * @param Tx_Tkblog_Domain_Model_Category $category
      * @return void
      */
     public function addCategory(Tx_Tkblog_Domain_Model_Category $category) {
@@ -406,7 +409,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Removes a Category
      *
-     * @param Tx_Tkblog_Domain_Model_Categoriesegory $categoriesegoryToRemove The Categoriesegory to be removed
+     * @param Tx_Tkblog_Domain_Model_Category $categoryToRemove The Category to be removed
      * @return void
      */
     public function removeCategory(Tx_Tkblog_Domain_Model_Category $categoryToRemove) {
@@ -416,7 +419,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Returns the categories
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoriesegory> $categoriesegory
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
      */
     public function getCategories() {
         return $this->categories;
@@ -425,7 +428,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Sets the categories
      *
-     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Categoriesegory> $categoriesegory
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
      * @return void
      */
     public function setCategories($categories) {
@@ -472,6 +475,45 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     }
 
     /**
+     * Adds a Comments
+     *
+     * @param Tx_Tkblog_Domain_Model_Comment $comment
+     * @return void
+     */
+    public function addComment(Tx_Tkblog_Domain_Model_Comment $comment) {
+        $this->comments->attach($comment);
+    }
+
+    /**
+     * Removes a Comments
+     *
+     * @param Tx_Tkblog_Domain_Model_Comment $commentToRemove The Comments to be removed
+     * @return void
+     */
+    public function removeComment(Tx_Tkblog_Domain_Model_Comment $commentToRemove) {
+        $this->comments->detach($commentToRemove);
+    }
+
+    /**
+     * Returns the comments
+     *
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     */
+    public function getComments() {
+        return $this->comments;
+    }
+
+    /**
+     * Sets the comments
+     *
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     * @return void
+     */
+    public function setComments($comments) {
+        $this->comments = $comments;
+    }
+
+    /**
      * Returns the content
      *
      * @return integer $content
@@ -490,6 +532,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
         $this->content = $content;
     }
 
+    //Helper
     public function getYearOf() {
         return $this->date->format('Y');
     }

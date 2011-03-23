@@ -85,10 +85,11 @@
 			<label index="post_content">Content Elements</label>
 			<label index="post_comments">Comments</label>
 			<label index="post_related">Related Posts</label>
+			<label index="post_comments">Comments</label>
 			<label index="post_allowComments">allow Comments</label>
-			<label index="post_allowComments.I.0">Everybody can comment this post</label>
-			<label index="post_allowComments.I.1">Nobody can comment this post</label>
-			<label index="post_allowComments.I.2">Only registered users can comment</label>
+			<label index="post_allowcomment_I.0">Everybody can comment this post</label>
+			<label index="post_allowcomment_I.1">Nobody can comment this post</label>
+			<label index="post_allowcomment_I.2">Only registered users can comment</label>
 			<label index="post_tags">Tag clouds (comma separated list)</label>
 			<label index="post_cropTeaser">Crop Teaser</label>
 			<label index="post_teaserDescription">Teaser Description</label>
@@ -105,7 +106,14 @@
 			<label index="category_description">Description</label>
 			<label index="category_image">Category Image</label>
 			<label index="category_parent_category">Parent Category</label>
-			<label index="comment">Comment</label>
+			<label index="comment">Comments</label>
+			<label index="comment_author">Author</label>
+			<label index="comment_email">Email</label>
+			<label index="comment_website">Website</label>
+			<label index="comment_location">Location</label>
+			<label index="comment_date">Date</label>
+			<label index="comment_comment">Comment</label>
+			<label index="comment_approved">Approved</label>
 		</languageKey>
 	</data>
 </T3locallang>

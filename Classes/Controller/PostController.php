@@ -44,13 +44,18 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
      * @var Tx_Tkblog_Domain_Repository_PostRepository
      */
     protected $postRepository;
+    /**
+     *
+     * @var object 
+     */
+    protected $cObj;
 
     /**
      * Initializes the current action
      *
      * @return void
      */
-    protected function initializeAction() {
+    protected function initializeAction () {
         $this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
         $framework = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'tkblog', 'tkblog_fe1');
         $originalSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -69,6 +74,9 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
         $this->settings = $originalSettings['settings'];
         $this->persistence = $originalSettings['persistence'];
+
+        //get cObj
+        $this->cObj = $this->configurationManager->getContentObject();
     }
 
     /**
@@ -76,8 +84,8 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
      *
      * @return string The rendered list action
      */
-    public function listAction() {
-        $pagerConfig = array(
+    public function listAction () {
+        $pagerConfig = array (
             'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
             'insertAbove' => $this->settings['displayList']['insertAbove'],
             'insertBelow' => $this->settings['displayList']['insertBelow'],
@@ -93,7 +101,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            Tx_Extbase_Utility_Cache::clearPageCache(array($GLOBALS['TSFE']->id));
+            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
         }
 
         if (isset($request['year'])) {
@@ -113,14 +121,14 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
      * @param mixed $page 
      * 
      */
-    public function detailAction(Tx_Tkblog_Domain_Model_Post $post = NULL, $page = 1) {
+    public function detailAction (Tx_Tkblog_Domain_Model_Post $post = NULL, $page = 1) {
         if ($post) {
             $pagerEnabled = $this->settings['displaySingle']['pagerEnabled'];
             if ($page == 0)
                 $pagerEnabled = 0;
 
             $content = $post->getContent();
-            $pages = array();
+            $pages = array ();
             $pages[1] = '';
             $divider = 2;
             $elements = new Tx_Extbase_Persistence_ObjectStorage();
@@ -173,40 +181,78 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
         }
     }
 
-    public function latestWidgetAction() {
+    public function latestWidgetAction () {
         $this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
+        $this->view->assign('header', $this->cObj->data['header']);
     }
 
-    public function viewsWidgetAction() {
+    public function viewsWidgetAction () {
         $this->view->assign('posts', $this->postRepository->findViews((int) $this->settings['viewsWidget']['maxEntrys']));
+        $this->view->assign('header', $this->cObj->data['header']);
     }
 
-    public function searchWidgetAction() {
-        
+    public function searchWidgetAction () {
+        $this->view->assign('header', $this->cObj->data['header']);
     }
-    
-    public function searchViewAction() {
+
+    public function searchViewAction () {
         $request = $this->request->getArguments();
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            Tx_Extbase_Utility_Cache::clearPageCache(array($GLOBALS['TSFE']->id));
+            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
         }
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
     }
 
-    public function categoryWidgetAction() {
+    public function categoryWidgetAction () {
         $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
         $this->view->assign('categories', $categoryRepository->findMainCategory());
+        $this->view->assign('header', $this->cObj->data['header']);
     }
-    
-    public function categoryViewAction() {
+
+    public function categoryViewAction () {
         $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
         $this->view->assign('categories', $categoryRepository->findMainCategory());
     }
 
-    public function dateMenuWidgetAction() {
+    public function dateMenuWidgetAction () {
         $this->settings['displayList']['orderBy'] = 'date';
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+        $this->view->assign('header', $this->cObj->data['header']);
+    }
+
+    public function rssAction () {
+        $posts = $this->postRepository->findLatest((int) 25);
+        $rssItems = array ();
+
+        foreach ($posts as $key => $post) {
+            $rssItems[$key]['title'] = $post->getTitle();
+            $rssItems[$key]['date'] = $post->getDate();
+            $rssItems[$key]['post'] = $post->getUid();
+
+            $content = $post->getContent();
+            //render Description
+            if ($post->getTeaserDescription()) {
+                $description = $post->getTeaserDescription();
+            } else {
+                $singleCounter = 0;
+                foreach ($content as $element) {
+                    if ($singleCounter == 0 && $element->getBodytext()) {
+                        $description = $element->getBodytext();
+                        $singleCounter++;
+                    }
+                }
+            }
+            $rssItems[$key]['description'] = strip_tags($description);
+            $categories = '';
+
+            foreach ($post->getCategories() as $category) {
+                $categories .= $category->getTitle() . ' ';
+            }
+            $rssItems[$key]['categories'] = $categories;
+            $rssItems[$key]['views'] = $post->getViews();
+        }
+        $this->view->assign('rssItems', $rssItems);
     }
 
 }

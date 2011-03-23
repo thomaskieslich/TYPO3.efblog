@@ -1,7 +1,7 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'prepend')}
+	{settings.displayList.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
 
     <tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
         <f:for each="{paginatedPosts}" as="post">
@@ -22,17 +22,17 @@
                                                                 <f:then>
                                                                     <f:if condition="{post.teaserLink.target}">
                                                                         <f:then>
-                                                                            {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                            {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                             -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}
                                                                         </f:then>
                                                                         <f:else>
-                                                                            {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                            {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                             -> f:link.page(pageUid : '{post.teaserLink.link}')}
                                                                         </f:else>
                                                                     </f:if>
                                                                 </f:then>
-                                                                <f:else>
-                                                                    {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                <f:else>  
+                                                                    {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                     -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
                                                                 </f:else>
                                                             </f:if>
@@ -51,17 +51,17 @@
                                                                 <f:then>
                                                                     <f:if condition="{post.teaserLink.target}">
                                                                         <f:then>
-                                                                            {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                            {f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                             -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}
                                                                         </f:then>
                                                                         <f:else>
-                                                                            {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                            {f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                             -> f:link.page(pageUid : '{post.teaserLink.link}')}
                                                                         </f:else>
                                                                     </f:if>
                                                                 </f:then>
                                                                 <f:else>
-                                                                    {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                    {f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                     -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
                                                                 </f:else>
                                                             </f:if>
@@ -118,17 +118,17 @@
                                                         <f:then>
                                                             <f:if condition="{post.teaserLink.target}">
                                                                 <f:then>
-                                                                    {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                    {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                     -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}
                                                                 </f:then>
                                                                 <f:else>
-                                                                    {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                                    {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                                     -> f:link.page(pageUid : '{post.teaserLink.link}')}
                                                                 </f:else>
                                                             </f:if>
                                                         </f:then>
                                                         <f:else>
-                                                            {f:image(src: "uploads/tx_tkblog/{image}" alt: "{element.header}" width: "{settings.displayList.imageWidth}" height: "{settings.displayList.imageHeight}")
+                                                            {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
                                                             -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
                                                         </f:else>
                                                     </f:if>
@@ -193,6 +193,7 @@
                                 </f:else>
                             </f:if>                            
                         </f:for>
+                        | {post.comments -> f:count()} Comments
                     </div>
                 </div>
             </div>               

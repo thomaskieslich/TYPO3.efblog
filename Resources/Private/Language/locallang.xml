@@ -30,24 +30,25 @@
 			<label index="pager_page">page</label>
 			<label index="pager_on">pager on</label>
 			<label index="pager_off">pager off</label>
-			
+                        
+                        <!-- Comments -->
+			<label index="comments_comments">Comments</label>
+			<label index="comments_comment">Comments</label>
+			<label index="comments_wrote">wrote at</label>
+			<label index="comments_add">add Comment</label>
+                        
 			<!--Latest Widget-->
-			<label index="widget_latest">latest entries</label>
 			<label index="widget_latest_more"><![CDATA[ …]]></label>
                         
                         <!--Views Widget-->
-			<label index="widget_views">most readed</label>
 			<label index="widget_views_more"><![CDATA[ …]]></label>
                         
                         <!--Search Widget-->
-			<label index="widget_search">Search</label>
 			
 			<!--CategoryWidget-->
-                        <label index="widget_category">Categories</label>
 			<label index="widget_category_more"><![CDATA[ …]]></label>
                         
                         <!--DateMenu Widget-->
-			<label index="widget_date">Archive</label>
 			<label index="widget_date_item">Item</label>
 			<label index="widget_date_items">Items</label>
 			
@@ -76,22 +77,17 @@
 			<label index="pager_off">Einzelseiten aus</label>
                         
                         <!--Latest Widget-->
-			<label index="widget_latest">Letzte Einträge</label>
 			<label index="widget_latest_more"><![CDATA[ …]]></label>
                         
                         <!--Views Widget-->
-			<label index="widget_views">am meisten gelesen</label>
 			<label index="widget_views_more"><![CDATA[ …]]></label>
                         
                         <!--Search Widget-->
-			<label index="widget_search">Suche</label>
                         
                         <!--CategoryWidget-->
-                        <label index="widget_category">Kategorien</label>
 			<label index="widget_category_more"><![CDATA[ …]]></label>
                         
                         <!--DateMenu Widget-->
-			<label index="widget_date">Archiv</label>
                         <label index="widget_date_item">Eintrag</label>
 			<label index="widget_date_items">Einträge</label>
                         

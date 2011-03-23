@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
     //Archive menu
+    $('.tx-tkblog-widget-content .year').next().hide();
+    
     var cookie = $.cookie("tx_tkblog"),
     expanded = cookie ? cookie.split("|").getUnique() : [],
     cookieExpires = 7;
@@ -8,7 +10,7 @@ jQuery(document).ready(function($) {
         $('#' + this).show();
     })
     
-    $('.tx-tkblog-date-content .year').click(function(){
+    $('.tx-tkblog-widget-content .year').click(function(){
         $(this).next().slideToggle('300', function(){
             updateCookie(this);
         });

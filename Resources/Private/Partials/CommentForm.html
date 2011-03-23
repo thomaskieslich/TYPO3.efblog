@@ -1,0 +1,29 @@
+<div id="comment-form">
+<f:render partial="FormErrors" />
+	<f:form action="create" controller="Comment" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
+            {object}
+		<dl>
+			<dt>
+				<label for="author"><f:translate key="property.author">[author]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textfield property="author" id="author"><input type="text" id="author" /></f:form.textfield>
+			</dd>
+			<dt>
+				<label for="email"><f:translate key="property.email">[email]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textfield property="email" type="email" id="email"><input type="email" id="email" /></f:form.textfield>
+			</dd>
+			<dt>
+				<label for="comment"><f:translate key="property.message">[message]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textarea property="comment" id="content" rows="8" cols="46"><textarea id="content" rows="8" cols="46" /></f:form.textarea>
+			</dd>
+			<dd>
+				<f:form.submit class="button" value="{f:translate(key: 'submit', default: '[submit]')}"><input class="button" type="submit" name="" value="Submit" /></f:form.submit>
+			</dd>
+		</dl>
+	</f:form>
+</div>

@@ -1,5 +1,5 @@
 page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
-//page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
+page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
 page.includeJS.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
 
@@ -11,12 +11,11 @@ plugin.tx_tkblog{
 		replaceTitle = 1
 		replaceDescription = 1
 		replaceKeywords = 1
-		
-		
 
+                defaultGravatar = typo3conf/ext/tkblog/Resources/Public/Icons/gravatar_default.png
 
 		displayList{
-			blogTitle = Testblog
+			blogTitle = Tkblog
 
 			//Sorting
 			orderBy = date,title
@@ -75,6 +74,7 @@ plugin.tx_tkblog{
 		}
 	}
 	persistence{
+                storagePid = {$plugin.tx_tkblog.persistence.storagePid}
 		classes{
 			Tx_Tkblog_Domain_Model_Content{
 				mapping {
@@ -112,5 +112,33 @@ module.tx_tkblog {
 		partialRootPath = {$module.tx_tkblog.view.partialRootPath}
 		layoutRootPath = {$module.tx_tkblog.view.layoutRootPath}
 	}
+}
+
+//RSS
+xml = PAGE
+xml {
+  typeNum = 100
+  10 = USER
+  10 {
+    userFunc = tx_extbase_core_bootstrap->run  
+    pluginName = Fe1  
+    extensionName = Tkblog  
+    switchableControllerActions {
+        Post {
+            1 = rss
+        }
+    }
+    settings =< plugin.tx_tkblog.settings
+    persistence =< plugin.tx_tkblog.persistence
+    view =< plugin.tx_tkblog.view
+  }
+   
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/xml
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+  
 }
    

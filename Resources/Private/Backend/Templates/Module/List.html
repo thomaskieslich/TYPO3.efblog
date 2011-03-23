@@ -13,11 +13,17 @@
             </f:if>		
         </f:for>
 
-<tk:be.tableList tableName="tx_tkblog_domain_model_post"  fieldList="{0: 'title', 1: 'date', 2: 'archive'}"  
-				sortField="date"  sortDescending="true" readOnly="false" recordsPerPage="14"
-				 enableClickMenu="true" clickTitleMode="edit" alternateBackgroundColors="true"
-				/>
-<tk:be.tableList tableName="tx_tkblog_domain_model_category" />
+        <tk:be.tableList tableName="tx_tkblog_domain_model_post"  fieldList="{0: 'title', 1: 'date', 2: 'archive'}"  
+                         sortField="date"  sortDescending="true" readOnly="false" recordsPerPage="14"
+                         enableClickMenu="true" clickTitleMode="edit" alternateBackgroundColors="true"
+                         />
+
+        <tk:be.tableList tableName="tx_tkblog_domain_model_comment"  fieldList="{0: 'author', 1: 'date', 2: 'post'}" 
+                         sortField="date"  sortDescending="true" readOnly="false" recordsPerPage="14"
+                         enableClickMenu="true" clickTitleMode="edit" alternateBackgroundColors="true"
+                         />        
+        
+        <tk:be.tableList tableName="tx_tkblog_domain_model_category" />
 
     </f:be.container>
 </f:section>

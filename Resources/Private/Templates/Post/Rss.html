@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Blog Thomas Kieslich</title>
+        <description>Blog über TYPO3, Actionscript und andere Dinge.</description>
+        <link>http://tk.example.org/</link>
+        <atom:link href="http://kiesi1.kdgconnect.de/blog/rss.xml" rel="self" type="application/rss+xml" />
+        <image>
+        <link>http://www.thomaskieslich.net</link>
+        <title>Blog Thomas Kieslich</title>
+        <url>http://www.thomaskieslich.net/fileadmin/media/layout/rss.png</url>
+        </image>
+        <f:for each="{rssItems}" as="rssItem">            
+            <item>
+                <title>{rssItem.title}</title>
+                <link>{f:uri.action(action : 'detail', arguments : '{post:rssItem.post}', pageUid : '78', absolute: 'TRUE')}</link>
+                <guid>{f:uri.action(action : 'detail', arguments : '{post:rssItem.post}', pageUid : '78', absolute: 'TRUE')}</guid>
+                <description>{rssItem.description -> f:format.crop(maxCharacters: '280')}</description>
+                <category>{rssItem.categories}</category>
+                <pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
+                <comments>{f:uri.action(action : 'detail', arguments : '{post:rssItem.post}', pageUid : '78', absolute: 'TRUE')}</comments>
+                <slash:comments>{rssItem.views}</slash:comments>
+            </item>
+        </f:for>
+    </channel>
+</rss>

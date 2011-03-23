@@ -1,14 +1,14 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-    <div class="tx-tkblog-date-container">
-        <h1>{f:translate(key : 'widget_date')}</h1>
-        <div class="tx-tkblog-date-content">
+    <div class="tx-tkblog-widget-container">
+        <h1>{header}</h1>
+        <div class="tx-tkblog-widget-content">
             <f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
                 <h3 class="year"><a href="#">{year} ({postsByYear -> f:count()})</a></h3>
-                    <ul id="{year}" style="display:none;">
+                    <ul id="y_{year}">
                         <f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
-                            <li id="{year}_{month}">
+                            <li id="d_{year}_{month}">
                             <f:link.action action="list" pageUid="{settings.target.listUid}" arguments="{year: year, month: month}">
                                 <tk:format.monthName month="{month}" /> {year}</f:link.action>
 				({postsByMonth -> f:count()}

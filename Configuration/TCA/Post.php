@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_tkblog_domain_model_post'] = array(
     'ctrl' => $TCA['tx_tkblog_domain_model_post']['ctrl'],
     'interface' => array(
-        'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,crop_teaser,views,category,related_post,fe_group'
+        'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,crop_teaser,views,category,related_post,comments,fe_group'
     ),
     'types' => array(
         '0' => array(
@@ -80,6 +80,7 @@ $TCA['tx_tkblog_domain_model_post'] = array(
         ),
         'comments' => array(
             'showitem' =>
+            'comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_comments,',
             'allow_comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments,',
             'canNotCollapse' => 1,
         ),
@@ -311,6 +312,23 @@ $TCA['tx_tkblog_domain_model_post'] = array(
                 ),
             )
         ),
+        'comments' => array(
+            'exclude' => 0,
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.comments',
+            'config' => array(
+                'type' => 'inline',
+                'foreign_table' => 'tx_tkblog_domain_model_comment',
+                'foreign_field' => 'post',
+                'maxitems' => 9999,
+                'appearance' => array(
+                    'collapse' => 0,
+                    'newRecordLinkPosition' => 'bottom',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1
+                ),
+            ),
+        ),
         'allow_comments' => Array(
             'exclude' => 0,
             'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allowComments',
@@ -354,7 +372,7 @@ $TCA['tx_tkblog_domain_model_post'] = array(
                 'show_thumbs' => 1,
                 'size' => 3,
                 'minitems' => 0,
-                'maxitems' => 3,
+                'maxitems' => 4,
             )
         ),
         'show_teaser_image' => Array(
