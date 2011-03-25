@@ -54,7 +54,7 @@ class Tx_Tkblog_ViewHelpers_Widget_PaginateViewHelper extends Tx_Fluid_Core_Widg
 	 * @return string
 	 */
 	public function render(Tx_Extbase_Persistence_QueryResultInterface $objects, $as, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maxPages' => 5)) {
-		return $this->initiateSubRequest();
+            return $this->initiateSubRequest();
 	}
 }
 

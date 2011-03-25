@@ -116,8 +116,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	 */
 	protected function updateForListAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
 			'target' => 'listUid'
 		);
@@ -133,8 +133,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForDetailAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
 			'target' => 'detailUid'
 		);		
@@ -144,8 +144,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
         protected function updateForSearchViewAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
 			'target' => 'listUid'
 		);		
@@ -154,10 +154,10 @@ class tx_Tkblog_Hooks_T3libBefunc {
         
          protected function updateForCategoryViewAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
-			'displayList' => 'orderBy,sortDirection,displayArchived,daysToArchive',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
-			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
+			'displayList' => 'categoryMode,category,orderBy,sortDirection,displayArchived,daysToArchive',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
+			'categoryWidget' => 'listUri',
 			'target' => 'detailUid'
 		);		
 		$this->deleteFromStructure($dataStructure, $fieldsToBeRemoved);
@@ -172,7 +172,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForLatestWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
 			'target' => 'listUid'
 		);
@@ -189,7 +189,7 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForViewsWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
 			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
 			'target' => 'listUid'
 		);
@@ -206,8 +206,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForCategoryWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'target' => 'detailUid'
 		);
 		
@@ -223,8 +223,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForSearchWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,sortDirection,categoryMode,category,displayArchived,daysToArchive',
-			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'detailUri,maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'detailUri,maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'detailUri,maxEntrys,cropLink',
 			'categoryWidget' => 'listUri,cropLink,viewCounts,viewEmpty',
 			'target' => 'detailUid'
 		);
@@ -241,8 +241,8 @@ class tx_Tkblog_Hooks_T3libBefunc {
 	protected function updateForDateMenuWidgetAction(array &$dataStructure) {
 		$fieldsToBeRemoved = array (
 			'displayList' => 'orderBy,categoryMode,category',
-			'latestWidget' => 'maxEntrys,cropLink,showViews,teaserHeader',
-			'viewsWidget' => 'maxEntrys,cropLink,teaserHeader',
+			'latestWidget' => 'maxEntrys,cropLink,showViews',
+			'viewsWidget' => 'maxEntrys,cropLink',
 			'categoryWidget' => 'cropLink,viewCounts,viewEmpty',
 			'target' => 'detailUid'
 		);

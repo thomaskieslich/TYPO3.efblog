@@ -14,7 +14,7 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_fe1';
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,recursive,pages';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform.xml');
 
@@ -24,35 +24,7 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 t3lib_extMgm::addStaticFile($_EXTKEY,'Configuration/TypoScript','TK Simple Blog');
 
 
-if (TYPO3_MODE === 'BE') {
-	
-	/**
-	* Registers a Backend Module
-	*/
-	Tx_Extbase_Utility_Extension::registerModule(
-		$_EXTKEY,
-		'web',					
-		'tx_tkblog_be1',
-		'',		
-		array(					
-			'Module' => 'list,detail,rss'
-			),
-		array(
-			'access' => 'user,group',
-			'icon'   => 'EXT:tkblog/ext_icon.gif',
-			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xml',
-		)
-	);
-	
-	$TCA['pages']['columns']['module']['config']['items'][] = array ('TK Simple Blog', 'tkblog', 'EXT:tkblog/ext_icon.gif');
-	t3lib_SpriteManager::addTcaTypeIcon('pages','contains-txtkblog',t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif');
-}
-
-
 t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_post');
-//t3lib_div::loadTCA('pages');
-//t3lib_extMgm::addToInsertRecords('tx_tkblog_domain_model_post');	
-
 $TCA['tx_tkblog_domain_model_post'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post',
@@ -93,7 +65,6 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 		'languageField' 	=> 'sys_language_uid',
 		'transOrigPointerField' 	=> 'l18n_parent',
 		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
-                'default_sortby' => 'ORDER BY date DESC',
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
@@ -118,6 +89,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array (
 		'languageField' 	=> 'sys_language_uid',
 		'transOrigPointerField' 	=> 'l18n_parent',
 		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
+                'default_sortby' => 'ORDER BY date DESC',
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'

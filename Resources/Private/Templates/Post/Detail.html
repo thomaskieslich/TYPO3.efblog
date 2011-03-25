@@ -45,6 +45,12 @@
                 {relatedPost.title}<br>
             </f:link.action>
         </f:for>
+        <f:if condition="{post.teaserLink.link}">
+            {f:if(condition: '{post.teaserLink.target}', then: 
+            "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
+            else: 
+            "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
+        </f:if>
     </f:if>
 
     <f:if condition="{post.comments}">
@@ -56,9 +62,9 @@
                         <div class="header">
                             <div class="gravatar">
                                 {f:if(condition: '{comment.website}',
-                                    then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')
-                                     -> f:link.external(uri: '{comment.website}', target: '_blank')}",
-                                    else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')}"                                
+                                then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')
+                                -> f:link.external(uri: '{comment.website}', target: '_blank')}",
+                                else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')}"                                
                                 )}
                             </div>
                             <div class="number">
@@ -75,7 +81,7 @@
                         <div class="comment">
                             <p>{comment.comment}</p>
                         </div>
-                        
+
                     </div>
                 </f:cycle>
             </f:for>
@@ -83,7 +89,7 @@
     </f:if>
     <div class="addComment">
         <h3><f:translate key="comments_add">[add comment]</f:translate></h3>
-		<f:render partial="CommentForm" arguments="{object: newComment, objectName: 'newComment', post: post}" />
+        <f:render partial="CommentForm" arguments="{object: newComment, objectName: 'newComment', post: post}" />
     </div>
 
 </f:section>

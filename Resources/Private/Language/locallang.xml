@@ -44,6 +44,9 @@
 			<label index="widget_views_more"><![CDATA[ …]]></label>
                         
                         <!--Search Widget-->
+                        <!--Search --> 
+                        <label index="view_search_result">Result for</label>
+                        <label index="view_search_results">Results for</label>
 			
 			<!--CategoryWidget-->
 			<label index="widget_category_more"><![CDATA[ …]]></label>

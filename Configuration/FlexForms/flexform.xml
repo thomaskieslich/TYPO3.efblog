@@ -58,7 +58,7 @@
                             </config>
                         </TCEforms>
                     </switchableControllerActions>
-					<!-- order -->
+                    <!-- order -->
                     <settings.displayList.orderBy>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_orderBy</label>
@@ -86,7 +86,7 @@
                         </TCEforms>
                     </settings.displayList.orderBy>
 					
-					<!-- order direction  -->
+                    <!-- order direction  -->
                     <settings.displayList.sortDirection>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_sortDirection</label>
@@ -110,7 +110,7 @@
                         </TCEforms>
                     </settings.displayList.sortDirection>
 					
-					<!-- Category Mode -->
+                    <!-- Category Mode -->
                     <settings.displayList.categoryMode>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categoryMode</label>
@@ -142,7 +142,7 @@
                         </TCEforms>
                     </settings.displayList.categoryMode>
 					
-					<!-- Category -->
+                    <!-- Category -->
                     <settings.displayList.category>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_categories</label>
@@ -157,9 +157,8 @@
                                     </appearance>
                                 </treeConfig>
                                 <foreign_table>tx_tkblog_domain_model_category</foreign_table>
-                                <foreign_table_where>AND (tx_tkblog_domain_model_category.pid IN (###PAGE_TSCONFIG_IDLIST###) OR
-								tx_tkblog_domain_model_category.pid = ###CURRENT_PID###)
-								AND tx_tkblog_domain_model_category.sys_language_uid = 0
+                                <foreign_table_where>AND tx_tkblog_domain_model_category.pid  IN ((SELECT pages FROM tt_content WHERE uid=###THIS_UID###))
+						     AND tx_tkblog_domain_model_category.sys_language_uid = 0
                                 </foreign_table_where>
                                 <size>10</size>
                                 <autoSizeMax>20</autoSizeMax>
@@ -168,7 +167,7 @@
                             </config>
                         </TCEforms>
                     </settings.displayList.category>
-					<!-- Archive -->
+                    <!-- Archive -->
                     <settings.displayList.displayArchived>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_archive</label>
@@ -192,7 +191,7 @@
                         </TCEforms>
                     </settings.displayList.displayArchived>
 					
-					<!-- days to archive-->
+		    <!-- days to archive-->
                     <settings.displayList.daysToArchive>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_daysToArchive</label>
@@ -204,7 +203,7 @@
                         </TCEforms>
                     </settings.displayList.daysToArchive>
 					
-					<!-- latest Widget-->
+		    <!-- latest Widget-->
                     <settings.latestWidget.maxEntrys>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_maxEntrys</label>
@@ -231,16 +230,8 @@
                             </config>
                         </TCEforms>
                     </settings.latestWidget.showViews>
-                    <settings.latestWidget.teaserHeader>
-                        <TCEforms>
-                            <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_latest_teaserHeader</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.latestWidget.teaserHeader>
 					
-					<!-- views Widget-->
+		 <!-- views Widget-->
                     <settings.viewsWidget.maxEntrys>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_maxEntrys</label>
@@ -259,16 +250,8 @@
                             </config>
                         </TCEforms>
                     </settings.viewsWidget.cropLink>
-                    <settings.viewsWidget.teaserHeader>
-                        <TCEforms>
-                            <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_views_teaserHeader</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.viewsWidget.teaserHeader>
 					
-					<!-- category Widget-->					
+		<!-- category Widget-->					
                     <settings.categoryWidget.cropLink>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_category_cropLink</label>
@@ -295,13 +278,13 @@
                         </TCEforms>
                     </settings.categoryWidget.viewEmpty>
 					
-					<!-- search Widget-->
+		<!-- search Widget-->
 	
 					
-					<!-- date Menu Widget-->
+		<!-- date Menu Widget-->
 	
 					
-					<!--startingpoint-->
+		<!--traget-->
                     <settings.target.detailUid>
                         <TCEforms>
                             <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_target_detailUid</label>
@@ -332,22 +315,6 @@
                             </config>
                         </TCEforms>
                     </settings.target.listUid>
-                    <persistence.storagePid>                                            
-                        <TCEforms>
-                            <label>LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_storage</label>
-                            <exclude>1</exclude>
-                            <config>
-                                <type>group</type>
-                                <internal_type>db</internal_type>
-                                <allowed>pages</allowed>
-                                <size>6</size>
-                                <maxitems>50</maxitems>
-                                <minitems>0</minitems>
-                                <show_thumbs>1</show_thumbs>
-                            </config>
-                        </TCEforms>
-                    </persistence.storagePid>
-	
                 </el>
             </ROOT>
         </general>

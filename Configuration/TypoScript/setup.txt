@@ -33,7 +33,7 @@ plugin.tx_tkblog{
 			imageHeight = 
 
 			//Pager
-			itemsPerPage = 10
+			itemsPerPage = 12
 			insertAbove = 1
 			insertBelow = 1
 			maxPages = 5
@@ -52,13 +52,11 @@ plugin.tx_tkblog{
 			maxEntrys = 6
 			cropLink = 12
 			showViews = 1
-			teaserHeader = 1
 		}
 
 		viewsWidget{
 			maxEntrys = 8
 			cropLink = 12
-			teaserHeader = 1
 		}
 		
 		categoryWidget{

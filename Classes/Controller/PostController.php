@@ -199,9 +199,18 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
         $request = $this->request->getArguments();
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
+//            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
+            $this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
         }
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+        
+        $pagerConfig = array (
+            'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
+            'insertAbove' => $this->settings['displayList']['insertAbove'],
+            'insertBelow' => $this->settings['displayList']['insertBelow'],
+            'maxPages' => $this->settings['displayList']['maxPages']
+        );
+        $this->view->assign('pagerConfig', $pagerConfig);
     }
 
     public function categoryWidgetAction () {

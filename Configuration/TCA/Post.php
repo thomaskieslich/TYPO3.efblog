@@ -360,7 +360,6 @@ $TCA['tx_tkblog_domain_model_post'] = array(
         ),
         'teaser_image' => array(
             'exclude' => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.post_teaserImage',
             'config' => array(
                 'type' => 'group',
