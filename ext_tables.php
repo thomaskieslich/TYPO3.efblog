@@ -79,7 +79,7 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_comment');
 $TCA['tx_tkblog_domain_model_comment'] = array (
 	'ctrl' => array (
-		'title'             => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_comment',
+		'title'             => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment',
 		'label' 			=> 'author',
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',

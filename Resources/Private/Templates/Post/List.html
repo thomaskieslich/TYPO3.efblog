@@ -10,54 +10,16 @@
                     <f:if condition="<f:count subject='{post.content}' /> > 0">
                         <f:then>
                             <f:for each="{post.content}" as="element"  iteration="elementIterator">
-                                <f:if condition="{elementIterator.isFirst}">
-                                    <!-- Render Teaser-->
-                                    <div class="tx-tkblog-list-images">
-                                        <!-- Post Image-->
-                                        <f:if condition="{post.showTeaserImage} == 1">
-                                            <f:for each="{post.teaserImage}" as="image" key="imageNumber">
-                                                <f:if condition="{image}">  
-                                                    <f:if condition="{imageNumber} < {settings.displayList.images}">
-                                                        <div class="tx-tkblog-list-imagerow">
-                                                            {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
-                                                            -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
-                                                        </div>
-                                                    </f:if>
-                                                </f:if>
-                                            </f:for>
-                                        </f:if>
-                                        <!-- Teaser Image-->
-                                        <f:if condition="{post.showTeaserImage} == 2">
-                                            <f:for each="{element.image}" as="image" key="imageNumber">
-                                                <f:if condition="{image}">  
-                                                    <f:if condition="{imageNumber} < {settings.displayList.images}">
-                                                        <div class="tx-tkblog-list-imagerow">
-                                                            {f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
-                                                            -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
-                                                        </div>
-                                                    </f:if>
-                                                </f:if>
-                                            </f:for>
-                                        </f:if>
-                                    </div>
-
-                                    <div class="tx-tkblog-list-text">
-                                        <h1>
-                                            {post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
-                                        </h1>
-                                        <f:if condition="{post.cropTeaser} == 1">
-                                            <f:then>
-                                                {element.bodytext -> f:format.html() -> 
-                                                f:format.crop(maxCharacters: '{settings.displayList.cropText}',  
-                                                append: '{f:translate(key : "teaser_more")}')}
-                                            </f:then>
-                                            <f:else>			
-                                                {element.bodytext -> f:format.html()}
-                                            </f:else>
-                                        </f:if>
-                                    </div>  
+                                <f:if condition="{elementIterator.cycle} == 1">
+                                    <f:if condition="{element.ctype} != {settings.displaySingle.divType}">
+                                        <f:then>
+                                            <f:render section="listElement" arguments="{post: post, count:1}" />
+                                        </f:then>
+                                        <f:else>
+                                            <f:render section="listElement" arguments="{post: post, count:2}" />
+                                        </f:else>
+                                    </f:if>
                                 </f:if>
-
                             </f:for>
                         </f:then>
                         <f:else>
@@ -129,4 +91,56 @@
             </div>               
         </f:for>
     </tk:widget.paginate>
+</f:section>
+
+<f:section name="listElement">
+    <f:for each="{post.content}" as="element"  iteration="elementIterator">
+        <f:if condition="{elementIterator.cycle} == {count}">
+            <!-- Render Teaser-->
+            <div class="tx-tkblog-list-images">
+                <!-- Post Image-->
+                <f:if condition="{post.showTeaserImage} == 1">
+                    <f:for each="{post.teaserImage}" as="image" key="imageNumber">
+                        <f:if condition="{image}">  
+                            <f:if condition="{imageNumber} < {settings.displayList.images}">
+                                <div class="tx-tkblog-list-imagerow">
+                                    {f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
+                                    -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
+                                </div>
+                            </f:if>
+                        </f:if>
+                    </f:for>
+                </f:if>
+                <!-- Teaser Image-->
+                <f:if condition="{post.showTeaserImage} == 2">
+                    <f:for each="{element.image}" as="image" key="imageNumber">
+                        <f:if condition="{image}">  
+                            <f:if condition="{imageNumber} < {settings.displayList.images}">
+                                <div class="tx-tkblog-list-imagerow">
+                                    {f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.displayList.imageWidth}", height: "{settings.displayList.imageHeight}")
+                                    -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
+                                </div>
+                            </f:if>
+                        </f:if>
+                    </f:for>
+                </f:if>
+            </div> 
+
+            <div class="tx-tkblog-list-text">
+                <h1>
+                    {post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
+                </h1>
+                <f:if condition="{post.cropTeaser} == 1">
+                    <f:then>
+                        {element.bodytext -> f:format.html() -> 
+                        f:format.crop(maxCharacters: '{settings.displayList.cropText}',  
+                        append: '{f:translate(key : "teaser_more")}')}
+                    </f:then>
+                    <f:else>			
+                        {element.bodytext -> f:format.html()}
+                    </f:else>
+                </f:if>
+            </div> 
+        </f:if>
+    </f:for>
 </f:section>

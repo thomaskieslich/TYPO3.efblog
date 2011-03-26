@@ -41,7 +41,7 @@
 	 */
 	public function createAction(Tx_Tkblog_Domain_Model_Post $post, Tx_Tkblog_Domain_Model_Comment $newComment) {
 		$post->addComment($newComment);
-		$this->flashMessageContainer->add('Your new Comments was created.');
+		//$this->flashMessageContainer->add('Your new Comments was created.');
 		$this->redirect('detail', 'Post', NULL, array('post' => $post));
 	}
 

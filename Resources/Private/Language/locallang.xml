@@ -27,15 +27,19 @@
 			<label index="read_more">read more &gt;&gt;</label>
                         
                         <!--Detail-->
-			<label index="pager_page">page</label>
-			<label index="pager_on">pager on</label>
-			<label index="pager_off">pager off</label>
+			<label index="detail_backto_list">back to Listview</label>
                         
                         <!-- Comments -->
 			<label index="comments_comments">Comments</label>
-			<label index="comments_comment">Comments</label>
+			<label index="comments_comment">Comment</label>
 			<label index="comments_wrote">wrote at</label>
 			<label index="comments_add">add Comment</label>
+                        
+			<label index="comment_form_author">Name</label>
+			<label index="comment_form_email">Email</label>
+			<label index="comment_form_website">Website</label>
+			<label index="comment_form_comment">Comment</label>
+			<label index="comment_form_submit">submit Comment</label>
                         
 			<!--Latest Widget-->
 			<label index="widget_latest_more"><![CDATA[ …]]></label>

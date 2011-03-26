@@ -38,8 +38,8 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
                 'items' => array(
                     array('', 0),
                 ),
-                'foreign_table' => 'tx_tkblog_domain_model_comments',
-                'foreign_table_where' => 'AND tx_tkblog_domain_model_comments.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_comments.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_tkblog_domain_model_comment',
+                'foreign_table_where' => 'AND tx_tkblog_domain_model_comment.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_comment.sys_language_uid IN (-1,0)',
             )
         ),
         'l18n_diffsource' => array(
@@ -64,7 +64,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'author' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_author',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_author',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -73,7 +73,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'email' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_email',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_email',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -82,7 +82,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'website' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_website',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_website',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -91,7 +91,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'date' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_date',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_date',
             'config' => array(
                 'type' => 'input',
                 'size' => 12,
@@ -103,7 +103,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'comment' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_comment',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_comment',
             'config' => array(
                 'type' => 'text',
                 'cols' => 40,
@@ -113,7 +113,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'approved' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comments_approved',
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_approved',
             'config' => array(
                 'type' => 'check',
                 'default' => 1

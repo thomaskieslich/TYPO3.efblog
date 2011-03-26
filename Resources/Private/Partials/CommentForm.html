@@ -1,29 +1,30 @@
-<div id="comment-form">
-<f:render partial="FormErrors" />
-	<f:form action="create" controller="Comment" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
-            {object}
-		<dl>
-			<dt>
-				<label for="author"><f:translate key="property.author">[author]</f:translate>:</label>
-			</dt>
-			<dd>
-				<f:form.textfield property="author" id="author"><input type="text" id="author" /></f:form.textfield>
-			</dd>
-			<dt>
-				<label for="email"><f:translate key="property.email">[email]</f:translate>:</label>
-			</dt>
-			<dd>
-				<f:form.textfield property="email" type="email" id="email"><input type="email" id="email" /></f:form.textfield>
-			</dd>
-			<dt>
-				<label for="comment"><f:translate key="property.message">[message]</f:translate>:</label>
-			</dt>
-			<dd>
-				<f:form.textarea property="comment" id="content" rows="8" cols="46"><textarea id="content" rows="8" cols="46" /></f:form.textarea>
-			</dd>
-			<dd>
-				<f:form.submit class="button" value="{f:translate(key: 'submit', default: '[submit]')}"><input class="button" type="submit" name="" value="Submit" /></f:form.submit>
-			</dd>
-		</dl>
-	</f:form>
+<div id="tx-tkblog-comment-form">
+    <f:render partial="FormErrors" />
+    <f:form action="create" controller="Comment" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
+        <div class="tf">
+            <label for="author"><f:translate key="comment_form_author">[author]</f:translate>:</label>
+            <f:form.textfield property="author" id="author"><input type="text" id="author" /></f:form.textfield>
+        </div>
+
+        <div class="tf">
+            <label for="email"><f:translate key="comment_form_email">[email]</f:translate>:</label>
+            <f:form.textfield property="email" id="email"><input type="text" id="email" /></f:form.textfield>
+        </div>
+
+        <div class="tf">
+            <label for="website"><f:translate key="comment_form_website">[website]</f:translate>:</label>
+            <f:form.textfield property="website" id="website"><input type="text" id="website" /></f:form.textfield>
+        </div>
+
+        <div class="ta">
+            <label for="comment"><f:translate key="comment_form_comment">[comment]</f:translate>:</label>
+            <f:form.textarea property="comment" id="comment" rows="8" cols="46"><textarea id="comment" rows="8" cols="46" /></f:form.textarea>
+        </div>
+        
+        <div class="submit">
+            <f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}">
+                <input class="button" type="submit" name="" value="Submit" />
+            </f:form.submit>
+        </div>
+    </f:form>
 </div>

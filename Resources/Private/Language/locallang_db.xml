@@ -106,7 +106,7 @@
 			<label index="category_description">Description</label>
 			<label index="category_image">Category Image</label>
 			<label index="category_parent_category">Parent Category</label>
-			<label index="comment">Comments</label>
+			<label index="comment">Comment</label>
 			<label index="comment_author">Author</label>
 			<label index="comment_email">Email</label>
 			<label index="comment_website">Website</label>

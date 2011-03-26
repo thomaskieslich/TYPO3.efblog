@@ -39,6 +39,10 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
     /**
      * @var	array
      */
+    protected $setup;
+    /**
+     * @var	array
+     */
     protected $persistence;
     /**
      * @var Tx_Tkblog_Domain_Repository_PostRepository
@@ -57,23 +61,24 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
      */
     protected function initializeAction () {
         $this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
-        $framework = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'tkblog', 'tkblog_fe1');
-        $originalSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $defaultSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'tkblog', 'tkblog_fe1');
+        $flexSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
         // start override
-        if (isset($framework['settings']['overrideFlexformSettingsIfEmpty'])) {
-            $overrideCategories = t3lib_div::trimExplode(',', $framework['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
+        if (isset($defaultSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+            $overrideCategories = t3lib_div::trimExplode(',', $defaultSettings['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
             foreach ($overrideCategories as $category) {
                 $overrideSettings = t3lib_div::trimExplode('.', $category, TRUE);
-                if ((!isset($originalSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]) || empty($originalSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]))
-                        && isset($framework['settings'][$overrideSettings[0]][$overrideSettings[1]])) {
-                    $originalSettings['settings'][$overrideSettings[0]][$overrideSettings[1]] = $framework['settings'][$overrideSettings[0]][$overrideSettings[1]];
+                if ((!isset($flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]) || empty($flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]))
+                        && isset($defaultSettings['settings'][$overrideSettings[0]][$overrideSettings[1]])) {
+                    $flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]] = $defaultSettings['settings'][$overrideSettings[0]][$overrideSettings[1]];
                 }
             }
         }
 
-        $this->settings = $originalSettings['settings'];
-        $this->persistence = $originalSettings['persistence'];
+        $this->settings = $flexSettings['settings'];
+        $this->persistence = $flexSettings['persistence'];
+        $this->setup = $defaultSettings['settings'];
 
         //get cObj
         $this->cObj = $this->configurationManager->getContentObject();
@@ -101,7 +106,6 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
         }
 
         if (isset($request['year'])) {
@@ -118,45 +122,27 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
     /**
      * post detail
      * @param Tx_Tkblog_Domain_Model_Post $post
-     * @param mixed $page 
      * 
      */
-    public function detailAction (Tx_Tkblog_Domain_Model_Post $post = NULL, $page = 1) {
+    public function detailAction (Tx_Tkblog_Domain_Model_Post $post = NULL) {
         if ($post) {
-            $pagerEnabled = $this->settings['displaySingle']['pagerEnabled'];
-            if ($page == 0)
-                $pagerEnabled = 0;
 
             $content = $post->getContent();
             $pages = array ();
-            $pages[1] = '';
-            $divider = 2;
-            $elements = new Tx_Extbase_Persistence_ObjectStorage();
+            $divider = 0;
 
-            if ($pagerEnabled == 1) {
-                foreach ($content as $single) {
-                    if ($single->getCtype() == $this->settings['displaySingle']['divType']) {
-                        $pages[$divider++] = $single->getHeader();
-                    }
-                    if ($divider == $page + 1 && $single->getCtype() != $this->settings['displaySingle']['divType']) {
-                        $elements->attach($single);
-                    }
+            foreach ($content as $single) {
+                if ($single->getCtype() == $this->settings['displaySingle']['divType']) {
+                    $divider++;
+                    $pages[$divider][title] = $single->getHeader();
                 }
-            } else {
-                $pageCount = 0;
-                foreach ($content as $single) {
-                    if ($this->settings['displaySingle']['hideDivider'] == 1 && $single->getCtype() == $this->settings['displaySingle']['divType']) {
-                        $pageCount++;
-                    }
-                    else
-                        $elements->attach($single);
+                if ($single->getCtype() != $this->settings['displaySingle']['divType']) {
+                    $pages[$divider][elements][] = $single;
                 }
             }
+
             $this->view->assign('pages', $pages);
-            $this->view->assign('elements', $elements);
-            $this->view->assign('pagerEnabled', $pagerEnabled);
-            $this->view->assign('page', $page);
-            $this->view->assign('pageCount', $pageCount);
+            $this->view->assign('setup', $this->setup);
             $this->view->assign('post', $post);
 
             //Update Views
@@ -199,11 +185,10 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
         $request = $this->request->getArguments();
         if (isset($request['searchPhrase'])) {
             $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-//            Tx_Extbase_Utility_Cache::clearPageCache(array ($GLOBALS['TSFE']->id));
             $this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
         }
         $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-        
+
         $pagerConfig = array (
             'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
             'insertAbove' => $this->settings['displayList']['insertAbove'],
