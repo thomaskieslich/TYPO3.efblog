@@ -70,10 +70,14 @@ class Tx_Tkblog_Domain_Model_Content extends Tx_Extbase_DomainObject_AbstractEnt
 	 * Returns the image value
 	 *
 	 * @return string
-	 * @api
 	 */
 	public function getImage() {
-		return explode(',', $this->image);
+		if (t3lib_extMgm::isLoaded('dam')) {
+			$damPics = tx_dam_db::getReferencedFiles('tt_content', $this->uid, 'tx_damttcontent_files');
+			return $damPics['rows'];
+		} else {
+			return explode(',', $this->image);
+		}
 	}
 	
 	public function getCtype() {

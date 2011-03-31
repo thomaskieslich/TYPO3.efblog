@@ -7,10 +7,10 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_tkblog_domain_model_comment'] = array(
     'ctrl' => $TCA['tx_tkblog_domain_model_comment']['ctrl'],
     'interface' => array(
-        'showRecordFieldList' => 'author,email,website,date,comment,approved',
+        'showRecordFieldList'	=> 'author,email,website,location,title,message,date,spampoints,ip,parent_comment',
     ),
     'types' => array(
-        '1' => array('showitem' => 'author,email,website,date,comment,approved'),
+        '1' => array('showitem'	=> 'author,email,website,location,title,message,date,spampoints,ip,parent_comment'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -89,6 +89,34 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
                 'eval' => 'trim'
             ),
         ),
+        'location' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_location',
+			'config'	=> array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
+			),
+		),
+		'title' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_title',
+			'config'	=> array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
+			),
+		),
+        'message' => array(
+            'exclude' => 0,
+            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_message',
+            'config' => array(
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim'
+            ),
+        ),
         'date' => array(
             'exclude' => 0,
             'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_date',
@@ -101,24 +129,41 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
                 'default' => time()
             ),
         ),
-        'comment' => array(
-            'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_comment',
-            'config' => array(
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim'
-            ),
-        ),
-        'approved' => array(
-            'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_approved',
-            'config' => array(
-                'type' => 'check',
-                'default' => 1
-            ),
-        ),
+		'spampoints' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_spampoints',
+			'config'	=> array(
+				'type' => 'input',
+				'size' => 10,
+				'eval' => 'int'
+			),
+		),
+		'ip' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_ip',
+			'config'	=> array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
+			),
+		),
+		'parent_comment' => array(
+			'exclude'	=> 0,
+			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_parent_comment',
+			'config'	=> array(
+				'type' => 'inline',
+				'foreign_table' => 'tx_tkblog_domain_model_comment',
+				'minitems' => 0,
+				'maxitems' => 1,
+				'appearance' => array(
+					'collapse' => 0,
+					'newRecordLinkPosition' => 'bottom',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
+			),
+		),
         'post' => array(
             'config' => array(
                 'type' => 'passthrough',

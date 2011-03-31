@@ -3,8 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011 
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,24 +24,13 @@
  * ************************************************************* */
 
 /**
- *  Description View helper
+ * Repository for Tx_Tkblog_Domain_Model_Administrator
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Document_DescriptionViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
-
-	/**
-	 * replace the description
-	 */
-	public function render() {
-		$renderedContent = $this->renderChildren();
-		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['description'] = $renderedContent;
-		}
-	}
+class Tx_Tkblog_Domain_Repository_AdministratorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
 
 }
 

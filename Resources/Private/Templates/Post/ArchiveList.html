@@ -1,0 +1,16 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<f:layout name="default" />
+<f:section name="content">
+    <div class="tx-tkblog-archive-container">
+        <h2>
+	    {posts->f:count()} 
+	    <f:if condition="<f:count subject='{posts}' /> == 1">
+		<f:then>{f:translate(key : 'list_archive_result')}</f:then>
+		<f:else>{f:translate(key : 'list_archive_results')}</f:else>
+	    </f:if>
+	    <tk:format.monthName month="{month}" /> {year}
+	</h2>
+    </div>
+
+    <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />
+</f:section>

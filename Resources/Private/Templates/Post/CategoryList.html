@@ -1,0 +1,29 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<f:layout name="default" />
+<f:section name="content">
+    <div class="tx-tkblog-category-container">
+	<h2>{category.title}</h2>
+	<p>{category.description}</p>
+	<f:for each="{category.image}" as="image" iteration="imageIterator">
+	    <f:if condition="{image}">
+		<f:if condition="{dam}">
+		    <f:then>
+			{f:image(src: "{image.file_path}{image.file_name}", alt: "{category.title}", width: "150m", height: "150m")}
+		    </f:then>
+		    <f:else>
+			{f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "150m", height: "150m")} 
+		    </f:else>
+		</f:if>
+	    </f:if>
+	</f:for>
+	<p>
+	    {posts->f:count()}
+	<f:if condition="<f:count subject='{posts}' /> == 1">
+	    <f:then>{f:translate(key : 'list_category_result')}</f:then>
+	    <f:else>{f:translate(key : 'list_category_results')}</f:else>
+	</f:if>
+	</p>
+    </div>
+
+    <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />
+</f:section>

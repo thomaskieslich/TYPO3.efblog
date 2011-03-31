@@ -1,22 +1,50 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-    <f:flashMessages renderMode="div" />
+
     <f:if condition="{post}">
 	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
 	{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
 	{description -> f:if(condition: '{settings.replaceDescription}') 
 					->	f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0) 
 					->tk:document.description()}
+	{post.author.name -> f:if(condition: '{settings.replaceAuthor}') -> tk:document.author()}
 
         <div class="tx-tkblog-detail-container">
-            set: {setup.displayList.orderBy}
-            <f:if condition="{settings.target.listUid}">
-                {f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.target.listUid}')}
-            </f:if>
-            
-            
+			<f:if condition="{settings.detailView.showBreadCrumb}">
+				<div class="tx-tkblog-detail-breadCrumb">
+					<div class="left">
+						<f:if condition="{breadCrumb.0}">
+							<f:then>
+								{breadCrumb.0.title -> f:format.crop(maxCharacters: '22', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+								-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.0}', pageUid : '{settings.detailUid}', title: '{breadCrumb.0.title}')}
+							</f:then>
+							<f:else>
+								&nbsp;
+							</f:else>
+						</f:if>
+					</div>
+					<div class="center">
+						<f:if condition="{settings.backUid}">
+			{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
+						</f:if>
+					</div>
+					<div class="right">
+						<f:if condition="{breadCrumb.1}">
+							<f:then>
+				{breadCrumb.1.title -> f:format.crop(maxCharacters: '22', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+				-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.1}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
+							</f:then>
+							<f:else>
+								&nbsp;
+							</f:else>
+						</f:if>
+					</div>
+				</div>	
+			</f:if>
+
             <h1>{post.title}</h1>
+			{post.author.name}
             <f:if condition="<f:count subject='{pages}' /> > 1">
                 <ul class="tabs">
                     <f:for each="{pages}" as="page" key="count">
@@ -51,41 +79,38 @@
 
     <f:if condition="{post.comments}">
         <div class="tx-tkblog-comments-list">
-            <p>{post.comments -> f:count()} {f:translate(key : 'comments_comments')}</p>
-            <f:for each="{post.comments}" as="comment" iteration="comIterator">
+			<a name="comments">&nbsp;</a>
+            <p>
+				<f:if condition="{post.comments -> f:count()} > 1">
+				<f:then>
+					{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+				</f:then>
+				<f:else>
+					{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+				</f:else>
+			</f:if>
+			</p>
+
+			<f:for each="{comments}" as="comment" iteration="comIterator">
                 <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
                     <div class="item {row}" id="comment_{comment.uid}">
-                        <div class="header">
-                            <div class="gravatar">
-                                {f:if(condition: '{comment.website}',
-                                then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')
-                                -> f:link.external(uri: '{comment.website}', target: '_blank')}",
-                                else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.defaultGravatar}', size: '55', class: 'tx-tkblog-gravatar')}"                                
-                                )}
-                            </div>
-                            <div class="number">
-                                #{comIterator.cycle}
-                            </div>
-                            <div class="author">
-                                {f:if(condition: '{comment.website}', 
-                                then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}", 
-                                else: '{comment.author}')}
-                                {f:translate(key : 'comments_wrote')}
-                                {comment.date -> f:format.date(format:'d.m.Y, h:m')}
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <p>{comment.comment}</p>
-                        </div>
-
+                        <f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}" /> 
+						<f:for each="{comment.children}" as="child">
+							<div style="margin-left: 50px">
+								<f:render partial="CommentElement" arguments="{comment: child, comIterator:comIterator, post : post}" /> 
+							</div>
+						</f:for>
                     </div>
-                </f:cycle>
+                </f:cycle>				
             </f:for>
         </div>
     </f:if>
-    <div class="addComment">
-        <h3><f:translate key="comments_add">[add comment]</f:translate></h3>
-        <f:render partial="CommentForm" arguments="{object: newComment, objectName: 'newComment', post: post}" />
-    </div>
+
+    <f:if condition='{allowComments}'>
+		<div class="addComment">
+			<h3>{f:translate(key : 'comments_add')}</h3>
+			<f:render partial='CommentForm' arguments="{object: newComment, objectName: 'newComment', post: post, newComment : newComment}" />
+		</div>
+    </f:if>
 
 </f:section>

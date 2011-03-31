@@ -124,7 +124,12 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
      * @return string $image 
      */
     public function getImage () {
-        return $this->image;
+        if (t3lib_extMgm::isLoaded('dam')) {
+			$damPics = tx_dam_db::getReferencedFiles('tx_tkblog_domain_model_category', $this->uid, 'tx_tkblog_domain_model_category_image');
+			return $damPics['rows'];
+		} else {
+			return explode(',', $this->image);
+		}
     }
 
     /**

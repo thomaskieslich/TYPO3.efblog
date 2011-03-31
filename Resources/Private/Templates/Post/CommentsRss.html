@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom">	
+	<channel>
+		<title>{f:translate(key : 'comment_rss_title')} {post.title}</title>
+		<description>Blog über TYPO3, Actionscript und andere Dinge.</description>
+		<link>http://{server}/</link>
+		<atom:link href="http://{server}/comments.xml" rel="self" type="application/rss+xml" />
+		<image>
+		<link>http://www.thomaskieslich.net</link>
+		<title>Blog Thomas Kieslich</title>
+		<url>http://www.thomaskieslich.net/fileadmin/media/layout/rss.png</url>
+		</image>
+		<f:for each="{rssItems}" as="rssItem">            
+			<item>
+				<title>{rssItem.title}</title>
+				<link><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></link>
+				<guid><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></guid>
+				<description>{rssItem.message -> f:format.crop(maxCharacters: '280')}</description>
+				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
+			</item>
+		</f:for>
+	</channel>
+</rss>

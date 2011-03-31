@@ -1,119 +1,91 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-	<meta type="array">
-		<type>database</type>
-		<description>Language labels for database tables/fields belonging to extension 'tkblog'</description>
-	</meta>
-	<data type="array">
-		<languageKey index="default" type="array">	
+    <meta type="array">
+	<type>database</type>
+	<description>Language labels for database tables/fields belonging to extension 'tkblog'</description>
+    </meta>
+    <data type="array">
+	<languageKey index="default" type="array">	
 			<!--Plugin-->
-			<label index="plugin_fe1_title">TK Simple Blog</label>
+	    <label index="plugin_fe1_title">TK Simple Blog</label>
+	    <label index="feuser_type">Tx_Tkblog_Domain_Model_Administrator</label>
+			
 			
 			<!--Flexform-->
-			<label index="flexform_options_general">TK Simple Blog</label>			
-			<label index="flexform_options_general_widgets">Widgets</label>
-			<label index="flexform_options_general_list">Post List</label>
-			<label index="flexform_options_general_detail">Detail View</label>
-			<label index="flexform_options_general_view_category">Category View</label>
-			<label index="flexform_options_general_view_search">Search View</label>
-			<label index="flexform_options_general_widgets_latest">Latest Widget</label>
-			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
-			<label index="flexform_options_general_widgets_category">Category Widget</label>
-			<label index="flexform_options_general_widgets_search">Search Widget</label>
-			<label index="flexform_options_general_widgets_date">Date Menu Widget</label>
-			<label index="flexform_options_general_categories">Categories</label>
-			
-			<label index="flexform_options_general_storage">Pages with Posts or/and Categories</label>
-                        
-                        <label index="flexform_options_general_target_detailUid">Page with Detail View</label>
-                        <label index="flexform_options_general_target_listUid">Page with List View</label>
-			
-			<label index="flexform_options_general_orderBy">Order by</label>
-			<label index="flexform_options_general_orderBy_date">Date</label>
-			<label index="flexform_options_general_orderBy_archive">Archive Date</label>
-			<label index="flexform_options_general_orderBy_title">Title</label>
-			
-			<label index="flexform_options_general_sortDirection">Ascending or Descending (LIST &amp; LATEST):</label>
-			<label index="flexform_options_general_sortDirection_asc">Ascending</label>
-			<label index="flexform_options_general_sortDirection_desc">Descending</label>			
-			
-			<label index="flexform_options_general_categoryMode">Category Mode</label>
-			<label index="flexform_options_general_categoryMode_all">Don't care, show all</label>
-			<label index="flexform_options_general_categoryMode_or">Show items with selected categories (OR)</label>
-			<label index="flexform_options_general_categoryMode_and">Show items with selected categories (AND)</label>
-			<label index="flexform_options_general_categoryMode_notor">Do NOT show items with selected categories (AND)</label>
-			<label index="flexform_options_general_categoryMode_notand">Do NOT show items with selected categories (OR)</label>
-			
-			
-			<label index="flexform_options_general_archive">Archive Mode</label>
-			<label index="flexform_options_general_archive_active">Active ONLY</label>
-			<label index="flexform_options_general_archive_archived">Archived</label>
-			
-			<label index="flexform_options_general_daysToArchive">Days to Archive</label>
-			
-			<label index="flexform_options_general_latest_maxEntrys">Max Entries</label>
-			<label index="flexform_options_general_latest_cropLink">Crop Links after(min 8)</label>
-			<label index="flexform_options_general_latest_showViews">Show Views after Link</label>
-			<label index="flexform_options_general_latest_teaserHeader">Linktext from Teaser(first header)</label>
-			
-			<label index="flexform_options_general_views_maxEntrys">Max Entries</label>
-			<label index="flexform_options_general_views_cropLink">Crop Links after(min 8)</label>
-			<label index="flexform_options_general_views_teaserHeader">Linktext from Teaser(first header)</label>
-
-			<label index="flexform_options_general_category_cropLink">Crop Links after(min 8)</label>
-			<label index="flexform_options_general_category_viewCounts">View Category Counts</label>
-			<label index="flexform_options_general_category_viewEmpty">View empty categories</label>
+	    <label index="flexform_options_general">TK Simple Blog</label>			
+	    <label index="flexform_options_general_widgets">Widgets</label>
+	    <label index="flexform_options_general_list">Post List</label>
+	    <label index="flexform_options_general_detail">Details</label>
+	    <label index="flexform_options_general_list_search">Search List</label>
+	    <label index="flexform_options_general_list_category">Category List</label>
+	    <label index="flexform_options_general_list_archive">Archive List</label>
+	    <label index="flexform_options_general_view_category">Category Overview</label>
+	    <label index="flexform_options_general_widgets_latest">Latest Widget</label>
+	    <label index="flexform_options_general_widgets_views">Most Views Widget</label>
+	    <label index="flexform_options_general_widgets_category">Category Widget</label>
+	    <label index="flexform_options_general_widgets_search">Search Widget</label>
+	    <label index="flexform_options_general_widgets_date">Date Menu Widget</label>
 			
 			<!--Post-->
-			<label index="post">Post</label>
-			<label index="post_tab_post">Post</label>
-			<label index="post_tab_categorize">Categorize</label>
-			<label index="post_tab_teaser">Teaser</label>
-			<label index="post_tab_interactive">Interactivity</label>
-			<label index="post_tab_access">Access</label>
-			<label index="post_palette_content">Content</label>
-			<label index="post_palette_tags">Tags</label>
-			<label index="post_palette_category">Category</label>
-			<label index="post_palette_access">Access Rights</label>
-			<label index="post_title">Title</label>
-			<label index="post_category">Categories</label>
-			<label index="post_author">Author</label>
-			<label index="post_date">Date &amp; Time</label>
-			<label index="post_archive">Archive Date</label>
-			<label index="post_teaserLink">Teaserlink</label>
-			<label index="post_teaserLink_title">Teaserlink Title</label>
-			<label index="post_content">Content Elements</label>
-			<label index="post_comments">Comments</label>
-			<label index="post_related">Related Posts</label>
-			<label index="post_comments">Comments</label>
-			<label index="post_allowComments">allow Comments</label>
-			<label index="post_allowcomment_I.0">Everybody can comment this post</label>
-			<label index="post_allowcomment_I.1">Nobody can comment this post</label>
-			<label index="post_allowcomment_I.2">Only registered users can comment</label>
-			<label index="post_tags">Tag clouds (comma separated list)</label>
-			<label index="post_cropTeaser">Crop Teaser</label>
-			<label index="post_teaserDescription">Teaser Description</label>
-			<label index="post_teaserImage">Teaser Image</label>
-                        <label index="post_showTeaserImage">allow Teaser Images</label>
-			<label index="post_showTeaserImage.I.0">no Image</label>
-			<label index="post_showTeaserImage.I.1">use from Post</label>
-			<label index="post_showTeaserImage.I.2">use from first Element</label>
-			<label index="post_numberViews">Number of Views</label>
-			<label index="category">Category</label>
-			<label index="category_tab_categorize">Category</label>
-			<label index="category_tab_access">Access</label>
-			<label index="category_title">Category name</label>
-			<label index="category_description">Description</label>
-			<label index="category_image">Category Image</label>
-			<label index="category_parent_category">Parent Category</label>
-			<label index="comment">Comment</label>
-			<label index="comment_author">Author</label>
-			<label index="comment_email">Email</label>
-			<label index="comment_website">Website</label>
-			<label index="comment_location">Location</label>
-			<label index="comment_date">Date</label>
-			<label index="comment_comment">Comment</label>
-			<label index="comment_approved">Approved</label>
-		</languageKey>
-	</data>
+	    <label index="post">Post</label>
+	    <label index="post_tab_post">Post</label>
+	    <label index="post_tab_categorize">Categorize</label>
+	    <label index="post_tab_teaser">Teaser</label>
+	    <label index="post_tab_interactive">Interactivity</label>
+	    <label index="post_tab_access">Access</label>
+	    <label index="post_palette_content">Content</label>
+	    <label index="post_palette_tags">Tags</label>
+	    <label index="post_palette_category">Category</label>
+	    <label index="post_palette_access">Access Rights</label>
+	    <label index="post_title">Title</label>
+	    <label index="post_category">Categories</label>
+	    <label index="post_author">Author</label>
+	    <label index="post_date">Date &amp; Time</label>
+	    <label index="post_archive">Archive Date</label>
+	    <label index="post_teaserLink">Teaserlink</label>
+	    <label index="post_teaserLink_title">Teaserlink Title</label>
+	    <label index="post_content">Content Elements</label>
+	    <label index="post_comments">Comments</label>
+	    <label index="post_related">Related Posts</label>
+	    <label index="post_comments">Comments</label>
+	    <label index="post_allow_comments">allow Comments</label>
+	    <label index="post_allow_comments.I.0">Everybody can comment this post</label>
+	    <label index="post_allow_comments.I.1">Nobody can comment this post</label>
+	    <label index="post_allow_comments.I.2">allow Comments(override close comments after)</label>
+	    <label index="post_allow_comments.I.3">Only registered users can comment</label>
+	    <label index="post_tags">Tag clouds (comma separated list)</label>
+	    <label index="post_teaser_options">Teaser Options</label>
+		<label index="post_teaser_options.I.0">none</label>
+		<label index="post_teaser_options.I.1">Crop Teaser</label>
+		<label index="post_teaser_options.I.2">Show original Content Element</label>
+		<label index="post_teaser_options.I.3">Show original Content Element without "more" Link</label>
+	    <label index="post_teaserDescription">Teaser Description</label>
+	    <label index="post_teaserImage">Teaser Image</label>
+	    <label index="post_showTeaserImage">allow Teaser Images</label>
+	    <label index="post_showTeaserImage.I.0">no Image</label>
+	    <label index="post_showTeaserImage.I.1">use from Post</label>
+	    <label index="post_showTeaserImage.I.2">use from first Element</label>
+	    <label index="post_numberViews">Number of Views</label>
+	    <label index="category">Category</label>
+	    <label index="category_tab_categorize">Category</label>
+	    <label index="category_tab_access">Access</label>
+	    <label index="category_title">Category name</label>
+	    <label index="category_description">Description</label>
+	    <label index="category_image">Category Image</label>
+	    <label index="category_parent_category">Parent Category</label>
+			
+	    <label index="comment">Comment</label>
+	    <label index="comment_author">Author</label>
+	    <label index="comment_email">Email</label>
+	    <label index="comment_website">Website</label>
+	    <label index="comment_location">Location</label>
+	    <label index="comment_title">Title</label>
+	    <label index="comment_location">Location</label>			
+	    <label index="comment_message">Comment</label>
+	    <label index="comment_date">Date</label>
+	    <label index="comment_spampoints">Spampoints</label>
+	    <label index="comment_ip">IP</label>
+	    <label index="comment_parent_comment">Parent Comment</label>
+	</languageKey>
+    </data>
 </T3locallang>

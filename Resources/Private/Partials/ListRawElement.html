@@ -1,0 +1,16 @@
+<f:for each="{post.content}" as="element" iteration="elementIterator">
+    <f:if condition="{elementIterator.cycle} == {count}">
+		<h1>
+			<f:if condition="{post.teaserOptions} == 2">
+				<f:then>
+					{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}
+				</f:then>
+				<f:else>
+					{post.title}
+				</f:else>
+			</f:if>
+			
+		</h1>
+		<f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+	</f:if>
+</f:for>

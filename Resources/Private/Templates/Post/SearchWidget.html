@@ -1,9 +1,9 @@
 <f:layout name="default" />
 <f:section name="content">
     <div class="tx-tkblog-widget-container">
-        <h1>{header}</h1>
+        <h1>{f:translate(key : 'widget_search_header')}</h1>
         <div class="tx-tkblog-widget-content">
-            <f:form  action="list" pageUid="{settings.target.listUid}">
+            <f:form  action="list" pageUid="{settings.searchUid}">
                 <f:form.textbox name="searchPhrase" value="{searchPhrase}" class="searchfield" id="searchPhrase" />
                 <input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
             </f:form>

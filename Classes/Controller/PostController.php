@@ -32,222 +32,358 @@
  */
 class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
 
-    /**
-     * @var	array
-     */
-    protected $settings;
-    /**
-     * @var	array
-     */
-    protected $setup;
-    /**
-     * @var	array
-     */
-    protected $persistence;
-    /**
-     * @var Tx_Tkblog_Domain_Repository_PostRepository
-     */
-    protected $postRepository;
-    /**
-     *
-     * @var object 
-     */
-    protected $cObj;
+	/**
+	 * @var Tx_Tkblog_Domain_Repository_PostRepository
+	 */
+	protected $postRepository;
+	/**
+	 *
+	 * @var object 
+	 */
+	protected $cObj;
 
-    /**
-     * Initializes the current action
-     *
-     * @return void
-     */
-    protected function initializeAction () {
-        $this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
-        $defaultSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'tkblog', 'tkblog_fe1');
-        $flexSettings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 */
+	protected function initializeAction () {
+		$this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
+	}
 
-        // start override
-        if (isset($defaultSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
-            $overrideCategories = t3lib_div::trimExplode(',', $defaultSettings['settings']['overrideFlexformSettingsIfEmpty'], TRUE);
-            foreach ($overrideCategories as $category) {
-                $overrideSettings = t3lib_div::trimExplode('.', $category, TRUE);
-                if ((!isset($flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]) || empty($flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]]))
-                        && isset($defaultSettings['settings'][$overrideSettings[0]][$overrideSettings[1]])) {
-                    $flexSettings['settings'][$overrideSettings[0]][$overrideSettings[1]] = $defaultSettings['settings'][$overrideSettings[0]][$overrideSettings[1]];
-                }
-            }
-        }
-
-        $this->settings = $flexSettings['settings'];
-        $this->persistence = $flexSettings['persistence'];
-        $this->setup = $defaultSettings['settings'];
-
-        //get cObj
-        $this->cObj = $this->configurationManager->getContentObject();
-    }
-
-    /**
-     * list action
-     *
-     * @return string The rendered list action
-     */
-    public function listAction () {
-        $pagerConfig = array (
-            'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
-            'insertAbove' => $this->settings['displayList']['insertAbove'],
-            'insertBelow' => $this->settings['displayList']['insertBelow'],
-            'maxPages' => $this->settings['displayList']['maxPages']
-        );
-        $this->view->assign('pagerConfig', $pagerConfig);
+	/**
+	 * list action
+	 *
+	 * @return string The rendered list action
+	 */
+	public function listAction () {
+		$pagerConfig = array (
+			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+			'insertAbove' => $this->settings['listView']['insertAbove'],
+			'insertBelow' => $this->settings['listView']['insertBelow'],
+			'maxPages' => $this->settings['listView']['maxPages']
+		);
+		$this->view->assign('pagerConfig', $pagerConfig);
 
 
-        $request = $this->request->getArguments();
-        if (isset($request['category'])) {
-            $this->settings['displayList']['category'] = $this->request->getArgument('category');
-        }
+		$request = $this->request->getArguments();
+		if (isset($request['category'])) {
+			$this->settings['listView']['category'] = $this->request->getArgument('category');
+		}
 
-        if (isset($request['searchPhrase'])) {
-            $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-        }
+		if (isset($request['searchPhrase'])) {
+			$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
+		}
 
-        if (isset($request['year'])) {
-            $this->settings['displayList']['year'] = $this->request->getArgument('year');
-        }
+		if (isset($request['year'])) {
+			$this->settings['listView']['year'] = $this->request->getArgument('year');
+		}
 
-        if (isset($request['month'])) {
-            $this->settings['displayList']['month'] = $this->request->getArgument('month');
-        }
+		if (isset($request['month'])) {
+			$this->settings['listView']['month'] = $this->request->getArgument('month');
+		}
 
-        $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-    }
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-    /**
-     * post detail
-     * @param Tx_Tkblog_Domain_Model_Post $post
-     * 
-     */
-    public function detailAction (Tx_Tkblog_Domain_Model_Post $post = NULL) {
-        if ($post) {
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
+	}
 
-            $content = $post->getContent();
-            $pages = array ();
-            $divider = 0;
+	/**
+	 * post detail
+	 * @param Tx_Tkblog_Domain_Model_Post $post
+	 * @param Tx_Tkblog_Domain_Model_Comment $newComment
+	 * @return void
+	 * @dontvalidate $newComment
+	 */
+	public function detailAction (Tx_Tkblog_Domain_Model_Post $post, Tx_Tkblog_Domain_Model_Comment $newComment = NULL) {
+		if ($post) {
+			$content = $post->getContent();
+			$pages = array ();
+			$divider = 0;
 
-            foreach ($content as $single) {
-                if ($single->getCtype() == $this->settings['displaySingle']['divType']) {
-                    $divider++;
-                    $pages[$divider][title] = $single->getHeader();
-                }
-                if ($single->getCtype() != $this->settings['displaySingle']['divType']) {
-                    $pages[$divider][elements][] = $single;
-                }
-            }
+			foreach ($content as $single) {
+				if ($single->getCtype() == $this->settings['detailView']['divType']) {
+					$divider++;
+					$pages[$divider][title] = $single->getHeader();
+				}
+				if ($single->getCtype() != $this->settings['detailView']['divType']) {
+					$pages[$divider][elements][] = $single;
+				}
+			}
+			$this->view->assign('pages', $pages);
+			$this->view->assign('post', $post);
+			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
-            $this->view->assign('pages', $pages);
-            $this->view->assign('setup', $this->setup);
-            $this->view->assign('post', $post);
+			//get Main Comments
+			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
-            //Update Views
-            $currentViews = $post->getViews();
-            $post->setViews($currentViews + 1);
+			$allowComments = $this->checkAllowComments($post);
+			$this->view->assign('allowComments', $allowComments);
 
-            //render Description
-            if ($post->getTeaserDescription()) {
-                $description = $post->getTeaserDescription();
-            } else {
-                $singleCounter = 0;
-                foreach ($content as $element) {
-                    if ($singleCounter == 0 && $element->getBodytext()) {
-                        $description = $element->getBodytext();
-                        $singleCounter++;
-                    }
-                }
-            }
-            $this->view->assign('description', strip_tags($description));
-        } else {
-            $this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
-        }
-    }
+			if (!$newComment && $allowComments) {
+				$this->view->assign('newComment', $this->prefillCommentForm());
+			} elseif ($allowComments) {
+				$this->view->assign('newComment', $newComment);
+			}
 
-    public function latestWidgetAction () {
-        $this->view->assign('posts', $this->postRepository->findLatest((int) $this->settings['latestWidget']['maxEntrys']));
-        $this->view->assign('header', $this->cObj->data['header']);
-    }
+			//Update Views
+			$views = $this->updateViews($post);
 
-    public function viewsWidgetAction () {
-        $this->view->assign('posts', $this->postRepository->findViews((int) $this->settings['viewsWidget']['maxEntrys']));
-        $this->view->assign('header', $this->cObj->data['header']);
-    }
+			//render Description
+			$this->view->assign('description', $this->createDescription($post, $content));
+		} else {
+			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
+		}
+	}
 
-    public function searchWidgetAction () {
-        $this->view->assign('header', $this->cObj->data['header']);
-    }
+	public function searchListAction () {
+		$request = $this->request->getArguments();
+		if (isset($request['searchPhrase'])) {
+			$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
+			$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
+		}
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-    public function searchViewAction () {
-        $request = $this->request->getArguments();
-        if (isset($request['searchPhrase'])) {
-            $this->settings['displayList']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-            $this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
-        }
-        $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
-        $pagerConfig = array (
-            'itemsPerPage' => $this->settings['displayList']['itemsPerPage'],
-            'insertAbove' => $this->settings['displayList']['insertAbove'],
-            'insertBelow' => $this->settings['displayList']['insertBelow'],
-            'maxPages' => $this->settings['displayList']['maxPages']
-        );
-        $this->view->assign('pagerConfig', $pagerConfig);
-    }
+		$pagerConfig = array (
+			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+			'insertAbove' => $this->settings['listView']['insertAbove'],
+			'insertBelow' => $this->settings['listView']['insertBelow'],
+			'maxPages' => $this->settings['listView']['maxPages']
+		);
+		$this->view->assign('pagerConfig', $pagerConfig);
+	}
 
-    public function categoryWidgetAction () {
-        $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-        $this->view->assign('categories', $categoryRepository->findMainCategory());
-        $this->view->assign('header', $this->cObj->data['header']);
-    }
+	public function categoryListAction () {
+		$request = $this->request->getArguments();
+		if (isset($request['category'])) {
+			$this->settings['listView']['category'] = $this->request->getArgument('category');
+			$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+			$this->view->assign('category', $categoryRepository->findByUid($this->request->getArgument('category')));
+		}
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-    public function categoryViewAction () {
-        $categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-        $this->view->assign('categories', $categoryRepository->findMainCategory());
-    }
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
-    public function dateMenuWidgetAction () {
-        $this->settings['displayList']['orderBy'] = 'date';
-        $this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-        $this->view->assign('header', $this->cObj->data['header']);
-    }
+		$pagerConfig = array (
+			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+			'insertAbove' => $this->settings['listView']['insertAbove'],
+			'insertBelow' => $this->settings['listView']['insertBelow'],
+			'maxPages' => $this->settings['listView']['maxPages']
+		);
+		$this->view->assign('pagerConfig', $pagerConfig);
+	}
 
-    public function rssAction () {
-        $posts = $this->postRepository->findLatest((int) 25);
-        $rssItems = array ();
+	public function archiveListAction () {
+		$request = $this->request->getArguments();
+		if (isset($request['year'])) {
+			$this->settings['listView']['year'] = $this->request->getArgument('year');
+			$this->view->assign('year', $this->request->getArgument('year'));
+		}
 
-        foreach ($posts as $key => $post) {
-            $rssItems[$key]['title'] = $post->getTitle();
-            $rssItems[$key]['date'] = $post->getDate();
-            $rssItems[$key]['post'] = $post->getUid();
+		if (isset($request['month'])) {
+			$this->settings['listView']['month'] = $this->request->getArgument('month');
+			$this->view->assign('month', $this->request->getArgument('month'));
+		}
 
-            $content = $post->getContent();
-            //render Description
-            if ($post->getTeaserDescription()) {
-                $description = $post->getTeaserDescription();
-            } else {
-                $singleCounter = 0;
-                foreach ($content as $element) {
-                    if ($singleCounter == 0 && $element->getBodytext()) {
-                        $description = $element->getBodytext();
-                        $singleCounter++;
-                    }
-                }
-            }
-            $rssItems[$key]['description'] = strip_tags($description);
-            $categories = '';
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-            foreach ($post->getCategories() as $category) {
-                $categories .= $category->getTitle() . ' ';
-            }
-            $rssItems[$key]['categories'] = $categories;
-            $rssItems[$key]['views'] = $post->getViews();
-        }
-        $this->view->assign('rssItems', $rssItems);
-    }
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
+
+		$pagerConfig = array (
+			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+			'insertAbove' => $this->settings['listView']['insertAbove'],
+			'insertBelow' => $this->settings['listView']['insertBelow'],
+			'maxPages' => $this->settings['listView']['maxPages']
+		);
+		$this->view->assign('pagerConfig', $pagerConfig);
+	}
+
+	public function categoryOverviewAction () {
+		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+		$this->view->assign('categories', $categoryRepository->findMainCategory());
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
+	}
+
+	public function latestWidgetAction () {
+		$this->settings['listView']['maxEntries'] = $this->settings['latestWidget']['maxEntries'];
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+	}
+
+	public function viewsWidgetAction () {
+		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+	}
+
+	public function searchWidgetAction () {
+		
+	}
+
+	public function categoryWidgetAction () {
+		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+		$this->view->assign('categories', $categoryRepository->findMainCategory());
+	}
+
+	public function dateMenuWidgetAction () {
+		$this->settings['listView']['orderBy'] = $this->settings['dateMenuWidget']['orderBy'];
+		$this->settings['listView']['sortDirection'] = $this->settings['dateMenuWidget']['sortDirection'];
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+	}
+
+	public function postRssAction () {
+		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
+		$posts = $this->postRepository->findPosts($this->settings);
+		$rssItems = array ();
+
+		foreach ($posts as $key => $post) {
+			$rssItems[$key]['title'] = $post->getTitle();
+			$rssItems[$key]['date'] = $post->getDate();
+			$rssItems[$key]['post'] = $post->getUid();
+			$rssItems[$key]['comments'] = $post->getComments();
+
+			$content = $post->getContent();
+			//render Description
+			if ($post->getTeaserDescription()) {
+				$description = $post->getTeaserDescription();
+			} else {
+				$singleCounter = 0;
+				foreach ($content as $element) {
+					if ($singleCounter == 0 && $element->getBodytext()) {
+						$description = $element->getBodytext();
+						$singleCounter++;
+					}
+				}
+			}
+			$rssItems[$key]['description'] = strip_tags($description);
+			$categories = '';
+
+			foreach ($post->getCategories() as $category) {
+				$categories .= $category->getTitle() . ' ';
+			}
+			$rssItems[$key]['categories'] = $categories;
+			$rssItems[$key]['views'] = $post->getViews();
+		}
+		$this->view->assign('rssItems', $rssItems);
+	}
+
+	public function commentsRssAction () {
+		$request = $this->request->getArguments();
+		if (isset($request['post'])) {
+			$postId = $request['post'];
+			$post = $this->postRepository->findByUid((int) $postId);
+			$rssItems = array ();
+			if ($post->getComments()) {
+				$comments = $post->getComments()->toArray();
+				$comments = array_reverse($comments);
+				foreach ($comments as $key => $comment) {
+					$rssItems[$key]['title'] = $comment->getTitle().' '.Tx_Extbase_Utility_Localization::translate('comments_from', $this->extensionName).' '.$comment->getAuthor();
+					$rssItems[$key]['date'] = $comment->getDate();
+					$rssItems[$key]['message'] = $comment->getMessage();
+					$rssItems[$key]['post'] = $postId;
+				}
+			}
+
+			$this->view->assign('post', $post);
+			$this->view->assign('server', $_SERVER['SERVER_NAME']);			
+			$this->view->assign('rssItems', $rssItems);
+		}
+	}
+
+	protected function prefillCommentForm () {
+		$newComment = '';
+		if ($GLOBALS['TSFE']->loginUser) {
+			$newComment['author'] = $GLOBALS['TSFE']->fe_user->user['name'];
+			$newComment['email'] = $GLOBALS['TSFE']->fe_user->user['email'];
+			$newComment['website'] = $GLOBALS['TSFE']->fe_user->user['www'];
+		}
+
+		$request = $this->request->getArguments();
+		if ($request['parentComment'] != '') {
+			$newComment['parentComment'] = $this->request->getArgument('parentComment');
+			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+			$parentComment = $commentRepository->findByUid((int) $newComment['parentComment']);
+			$extensionName = $this->request->getControllerExtensionName();
+			$newComment['title'] = Tx_Extbase_Utility_Localization::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
+		}
+		return $newComment;
+	}
+
+	protected function checkAllowComments ($post) {
+		$allowComments = FALSE;
+		if ($post->getAllowComments() == 0) {
+			$allowComments = TRUE;
+		}
+
+		if ($this->settings['detailView']['closeCommentsAfter'] > 0) {
+			$days = ($this->settings['detailView']['closeCommentsAfter'] * 24 * 60 * 60);
+			$postDate = (int) $post->getDate()->format('U');
+			if (($postDate + $days) > time()) {
+				$allowComments = TRUE;
+			} else {
+				$allowComments = FALSE;
+			}
+		}
+
+		if ($post->getAllowComments() == 1 || $this->settings['detailView']['closeCommentsAfter'] < 0) {
+			$allowComments = FALSE;
+		}
+
+		if ($post->getAllowComments() == 2) {
+			$allowComments = TRUE;
+		}
+
+		if ($post->getAllowComments() == 3 && isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser) {
+			$allowComments = TRUE;
+		}
+
+		//Post Owner
+		if ($post->getAuthor() && $GLOBALS['TSFE']->fe_user->user['uid'] == $post->getAuthor()->getUid()) {
+			$allowComments = TRUE;
+		}
+
+		//Superadmin
+		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) && in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])) {
+			$allowComments = TRUE;
+		}
+
+		return $allowComments;
+	}
+
+	protected function createBreadCrumb ($post) {
+		$posts = $this->postRepository->findPosts($this->settings)->toArray();
+		$breadCrumb = array ();
+		foreach ($posts as $key => $value) {
+			if ($post->getUid() == $value->getUid()) {
+				$breadCrumb[0] = $posts[$key - 1];
+				$breadCrumb[1] = $posts[$key + 1];
+			}
+		}
+		return $breadCrumb;
+	}
+
+	protected function updateViews ($post) {
+		$currentViews = $post->getViews();
+		$post->setViews($currentViews + 1);
+	}
+
+	protected function createDescription ($post, $content) {
+		$description = '';
+		if ($post->getTeaserDescription()) {
+			$description = $post->getTeaserDescription();
+		} else {
+			$singleCounter = 0;
+			foreach ($content as $element) {
+				if ($singleCounter == 0 && $element->getBodytext()) {
+					$description = $element->getBodytext();
+					$singleCounter++;
+				}
+			}
+		}
+		$description = strip_tags($description);
+		return $description;
+	}
 
 }
 

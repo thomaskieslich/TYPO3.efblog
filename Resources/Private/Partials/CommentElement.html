@@ -1,0 +1,43 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<div class="header">
+	<div class="gravatar">
+		<f:if condition="{comment.avatar}">
+			<f:then>
+				{f:if(condition: '{comment.website}',
+				then: "{f:image(src: 'uploads/pics/{comment.avatar}', alt: '{comment.author}', width: '{settings.comments.gravatarSize}', height: '{settings.comments.gravatarSize}')
+				-> f:link.external(uri: '{comment.website}', target: '_blank')}",
+				else: "{f:image(src: 'uploads/pics/{comment.avatar}', alt: '{comment.author}', width: '{settings.comments.gravatarSize}', height: '{settings.comments.gravatarSize}')}"                                
+				)}
+			</f:then>
+			<f:else>
+				{f:if(condition: '{comment.website}',
+				then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-tkblog-gravatar')
+				-> f:link.external(uri: '{comment.website}', target: '_blank')}",
+				else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-tkblog-gravatar')}"                                
+				)}
+			</f:else>
+		</f:if>
+
+	</div>
+	<div class="number">
+		#{comIterator.cycle}
+	</div>
+	<div class="author">
+		{f:if(condition: '{comment.website}', 
+		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}", 
+		else: '{comment.author}')}
+		{f:if(condition : '{comment.email} == {post.author.email}',
+		then : "{f:translate(key : 'comments_author')}")}
+		{f:translate(key : 'comments_wrote')}
+		{comment.date -> f:format.date(format:'d.m.Y, h:m')}
+		{f:if(condition: '{comment.location}',
+		then: "<br>{f:translate(key : 'comments_from')} {comment.location}")}
+		{f:if(condition: '{isMainComment}',
+		then:"<br>{f:translate(key : 'comments_reply') -> f:link.action(action : 'detail', arguments : '{post : post, parentComment : comment}')}")}
+	</div>
+</div>
+<div class="comment">
+	{f:if(condition: '{comment.title}',
+	then: "<h1>{comment.title}</h1>")}
+	{comment.message -> f:format.html()}	
+</div>

@@ -3,8 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011 
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,25 +24,42 @@
  * ************************************************************* */
 
 /**
- *  Description View helper
+ * Repository for Tx_Tkblog_Domain_Model_Comment
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Document_DescriptionViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Tkblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persistence_Repository {
 
-	/**
-	 * replace the description
-	 */
-	public function render() {
-		$renderedContent = $this->renderChildren();
-		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['description'] = $renderedContent;
-		}
+	public function findMainComments ($post = NULL) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->logicalAnd(
+				$query->equals('parent_comment', 0),
+				$query->equals('post', $post)
+			)
+		);
+		$query->setOrderings(
+			array (
+				'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			)
+		);
+
+		return $query->execute();
+	}
+
+	public function findAllChildren (Tx_Tkblog_Domain_Model_Comment $comment) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->equals('parent_comment', $comment)
+		);
+		$query->setOrderings(
+			array (
+				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			)
+		);
+		return $query->execute();
 	}
 
 }
-
-?>

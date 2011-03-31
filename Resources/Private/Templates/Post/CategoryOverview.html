@@ -1,0 +1,32 @@
+<f:layout name="default" />
+<f:section name="content">
+    <div class="tx-tkblog-view-category">
+
+        <f:for each="{categories}" as="category">          
+            <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
+                <div class="element {row}">    
+                    <h2>{category.title}</h2>
+                    <p>{category.description}</p>
+		    <f:for each="{category.image}" as="image" iteration="imageIterator">
+			<f:if condition="{image}">
+			    <f:if condition="{dam}">
+				<f:then>
+				{f:image(src: "{image.file_path}{image.file_name}", alt: "{category.title}", width: "150m", height: "150m")
+				-> f:link.action(action : 'list', arguments : '{category:category}', pageUid : '{settings.categoryUid}')}
+				</f:then>
+				<f:else>
+				{f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "150m", height: "150m")
+				-> f:link.action(action : 'list', arguments : '{category:category}', pageUid : '{settings.categoryUid}')} 
+				</f:else>
+			    </f:if>
+			</f:if>
+		    </f:for>
+		    <ul>
+			<f:render partial="CategoryElement" arguments="{category: category}" /> 
+		    </ul>
+                </div>
+            </f:cycle>
+        </f:for>
+
+    </div>
+</f:section>

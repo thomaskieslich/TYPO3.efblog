@@ -1,0 +1,63 @@
+<f:for each="{post.content}" as="element" iteration="elementIterator">
+    <f:if condition="{elementIterator.cycle} == {count}">
+	<!-- Render Teaser-->
+	<div class="tx-tkblog-list-images">
+	    <!-- Post Image-->
+	    <f:if condition="{post.showTeaserImage} == 1">
+		<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+		    <f:if condition="{post.teaserImage}">  
+			<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
+			    <div class="tx-tkblog-list-imagerow">
+				<f:if condition="{dam}">
+				    <f:then>
+					{f:image(src: "{image.file_path}{image.file_name}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
+					-> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
+				    </f:then>
+				    <f:else>
+					{f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
+					-> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
+				    </f:else>
+				</f:if> 
+			    </div>
+			</f:if>
+		    </f:if>
+		</f:for>
+	    </f:if>
+	    <!-- content Image-->
+	    <f:if condition="{post.showTeaserImage} == 2">
+		<f:for each="{element.image}" as="image"  iteration="imageIterator">
+		    <f:if condition="{image}">  
+			<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
+			    <div class="tx-tkblog-list-imagerow">
+				<f:if condition="{dam}">
+				    <f:then>
+					{f:image(src: "{image.file_path}{image.file_name}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
+					-> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
+				    </f:then>
+				    <f:else>
+					{f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
+					-> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
+				    </f:else>
+				</f:if>
+			    </div>
+			</f:if>
+		    </f:if>
+		</f:for>
+	    </f:if>
+	</div> 
+
+	<div class="tx-tkblog-list-text">
+	    <h1>{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}</h1>
+	    <f:if condition="{post.teaserOptions} == 1">
+		<f:then>
+		    {element.bodytext -> f:format.html() -> 
+		    f:format.crop(maxCharacters: '{settings.listView.cropText}',  
+		    append: '{f:translate(key : "teaser_more")}')}
+		</f:then>
+		<f:else>			
+		    {element.bodytext -> f:format.html()}
+		</f:else>
+	    </f:if>
+	</div> 
+    </f:if>
+</f:for>

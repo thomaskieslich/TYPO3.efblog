@@ -14,7 +14,10 @@ jQuery(document).ready(function($) {
         $('.tab_content#' + activeTab).show();
         return false;
     });
-    
+	
+	//Commentform
+    $('#tx-tkblog-comment-form #tx-tkblog-link').parent().hide();
+	
     //Archive menu
     $('.tx-tkblog-widget-content .year').next().hide();
     

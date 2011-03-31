@@ -32,192 +32,173 @@
  */
 class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 
-    public function findPosts ($settings) {
-        $query = $this->createQuery();
-        
-        if ($constraints = $this->createConstraintsFromSettings($query, $settings)) {
-            $query->matching(
-                    $query->logicalAnd($constraints)
-            );
-        }
+	public function findPosts ($settings) {
+		$query = $this->createQuery();
 
-        //Ordering
-        if ($orderings = $this->createOrderingsfromSettings($settings['displayList'])) {
-            $query->setOrderings($orderings);
-        }
+		if ($constraints = $this->createConstraintsFromSettings($query, $settings)) {
+			$query->matching(
+				$query->logicalAnd($constraints)
+			);
+		}
 
-        //Limit
-        if ($settings['displayList']['maxEntrys'] > 0) {
-            $query->setLimit((int) $settings['displayList']['maxEntrys']);
-        }
+		//Ordering
+		if ($orderings = $this->createOrderingsfromSettings($settings)) {
+			$query->setOrderings($orderings);
+		}
 
-        return $query->execute();
-    }
+		//Limit
+		if ($settings['listView']['maxEntries'] > 0) {
+			$query->setLimit((int) $settings['listView']['maxEntries']);
+		}
 
-    public function findLatest ($limit) {
-        $query = $this->createQuery();
-        $query->setOrderings(
-                array (
-                    'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
-                )
-        );
-        $query->setLimit($limit);
+		return $query->execute();
+	}
 
-        return $query->execute();
-    }
+	//Utilities
+	protected function createConstraintsfromSettings (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraints = array ();
 
-    public function findViews ($limit) {
-        $query = $this->createQuery();
-        $query->setOrderings(
-                array (
-                    'views' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
-                )
-        );
-        $query->setLimit($limit);
+		//categories
+		if ($settings['listView']['category']) {
+			$constraints[] = $this->createCategoryConstraint($query, $settings);
+		}
 
-        return $query->execute();
-    }
+		//search
+		if ($settings['listView']['searchPhrase']) {
+			$constraints[] = $this->createSearchConstraint($query, $settings);
+		}
+		
+		//no future posts
+		$today = time();
+		$constraints[] = $query->lessThan('date', $today);
+		
+		//Month for archive
+		if ($settings['listView']['year'] > 0 && $settings['listView']['month'] > 0) {
+			$begin = mktime(0, 0, 0, $settings['listView']['month'], 0, $settings['listView']['year']);
+			$end = mktime(0, 0, 0, ($settings['listView']['month'] + 1), 0, $settings['listView']['year']);
 
-    //Utilities
-    protected function createConstraintsfromSettings (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
-        $constraints = array ();
+			$constraints[] = $query->logicalAnd(
+					$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
+			);
+		}
 
-        //categories
-        if ($settings['displayList']['category']) {
-            $constraints[] = $this->createCategoryConstraint($query, $settings);
-        }
+		$archiveMode = $settings['listView']['displayArchived'];
+		// daysToArchive
+		if ($settings['listView']['daysToArchive']) {
+			$archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int) $settings['listView']['daysToArchive'], date("Y"));
 
-        //search
-        if ($settings['displayList']['searchPhrase']) {
-            $constraints[] = $this->createSearchConstraint($query, $settings);
-        }
-
-        //Month for archive
-        if ($settings['displayList']['year'] > 0 && $settings['displayList']['month'] > 0) {
-            $begin = mktime(0, 0, 0, $settings['displayList']['month'], 0, $settings['displayList']['year']);
-            $end = mktime(0, 0, 0, ($settings['displayList']['month'] + 1), 0, $settings['displayList']['year']);
-
-            $constraints[] = $query->logicalAnd(
-                            $query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
-            );
-        }
-
-        $archiveMode = $settings['displayList']['displayArchived'];
-        // daysToArchive
-        if ($settings['displayList']['daysToArchive']) {
-            $archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int) $settings['displayList']['daysToArchive'], date("Y"));
-
-            if ($archiveMode == 'archived') {
-                $constraints[] = $query->lessThan('date', $archiveDate);
-            } elseif ($archiveMode == 'active') {
-                $constraints[] = $query->greaterThanOrEqual('date', $archiveDate);
-            }
-        }
-        // archived
-        else {
-            if ($archiveMode == 'archived') {
-                $constraints[] = $query->logicalAnd(
-                                $query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
-                );
-            } elseif ($archiveMode == 'active') {
-                $constraints[] = $query->logicalOr(
-                                $query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
-                );
-            }
-        }
+			if ($archiveMode == 'archived') {
+				$constraints[] = $query->lessThan('date', $archiveDate);
+			} elseif ($archiveMode == 'active') {
+				$constraints[] = $query->greaterThanOrEqual('date', $archiveDate);
+			}
+		}
+		// archived
+		else {
+			if ($archiveMode == 'archived') {
+				$constraints[] = $query->logicalAnd(
+						$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
+				);
+			} elseif ($archiveMode == 'active') {
+				$constraints[] = $query->logicalOr(
+						$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
+				);
+			}
+		}
 
 
-        return $constraints;
-    }
+		return $constraints;
+	}
 
-    protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
-        $constraint = NULL;
-        $categoryConstraints = array ();
-        $categories = t3lib_div::trimExplode(',', $settings['displayList']['category'], TRUE);
+	protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraint = NULL;
+		$categoryConstraints = array ();
+		$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
 
-        foreach ($categories as $category) {
-            $categoryConstraints[] = $query->contains('categories', $category);
-        }
+		foreach ($categories as $category) {
+			$categoryConstraints[] = $query->contains('categories', $category);
+		}
 
-        switch (strtolower($settings['displayList']['categoryMode'])) {
-            case 'or':
-                $constraint = $query->logicalOr($categoryConstraints);
-                break;
-            case 'notor':
-                $constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
-                break;
-            case 'notand':
-                $constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
-                break;
-            case 'and':
-            default:
-                $constraint = $query->logicalAnd($categoryConstraints);
-        }
+		switch (strtolower($settings['listView']['categoryMode'])) {
+			case 'or':
+				$constraint = $query->logicalOr($categoryConstraints);
+				break;
+			case 'notor':
+				$constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+				break;
+			case 'notand':
+				$constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+				break;
+			case 'and':
+			default:
+				$constraint = $query->logicalAnd($categoryConstraints);
+		}
 
-        return $constraint;
-    }
+		return $constraint;
+	}
 
-    protected function createSearchConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+	protected function createSearchConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 
-        $constraint = NULL;
-        $searchConstraints = array ();
-        $terms = t3lib_div::trimExplode(' ', $settings['displayList']['searchPhrase'], TRUE);
-        $fields = t3lib_div::trimExplode(',', $settings['displayList']['searchFields'], TRUE);
+		$constraint = NULL;
+		$searchConstraints = array ();
+		$terms = t3lib_div::trimExplode(' ', $settings['listView']['searchPhrase'], TRUE);
+		$fields = t3lib_div::trimExplode(',', $settings['listView']['searchFields'], TRUE);
 
-        foreach ($terms as $term) {
-            foreach ($fields as $field) {
-                $searchConstraints[] = $query->like($field, '%' . $term . '%');
-            }
-        }
-        $constraint = $query->logicalOr($searchConstraints);
-        return $constraint;
-    }
+		foreach ($terms as $term) {
+			foreach ($fields as $field) {
+				$searchConstraints[] = $query->like($field, '%' . $term . '%');
+			}
+		}
+		$constraint = $query->logicalOr($searchConstraints);
+		return $constraint;
+	}
 
-    protected function createOrderingsfromSettings ($settings) {
-        $orderings = array ();
-        $orderList = t3lib_div::trimExplode(',', $settings['orderBy'], TRUE);
-        $sortList = t3lib_div::trimExplode(',', $settings['sortDirection'], FALSE);
+	protected function createOrderingsfromSettings ($settings) {
+		$orderings = array ();
+		$orderList = t3lib_div::trimExplode(',', $settings['listView']['orderBy'], TRUE);
+		$sortList = t3lib_div::trimExplode(',', $settings['listView']['sortDirection'], FALSE);
 
-        if (!empty($orderList)) {
-            foreach ($orderList as $orderNum => $orderItem) {
-                if ($sortList[$orderNum]) {
-                    $orderings[$orderItem] = ((strtolower($sortList[$orderNum]) == 'desc') ?
-                                    Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING :
-                                    Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING);
-                } else {
-                    $orderings[$orderItem] = Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING;
-                }
-            }
-        }
-        return $orderings;
-    }
+		if (!empty($orderList)) {
+			foreach ($orderList as $orderNum => $orderItem) {
+				if ($sortList[$orderNum]) {
+					$orderings[$orderItem] = ((strtolower($sortList[$orderNum]) == 'desc') ?
+							Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING :
+							Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING);
+				} else {
+					$orderings[$orderItem] = Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING;
+				}
+			}
+		}
+		return $orderings;
+	}
 
-    public function countCategoryPosts (Tx_Tkblog_Domain_Model_Category $category) {
-        $query = $this->createQuery();
-        $query->matching(
-               $query->contains('categories', $category)
-        );
-        return $query->execute()->count();
-    }
+	public function countCategoryPosts (Tx_Tkblog_Domain_Model_Category $category) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->contains('categories', $category)
+		);
+		return $query->execute()->count();
+	}
 
-    public function searchPost ($searchString = '') {
-        $query = $this->createQuery();
+	public function searchPost ($searchString = '') {
+		$query = $this->createQuery();
 
-        $terms = t3lib_div::trimExplode(' ', $searchString, TRUE);
-        $constraints = array ();
-        if ($terms) {
-            foreach ($terms as $term) {
-                $constraints[] = $query->like('title', '%' . $term . '%');
-                $constraints[] = $query->like('content.header', '%' . $term . '%');
-                $constraints[] = $query->like('content.bodytext', '%' . $term . '%');
-            }
-        }
-        $query->matching(
-                $query->logicalOr($constraints)
-        );
+		$terms = t3lib_div::trimExplode(' ', $searchString, TRUE);
+		$constraints = array ();
+		if ($terms) {
+			foreach ($terms as $term) {
+				$constraints[] = $query->like('title', '%' . $term . '%');
+				$constraints[] = $query->like('content.header', '%' . $term . '%');
+				$constraints[] = $query->like('content.bodytext', '%' . $term . '%');
+			}
+		}
+		$query->matching(
+			$query->logicalOr($constraints)
+		);
 
-        return $query->execute();
-    }
+		return $query->execute();
+	}
+
 }
 
 ?>

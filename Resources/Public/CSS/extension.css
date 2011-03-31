@@ -57,6 +57,27 @@
 }
 
 /*detail*/
+.tx-tkblog-detail-breadCrumb{
+    height: 18px;
+    width: 100%;
+}
+
+.tx-tkblog-detail-breadCrumb .left{
+    float: left;
+    width: 40%;
+}
+.tx-tkblog-detail-breadCrumb .center{
+    float: left;
+    text-align: center;
+    width: 20%;
+}
+
+.tx-tkblog-detail-breadCrumb .right{
+    float: right;
+    text-align: right;
+    width: 40%;
+}
+
 .tx-tkblog-detail-container ul.tabs {
     margin: 0;
     padding: 0;
@@ -153,6 +174,33 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
     clear: both;
 }
 
+/*comment form*/
+#tx-tkblog-comment-form{
+    width: 330px;
+}
+#tx-tkblog-comment-form .tf, #tx-tkblog-comment-form .ta{
+    margin-bottom: 8px;
+}
+#tx-tkblog-comment-form .tf label{
+    float: right;
+    width: 100px;
+}
+
+#tx-tkblog-comment-form .tf input{
+    width: 220px;
+}
+
+#tx-tkblog-comment-form .errors {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #FBB19B;
+    border: 1px #DC4C42 solid;
+}
+
+#tx-tkblog-comment-form .f3-form-error{
+    background-color: #FBB19B;
+    border: 1px #DC4C42 solid;
+}
 
 /*widgets*/
 .tx-tkblog-widget-container{

@@ -39,8 +39,8 @@ class Tx_Tkblog_ViewHelpers_Document_KeywordsViewHelper extends Tx_Fluid_Core_Vi
 	public function render() {
 		$renderedContent = $this->renderChildren();
 		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['KEYWORDS.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['KEYWORDS'] = $renderedContent;
+			$GLOBALS['TSFE']->pSetup['meta.']['keywords.'] = NULL;
+			$GLOBALS['TSFE']->pSetup['meta.']['keywords'] = $renderedContent;
 		}
 	}
 

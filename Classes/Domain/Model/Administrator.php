@@ -25,25 +25,14 @@
  * ************************************************************* */
 
 /**
- *  Description View helper
+ * An Administrator of a Post
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Document_DescriptionViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
-	/**
-	 * replace the description
-	 */
-	public function render() {
-		$renderedContent = $this->renderChildren();
-		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['description'] = $renderedContent;
-		}
-	}
-
+class Tx_Tkblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
+	
 }
-
 ?>

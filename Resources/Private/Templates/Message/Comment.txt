@@ -1,0 +1,15 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+{post.title}
+{tk:translate(key : 'comment_form_author', extensionName : 'Tkblog')}: {newComment.author}
+{tk:translate(key : 'comment_form_email', extensionName : 'Tkblog')}: {newComment.email}
+{tk:translate(key : 'comment_form_website', extensionName : 'Tkblog')}: {newComment.website}
+{tk:translate(key : 'comment_form_location', extensionName : 'Tkblog')}: {newComment.location}
+{tk:translate(key : 'comment_form_title', extensionName : 'Tkblog')}: {newComment.title}
+
+{tk:translate(key : 'comment_message_message', extensionName : 'Tkblog')}
+{newComment.message}
+
+{tk:translate(key : 'comment_message_spampoints', extensionName : 'Tkblog')}: {newComment.spampoints}
+<f:if condition='newComment.hidden'>{tk:translate(key : 'comment_message_hidden', extensionName : 'Tkblog')}</f:if>
+Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Tkblog', pluginName : 'fe1')}     
+        

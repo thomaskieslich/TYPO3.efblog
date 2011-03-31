@@ -110,23 +110,6 @@ $TCA['tx_tkblog_domain_model_category'] = array(
                 'size' => '40',
             )
         ),
-        'image' => array(
-            'exclude' => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.category_image',
-            'config' => array(
-                'type' => 'group',
-                'internal_type' => 'file',
-                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-                'uploadfolder' => 'uploads/tx_tkblog',
-                'disable_controls' => upload,
-                'show_thumbs' => 1,
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-            )
-        ),
         'parent_category' => Array(
             'exclude' => 1,
             'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_parent_category',

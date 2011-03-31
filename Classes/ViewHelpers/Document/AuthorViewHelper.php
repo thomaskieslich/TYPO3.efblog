@@ -25,22 +25,22 @@
  * ************************************************************* */
 
 /**
- *  Description View helper
+ * Author View helper
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Document_DescriptionViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Tkblog_ViewHelpers_Document_AuthorViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * replace the description
+	 * replace the keywords
 	 */
 	public function render() {
 		$renderedContent = $this->renderChildren();
 		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['description'] = $renderedContent;
+			$GLOBALS['TSFE']->pSetup['meta.']['author.'] = NULL;
+			$GLOBALS['TSFE']->pSetup['meta.']['author'] = $renderedContent;
 		}
 	}
 

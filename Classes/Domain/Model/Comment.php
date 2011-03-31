@@ -33,49 +33,88 @@
  */
 
  class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
+	 
+	 /**
+     * hidden
+     *
+     * @var integer
+     */
+    protected $hidden;
 
 	/**
-	 * author
-	 *
-	 * @var string $author
+	 * @var string
+	 * @validate NotEmpty
+	 * @validate StringLength(maximum = 120)
 	 */
 	protected $author;
 
 	/**
-	 * email
-	 *
-	 * @var string $email
+	 * @var string
+	 * @validate NotEmpty
+	 * @validate EmailAddress
 	 */
 	protected $email;
+	
 
 	/**
-	 * website
-	 *
-	 * @var string $website
+	 * @var string
 	 */
 	protected $website;
+	
+	/**
+	 * @var string
+	 */
+	protected $location;
+	
+	/**
+	 * @var string
+	 */
+	protected $title;	
 
 	/**
-	 * date
-	 *
-	 * @var DateTime $date
+	 * @var string
+	 * @validate NotEmpty
+	 * @validate StringLength(maximum = 1200)
+	 */
+	protected $message;
+	
+	/**
+	 * @var DateTime
 	 */
 	protected $date;
-
+	
 	/**
-	 * comment
-	 *
-	 * @var string $comment
-	 */
-	protected $comment;
-
-	/**
-	 * approved
-	 *
 	 * @var integer
 	 */
-	protected $approved;
+	protected $spampoints;
+	
+	/**
+	 * @var integer
+	 */
+	protected $ip;
+	
+	/**
+	 * parentComment
+	 *
+	 * @var Tx_Tkblog_Domain_Model_Comment $parentComment
+	 */
+	protected $parentComment;
 
+	/**
+	 *
+	 * @var string
+	 */
+	protected $avatar;
+	
+	public function getHidden () {
+		return $this->hidden;
+	}
+
+	public function setHidden ($hidden) {
+		$this->hidden = $hidden;
+	}
+
+	
 	/**
 	 * Setter for author
 	 *
@@ -132,7 +171,71 @@
 	public function getWebsite() {
 		return $this->website;
 	}
+		
+	/**
+	 * Returns the location
+	 *
+	 * @return string $location
+	 */
+	public function getLocation() {
+		return $this->location;
+	}
 
+	/**
+	 * Sets the location
+	 *
+	 * @param string $location
+	 * @return void
+	 */
+	public function setLocation($location) {
+		$this->location = $location;
+	}
+
+	/**
+	 * Returns the title
+	 *
+	 * @return string $title
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
+	 * Sets the title
+	 *
+	 * @param string $title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+		
+	/**
+	 * Constructs this comment
+	 */
+	public function __construct() {
+		$this->date = new DateTime();
+	}	
+
+	/**
+	 * Setter for message
+	 *
+	 * @param string $message message
+	 * @return void
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
+
+	/**
+	 * Getter for message
+	 *
+	 * @return string $message
+	 */
+	public function getMessage() {
+		return $this->message;
+	}
+	
 	/**
 	 * Setter for date
 	 *
@@ -151,45 +254,79 @@
 	public function getDate() {
 		return $this->date;
 	}
-
+	
 	/**
-	 * Setter for comment
+	 * Sets the spampoints
 	 *
-	 * @param string $comment comment
+	 * @param integer $spampoints
 	 * @return void
 	 */
-	public function setComment($comment) {
-		$this->comment = $comment;
+	public function setSpampoints($spampoints) {
+		$this->spampoints = $spampoints;
+	}
+	
+	public function getSpampoints () {
+		return $this->spampoints;
 	}
 
+	
 	/**
-	 * Getter for comment
+	 * Returns the ip
 	 *
-	 * @return string comment
+	 * @return string $ip
 	 */
-	public function getComment() {
-		return $this->comment;
+	public function getIp() {
+		return $this->ip;
 	}
 
 	/**
-	 * Returns the approved
+	 * Sets the ip
 	 *
-	 * @return string $approved
-	 */
-	public function getApproved() {
-		return $this->approved;
-	}
-
-	/**
-	 * Sets the approved
-	 *
-	 * @param string $approved
+	 * @param string $ip
 	 * @return void
 	 */
-	public function setApproved($approved) {
-		$this->location = $approved;
+	public function setIp($ip) {
+		$this->ip = $ip;
+	}
+	
+	/**
+	 * Returns the parentComment
+	 *
+	 * @return Tx_Tkblog_Domain_Model_Comment $parentComment
+	 */
+	public function getParentComment() {
+		return $this->parentComment;
 	}
 
+	/**
+	 * Sets the parentComment
+	 *
+	 * @param Tx_Tkblog_Domain_Model_Comment $parentComment
+	 * @return void
+	 */
+	public function setParentComment($parentComment) {
+		$this->parentComment = $parentComment;
+	}
+	
+	/**
+     * Returns the child comments
+     *
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $children
+     */
+    public function getChildren () {
+        $commentRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+        $children = $commentRepository->findAllChildren($this);
+        return clone $children;
+    }
 
+	
+	//helper
+	public function getAvatar() {
+		$avatarImage = NULL;
+		if($this->email){
+			$avatarImage = Tx_Tkblog_Service_AvatarService::findAvatarByEmail($this->email);
+		}
+		return $avatarImage;
+	}
 }
 ?>

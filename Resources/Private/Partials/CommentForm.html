@@ -1,26 +1,44 @@
 <div id="tx-tkblog-comment-form">
     <f:render partial="FormErrors" />
-    <f:form action="create" controller="Comment" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
+    <f:form action="create" controller="Comment"  section="tx-tkblog-comment-form" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
+		<f:if condition="{newComment.parentComment}">
+			{f:form.hidden(property:"parentComment", id: "tx-tkblog-parentComment")}
+		</f:if>
         <div class="tf">
-            <label for="author"><f:translate key="comment_form_author">[author]</f:translate>:</label>
-            <f:form.textfield property="author" id="author"><input type="text" id="author" /></f:form.textfield>
+            <label for="tx-tkblog-author">{f:translate(key : 'comment_form_author')}</label>
+            {f:form.textfield(property:"author", required: 'required', id: "tx-tkblog-author")}
         </div>
 
         <div class="tf">
-            <label for="email"><f:translate key="comment_form_email">[email]</f:translate>:</label>
-            <f:form.textfield property="email" id="email"><input type="text" id="email" /></f:form.textfield>
+            <label for="tx-tkblog-email">{f:translate(key : 'comment_form_email')}</label>
+			{f:form.textfield(property:"email", type: 'email', required: 'required' id: "tx-tkblog-email")}
         </div>
 
         <div class="tf">
-            <label for="website"><f:translate key="comment_form_website">[website]</f:translate>:</label>
-            <f:form.textfield property="website" id="website"><input type="text" id="website" /></f:form.textfield>
+            <label for="tx-tkblog-website">{f:translate(key : 'comment_form_website')}</label>
+			{f:form.textfield(property:"website", id: "tx-tkblog-website")}
+        </div>
+		
+		<div class="tf">
+            <label for="tx-tkblog-link">{f:translate(key : 'comment_form_link')}</label>
+			<input id="tx-tkblog-link" type="text" name="tx_tkblog_fe[newComment][link]">
+        </div>
+
+		<div class="tf">
+            <label for="tx-tkblog-location">{f:translate(key : 'comment_form_location')}</label>
+	    {f:form.textfield(property:"location", id: "tx-tkblog-location")}
+        </div>
+
+		<div class="tf">
+            <label for="tx-tkblog-title">{f:translate(key : 'comment_form_title')}</label>
+	    {f:form.textfield(property:"title", id: "tx-tkblog-title")}
         </div>
 
         <div class="ta">
-            <label for="comment"><f:translate key="comment_form_comment">[comment]</f:translate>:</label>
-            <f:form.textarea property="comment" id="comment" rows="8" cols="46"><textarea id="comment" rows="8" cols="46" /></f:form.textarea>
+            <label for="tx-tkblog-message">{f:translate(key : 'comment_form_message')}</label>
+            {f:form.textarea(property: "message", id: "tx-tkblog-message", rows: "8", cols: "46")}
         </div>
-        
+
         <div class="submit">
             <f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}">
                 <input class="button" type="submit" name="" value="Submit" />

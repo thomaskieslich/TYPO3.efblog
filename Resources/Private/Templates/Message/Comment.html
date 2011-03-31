@@ -1,0 +1,41 @@
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{post.title} - {newComment.title}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<h1>{post.title -> f:link.action(action : 'detail', arguments : '{post : post}', absolute : '1', 
+			extensionName : 'Tkblog', pluginName : 'fe1')}</h1>
+
+        <div>
+            {tk:translate(key : 'comment_form_author', extensionName : 'Tkblog')}: {newComment.author}
+        </div>
+		<div>
+            {tk:translate(key : 'comment_form_email', extensionName : 'Tkblog')}: {newComment.email}
+        </div>
+		<div>
+            {tk:translate(key : 'comment_form_website', extensionName : 'Tkblog')}: {newComment.website}
+        </div>
+		<div>
+            {tk:translate(key : 'comment_form_location', extensionName : 'Tkblog')}: {newComment.location}
+        </div>
+		<div>
+            <h2>{tk:translate(key : 'comment_form_title', extensionName : 'Tkblog')}: {newComment.title}</h2>
+        </div>
+		<div>
+            {tk:translate(key : 'comment_message_message', extensionName : 'Tkblog')}
+			{newComment.message -> f:format.html()}
+        </div>
+		<hr>
+		<div>
+            {tk:translate(key : 'comment_message_spampoints', extensionName : 'Tkblog')}: {newComment.spampoints}
+        </div>
+		<div>
+			<f:if condition='{newComment.hidden}'>
+				{tk:translate(key : 'comment_message_hidden', extensionName : 'Tkblog')}
+			</f:if>            
+        </div>
+	</body>
+</html>

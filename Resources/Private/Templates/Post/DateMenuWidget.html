@@ -2,19 +2,19 @@
 <f:layout name="default" />
 <f:section name="content">
     <div class="tx-tkblog-widget-container">
-        <h1>{header}</h1>
+        <h1>{f:translate(key : 'widget_dateMenu_header')}</h1>
         <div class="tx-tkblog-widget-content">
             <f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
                 <h3 class="year"><a href="#">{year} ({postsByYear -> f:count()})</a></h3>
                     <ul id="y_{year}">
                         <f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
                             <li id="d_{year}_{month}">
-                            <f:link.action action="list" pageUid="{settings.target.listUid}" arguments="{year: year, month: month}">
+                            <f:link.action action="list" pageUid="{settings.archiveUid}" arguments="{year: year, month: month}">
                                 <tk:format.monthName month="{month}" /> {year}</f:link.action>
 				({postsByMonth -> f:count()}
                             <f:if condition="<f:count subject='{postsByMonth}' /> == 1">
-                                <f:then>{f:translate(key : 'widget_date_item')}</f:then>
-                                <f:else>{f:translate(key : 'widget_date_items')}</f:else>
+                                <f:then>{f:translate(key : 'widget_dateMenu_item')}</f:then>
+                                <f:else>{f:translate(key : 'widget_dateMenu_items')}</f:else>
                             </f:if>
                             )
                             </li>

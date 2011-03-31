@@ -1,12 +1,12 @@
 <f:layout name="default" />
 <f:section name="content">
     <div class="tx-tkblog-widget-container">
-        <h1>{header}</h1>
+        <h1>{f:translate(key : 'widget_views_header')}</h1>
         <div class="tx-tkblog-widget-content">
             <ul>
                 <f:for each="{posts}" as="post">
                     <li>
-                    <f:link.action action="detail" pageUid="{settings.target.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
+                    <f:link.action action="detail" pageUid="{settings.detailUid}" additionalParams="{tx_tkblog_fe1:{post:post}}" title="{post.title}">
                         {post.title -> f:format.crop(maxCharacters: '{settings.viewsWidget.cropLink}',  append: "{f:translate(key : 'widget_views_more')}")}
                         ({post.views})
                     </f:link.action>

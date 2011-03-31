@@ -36,21 +36,18 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Title
      *
-     * @var string $title
+     * @var string
      * @validate NotEmpty
      */
     protected $title;
     /**
      * hidden
      *
-     * @var string $hidden
+     * @var string
      */
     protected $hidden;
     /**
-     * Author
-     *
-     * @var string $author
-     * @validate String
+     * @var Tx_Tkblog_Domain_Model_Administrator
      */
     protected $author;
     /**
@@ -96,11 +93,11 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     protected $allowComments;
     /**
-     * crop Teaser
+     * Teaser Options
      *
      * @var integer
      */
-    protected $cropTeaser;
+    protected $teaserOptions;
     /**
      * Teaser description
      *
@@ -179,25 +176,21 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 
     public function setHidden($hidden) {
         $this->hidden = $hidden;
-    }
+    }    
 
     /**
-     * Returns the author
-     *
-     * @return string $author
+     * @param Tx_Tkblog_Domain_Model_Administrator $author
+     * @return void
+     */
+    public function setAuthor(Tx_Tkblog_Domain_Model_Administrator $author) {
+        $this->author = $author;
+    }
+	
+	/**
+     * @return Tx_Tkblog_Domain_Model_Administrator
      */
     public function getAuthor() {
         return $this->author;
-    }
-
-    /**
-     * Sets the author
-     *
-     * @param string $author
-     * @return void
-     */
-    public function setAuthor($author) {
-        $this->author = $author;
     }
 
     public function getTeaserLink() {
@@ -300,22 +293,22 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     }
 
     /**
-     * Returns the cropTeaser
+     * Returns the teaserOptions
      *
-     * @return integer $cropTeaser
+     * @return integer $teaserOptions
      */
-    public function getCropTeaser() {
-        return $this->cropTeaser;
+    public function getTeaserOptions() {
+        return $this->teaserOptions;
     }
 
     /**
-     * Sets the cropTeaser
+     * Sets the teaserOptions
      *
-     * @param integer $cropTeaser
+     * @param integer $teaserOptions
      * @return void
      */
-    public function setCropTeaser($cropTeaser) {
-        $this->cropTeaser = $cropTeaser;
+    public function setTeaserOptions($teaserOptions) {
+        $this->teaserOptions = $teaserOptions;
     }
 
     public function getTeaserDescription() {
@@ -331,7 +324,12 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      * @return string void
      */
     public function getTeaserImage() {
-        return explode(',', $this->teaserImage);
+		if (t3lib_extMgm::isLoaded('dam')) {
+			$damPics = tx_dam_db::getReferencedFiles('tx_tkblog_domain_model_post', $this->uid, 'tx_tkblog_domain_model_post_teaser_image');
+			return $damPics['rows'];
+		} else {
+			return explode(',', $this->teaserImage);
+		}
     }
 
     /**
