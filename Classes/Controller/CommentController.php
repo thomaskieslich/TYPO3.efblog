@@ -32,6 +32,20 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Tkblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
+	
+	/**
+	 * @var Tx_Tkblog_Domain_Repository_CommentRepository
+	 */
+	protected $commentRepository;
+
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 */
+	protected function initializeAction () {
+		$this->commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+	}
 
 	/**
 	 * Adds a comment to a blog post and redirects to detail view
@@ -63,6 +77,10 @@ class Tx_Tkblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 		$this->flashMessageContainer->add('Your new Comments was created.');
 
 		$this->redirect('detail', 'Post', NULL, array ('post' => $post));
+	}
+	
+	public function latestCommentsWidgetAction () {
+		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
 	}
 
 	protected function checkForSpam ($newComment) {

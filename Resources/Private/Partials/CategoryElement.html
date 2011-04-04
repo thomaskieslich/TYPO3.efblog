@@ -1,49 +1,45 @@
 <f:if condition="{category.children}">
-    <f:then>
-        <f:if condition="{settings.categoryWidget.viewEmpty}">
-            <f:then>
-                <li>
-                <f:link.action action="list" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
-					{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-                    <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-                </f:link.action>
-            </f:then>
-            <f:else>
-                <f:if condition="{category.posts} > 0">
-                    <li>
-                    <f:link.action action="list" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
-						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-                        <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-                    </f:link.action>
-                </f:if>
-            </f:else>
-        </f:if>
-        <ul>
-            <f:for each="{category.children}" as="child">
-                <f:render partial="CategoryElement" arguments="{category: child}" />
-            </f:for>
-        </ul>
-        </li>
-    </f:then>
-    <f:else>
-        <f:if condition="{settings.categoryWidget.viewEmpty}">
-            <f:then>
-                <li>
-                <f:link.action action="list" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
-					{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-                    <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-                </f:link.action>
-            </f:then>
-            <f:else>
-                <f:if condition="{category.posts} > 0">
-                    <li>
-                    <f:link.action action="list" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
-						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
-                        <f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-                    </f:link.action>
-                </f:if>
-            </f:else>
-        </f:if>
+	<f:then>
+		<f:if condition="{settings.categoryWidget.viewEmpty}">
+			<f:then>
+				<li>
+				<f:render section="categoryLink" arguments="{category : category}" />
+			</f:then>
+			<f:else>
+				<f:if condition="{category.posts} > 0">
+					<li>
+					<f:render section="categoryLink" arguments="{category : category}" />
+				</f:if>
+			</f:else>
+		</f:if>
+		<ul>
+			<f:for each="{category.children}" as="child">
+				<f:render partial="CategoryElement" arguments="{category : child}" />
+			</f:for>
+		</ul>
+		</li>
+	</f:then>
+	<f:else>
 
-    </f:else>
+		<f:if condition="{settings.categoryWidget.viewEmpty}">
+			<f:then>
+				<li>
+				<f:render section="categoryLink" arguments="{category : category}" />
+			</f:then>
+			<f:else>
+				<f:if condition="{category.posts} > 0">
+					<li>
+					<f:render section="categoryLink" arguments="{category : category}" />
+				</f:if>
+			</f:else>
+		</f:if>
+
+	</f:else>
 </f:if> 
+
+<f:section name="categoryLink">
+	<f:link.action action="categoryList" controller="Post" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category.uid}}" title="{category.title}">
+						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
+		<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+	</f:link.action>
+</f:section>

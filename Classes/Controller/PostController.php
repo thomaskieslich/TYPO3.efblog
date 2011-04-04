@@ -114,7 +114,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$this->view->assign('post', $post);
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
-			//get Main Comments
+//get Main Comments
 			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
 			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
@@ -127,10 +127,10 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 				$this->view->assign('newComment', $newComment);
 			}
 
-			//Update Views
+//Update Views
 			$views = $this->updateViews($post);
 
-			//render Description
+//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 		} else {
 			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
@@ -159,9 +159,11 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	public function categoryListAction () {
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
-			$this->settings['listView']['category'] = $this->request->getArgument('category');
 			$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-			$this->view->assign('category', $categoryRepository->findByUid($this->request->getArgument('category')));
+			$category = $categoryRepository->findByUid($this->request->getArgument('category'));
+			$categories = $this->findSubCategories($category, $categoryRepository);
+			$this->settings['listView']['category'] = $categories;
+			$this->view->assign('category', $category);
 		}
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
@@ -176,7 +178,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
 
-	public function archiveListAction () {
+	public function dateMenuListAction () {
 		$request = $this->request->getArguments();
 		if (isset($request['year'])) {
 			$this->settings['listView']['year'] = $this->request->getArgument('year');
@@ -201,14 +203,10 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
 
-	public function categoryOverviewAction () {
-		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-		$this->view->assign('categories', $categoryRepository->findMainCategory());
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
-	}
+	
 
-	public function latestWidgetAction () {
-		$this->settings['listView']['maxEntries'] = $this->settings['latestWidget']['maxEntries'];
+	public function latestPostsWidgetAction () {
+		$this->settings['listView']['maxEntries'] = $this->settings['latestPostsWidget']['maxEntries'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
@@ -221,11 +219,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		
 	}
 
-	public function categoryWidgetAction () {
-		$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-		$this->view->assign('categories', $categoryRepository->findMainCategory());
-	}
-
+	
 	public function dateMenuWidgetAction () {
 		$this->settings['listView']['orderBy'] = $this->settings['dateMenuWidget']['orderBy'];
 		$this->settings['listView']['sortDirection'] = $this->settings['dateMenuWidget']['sortDirection'];
@@ -244,7 +238,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$rssItems[$key]['comments'] = $post->getComments();
 
 			$content = $post->getContent();
-			//render Description
+//render Description
 			if ($post->getTeaserDescription()) {
 				$description = $post->getTeaserDescription();
 			} else {
@@ -278,7 +272,8 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 				$comments = $post->getComments()->toArray();
 				$comments = array_reverse($comments);
 				foreach ($comments as $key => $comment) {
-					$rssItems[$key]['title'] = $comment->getTitle().' '.Tx_Extbase_Utility_Localization::translate('comments_from', $this->extensionName).' '.$comment->getAuthor();
+					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . Tx_Extbase_Utility_Localization::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
+					$rssItems[$key]['section'] = 'comment_'.$comment->getUid();
 					$rssItems[$key]['date'] = $comment->getDate();
 					$rssItems[$key]['message'] = $comment->getMessage();
 					$rssItems[$key]['post'] = $postId;
@@ -286,7 +281,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			}
 
 			$this->view->assign('post', $post);
-			$this->view->assign('server', $_SERVER['SERVER_NAME']);			
+			$this->view->assign('server', $_SERVER['SERVER_NAME']);
 			$this->view->assign('rssItems', $rssItems);
 		}
 	}
@@ -338,16 +333,18 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$allowComments = TRUE;
 		}
 
-		//Post Owner
+//Post Owner
 		if ($post->getAuthor() && $GLOBALS['TSFE']->fe_user->user['uid'] == $post->getAuthor()->getUid()) {
 			$allowComments = TRUE;
 		}
 
-		//Superadmin
+//Superadmin
 		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) && in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])) {
 			$allowComments = TRUE;
 		}
-
+		if($this->settings['comments']['allowComments'] == 0){
+			$allowComments = FALSE;
+		}
 		return $allowComments;
 	}
 
@@ -384,6 +381,26 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$description = strip_tags($description);
 		return $description;
 	}
+	
+
+
+	protected function findSubCategories ($category, $categoryRepository) {
+		$subCategories = $category->getUid();
+		$childs = $categoryRepository->findChilds($category);
+		if ($childs) {
+			foreach ($childs as $category) {
+				$subCategories .= ',' . $category->getUid();
+				$childs = $categoryRepository->findChilds($category);
+				if ($childs) {
+					foreach ($childs as $category) {
+						$subCategories .= ',' . $category->getUid();
+						$childs = $categoryRepository->findChilds($category);
+					}
+				}
+			}
+		}
+		return $subCategories;
+	}	
 
 }
 

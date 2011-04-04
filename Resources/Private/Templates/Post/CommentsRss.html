@@ -14,9 +14,9 @@
 		<f:for each="{rssItems}" as="rssItem">            
 			<item>
 				<title>{rssItem.title}</title>
-				<link><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></link>
-				<guid><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></guid>
-				<description>{rssItem.message -> f:format.crop(maxCharacters: '280')}</description>
+				<link><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></link>
+				<guid><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></guid>
+				<description>{rssItem.message -> f:format.crop(maxCharacters: '600')}</description>
 				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
 			</item>
 		</f:for>

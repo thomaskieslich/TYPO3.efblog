@@ -14,7 +14,6 @@ CREATE TABLE tx_tkblog_domain_model_post (
 	teaser_link text,
 	teaser_link_title text,
 	teaser_options int(11) DEFAULT '0' NOT NULL,
-	show_teaser_image int(11) DEFAULT '0' NOT NULL,
 	views int(11) DEFAULT '0' NOT NULL,
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
 	related_posts int(11) unsigned DEFAULT '0' NOT NULL,

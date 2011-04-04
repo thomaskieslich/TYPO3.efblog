@@ -111,12 +111,6 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     protected $teaserImage;
     /**
-     * show Teaser image
-     *
-     * @var string
-     */
-    protected $showTeaserImage;
-    /**
      * number of views
      *
      * @var integer $views
@@ -340,22 +334,6 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     public function setTeaserImage($teaserImage) {
         $this->teaserImage = $teaserImage;
-    }
-
-    /**
-     * get show teaser image
-     * @return string $showTeaserImage
-     */
-    public function getShowTeaserImage() {
-        return $this->showTeaserImage;
-    }
-
-    /**
-     * set show teaser image
-     * @param string $showTeaserImage 
-     */
-    public function setShowTeaserImage($showTeaserImage) {
-        $this->showTeaserImage = $showTeaserImage;
     }
 
     /**

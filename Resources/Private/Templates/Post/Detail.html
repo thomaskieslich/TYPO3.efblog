@@ -1,7 +1,6 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
 <f:layout name="default" />
 <f:section name="content">
-
     <f:if condition="{post}">
 	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
 	{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
@@ -16,7 +15,7 @@
 					<div class="left">
 						<f:if condition="{breadCrumb.0}">
 							<f:then>
-								{breadCrumb.0.title -> f:format.crop(maxCharacters: '22', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+								{breadCrumb.0.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
 								-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.0}', pageUid : '{settings.detailUid}', title: '{breadCrumb.0.title}')}
 							</f:then>
 							<f:else>
@@ -26,14 +25,14 @@
 					</div>
 					<div class="center">
 						<f:if condition="{settings.backUid}">
-			{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
+							{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
 						</f:if>
 					</div>
 					<div class="right">
 						<f:if condition="{breadCrumb.1}">
 							<f:then>
-				{breadCrumb.1.title -> f:format.crop(maxCharacters: '22', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-				-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.1}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
+								{breadCrumb.1.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+								-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.1}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
 							</f:then>
 							<f:else>
 								&nbsp;
@@ -43,8 +42,7 @@
 				</div>	
 			</f:if>
 
-            <h1>{post.title}</h1>
-			{post.author.name}
+            <h1>{post.title}</h1>			
             <f:if condition="<f:count subject='{pages}' /> > 1">
                 <ul class="tabs">
                     <f:for each="{pages}" as="page" key="count">
@@ -62,38 +60,77 @@
                     </div>                
                 </f:for>
             </div>
-        </div>
+			<h3>{f:translate(key : 'detail_from')} {post.author.name}</h3>
+			<!--Social-->
+			<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
+			<fb:like href="http://www.facebook.com/pages/Thomas-Kieslich-Blog/" show_faces="false" width="450" font="arial" colorscheme="dark">				
+			</fb:like>
 
-        <f:for each="{post.relatedPosts}" as="relatedPost">
-            <f:link.action action="detail" additionalParams="{tx_tkblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
-                {relatedPost.title}<br>
-            </f:link.action>
-        </f:for>
-        <f:if condition="{post.teaserLink.link}">
-            {f:if(condition: '{post.teaserLink.target}', then: 
-            "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-            else: 
-            "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
-        </f:if>
+
+			<div id="tx-tkblog-detail-footer">
+				<div class="more">
+					<f:if condition="{post.teaserLink.link}">
+						{f:if(condition: '{post.teaserLink.target}', then: 
+						"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
+						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
+					</f:if>
+				</div>
+				
+				<div class="info">
+					{post.views} {f:translate(key : 'detail_views')} | 
+					{post.date -> tk:format.date(format:'%d. %B %Y')} | 
+					<f:for each="{post.categories}" as="category"  iteration="catIterator">
+						<f:if condition="{catIterator.isLast}">
+							<f:then>
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								 {category.title}	
+								</f:link.action>								
+							</f:then>
+							<f:else>
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								 {category.title}, 	
+								</f:link.action> 
+							</f:else>
+						</f:if>                            
+					</f:for>
+				</div>
+			</div>
+
+			<f:if condition="{post.relatedPosts}">
+				<div id="tx-tkblog-detail-relatedPost">
+					<h3>{f:translate(key : 'detail_related_post')}</h3>
+					<ul>
+						<f:for each="{post.relatedPosts}" as="relatedPost">
+							<li>
+							<f:link.action action="detail" additionalParams="{tx_tkblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
+						{relatedPost.title}<br>
+							</f:link.action>
+							</li>
+						</f:for>
+					</ul>	
+				</div>
+			</f:if>
     </f:if>
 
     <f:if condition="{post.comments}">
-        <div class="tx-tkblog-comments-list">
-			<a name="comments">&nbsp;</a>
-            <p>
-				<f:if condition="{post.comments -> f:count()} > 1">
+		<a name="comments">&nbsp;</a>
+            <f:if condition="{post.comments -> f:count()} > 1">
 				<f:then>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+					<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comments')}</h3>
 				</f:then>
 				<f:else>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+					<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comment')}</h3>
 				</f:else>
 			</f:if>
-			</p>
-
+		<p class="tx-tkblog-comments-rss">
+		{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}', 
+		pageUid : '{settings.detailUid}', pageType : '101')} 
+		</p>
+		
+        <div class="tx-tkblog-comments-list">
 			<f:for each="{comments}" as="comment" iteration="comIterator">
                 <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
-                    <div class="item {row}" id="comment_{comment.uid}">
+                    <div class="item {row}" id="comment_{comment.uid}">						
                         <f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}" /> 
 						<f:for each="{comment.children}" as="child">
 							<div style="margin-left: 50px">
@@ -108,9 +145,9 @@
 
     <f:if condition='{allowComments}'>
 		<div class="addComment">
-			<h3>{f:translate(key : 'comments_add')}</h3>
+			<h3>{f:translate(key : 'comments_add')}</h3><a name="comments_form">&nbsp;</a>
 			<f:render partial='CommentForm' arguments="{object: newComment, objectName: 'newComment', post: post, newComment : newComment}" />
 		</div>
     </f:if>
-
+</div>
 </f:section>

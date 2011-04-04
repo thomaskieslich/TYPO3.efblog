@@ -19,8 +19,8 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
                                 --div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserImage;teaserImage,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options;teaserOptions,
+					--palette--;;teaserImage,
+					--palette--;;teaserOptions,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
 				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
 					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related;related,
@@ -49,7 +49,8 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'tags' => array (
 			'showitem' =>
-			'tags;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags,',
+			'tags;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags,--linebreak--,
+			teaser_description;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription,',
 			'canNotCollapse' => 1,
 		),
 		'category' => array (
@@ -58,14 +59,8 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 			'canNotCollapse' => 1,
 		),
 		'teaserImage' => array (
-			'showitem' =>
-			'teaser_description;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription, --linebreak--,
-             teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserImage,',
-			'canNotCollapse' => 1,
-		),
-		'showTeaserImage' => array (
-			'showitem' =>
-			'show_teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage,',
+			'showitem' =>			 
+             'teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_image,',
 			'canNotCollapse' => 1,
 		),
 		'teaserOptions' => array (
@@ -370,19 +365,6 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.1', '1'),
 					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.2', '2'),
 					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.3', '3'),
-				),
-			)
-		),
-		'show_teaser_image' => Array (
-			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage',
-			'config' => Array (
-				'type' => 'radio',
-				'default' => 2,
-				'items' => Array (
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.0', '0'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.1', '1'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage.I.2', '2'),
 				),
 			)
 		),

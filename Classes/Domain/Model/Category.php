@@ -58,26 +58,20 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
      * @var Tx_Tkblog_Domain_Model_Category $parentCategory
      */
     protected $parentCategory;
-    /**
+	/**
      * children
      *
      * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $children
      */
     protected $children;
-    /**
-     * posts
-     *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $posts
-     */
-    protected $posts;
+	
 
-    /**
+	/**
      * The constructor of this Category
      *
      * @return void
      */
-    public function __construct () {
-        $this->children = new Tx_Extbase_Persistence_ObjectStorage();
+    public function __construct () {		
         $this->posts = new Tx_Extbase_Persistence_ObjectStorage();
     }
 
@@ -158,26 +152,26 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
     public function setParentCategory ($parentCategory) {
         $this->parentCategory = $parentCategory;
     }
-
-    /**
+	
+	/**
      * Returns the child categories
      *
      * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $children
      */
     public function getChildren () {
         $categoryRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
-        $children = $categoryRepository->findAllChildren($this);
+        $children = $categoryRepository->findChilds($this);
         return clone $children;
     }
 
-    /**
+	/**
      * Returns post in categories
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post > $posts
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $posts
      */
     public function getPosts () {        
         $postRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_PostRepository');
-        $posts = (int)$postRepository->countCategoryPosts($this);
+        $posts = $postRepository->countCategoryPosts($this)->count();
         return $posts;
     }
 

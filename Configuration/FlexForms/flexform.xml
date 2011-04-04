@@ -34,31 +34,35 @@
                                         <numIndex index="1">Post->categoryList</numIndex>
                                     </numIndex>
 				    <numIndex index="4" type="array">
-                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_list_archive</numIndex>
-                                        <numIndex index="1">Post->archiveList</numIndex>
+                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_list_dateMenu</numIndex>
+                                        <numIndex index="1">Post->dateMenuList</numIndex>
                                     </numIndex>
                                     <numIndex index="5" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_view_category</numIndex>
-                                        <numIndex index="1">Post->categoryOverview;Post->list</numIndex>
+                                        <numIndex index="1">Category->categoryOverview</numIndex>
                                     </numIndex>
                                     <numIndex index="6" type="array">
-                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latest</numIndex>
-                                        <numIndex index="1">Post->latestWidget</numIndex>
+                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latestPosts</numIndex>
+                                        <numIndex index="1">Post->latestPostsWidget</numIndex>
                                     </numIndex>
-                                    <numIndex index="7" type="array">
+									<numIndex index="7" type="array">
+                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latestComments</numIndex>
+                                        <numIndex index="1">Comment->latestCommentsWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="8" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_views</numIndex>
                                         <numIndex index="1">Post->viewsWidget</numIndex>
                                     </numIndex>
-                                    <numIndex index="8" type="array">
-                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_category</numIndex>
-                                        <numIndex index="1">Post->categoryWidget</numIndex>
-                                    </numIndex>
                                     <numIndex index="9" type="array">
+                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_category</numIndex>
+                                        <numIndex index="1">Category->categoryWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="10" type="array">
                                         <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
                                         <numIndex index="1">Post->searchWidget</numIndex>
                                     </numIndex>
-                                    <numIndex index="10" type="array">
-                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_date</numIndex>
+                                    <numIndex index="11" type="array">
+                                        <numIndex index="0">LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_dateMenu</numIndex>
                                         <numIndex index="1">Post->dateMenuWidget</numIndex>
                                     </numIndex>
                                 </items>

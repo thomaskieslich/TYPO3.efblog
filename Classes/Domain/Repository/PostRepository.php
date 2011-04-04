@@ -59,19 +59,17 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$constraints = array ();
 
 		//categories
-		if ($settings['listView']['category']) {
-			$constraints[] = $this->createCategoryConstraint($query, $settings);
-		}
+		$constraints[] = $this->createCategoryConstraint($query, $settings);
 
 		//search
 		if ($settings['listView']['searchPhrase']) {
 			$constraints[] = $this->createSearchConstraint($query, $settings);
 		}
-		
+
 		//no future posts
 		$today = time();
 		$constraints[] = $query->lessThan('date', $today);
-		
+
 		//Month for archive
 		if ($settings['listView']['year'] > 0 && $settings['listView']['month'] > 0) {
 			$begin = mktime(0, 0, 0, $settings['listView']['month'], 0, $settings['listView']['year']);
@@ -113,7 +111,13 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 		$constraint = NULL;
 		$categoryConstraints = array ();
-		$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
+		if ($settings['listView']['category']) {
+			$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
+		} else {
+			$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+			$categories = $categoryRepository->findAll();
+		}
+
 
 		foreach ($categories as $category) {
 			$categoryConstraints[] = $query->contains('categories', $category);
@@ -130,8 +134,10 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 				$constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
 				break;
 			case 'and':
-			default:
 				$constraint = $query->logicalAnd($categoryConstraints);
+				break;
+			default:
+				$constraint = $query->logicalOr($categoryConstraints);
 		}
 
 		return $constraint;
@@ -177,7 +183,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$query->matching(
 			$query->contains('categories', $category)
 		);
-		return $query->execute()->count();
+		return $query->execute();
 	}
 
 	public function searchPost ($searchString = '') {

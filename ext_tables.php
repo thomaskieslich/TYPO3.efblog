@@ -91,6 +91,7 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 		'languageField' => 'sys_language_uid',
 		'transOrigPointerField' => 'l18n_parent',
 		'transOrigDiffSourceField' => 'l18n_diffsource',
+		'default_sortby' => 'ORDER BY title ASC',
 		'delete' => 'deleted',
 		'enablecolumns' => array (
 			'disabled' => 'hidden'

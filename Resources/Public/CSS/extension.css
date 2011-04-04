@@ -1,7 +1,6 @@
 /*Paginator*/
 .tx-tkblog-widget-paginator{
     height: 22px;
-    background-color: #eee;
     padding-top: 6px;
 }
 .tx-tkblog-widget-paginator ul{
@@ -15,7 +14,7 @@
     display: inline;
     list-style: none;
     margin: 0;
-    padding: 0 5px 0 0;
+    padding: 0 6px 0 0;
 }
 
 .tx-tkblog-widget-paginator li a{
@@ -28,14 +27,6 @@
     margin-bottom: 25px;
 }
 
-.tx-tkblog-list-body{
-    width: 100%;
-}
-
-.tx-tkblog-list-text{
-
-}
-
 .tx-tkblog-list-images{
     float: right;
     margin: 6px 0 6px 6px;
@@ -45,15 +36,34 @@
     width: 100px;
 }
 
+.tx-tkblog-list-body h1{
+	font-weight: normal;
+}
+
+.tx-tkblog-list-text h1 a{
+	padding: 0 24px 1px 0;
+	background: url(images/list-more.png) no-repeat top right;
+}
+
+.tx-tkblog-list-text h1 a:hover{
+	background: url(images/list-more-act.png) no-repeat top right;
+}
+
 .tx-tkblog-list-footer{
     clear: both;
-    border-top:1px solid #F88601;
+    border-top:1px solid #353333;
     margin: 3px 0px 0px 0px;
-    padding: 1px 0px 0px 0px;
+    padding: 3px 0px 0px 0px;
 }
 
 .tx-tkblog-list-footer .more{
     float: left;
+	padding-right: 18px;
+	background: url(images/breadcrumb_right.png) no-repeat top right;
+}
+
+.tx-tkblog-list-footer .info{
+    text-align: right;
 }
 
 /*detail*/
@@ -64,75 +74,109 @@
 
 .tx-tkblog-detail-breadCrumb .left{
     float: left;
-    width: 40%;
+    width: 34%;
+	padding-left: 18px;
+	background: url(images/breadcrumb_left.png) no-repeat top left;
 }
 .tx-tkblog-detail-breadCrumb .center{
     float: left;
-    text-align: center;
-    width: 20%;
+    width: 18%;
+	padding-left: 18px;
+	background: url(images/breadcrumb_top.png) no-repeat top left;
 }
 
 .tx-tkblog-detail-breadCrumb .right{
     float: right;
     text-align: right;
-    width: 40%;
+	padding-right: 18px;
+    width: 34%;
+	background: url(images/breadcrumb_right.png) no-repeat top right;
 }
 
 .tx-tkblog-detail-container ul.tabs {
-    margin: 0;
-    padding: 0;
+    padding: 8px 0 0 0;
     float: left;
     list-style: none;
-    height: 27px;
-    border-bottom: 1px solid #999;
-    border-left: 1px solid #999;
     width: 100%;
 }
 .tx-tkblog-detail-container ul.tabs li {
     float: left;
     margin: 0;
     padding: 0;
-    height: 26px;
-    line-height: 26px;
-    border: 1px solid #999;
-    border-left: none;
-    margin-bottom: -1px;
+    line-height: 140%;
     overflow: hidden;
     position: relative;
-    background: #e0e0e0;
 }
 .tx-tkblog-detail-container ul.tabs li a {
-    text-decoration: none;
-    color: #000;
+	background: url(images/list_orange.png) no-repeat left top;
+	color: #353333;
     display: block;
-    padding: 0 20px;
-    border: 1px solid #fff;
+    padding: 0 6px 0 16px;
     outline: none;
 }
+
 .tx-tkblog-detail-container ul.tabs li a:hover {
-    background: #ccc;
+	color: #f60;
+	border: none;
 }
-html ul.tabs li.active, html ul.tabs li.active a:hover  {
-    background: #fff;
-    border-bottom: 1px solid #fff;
+
+.tx-tkblog-detail-container ul.tabs li.active a, .tx-tkblog-detail-container ul.tabs li.active a:hover  {
+	color: #f60;
 }
 .tx-tkblog-detail-container .tab_container {
-    border: 1px solid #999;
-    border-top: none;
     overflow: hidden;
     clear: both;
     float: left; width: 100%;
-    background: #fff;
-}
-.tx-tkblog-detail-container .tab_content {
-    padding: 10px;
+	padding-top: 6px;
 }
 
-.tx-tkblog-list-footer .info{
+#tx-tkblog-detail-footer{
+    clear: both;
+    border-top:1px solid #353333;
+	height: 22px;
+    margin: 3px 0px 0px 0px;
+    padding: 3px 0px 0px 0px;
+}
+
+#tx-tkblog-detail-footer .more{
+    float: left;
+	padding-right: 18px;
+	background: url(images/breadcrumb_right.png) no-repeat top right;
+}
+
+#tx-tkblog-detail-footer .info{
     text-align: right;
 }
 
+#tx-tkblog-detail-relatedPost{
+	clear: both;
+	margin: 8px 0;
+	padding: 2px 6px 6px 6px;
+	background-color: #ececec;
+}
+
+#tx-tkblog-detail-relatedPost ul{
+	padding-left: 0;
+    margin: 0px;
+    list-style: none;
+    list-style-image: url(images/list_sidebar.png);
+}
+
+#tx-tkblog-detail-externalLink{
+	background-color: #ccc;
+}
+
+
+
 /*comments*/
+.tx-tkblog-comments-rss{
+	display: inline-block;
+	padding-right: 18px;
+	background: url(images/breadcrumb_right.png) no-repeat top right;
+}
+.tx-tkblog-comments-list{    
+    margin: 8px 0px 8px 0px;
+}
 .tx-tkblog-comments-list .item{    
     margin: 0px 0px 8px 0px;
     padding: 5px;
@@ -141,32 +185,43 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
     clear: both;
 }
 
-.tx-tkblog-comments-list .odd{
-    background: #fefefe;
-}
-
-.tx-tkblog-comments-list .even{
-    background: #ffc;
+.tx-tkblog-comments-list .odd, .tx-tkblog-comments-list .even{
+	border-radius: 6px;
+	border: 1px solid #353333;
+	padding: 8px;
+    background: #fff;
 }
 
 .tx-tkblog-comments-list .gravatar{
     float: right;
 }
 
+.tx-tkblog-comments-list .gravatar img{
+	border-radius: 6px;
+}
+
 .tx-tkblog-comments-list .number{
-    font-size: 28px;
-    font-weight: bold;
     float: left;
-    color: #fff;
-    background: #999;
-    line-height: 48px;
+	border-radius: 6px;
+    background: #F88601;
+    line-height: 55px;
     height: 50px;
     margin: 0 6px 6px 0;
     text-align: center;
     width: 50px;
 }
 
-.tx-tkblog-comments-list .author a{
+.tx-tkblog-comments-list .number a{
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.tx-tkblog-comments-list .number a:hover{
+    border: none;
+}
+
+.tx-tkblog-comments-list .author, .tx-tkblog-comments-list .author a{
     font-weight: bold;
 }
 
@@ -176,18 +231,22 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 
 /*comment form*/
 #tx-tkblog-comment-form{
-    width: 330px;
+	width: 530px;
 }
 #tx-tkblog-comment-form .tf, #tx-tkblog-comment-form .ta{
     margin-bottom: 8px;
 }
 #tx-tkblog-comment-form .tf label{
+	width: 260px;
     float: right;
-    width: 100px;
 }
 
 #tx-tkblog-comment-form .tf input{
-    width: 220px;
+    width: 260px;
+}
+
+#tx-tkblog-comment-form .ta textarea{
+    width: 426px;
 }
 
 #tx-tkblog-comment-form .errors {
@@ -204,30 +263,21 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 
 /*widgets*/
 .tx-tkblog-widget-container{
-    font-weight: normal;
-    font-size: 100%;
     border: 1px solid #333;
     margin-top: 15px;
     margin-left: 6px;
     padding-bottom: 3px;
     border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
     box-shadow: 3px 3px 6px #888;
-    -webkit-box-shadow: 3px 3px 6px #888;
-    -moz-box-shadow: 3px 3px 6px #888;
 }
-
-.tx-tkblog-widget-container h1 {
-    font-size: 16px;
+.tx-tkblog-widget-container h1{
+	font-size: 16px;
     font-weight: normal;
     background: #F88601;
     padding: 3px 3px 3px 5px;
     margin: 0;
     color: #fff;
     border-radius: 6px 6px 0 0;
-    -webkit-border-radius: 6px 6px 0 0;
-    -moz-border-radius: 6px 6px 0 0;
 }
 
 .tx-tkblog-widget-content{
@@ -235,7 +285,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 }
 
 .tx-tkblog-widget-content ul{
-    padding-left: 2px;
+    padding-left: 0;
     margin: 0px;
     list-style: none;
     list-style-image: url(images/list_sidebar.png);
@@ -289,7 +339,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 }
 
 .tx-tkblog-view-category ul{
-    padding-left: 2px;
+    padding-left: 0;
     margin: 0px;
     list-style: none;
     list-style-image: url(images/list_sidebar.png);
@@ -298,3 +348,35 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
     font-size: 11px;
     font-weight: normal;
 }
+
+/*category list*/
+
+.tx-tkblog-category-infos{
+	display: inline-block;
+	margin-top: 8px;
+	width: 100%;
+	
+}
+
+.tx-tkblog-category-infos .image{
+	float: left;
+	margin-right: 8px;
+	width: 120px;
+}
+
+.tx-tkblog-category-infos .text{
+	float: left;
+	width: 250px;
+	margin-right: 8px;
+}
+
+.tx-tkblog-category-infos .sub{
+	float: right;
+	width: 150px;
+}
+
+.tx-tkblog-category-infos .sub ul{
+	list-style: none;
+    list-style-image: url(images/list_sidebar.png);
+}
+

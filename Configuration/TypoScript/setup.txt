@@ -10,7 +10,7 @@ plugin.tx_tkblog{
 		detailUid = 
 		searchUid = 
 		categoryUid = 
-		archiveUid = 
+		dateMenuUid = 
 		backUid = 
 
 		blogTitle = Tkblog
@@ -26,7 +26,6 @@ plugin.tx_tkblog{
         replaceAuthor = 1
 
         listView{          
-
             //Sorting
             orderBy = date,title
             //asc, desc
@@ -41,9 +40,9 @@ plugin.tx_tkblog{
             category =
 
             //Teaser Rendering
-            cropText = 188
+            cropText = 300
             images = 4
-            imageWidth = 100m
+            imageWidth = 80m
             imageHeight =
 
             //Pager
@@ -59,20 +58,20 @@ plugin.tx_tkblog{
         detailView{
 			showBreadCrumb = 1
             divType = div
-            hideDivider = 1
-            defaultGravatar = typo3conf/ext/tkblog/Resources/Public/Icons/gravatar_default.png
+            hideDivider = 1            
 			closeCommentsAfter = 120
         }
 
 		comments{
+			allowComments = 1
 			//Gravatar
-			defaultGravatar = fileadmin/media/blog/gravatar_default.png
-			gravatarSize = 60m
+			defaultGravatar = typo3conf/ext/tkblog/Resources/Public/Icons/gravatar_default.png
+			gravatarSize = 50m
 
 			messageSuperAdmin = 1
 			messageAuthor = 1
 			messageSender = admin@example.org
-			messageSenderName = admin Tkblog
+			messageSenderName = Blog admin
 			messageHtml = 1
 			messsageHtmlTemplate = Message/Comment.html
 			messsageTextTemplate = Message/Comment.txt
@@ -95,10 +94,16 @@ plugin.tx_tkblog{
 			}
 		}
 
-        latestWidget{
+        latestPostsWidget{
             maxEntries = 10
             cropLink = 44
             showViews = 1
+        }
+
+		latestCommentsWidget{
+            maxEntries = 12
+            cropLink = 33
+            showGravatar = 1
         }
 
         viewsWidget{
@@ -126,14 +131,29 @@ plugin.tx_tkblog{
 		}
     }
     widgets{
-        latestWidget = USER
-        latestWidget{
+        latestPostsWidget = USER
+        latestPostsWidget{
             userFunc = tx_extbase_core_bootstrap->run
             pluginName = Fe1
             extensionName = Tkblog
             switchableControllerActions {
                 Post {
-                1 = latestWidget
+                1 = latestPostsWidget
+                }
+            }
+            settings =< plugin.tx_tkblog.settings
+            persistence =< plugin.tx_tkblog.persistence
+            view =< plugin.tx_tkblog.view
+        }
+
+		latestCommentsWidget = USER
+		latestCommentsWidget{
+            userFunc = tx_extbase_core_bootstrap->run
+            pluginName = Fe1
+            extensionName = Tkblog
+            switchableControllerActions {
+                Comment {
+                1 = latestCommentsWidget
                 }
             }
             settings =< plugin.tx_tkblog.settings
@@ -177,7 +197,7 @@ plugin.tx_tkblog{
             pluginName = Fe1
             extensionName = Tkblog
             switchableControllerActions {
-                Post {
+                Category {
                 1 = categoryWidget
                 }
             }

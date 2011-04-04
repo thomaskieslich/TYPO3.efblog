@@ -3,8 +3,6 @@
     <f:for each="{paginatedPosts}" as="post">
 		<div class="tx-tkblog-list-entry">                
 			<div class="tx-tkblog-list-body">
-				<f:if condition="<f:count subject='{post.content}' /> > 0">
-					<f:then>
 						<f:for each="{post.content}" as="element"  iteration="elementIterator">
 							<f:if condition="{elementIterator.cycle} == 1">
 								<f:if condition="{element.ctype} != {settings.detailView.divType}">
@@ -24,43 +22,14 @@
 								</f:if>
 							</f:if>
 						</f:for>
-					</f:then>
-					<f:else>
-						<div class="tx-tkblog-list-images">
-							<!-- Post Image-->
-							<f:if condition="{post.showTeaserImage} == 1">
-								<f:for each="{post.teaserImage}" as="image" key="imageNumber">
-									<f:if condition="{image}">  
-										<f:if condition="{imageNumber} < {settings.listView.images}">
-											<div class="tx-tkblog-list-imagerow">
-						{f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
-						-> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
-											</div>
-										</f:if>
-									</f:if>
-								</f:for>
-							</f:if>
-						</div>
-						<div class="tx-tkblog-list-text">
-							<h1>
-				{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.target.detailUid}')} 
-							</h1>
-							<f:if condition="{post.teaserDescription}">
-				{post.teaserDescription -> -> f:format.html()}
-							</f:if>
-						</div>  
-					</f:else>
-				</f:if>
 			</div>
 			<div class="tx-tkblog-list-footer">
 				<div class="more">
 					<f:if condition="{post.teaserLink.link}">
 						<f:then>
-			    {f:if(condition: '{post.teaserLink.target}', then: 
-			    "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-			    else: 
-			    "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
-
+							{f:if(condition: '{post.teaserLink.target}', then: 
+							"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
+							else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
 						</f:then>
 						<f:else>
 							<f:if condition="{post.teaserOptions} < 3">
@@ -72,28 +41,36 @@
 
 				</div>
 				<div class="info">
-		    {post.views} | {post.date -> tk:format.date(format:'%d.%B.%Y')} | 
+					{post.views} {f:translate(key : 'detail_views')}| 
+					{post.date -> tk:format.date(format:'%d. %B %Y')} |
 					<f:for each="{post.categories}" as="category"  iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
-				{category.title}
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								 {category.title}	
+								</f:link.action>								
 							</f:then>
 							<f:else>
-				{category.title}, 
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								 {category.title}, 	
+								</f:link.action> 
 							</f:else>
 						</f:if>                            
 					</f:for>
-			
+
 		    | <f:if condition="{post.comments -> f:count()} > 1">
-				<f:then>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comments') -> 
-					f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}', section : 'comments')}
-				</f:then>
-				<f:else>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comment') -> 
-					f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}', section : 'comments')}
-				</f:else>
-			</f:if>
+						<f:then>
+							<f:link.action action='detail' arguments='{post:post}' pageUid='{settings.detailUid}' section='comments'>
+								{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+							</f:link.action>
+						</f:then>
+						<f:else>
+							<f:link.action action='detail' arguments='{post:post}' pageUid='{settings.detailUid}' section='comments'>
+								{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+							</f:link.action>
+						</f:else>
+
+					</f:if>
 				</div>
 			</div>
 		</div>               

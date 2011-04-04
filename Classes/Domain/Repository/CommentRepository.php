@@ -61,5 +61,22 @@ class Tx_Tkblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persisten
 		);
 		return $query->execute();
 	}
+	
+	public function findLatestComments ($settings) {
+		$query = $this->createQuery();
+
+		$query->setOrderings(
+			array (
+				'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+			)
+		);
+		
+		//Limit
+		if ($settings['latestCommentsWidget']['maxEntries'] > 0) {
+			$query->setLimit((int) $settings['latestCommentsWidget']['maxEntries']);
+		}
+		
+		return $query->execute();
+	}
 
 }

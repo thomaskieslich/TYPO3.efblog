@@ -20,7 +20,7 @@
 
 	</div>
 	<div class="number">
-		#{comIterator.cycle}
+		<a name="comment_{comment.uid}">#{comIterator.cycle}</a>		
 	</div>
 	<div class="author">
 		{f:if(condition: '{comment.website}', 
@@ -33,7 +33,7 @@
 		{f:if(condition: '{comment.location}',
 		then: "<br>{f:translate(key : 'comments_from')} {comment.location}")}
 		{f:if(condition: '{isMainComment}',
-		then:"<br>{f:translate(key : 'comments_reply') -> f:link.action(action : 'detail', arguments : '{post : post, parentComment : comment}')}")}
+		then:"<br>{f:translate(key : 'comments_reply') -> f:link.action(action : 'detail', section : 'comments_form', arguments : '{post : post, parentComment : comment}')}")}
 	</div>
 </div>
 <div class="comment">

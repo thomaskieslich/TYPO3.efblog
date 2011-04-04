@@ -11,7 +11,7 @@
 
         <div class="tf">
             <label for="tx-tkblog-email">{f:translate(key : 'comment_form_email')}</label>
-			{f:form.textfield(property:"email", type: 'email', required: 'required' id: "tx-tkblog-email")}
+			{f:form.textfield(property:"email", type: 'email', id: "tx-tkblog-email")}
         </div>
 
         <div class="tf">
@@ -31,7 +31,7 @@
 
 		<div class="tf">
             <label for="tx-tkblog-title">{f:translate(key : 'comment_form_title')}</label>
-	    {f:form.textfield(property:"title", id: "tx-tkblog-title")}
+	    {f:form.textfield(property:"title", required: 'required', id: "tx-tkblog-title")}
         </div>
 
         <div class="ta">
@@ -45,4 +45,5 @@
             </f:form.submit>
         </div>
     </f:form>
+	<h3>{f:translate(key : 'comment_form_disclaimer')}</h3>
 </div>

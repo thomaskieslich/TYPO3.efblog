@@ -32,31 +32,67 @@
  */
 class Tx_Tkblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
 
-	public function findMainCategory() {
+	public function findMainCategories ($settings) {
 		$query = $this->createQuery();
-		$query->matching(
+		$constraint = NULL;
+		if ($settings['listView']['category']) {
+			$constraint = $query->logicalAnd(
+				$this->createCategoryConstraint($query, $settings), 
 				$query->equals('parent_category', 0)
-				);
+			);
+		} else {
+			$constraint = $query->equals('parent_category', 0);
+		}
+		
+		$query->matching(
+			$constraint
+		);
 		$query->setOrderings(
-				array (
-					'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
-				)
+			array (
+				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			)
 		);
 
 		return $query->execute();
 	}
 
-	public function findAllChildren(Tx_Tkblog_Domain_Model_Category $category) {
+	public function findChilds (Tx_Tkblog_Domain_Model_Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
-				$query->equals('parent_category', $category)
-				);
+			$query->equals('parent_category', $category)
+		);
 		$query->setOrderings(
-				array (
-					'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
-				)
+			array (
+				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			)
 		);
 		return $query->execute();
+	}
+
+	protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraint = NULL;
+		$categoryConstraints = array ();
+		$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
+
+		foreach ($categories as $category) {
+			$categoryConstraints[] = $query->equals('uid', $category);
+		}
+
+		switch (strtolower($settings['listView']['categoryMode'])) {
+			case 'or':
+				$constraint = $query->logicalOr($categoryConstraints);
+				break;
+			case 'notor':
+				$constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+				break;
+			case 'notand':
+				$constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+				break;
+			case 'and':
+			default:
+				$constraint = $query->logicalAnd($categoryConstraints);
+		}
+		return $constraint;
 	}
 
 }
