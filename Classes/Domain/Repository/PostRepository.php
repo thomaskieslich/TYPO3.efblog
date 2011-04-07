@@ -46,7 +46,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			$query->setOrderings($orderings);
 		}
 
-		//Limit
+		//Limit		
 		if ($settings['listView']['maxEntries'] > 0) {
 			$query->setLimit((int) $settings['listView']['maxEntries']);
 		}
@@ -59,7 +59,9 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$constraints = array ();
 
 		//categories
+		if ($settings['listView']['category'] || $settings['listView']['hideNoCategorized'] == 1) {
 		$constraints[] = $this->createCategoryConstraint($query, $settings);
+		}
 
 		//search
 		if ($settings['listView']['searchPhrase']) {

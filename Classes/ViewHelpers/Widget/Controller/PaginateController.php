@@ -36,7 +36,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	/**
 	 * @var array
 	 */
-	protected $configuration = array ('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maxPages' => 5);
+	protected $configuration = array ('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maxPages' => 5, 'maxItems' => 5);
 	/**
 	 * @var Tx_Extbase_Persistence_QueryResultInterface
 	 */
@@ -53,6 +53,11 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 	 * @var integer
 	 */
 	protected $maxPages = 5;
+	
+	/**
+	 * @var integer
+	 */
+	protected $maxItems = 5;
 
 	/**
 	 * @return void
@@ -62,6 +67,7 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 		$this->configuration = t3lib_div::array_merge_recursive_overrule($this->configuration, $this->widgetConfiguration['configuration'], TRUE);
 		$this->numberOfPages = ceil(count($this->objects) / (integer) $this->configuration['itemsPerPage']);
 		$this->maxPages = (integer) $this->configuration['maxPages'];
+		$this->maxItems = (integer) $this->configuration['maxItems'];
 	}
 
 	/**
@@ -81,8 +87,8 @@ class Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Flui
 		// modify query
 		$itemsPerPage = (integer) $this->configuration['itemsPerPage'];
 		$query = $this->objects->getQuery();
-		if ($settings['displayList']['maxEntrys'] > 0) {
-			$query->setLimit((int)min($itemsPerPage, $this->settings['displayList']['maxEntrys']));
+		if ($this->maxItems > 0) {
+			$query->setLimit((int)min($itemsPerPage, $this->settings['listView']['maxEntries']));
 		}
 		else{
 			$query->setLimit($itemsPerPage);

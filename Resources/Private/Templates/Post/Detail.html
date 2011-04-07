@@ -1,5 +1,5 @@
 {namespace tk=Tx_Tkblog_ViewHelpers}
-<f:layout name="default" />
+<f:layout name="Default" />
 <f:section name="content">
     <f:if condition="{post}">
 	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
@@ -62,9 +62,9 @@
             </div>
 			<h3>{f:translate(key : 'detail_from')} {post.author.name}</h3>
 			<!--Social-->
-			<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
-			<fb:like href="http://www.facebook.com/pages/Thomas-Kieslich-Blog/" show_faces="false" width="450" font="arial" colorscheme="dark">				
-			</fb:like>
+			<f:if condition="{settings.detailView.showSocial}">
+				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}" />
+			</f:if>
 
 
 			<div id="tx-tkblog-detail-footer">
@@ -75,7 +75,7 @@
 						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
 					</f:if>
 				</div>
-				
+
 				<div class="info">
 					{post.views} {f:translate(key : 'detail_views')} | 
 					{post.date -> tk:format.date(format:'%d. %B %Y')} | 
@@ -114,19 +114,19 @@
 
     <f:if condition="{post.comments}">
 		<a name="comments">&nbsp;</a>
-            <f:if condition="{post.comments -> f:count()} > 1">
-				<f:then>
-					<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comments')}</h3>
-				</f:then>
-				<f:else>
-					<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comment')}</h3>
-				</f:else>
-			</f:if>
+		<f:if condition="{post.comments -> f:count()} > 1">
+			<f:then>
+				<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comments')}</h3>
+			</f:then>
+			<f:else>
+				<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comment')}</h3>
+			</f:else>
+		</f:if>
 		<p class="tx-tkblog-comments-rss">
 		{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}', 
 		pageUid : '{settings.detailUid}', pageType : '101')} 
 		</p>
-		
+
         <div class="tx-tkblog-comments-list">
 			<f:for each="{comments}" as="comment" iteration="comIterator">
                 <f:cycle as="row" values="{0: 'odd', 1: 'even'}">

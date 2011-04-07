@@ -145,7 +145,7 @@
 			 <!--Detail-->
 			<label index="detail_backto_list">Listenansicht</label>
 			<label index="detail_from">von</label>
-			<label index="detail_views">Ansichen</label>
+			<label index="detail_views">Ansichten</label>
 			<label index="detail_related_post">ähnliche Artikel</label>
 
 			<!-- Kommentare -->

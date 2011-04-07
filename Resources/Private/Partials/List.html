@@ -3,25 +3,32 @@
     <f:for each="{paginatedPosts}" as="post">
 		<div class="tx-tkblog-list-entry">                
 			<div class="tx-tkblog-list-body">
-						<f:for each="{post.content}" as="element"  iteration="elementIterator">
-							<f:if condition="{elementIterator.cycle} == 1">
-								<f:if condition="{element.ctype} != {settings.detailView.divType}">
-									<f:then>				
-										<f:if condition="{post.teaserOptions} < 2">
-											<f:then>
-												<f:render partial="ListElement" arguments="{post : post, count : 1, dam : dam}" />
-											</f:then>
-											<f:else>
-												<f:render partial="ListRawElement" arguments="{post : post, count : 1}" />
-											</f:else>
-										</f:if>
+				<f:for each="{post.content}" as="element"  iteration="elementIterator">
+					<f:if condition="{elementIterator.cycle} == 1">
+						<f:if condition="{element.ctype} != {settings.detailView.divType}">
+							<f:then>				
+								<f:if condition="{post.teaserOptions} < 2">
+									<f:then>
+										<f:render partial="ListElement" arguments="{post : post, count : 1, dam : dam}" />
 									</f:then>
 									<f:else>
-										<f:render partial="ListElement" arguments="{post : post, count : 2, dam : dam}" />
+										<f:render partial="ListRawElement" arguments="{post : post, count : 1}" />
 									</f:else>
 								</f:if>
-							</f:if>
-						</f:for>
+							</f:then>
+							<f:else>
+								<f:if condition="{post.teaserOptions} < 2">
+									<f:then>
+										<f:render partial="ListElement" arguments="{post : post, count : 2, dam : dam}" />
+									</f:then>
+									<f:else>
+										<f:render partial="ListRawElement" arguments="{post : post, count : 2}" />
+									</f:else>
+								</f:if>
+							</f:else>
+						</f:if>
+					</f:if>
+				</f:for>
 			</div>
 			<div class="tx-tkblog-list-footer">
 				<div class="more">
@@ -32,9 +39,7 @@
 							else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
 						</f:then>
 						<f:else>
-							<f:if condition="{post.teaserOptions} < 3">
-								{f:translate(key : "read_more") -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
-							</f:if>
+							{f:translate(key : "read_more") -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')} 
 						</f:else>
 					</f:if>
 

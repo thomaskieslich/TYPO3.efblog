@@ -1,66 +1,81 @@
 page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
-page.includeCSS.tx_tkblog_ui = EXT:tkblog/Resources/Public/CSS/trontastic/jquery-ui-1.8.10.custom.css
-page.includeJS.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
-page.includeJS.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
+page.includeJSFooter.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
+page.includeJSFooter.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
 
 plugin.tx_tkblog{
-    settings {
+	settings {
 		##targets
-		listUid = 
-		detailUid = 
-		searchUid = 
-		categoryUid = 
-		dateMenuUid = 
-		backUid = 
+		listUid =
+		detailUid =
+		searchUid =
+		categoryUid =
+		dateMenuUid =
+		backUid =
 
 		blogTitle = Tkblog
 
 		//Admin roles
-		superAdminGroup = 4	
+		superAdminGroup = 4
 
 
-        //Page
-        replaceTitle = 1
-        replaceDescription = 1
-        replaceKeywords = 1
-        replaceAuthor = 1
+		//Page
+		replaceTitle = 1
+		replaceDescription = 1
+		replaceKeywords = 1
+		replaceAuthor = 1
 
-        listView{          
-            //Sorting
-            orderBy = date,title
-            //asc, desc
-            sortDirection = desc
-            maxEntries = 100
-            //active,archived or empty for all
-            displayArchived =
-            //days for auto archive
-            daysToArchive =
-            //or, notor, notand, and
-            categoryMode =
-            category =
+		listView{
+			//Sorting
+			orderBy = date,title
+			//asc, desc
+			sortDirection = desc
+			maxEntries = 100
+			//active,archived or empty for all
+			displayArchived =
+			//days for auto archive
+			daysToArchive =
+			//or, notor, notand, and
+			categoryMode =
+			category =
+			hideNoCategorized =  0
 
-            //Teaser Rendering
-            cropText = 300
-            images = 4
-            imageWidth = 80m
-            imageHeight =
+			//Teaser Rendering
+			cropText = 300
+			images = 4
+			imageWidth = 80m
+			imageHeight =
 
-            //Pager
-            itemsPerPage = 10
-            insertAbove = 1
-            insertBelow = 1
-            maxPages = 5
+			//Pager
+			itemsPerPage = 10
+			insertAbove = 1
+			insertBelow = 1
+			maxPages = 5
 
-            //Search
-            searchFields = title, content.header, content.bodytext
-        }
+			//Search
+			searchFields = title, content.header, content.bodytext
+		}
 
-        detailView{
+		detailView{
 			showBreadCrumb = 1
-            divType = div
-            hideDivider = 1            
+			divType = div
+			hideDivider = 1
+			showSocial = 1
 			closeCommentsAfter = 120
-        }
+		}
+
+		openGraph {
+			allowOpenGraph = 0
+			type = article
+			cropDescription = 280
+			defaultImage = typo3conf/ext/tkblog/Resources/Public/Icons/openGraphDefault.png
+			admins =
+			appId =
+			latitude =
+			longitude =
+			locality =
+			region =
+			country-name =
+		}
 
 		comments{
 			allowComments = 1
@@ -86,7 +101,7 @@ plugin.tx_tkblog{
 				keywordMultiplicator = 10
 				bodyLinkMultiplicator = 5
 				websiteLength = 30
-				blockedIps = 
+				blockedIps =
 				ipPoints = 60
 
 				spampointsToHide = 55
@@ -94,175 +109,175 @@ plugin.tx_tkblog{
 			}
 		}
 
-        latestPostsWidget{
-            maxEntries = 10
-            cropLink = 44
-            showViews = 1
-        }
+		latestPostsWidget{
+			maxEntries = 10
+			cropLink = 44
+			showViews = 1
+		}
 
 		latestCommentsWidget{
-            maxEntries = 12
-            cropLink = 33
-            showGravatar = 1
-        }
+			maxEntries = 12
+			cropLink = 33
+			showGravatar = 1
+		}
 
-        viewsWidget{
-            maxEntries = 10
-            cropLink = 44
-        }
+		viewsWidget{
+			maxEntries = 10
+			cropLink = 44
+		}
 
-        categoryWidget{
-            cropLink = 44
-            viewCounts = 1
-            viewEmpty   = 1
-        }
+		categoryWidget{
+			cropLink = 44
+			viewCounts = 1
+			viewEmpty   = 1
+		}
 
-        searchWidget{
-        }
+		searchWidget{
+		}
 
-        dateMenuWidget{
-            //Sorting
-            orderBy = date
-            //asc, desc
-            sortDirection = desc
-        }
+		dateMenuWidget{
+			//Sorting
+			orderBy = date
+			//asc, desc
+			sortDirection = desc
+		}
 		rss{
 			maxEntries = 25
 		}
-    }
-    widgets{
-        latestPostsWidget = USER
-        latestPostsWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Post {
-                1 = latestPostsWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
+	}
+	widgets{
+		latestPostsWidget = USER
+		latestPostsWidget{
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Post {
+				1 = latestPostsWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
 
 		latestCommentsWidget = USER
 		latestCommentsWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Comment {
-                1 = latestCommentsWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Comment {
+				1 = latestCommentsWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
 
-        viewsWidget = USER
-        viewsWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Post {
-                1 = viewsWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
+		viewsWidget = USER
+		viewsWidget{
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Post {
+				1 = viewsWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
 
-        searchWidget = USER
-        searchWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Post {
-                1 = searchWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
+		searchWidget = USER
+		searchWidget{
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Post {
+				1 = searchWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
 
-        categoryWidget = USER
-        categoryWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Category {
-                1 = categoryWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
+		categoryWidget = USER
+		categoryWidget{
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Category {
+				1 = categoryWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
 
-        dateMenuWidget = USER
-        dateMenuWidget{
-            userFunc = tx_extbase_core_bootstrap->run
-            pluginName = Fe1
-            extensionName = Tkblog
-            switchableControllerActions {
-                Post {
-                1 = dateMenuWidget
-                }
-            }
-            settings =< plugin.tx_tkblog.settings
-            persistence =< plugin.tx_tkblog.persistence
-            view =< plugin.tx_tkblog.view
-        }
-    }
+		dateMenuWidget = USER
+		dateMenuWidget{
+			userFunc = tx_extbase_core_bootstrap->run
+			pluginName = Fe1
+			extensionName = Tkblog
+			switchableControllerActions {
+				Post {
+				1 = dateMenuWidget
+				}
+			}
+			settings =< plugin.tx_tkblog.settings
+			persistence =< plugin.tx_tkblog.persistence
+			view =< plugin.tx_tkblog.view
+		}
+	}
 
-    persistence{
-        storagePid = {$plugin.tx_tkblog.persistence.storagePid}
-        classes{
-            Tx_Tkblog_Domain_Model_Content{
-                mapping {
-                    tableName = tt_content
-                    columns{
-                        CType.mapOnProperty = ctype
-                    }
-                }
-            }
-	    Tx_Extbase_Domain_Model_FrontendUser {
-		    subclasses {
-			    Tx_Tkblog_Domain_Model_Administrator = Tx_Tkblog_Domain_Model_Administrator
-		    }
-	    }
-	    Tx_Tkblog_Domain_Model_Administrator {
-		    mapping {
-			    tableName = fe_users
-			    recordType = Tx_Tkblog_Domain_Model_Administrator
-		    }
-	    }
-        }
-    }
+	persistence{
+		storagePid = {$plugin.tx_tkblog.persistence.storagePid}
+		classes{
+			Tx_Tkblog_Domain_Model_Content{
+				mapping {
+					tableName = tt_content
+					columns{
+						CType.mapOnProperty = ctype
+					}
+				}
+			}
+		Tx_Extbase_Domain_Model_FrontendUser {
+			subclasses {
+				Tx_Tkblog_Domain_Model_Administrator = Tx_Tkblog_Domain_Model_Administrator
+			}
+		}
+		Tx_Tkblog_Domain_Model_Administrator {
+			mapping {
+				tableName = fe_users
+				recordType = Tx_Tkblog_Domain_Model_Administrator
+			}
+		}
+		}
+	}
 
-    view {
-        templateRootPath = {$plugin.tx_tkblog.view.templateRootPath}
-        partialRootPath = {$plugin.tx_tkblog.view.partialRootPath}
-        layoutRootPath = {$plugin.tx_tkblog.view.layoutRootPath}
-        }
+	view {
+		templateRootPath = {$plugin.tx_tkblog.view.templateRootPath}
+		partialRootPath = {$plugin.tx_tkblog.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_tkblog.view.layoutRootPath}
+		}
 
-    renderElement = COA
-    renderElement {
-                10 = RECORDS
-                10 {
-                    source.field = uid
-                    tables = tt_content
-                    conf.tt_content < tt_content
-                }
-            }
-    }
+	renderElement = COA
+	renderElement {
+				10 = RECORDS
+				10 {
+					source.field = uid
+					tables = tt_content
+					conf.tt_content < tt_content
+				}
+			}
+	}
 
 //RSS
 postRss = PAGE
@@ -270,24 +285,24 @@ postRss {
   typeNum = 100
   10 = USER
   10 {
-    userFunc = tx_extbase_core_bootstrap->run
-    pluginName = Fe1
-    extensionName = Tkblog
-    switchableControllerActions {
-        Post {
-            1 = postRss
-        }
-    }
-    settings =< plugin.tx_tkblog.settings
-    persistence =< plugin.tx_tkblog.persistence
-    view =< plugin.tx_tkblog.view
+	userFunc = tx_extbase_core_bootstrap->run
+	pluginName = Fe1
+	extensionName = Tkblog
+	switchableControllerActions {
+		Post {
+			1 = postRss
+		}
+	}
+	settings =< plugin.tx_tkblog.settings
+	persistence =< plugin.tx_tkblog.persistence
+	view =< plugin.tx_tkblog.view
   }
 
   config {
-    disableAllHeaderCode = 1
-    additionalHeaders = Content-type:application/xml
-    xhtml_cleaning = 0
-    admPanel = 0
+	disableAllHeaderCode = 1
+	additionalHeaders = Content-type:application/xml
+	xhtml_cleaning = 0
+	admPanel = 0
   }
 }
 
@@ -296,24 +311,24 @@ commentsRss {
   typeNum = 101
   10 = USER
   10 {
-    userFunc = tx_extbase_core_bootstrap->run
-    pluginName = Fe1
-    extensionName = Tkblog
-    switchableControllerActions {
-        Post {
-            1 = commentsRss
-        }
-    }
-    settings =< plugin.tx_tkblog.settings
-    persistence =< plugin.tx_tkblog.persistence
-    view =< plugin.tx_tkblog.view
+	userFunc = tx_extbase_core_bootstrap->run
+	pluginName = Fe1
+	extensionName = Tkblog
+	switchableControllerActions {
+		Post {
+			1 = commentsRss
+		}
+	}
+	settings =< plugin.tx_tkblog.settings
+	persistence =< plugin.tx_tkblog.persistence
+	view =< plugin.tx_tkblog.view
   }
 
 	config {
-    disableAllHeaderCode = 1
-    additionalHeaders = Content-type:application/xml
-    xhtml_cleaning = 0
-    admPanel = 0
+	disableAllHeaderCode = 1
+	additionalHeaders = Content-type:application/xml
+	xhtml_cleaning = 0
+	admPanel = 0
   }
 
 }

@@ -1,14 +1,52 @@
-<head>
-<meta property="og:title" content="Facebook gefällt mir / like und Open Graph"/>
-<meta property="og:site_name" content="Webdesign-Podcast.de &#8211; Der Podcast für Webdesigner und Grafiker"/>
-<meta property="og:description" content="Deine Anlaufstelle für aktuelle Informationen zum Thema Webdesign und Programmierung. Video Podcast in HD-Qualität 720p"/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="http://www.webdesign-podcast.de/?p=2146"/>
-<meta property="og:image" content="http://www.webdesign-podcast.de/wp-content/themes/webdesign-podcast_de/images/fb-50.jpg"/>
-<meta property="og:locality" content="Berlin"/>
- 
-<meta property="og:region" content="Berlin"/>
-<meta property="og:country-name" content="Germany"/>
-<meta property="og:email" content="info@webdesign-podcast.de"/>
-<meta property="fb:admins" content="12345678"/>
-</head>
+{namespace tk=Tx_Tkblog_ViewHelpers}
+<f:if condition="{settings.openGraph.allowOpenGraph}">
+	<tk:metaTag property="og:title" content="{post.title}" />
+	<tk:metaTag property="og:type" content="{settings.openGraph.type}" />
+	<tk:metaTag property="og:url" content="{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" />
+	<tk:metaTag property="og:site_name" content="{settings.blogTitle}" />
+
+	<!-- Post Image-->
+	<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+		<f:if condition="{imageIterator.cycle} == 1">
+			<div class="tx-tkblog-list-imagerow">
+				<f:if condition="{dam}">
+					<f:then>
+						<tk:metaTag property="og:image" 
+									content="{f:uri.image(src:'{image.file_path}{image.file_name}', maxWidth:'100')}" 
+									forceAbsoluteUrl="1" />
+					</f:then>
+					<f:else>
+						<tk:metaTag property="og:image" content="{f:uri.image(src:'uploads/pics/{image}', maxWidth:'100')}" forceAbsoluteUrl="1" />
+					</f:else>
+				</f:if> 
+			</div>
+		</f:if>
+	</f:for>
+	<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
+		<tk:metaTag property="og:image" content="{f:uri.image(src:'{settings.openGraph.defaultImage}', maxWidth:'100')}" forceAbsoluteUrl="1" />
+	</f:if>
+
+	<tk:metaTag property="og:description" content="{description-> f:format.crop(maxCharacters: '{settings.openGraph.cropDescription}')}" />
+	<tk:metaTag property="fb:admins" content="{settings.openGraph.admins}" />
+	<tk:metaTag property="fb:app_id" content="{settings.openGraph.appId}" />
+
+	<tk:metaTag property="og:latitude" content="{settings.openGraph.latitude}" />
+	<tk:metaTag property="og:longitude" content="{settings.openGraph.longitude}" />
+	<tk:metaTag property="og:locality" content="{settings.openGraph.locality}" />
+	<tk:metaTag property="og:region" content="{settings.openGraph.region}" />
+	<tk:metaTag property="og:country-name" content="{settings.openGraph.country-name}" />
+</f:if>
+
+<div id="tx-tkblog-detail-social">
+	<div class="facebook">
+		<!--FB Like-->
+		<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
+		<fb:like layout="standard" show_faces="true" width="250" font="arial" colorscheme="light"></fb:like>
+	</div>
+
+	<div class="twitter">
+		<!--	Twitter-->
+		<a href="http://twitter.com/share" class="twitter-share-button" data-url="{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" data-text="{post.title}" data-count="horizontal" data-via="thomaskieslich" data-lang="de">Tweet</a>
+		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
+</div>

@@ -1,5 +1,5 @@
 {namespace tk=Tx_Tkblog_ViewHelpers} 
-<f:layout name="default" />
+<f:layout name="Default" />
 <f:section name="content">
     {settings.blogTitle -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
     <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />

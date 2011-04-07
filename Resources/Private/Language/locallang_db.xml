@@ -60,8 +60,8 @@
 	    <label index="post_teaser_options">Teaser Options</label>
 		<label index="post_teaser_options.I.0">none</label>
 		<label index="post_teaser_options.I.1">Crop Teaser</label>
-		<label index="post_teaser_options.I.2">Show original Content Element</label>
-		<label index="post_teaser_options.I.3">Show original Content Element without "more" Link</label>	    
+		<label index="post_teaser_options.I.2">Show first Content Element</label>
+		<label index="post_teaser_options.I.3">Show all Content Elements</label>	    
 	    <label index="category">Category</label>
 	    <label index="category_tab_categorize">Category</label>
 	    <label index="category_tab_access">Access</label>

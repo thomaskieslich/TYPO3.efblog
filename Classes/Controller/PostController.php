@@ -61,7 +61,8 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maxPages' => $this->settings['listView']['maxPages']
+			'maxPages' => $this->settings['listView']['maxPages'],
+			'maxItems' => $this->settings['listView']['maxEntries']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 
@@ -112,9 +113,10 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			}
 			$this->view->assign('pages', $pages);
 			$this->view->assign('post', $post);
+			$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
-//get Main Comments
+			//get Main Comments
 			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
 			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
@@ -211,6 +213,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	}
 
 	public function viewsWidgetAction () {
+		$this->settings['listView']['orderBy'] = views;
 		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
