@@ -1,7 +1,7 @@
 <?php
 
 ########################################################################
-# Extension Manager/Repository config file for ext "tkblog".
+# Extension Manager/Repository config file for ext "efblog".
 #
 # Auto generated 07-04-2011 14:45
 #
@@ -11,8 +11,8 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'TK Simple Blog',
-	'description' => 'testblog',
+	'title' => 'Simple Blog',
+	'description' => 'Blog- Newsextension, based on extbase/fluid.',
 	'category' => 'plugin',
 	'author' => 'Thomas Kieslich',
 	'author_email' => 'thomaskieslich@gmx.net',
@@ -25,7 +25,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'state' => 'alpha',
 	'internal' => '',
 	'uploadfolder' => 0,
-	'createDirs' => 'uploads/tx_tkblog',
+	'createDirs' => 'uploads/tx_efblog',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
