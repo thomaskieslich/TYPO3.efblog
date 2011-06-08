@@ -1,8 +1,8 @@
-page.includeCSS.tx_tkblog = EXT:tkblog/Resources/Public/CSS/extension.css
-page.includeJSFooter.jquery_cookie = EXT:tkblog/Resources/Public/JS/jquery.cookie.js
-page.includeJSFooter.tx_tkblog = EXT:tkblog/Resources/Public/JS/extension.js
+page.includeCSS.tx_efblog = EXT:efblog/Resources/Public/CSS/extension.css
+page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
+page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
 
-plugin.tx_tkblog{
+plugin.tx_efblog{
 	settings {
 		##targets
 		listUid =
@@ -12,7 +12,7 @@ plugin.tx_tkblog{
 		dateMenuUid =
 		backUid =
 
-		blogTitle = Tkblog
+		blogTitle = efblog
 
 		//Admin roles
 		superAdminGroup = 4
@@ -67,7 +67,7 @@ plugin.tx_tkblog{
 			allowOpenGraph = 0
 			type = article
 			cropDescription = 280
-			defaultImage = typo3conf/ext/tkblog/Resources/Public/Icons/openGraphDefault.png
+			defaultImage = typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png
 			admins =
 			appId =
 			latitude =
@@ -80,7 +80,7 @@ plugin.tx_tkblog{
 		comments{
 			allowComments = 1
 			//Gravatar
-			defaultGravatar = typo3conf/ext/tkblog/Resources/Public/Icons/gravatar_default.png
+			defaultGravatar = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
 			gravatarSize = 50m
 
 			messageSuperAdmin = 1
@@ -110,12 +110,17 @@ plugin.tx_tkblog{
 		}
 
 		latestPostsWidget{
+			//Sorting
+			orderBy = date,title
+			//asc, desc
+			sortDirection = desc
 			maxEntries = 10
 			cropLink = 44
 			showViews = 1
 		}
 
 		latestCommentsWidget{
+			
 			maxEntries = 12
 			cropLink = 33
 			showGravatar = 1
@@ -143,6 +148,11 @@ plugin.tx_tkblog{
 		}
 		rss{
 			maxEntries = 25
+			title = Blog RSS
+			description = RSS for Blog
+			blogUrl = 
+			atomUrl = 
+			image = 
 		}
 	}
 	widgets{
@@ -150,97 +160,97 @@ plugin.tx_tkblog{
 		latestPostsWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Post {
 				1 = latestPostsWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 
 		latestCommentsWidget = USER
 		latestCommentsWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Comment {
 				1 = latestCommentsWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 
 		viewsWidget = USER
 		viewsWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Post {
 				1 = viewsWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 
 		searchWidget = USER
 		searchWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Post {
 				1 = searchWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 
 		categoryWidget = USER
 		categoryWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Category {
 				1 = categoryWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 
 		dateMenuWidget = USER
 		dateMenuWidget{
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
-			extensionName = Tkblog
+			extensionName = Efblog
 			switchableControllerActions {
 				Post {
 				1 = dateMenuWidget
 				}
 			}
-			settings =< plugin.tx_tkblog.settings
-			persistence =< plugin.tx_tkblog.persistence
-			view =< plugin.tx_tkblog.view
+			settings =< plugin.tx_efblog.settings
+			persistence =< plugin.tx_efblog.persistence
+			view =< plugin.tx_efblog.view
 		}
 	}
 
 	persistence{
-		storagePid = {$plugin.tx_tkblog.persistence.storagePid}
+		storagePid = {$plugin.tx_efblog.persistence.storagePid}
 		classes{
-			Tx_Tkblog_Domain_Model_Content{
+			Tx_Efblog_Domain_Model_Content{
 				mapping {
 					tableName = tt_content
 					columns{
@@ -250,22 +260,22 @@ plugin.tx_tkblog{
 			}
 		Tx_Extbase_Domain_Model_FrontendUser {
 			subclasses {
-				Tx_Tkblog_Domain_Model_Administrator = Tx_Tkblog_Domain_Model_Administrator
+				Tx_Efblog_Domain_Model_Administrator = Tx_Efblog_Domain_Model_Administrator
 			}
 		}
-		Tx_Tkblog_Domain_Model_Administrator {
+		Tx_Efblog_Domain_Model_Administrator {
 			mapping {
 				tableName = fe_users
-				recordType = Tx_Tkblog_Domain_Model_Administrator
+				recordType = Tx_Efblog_Domain_Model_Administrator
 			}
 		}
 		}
 	}
 
 	view {
-		templateRootPath = {$plugin.tx_tkblog.view.templateRootPath}
-		partialRootPath = {$plugin.tx_tkblog.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_tkblog.view.layoutRootPath}
+		templateRootPath = {$plugin.tx_efblog.view.templateRootPath}
+		partialRootPath = {$plugin.tx_efblog.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_efblog.view.layoutRootPath}
 		}
 
 	renderElement = COA
@@ -287,15 +297,15 @@ postRss {
   10 {
 	userFunc = tx_extbase_core_bootstrap->run
 	pluginName = Fe1
-	extensionName = Tkblog
+	extensionName = Efblog
 	switchableControllerActions {
 		Post {
 			1 = postRss
 		}
 	}
-	settings =< plugin.tx_tkblog.settings
-	persistence =< plugin.tx_tkblog.persistence
-	view =< plugin.tx_tkblog.view
+	settings =< plugin.tx_efblog.settings
+	persistence =< plugin.tx_efblog.persistence
+	view =< plugin.tx_efblog.view
   }
 
   config {
@@ -313,15 +323,15 @@ commentsRss {
   10 {
 	userFunc = tx_extbase_core_bootstrap->run
 	pluginName = Fe1
-	extensionName = Tkblog
+	extensionName = Efblog
 	switchableControllerActions {
 		Post {
 			1 = commentsRss
 		}
 	}
-	settings =< plugin.tx_tkblog.settings
-	persistence =< plugin.tx_tkblog.persistence
-	view =< plugin.tx_tkblog.view
+	settings =< plugin.tx_efblog.settings
+	persistence =< plugin.tx_efblog.persistence
+	view =< plugin.tx_efblog.view
   }
 
 	config {

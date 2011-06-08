@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Tkblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
+class Tx_Efblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
 	
 }
 ?>

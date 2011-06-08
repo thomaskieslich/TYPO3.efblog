@@ -3,7 +3,7 @@
 		<f:then>
 			<f:if condition="{elementIterator.cycle} == {count}">
 				<h1>{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}</h1>
-				<f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+				<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}" />
 			</f:if>
 		</f:then>
 		<f:else>
@@ -11,7 +11,7 @@
 				<h1>{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}</h1>
 			</f:if>
 			<f:if condition="{element.ctype} != {settings.detailView.divType}">
-				<f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+				<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}" />
 			</f:if>
 		</f:else>
 	</f:if>

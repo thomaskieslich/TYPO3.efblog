@@ -31,10 +31,10 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
-	
+class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
+
 	/**
-	 * @var Tx_Tkblog_Domain_Repository_CommentRepository
+	 * @var Tx_Efblog_Domain_Repository_CommentRepository
 	 */
 	protected $commentRepository;
 
@@ -44,41 +44,43 @@ class Tx_Tkblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 	 * @return void
 	 */
 	protected function initializeAction () {
-		$this->commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+		$this->commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
 	}
 
 	/**
 	 * Adds a comment to a blog post and redirects to detail view
-	 * @param Tx_Tkblog_Domain_Model_Post $post
-	 * @param Tx_Tkblog_Domain_Model_Comment $newComment 
+	 * @param Tx_Efblog_Domain_Model_Post $post
+	 * @param Tx_Efblog_Domain_Model_Comment $newComment 
 	 * @return void
 	 */
-	public function createAction (Tx_Tkblog_Domain_Model_Post $post, Tx_Tkblog_Domain_Model_Comment $newComment) {
-		$spampoints = $this->checkForSpam($newComment);
-		$newComment->setIp($_SERVER['REMOTE_ADDR']);
-		$newComment->setSpampoints($spampoints);
+	public function createAction (Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment) {
+		if ($this->settings['comments']['allowComments'] == 1) {
+			$spampoints = $this->checkForSpam($newComment);
+			$newComment->setIp($_SERVER['REMOTE_ADDR']);
+			$newComment->setSpampoints($spampoints);
 
-		if ($spampoints > $this->settings['comments']['spam']['spampointsToHide']) {
-			$newComment->setHidden(1);
-		}
-		if ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
-			$post->addComment($newComment);
-		}
-
-
-		if ($this->settings['comments']['messageAuthor'] || $this->settings['comments']['messageSuperAdmin']) {
-			if ($spampoints < $this->settings['comments']['messageAllSpam']) {
-				$this->sendMessage($post, $newComment);
-			} elseif ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
-				$this->sendMessage($post, $newComment);
+			if ($spampoints > $this->settings['comments']['spam']['spampointsToHide']) {
+				$newComment->setHidden(1);
 			}
-		}
+			if ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
+				$post->addComment($newComment);
+			}
 
-		$this->flashMessageContainer->add('Your new Comments was created.');
+
+			if ($this->settings['comments']['messageAuthor'] || $this->settings['comments']['messageSuperAdmin']) {
+				if ($spampoints < $this->settings['comments']['messageAllSpam']) {
+					$this->sendMessage($post, $newComment);
+				} elseif ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
+					$this->sendMessage($post, $newComment);
+				}
+			}
+
+			$this->flashMessageContainer->add('Your new Comments was created.');
+		}
 
 		$this->redirect('detail', 'Post', NULL, array ('post' => $post));
 	}
-	
+
 	public function latestCommentsWidgetAction () {
 		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
 	}
@@ -86,7 +88,7 @@ class Tx_Tkblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 	protected function checkForSpam ($newComment) {
 		$spampoints = 0;
 		//check dummy field
-		$dummyField = t3lib_div::_POST('tx_tkblog_fe');
+		$dummyField = t3lib_div::_POST('tx_Efblog_fe');
 		if ($dummyField[newComment][link] > 0) {
 			$spampoints += 100;
 		}

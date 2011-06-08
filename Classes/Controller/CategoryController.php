@@ -30,10 +30,10 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * @var Tx_Tkblog_Domain_Repository_CategoryRepository
+	 * @var Tx_Efblog_Domain_Repository_CategoryRepository
 	 */
 	protected $categoryRepository;
 
@@ -43,7 +43,7 @@ class Tx_Tkblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	protected function initializeAction () {
-		$this->categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+		$this->categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
 	}
 
 	public function categoryOverviewAction () {
@@ -98,11 +98,15 @@ class Tx_Tkblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 
 	protected function findCategoryLevels ($categories, $level = 0) {
 		$return = $level;
-		foreach ($categories as $key => $category) {
-			$level_new = $this->findCategoryLevels($category, $level + 1);
+		$level_new = 0;
+		foreach ($categories as $category) {
+			if (is_array($category)) {
+				$level_new = $this->findCategoryLevels($category, $level + 1);
+			}
 			if ($level_new > $return)
 				$return = $level_new;
 		}
+
 		return $return;
 	}
 

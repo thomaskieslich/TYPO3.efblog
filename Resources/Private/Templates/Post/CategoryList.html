@@ -1,7 +1,7 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
-    <div class="tx-tkblog-category-container">
+    <div class="tx-efblog-category-container">
 		<h1>
 			{posts->f:count()}
 			<f:if condition="<f:count subject='{posts}' /> == 1">
@@ -10,7 +10,7 @@
 			</f:if>			
 		</h1>
 
-		<div class="tx-tkblog-category-infos">
+		<div class="tx-efblog-category-infos">
 			<div class="image">
 				<f:for each="{category.image}" as="image" iteration="imageIterator">
 					<f:if condition="{image}">
@@ -19,7 +19,7 @@
 							{f:image(src: "{image.file_path}{image.file_name}", alt: "{category.title}", width: "120m", height: "120m")}
 							</f:then>
 							<f:else>
-							{f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "120m", height: "120m")} 
+							{f:image(src: "uploads/tx_efblog/{image}", alt: "{post.title}", width: "120m", height: "120m")} 
 							</f:else>
 						</f:if>
 					</f:if>

@@ -1,21 +1,21 @@
 <f:layout name="Default" />
 <f:section name="content">
-    <div class="tx-tkblog-widget-container">
+    <div class="tx-efblog-widget-container">
         <h1>{f:translate(key : 'widget_latestComments_header')}</h1>
-        <div class="tx-tkblog-widget-content">
+        <div class="tx-efblog-widget-content">
             <ul>
                 <f:for each="{comments}" as="comment">
                     <li>						
 					<f:if condition="{comment.title}">
 						<f:then>
-							<f:link.action action="detail" controller='Post' section='comment_{comment.uid}' pageUid="{settings.detailUid}" additionalParams="{tx_tkblog_fe1:{post:comment.post}}" title="{comment.title}">
+							<f:link.action action="detail" controller='Post' section='comment_{comment.uid}' pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:comment.post}}" title="{comment.title}">
 								{comment.author} |
 								{comment.title -> f:format.crop(maxCharacters: '{settings.latestCommentsWidget.cropLink}',  
 								append: "{f:translate(key : 'widget_latestComments_more')}")}
 							</f:link.action>
 						</f:then>
 						<f:else>
-							<f:link.action action="detail" controller='Post' section='comment_{comment.uid}' pageUid="{settings.detailUid}" additionalParams="{tx_tkblog_fe1:{post:comment.post}}" title="{comment.title}">
+							<f:link.action action="detail" controller='Post' section='comment_{comment.uid}' pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:comment.post}}" title="{comment.title}">
 								{comment.author} |
 								{comment.message -> f:format.crop(maxCharacters: '{settings.latestCommentsWidget.cropLink}',  
 								append: "{f:translate(key : 'widget_latestComments_more')}")}

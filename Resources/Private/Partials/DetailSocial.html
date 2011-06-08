@@ -1,14 +1,12 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <f:if condition="{settings.openGraph.allowOpenGraph}">
 	<tk:metaTag property="og:title" content="{post.title}" />
 	<tk:metaTag property="og:type" content="{settings.openGraph.type}" />
-	<tk:metaTag property="og:url" content="{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" />
+	<tk:metaTag property="og:url" content="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" />
 	<tk:metaTag property="og:site_name" content="{settings.blogTitle}" />
 
-	<!-- Post Image-->
 	<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 		<f:if condition="{imageIterator.cycle} == 1">
-			<div class="tx-tkblog-list-imagerow">
 				<f:if condition="{dam}">
 					<f:then>
 						<tk:metaTag property="og:image" 
@@ -19,7 +17,6 @@
 						<tk:metaTag property="og:image" content="{f:uri.image(src:'uploads/pics/{image}', maxWidth:'100')}" forceAbsoluteUrl="1" />
 					</f:else>
 				</f:if> 
-			</div>
 		</f:if>
 	</f:for>
 	<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
@@ -37,16 +34,16 @@
 	<tk:metaTag property="og:country-name" content="{settings.openGraph.country-name}" />
 </f:if>
 
-<div id="tx-tkblog-detail-social">
+<div id="tx-efblog-detail-social">
 	<div class="facebook">
 		<!--FB Like-->
 		<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
-		<fb:like layout="standard" show_faces="true" width="250" font="arial" colorscheme="light"></fb:like>
+		<fb:like layout="standard" show_faces="true" width="230" font="arial" colorscheme="light"></fb:like>
 	</div>
 
 	<div class="twitter">
 		<!--	Twitter-->
-		<a href="http://twitter.com/share" class="twitter-share-button" data-url="{f:uri.page(additionalParams : '{tx_tkblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" data-text="{post.title}" data-count="horizontal" data-via="thomaskieslich" data-lang="de">Tweet</a>
+		<a href="http://twitter.com/share" class="twitter-share-button" data-url="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" data-text="{post.title}" data-count="horizontal" data-via="thomaskieslich" data-lang="de">Tweet</a>
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 	</div>
 </div>

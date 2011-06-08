@@ -1,4 +1,4 @@
-CREATE TABLE tx_tkblog_domain_model_post (
+CREATE TABLE tx_efblog_domain_model_post (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
@@ -46,12 +46,12 @@ CREATE TABLE tx_tkblog_domain_model_post (
 
 
 CREATE TABLE tt_content (
-	tx_tkblog_post_content_mm int(11) DEFAULT '0' NOT NULL,
+	tx_efblog_post_content_mm int(11) DEFAULT '0' NOT NULL,
 
-	KEY tkblog (tx_tkblog_post_content_mm,sorting)
+	KEY efblog (tx_efblog_post_content_mm,sorting)
 );
 
-CREATE TABLE tx_tkblog_post_category_mm (
+CREATE TABLE tx_efblog_post_category_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE tx_tkblog_post_category_mm (
 	KEY uid_foreign (uid_foreign)
 );
 
-CREATE TABLE tx_tkblog_post_post_mm (
+CREATE TABLE tx_efblog_post_post_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE tx_tkblog_post_post_mm (
 	KEY uid_foreign (uid_foreign)
 );
 
-CREATE TABLE tx_tkblog_domain_model_category (
+CREATE TABLE tx_efblog_domain_model_category (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
@@ -103,7 +103,7 @@ CREATE TABLE tx_tkblog_domain_model_category (
 	KEY parent (pid)
 );
 
-CREATE TABLE tx_tkblog_domain_model_comment (
+CREATE TABLE tx_efblog_domain_model_comment (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	

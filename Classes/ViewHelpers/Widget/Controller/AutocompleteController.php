@@ -23,7 +23,7 @@
 /**
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Widget_Controller_AutocompleteController extends Tx_Fluid_Core_Widget_AbstractWidgetController {
+class Tx_Efblog_ViewHelpers_Widget_Controller_AutocompleteController extends Tx_Fluid_Core_Widget_AbstractWidgetController {
 
 	/**
 	 * @return void

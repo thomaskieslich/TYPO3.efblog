@@ -1,7 +1,7 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
-    <div class="tx-tkblog-search-container">
+    <div class="tx-efblog-search-container">
         <h1>
             <tk:widget.paginate objects="{posts}"  as="countPosts"  configuration="{insertAbove:0,insertBelow:0}">
                 {countPosts->f:count()}
@@ -13,7 +13,7 @@
             {searchPhrase}</h1>
 
 
-            <div class="tx-tkblog-view-search">
+            <div class="tx-efblog-view-search">
                 <f:form  action="list" pageUid="{settings.target.listUid}">
                     <f:form.textbox name="searchPhrase" value="{searchPhrase}" class="searchfield" />
                     <input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">

@@ -1,12 +1,12 @@
 <f:for each="{post.content}" as="element" iteration="elementIterator">
     <f:if condition="{elementIterator.cycle} == {count}">
 	<!-- Render Teaser-->
-	<div class="tx-tkblog-list-images">
+	<div class="tx-efblog-list-images">
 	    <!-- Post Image-->
 		<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 		    <f:if condition="{post.teaserImage}">  
 			<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
-			    <div class="tx-tkblog-list-imagerow">
+			    <div class="tx-efblog-list-imagerow">
 				<f:if condition="{dam}">
 				    <f:then>
 					{f:image(src: "{image.file_path}{image.file_name}", alt: "{post.title}", width: "{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
@@ -23,7 +23,7 @@
 		</f:for>
 	</div> 
 
-	<div class="tx-tkblog-list-text">
+	<div class="tx-efblog-list-text">
 	    <h1>{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}</h1>
 	    <f:if condition="{post.teaserOptions} == 1">
 		<f:then>

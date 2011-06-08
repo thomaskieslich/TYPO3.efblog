@@ -10,7 +10,7 @@
  *
  * @author Thomas
  */
-class Tx_Tkblog_Service_AvatarService implements t3lib_Singleton {
+class Tx_Efblog_Service_AvatarService implements t3lib_Singleton {
 
 	public function findAvatarByEmail ($email) {
 		$avatar = NULL;

@@ -4,17 +4,17 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_tkblog_domain_model_category'] = array(
-    'ctrl' => $TCA['tx_tkblog_domain_model_category']['ctrl'],
+$TCA['tx_efblog_domain_model_category'] = array(
+    'ctrl' => $TCA['tx_efblog_domain_model_category']['ctrl'],
     'interface' => array(
         'showRecordFieldList' => 'title,description,parent_category',
     ),
     'types' => array(
         '0' => array(
             'showitem' =>
-            '--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize,
-			--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize;category,
-			--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_parent_category;parent,
+            '--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize,
+			--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize;category,
+			--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category;parent,
 			--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
@@ -23,14 +23,14 @@ $TCA['tx_tkblog_domain_model_category'] = array(
     'palettes' => array(
         'category' => array(
             'showitem' =>
-            'title;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_title, --linebreak--,
-			description;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_description, --linebreak--,
-                        image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_image',
+            'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_title, --linebreak--,
+			description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_description, --linebreak--,
+                        image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_image',
             'canNotCollapse' => 1,
         ),
         'parent' => array(
             'showitem' =>
-            'parent_category;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_parent_category,',
+            'parent_category;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category,',
             'canNotCollapse' => 1,
         ),
         'visibility' => array(
@@ -69,8 +69,8 @@ $TCA['tx_tkblog_domain_model_category'] = array(
                 'items' => array(
                     array('', 0),
                 ),
-                'foreign_table' => 'tx_tkblog_domain_model_category',
-                'foreign_table_where' => 'AND tx_tkblog_domain_model_category.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_category.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_efblog_domain_model_category',
+                'foreign_table_where' => 'AND tx_efblog_domain_model_category.uid=###REC_FIELD_l18n_parent### AND tx_efblog_domain_model_category.sys_language_uid IN (-1,0)',
             )
         ),
         'l18n_diffsource' => array(
@@ -95,7 +95,7 @@ $TCA['tx_tkblog_domain_model_category'] = array(
         ),
         'title' => Array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_title',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_title',
             'config' => Array(
                 'type' => 'input',
                 'size' => '30',
@@ -104,7 +104,7 @@ $TCA['tx_tkblog_domain_model_category'] = array(
         ),
         'description' => Array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_description',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_description',
             'config' => Array(
                 'type' => 'text',
                 'size' => '40',
@@ -112,15 +112,15 @@ $TCA['tx_tkblog_domain_model_category'] = array(
         ),
         'parent_category' => Array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category_parent_category',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category',
             'config' => array(
                 'type' => 'select',
                 'size' => 8,
                 'autoSizeMax' => 20,
-                'foreign_table' => 'tx_tkblog_domain_model_category',
-                'foreign_table_where' => ' AND tx_tkblog_domain_model_category.pid = ###CURRENT_PID### 
-					AND tx_tkblog_domain_model_category.uid != ###THIS_UID###
-				    AND tx_tkblog_domain_model_category.sys_language_uid = 0',
+                'foreign_table' => 'tx_efblog_domain_model_category',
+                'foreign_table_where' => ' AND tx_efblog_domain_model_category.pid = ###CURRENT_PID### 
+					AND tx_efblog_domain_model_category.uid != ###THIS_UID###
+				    AND tx_efblog_domain_model_category.sys_language_uid = 0',
                 'renderMode' => 'tree',
                 'treeConfig' => array(
                     'parentField' => 'parent_category',

@@ -1,0 +1,55 @@
+{namespace tk=Tx_Efblog_ViewHelpers} 
+<f:layout name="Default" />
+<f:section name="content">
+	<div class="tx-efblog-combined">
+
+		<f:for each="{posts}" as="post">
+			<div class="tx-efblog-combined-entry"> 
+				<div class="tx-efblog-combined-image">
+					<f:if condition="{post.teaserImage}">
+						<f:then>
+							<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+								<f:if condition="{post.teaserImage}">  
+									<f:if condition="{imageIterator.cycle} == 1">
+										<f:if condition="{dam}">
+											<f:then>
+												{f:image(src: "{image.file_path}{image.file_name}", alt: "{post.title}", width: "40m", height: "40m")}
+											</f:then>
+											<f:else>
+												{f:image(src: "uploads/pics/{image}", alt: "{post.title}", width: "{settings.listView.40m", height: "40m")}
+											</f:else>
+										</f:if> 
+									</f:if>
+								</f:if>
+							</f:for>
+						</f:then>
+						<f:else>
+							{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "{settings.listView.40m", height: "40m")}
+						</f:else>
+					</f:if>
+				</div>
+
+				<div class="title"><h1>
+						<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}'>
+							{post.title -> f:format.crop(maxCharacters: '44', append: '{f:translate(key : "teaser_more")}')}
+						</f:link.action>
+					</h1></div> 
+				<div class="infos">{post.date -> tk:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
+					<f:if condition="{post.comments -> f:count()} > 1">
+						<f:then>
+							<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
+								{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+							</f:link.action>
+						</f:then>
+						<f:else>
+							<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
+								{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+							</f:link.action>
+						</f:else>
+					</f:if> |
+					{post.blogName}</div>
+
+			</div>		
+		</f:for>
+	</div>
+</f:section>

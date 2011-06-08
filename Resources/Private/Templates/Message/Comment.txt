@@ -1,15 +1,15 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 {post.title}
-{tk:translate(key : 'comment_form_author', extensionName : 'Tkblog')}: {newComment.author}
-{tk:translate(key : 'comment_form_email', extensionName : 'Tkblog')}: {newComment.email}
-{tk:translate(key : 'comment_form_website', extensionName : 'Tkblog')}: {newComment.website}
-{tk:translate(key : 'comment_form_location', extensionName : 'Tkblog')}: {newComment.location}
-{tk:translate(key : 'comment_form_title', extensionName : 'Tkblog')}: {newComment.title}
+{tk:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
+{tk:translate(key : 'comment_form_email', extensionName : 'Efblog')}: {newComment.email}
+{tk:translate(key : 'comment_form_website', extensionName : 'Efblog')}: {newComment.website}
+{tk:translate(key : 'comment_form_location', extensionName : 'Efblog')}: {newComment.location}
+{tk:translate(key : 'comment_form_title', extensionName : 'Efblog')}: {newComment.title}
 
-{tk:translate(key : 'comment_message_message', extensionName : 'Tkblog')}
+{tk:translate(key : 'comment_message_message', extensionName : 'Efblog')}
 {newComment.message}
 
-{tk:translate(key : 'comment_message_spampoints', extensionName : 'Tkblog')}: {newComment.spampoints}
-<f:if condition='newComment.hidden'>{tk:translate(key : 'comment_message_hidden', extensionName : 'Tkblog')}</f:if>
-Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Tkblog', pluginName : 'fe1')}     
+{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')}: {newComment.spampoints}
+<f:if condition='newComment.hidden'>{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}</f:if>
+Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Efblog', pluginName : 'fe1')}     
         

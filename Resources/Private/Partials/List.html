@@ -1,8 +1,8 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <tk:widget.paginate objects="{posts}"  as="paginatedPosts" configuration="{pagerConfig}">
     <f:for each="{paginatedPosts}" as="post">
-		<div class="tx-tkblog-list-entry">                
-			<div class="tx-tkblog-list-body">
+		<div class="tx-efblog-list-entry">                
+			<div class="tx-efblog-list-body">
 				<f:for each="{post.content}" as="element"  iteration="elementIterator">
 					<f:if condition="{elementIterator.cycle} == 1">
 						<f:if condition="{element.ctype} != {settings.detailView.divType}">
@@ -30,7 +30,7 @@
 					</f:if>
 				</f:for>
 			</div>
-			<div class="tx-tkblog-list-footer">
+			<div class="tx-efblog-list-footer">
 				<div class="more">
 					<f:if condition="{post.teaserLink.link}">
 						<f:then>
@@ -46,17 +46,17 @@
 
 				</div>
 				<div class="info">
-					{post.views} {f:translate(key : 'detail_views')}| 
+					{post.views} {f:translate(key : 'detail_views')} | 
 					{post.date -> tk:format.date(format:'%d. %B %Y')} |
 					<f:for each="{post.categories}" as="category"  iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
 								 {category.title}	
 								</f:link.action>								
 							</f:then>
 							<f:else>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
 								 {category.title}, 	
 								</f:link.action> 
 							</f:else>
@@ -74,7 +74,6 @@
 								{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
 							</f:link.action>
 						</f:else>
-
 					</f:if>
 				</div>
 			</div>

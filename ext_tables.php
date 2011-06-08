@@ -7,7 +7,9 @@ if (!defined('TYPO3_MODE'))
 //Flexform
 
 Tx_Extbase_Utility_Extension::registerPlugin(
-		$_EXTKEY, 'Fe1', 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:plugin_fe1_title'
+	$_EXTKEY, 
+	'Fe1', 
+	'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_db.xml:plugin_fe1_title'
 );
 
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
@@ -20,13 +22,13 @@ t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Co
 
 
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'TK Simple Blog');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Simple Blog');
 
 
-t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_post');
-$TCA['tx_tkblog_domain_model_post'] = array (
+t3lib_extMgm::allowTableOnStandardPages('tx_efblog_domain_model_post');
+$TCA['tx_efblog_domain_model_post'] = array (
 	'ctrl' => array (
-		'title' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post',
+		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -43,26 +45,26 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 			'fe_group' => 'fe_group',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Post.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_tkblog_domain_model_post.gif',
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_post.gif',
 		'dividers2tabs' => 1
 	)
 );
 
 $postTempColumns = array ();
 if (t3lib_extMgm::isLoaded('dam')) {
-	$postTempColumns['teaser_image'] = txdam_getMediaTCA('image_field', 'tx_tkblog_domain_model_post_teaser_image');
+	$postTempColumns['teaser_image'] = txdam_getMediaTCA('image_field', 'tx_efblog_domain_model_post_teaser_image');
 	$postTempColumns['teaser_image']['exclude'] = 1;
-	$postTempColumns['teaser_image']['label'] = 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.post_teaserImage';
+	$postTempColumns['teaser_image']['label'] = 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.post_teaserImage';
 } else {
 	$postTempColumns['teaser_image'] = array (
 		'exclude' => 0,
-		'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.post_teaserImage',
+		'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.post_teaserImage',
 		'config' => array (
 			'type' => 'group',
 			'internal_type' => 'file',
 			'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
 			'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-			'uploadfolder' => 'uploads/tx_tkblog',
+			'uploadfolder' => 'uploads/tx_efblog',
 			'disable_controls' => upload,
 			'show_thumbs' => 1,
 			'size' => 3,
@@ -72,14 +74,14 @@ if (t3lib_extMgm::isLoaded('dam')) {
 	);
 }
 
-t3lib_div::loadTCA('tx_tkblog_domain_model_post');
-t3lib_extMgm::addTCAcolumns('tx_tkblog_domain_model_post', $postTempColumns, tx_tkblog);
+t3lib_div::loadTCA('tx_efblog_domain_model_post');
+t3lib_extMgm::addTCAcolumns('tx_efblog_domain_model_post', $postTempColumns, tx_efblog);
 
 
-t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_category');
-$TCA['tx_tkblog_domain_model_category'] = array (
+t3lib_extMgm::allowTableOnStandardPages('tx_efblog_domain_model_category');
+$TCA['tx_efblog_domain_model_category'] = array (
 	'ctrl' => array (
-		'title' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:category',
+		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category',
 		'label' => 'title',
 		'label_alt' => 'parent_category',
 		'label_alt_force' => 1,
@@ -97,7 +99,7 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 			'disabled' => 'hidden'
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Category.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_tkblog_domain_model_category.gif',
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_category.gif',
 		'treeParentField' => 'parent_category',
 		'dividers2tabs' => 1
 	)
@@ -105,20 +107,20 @@ $TCA['tx_tkblog_domain_model_category'] = array (
 
 $categoryTempColumns = array ();
 if (t3lib_extMgm::isLoaded('dam')) {
-	$categoryTempColumns['image'] = txdam_getMediaTCA('image_field', 'tx_tkblog_domain_model_category_image');
+	$categoryTempColumns['image'] = txdam_getMediaTCA('image_field', 'tx_efblog_domain_model_category_image');
 	$categoryTempColumns['image']['exclude'] = 1;
-	$categoryTempColumns['image']['label'] = 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.category_image';
+	$categoryTempColumns['image']['label'] = 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.category_image';
 } else {
 	$categoryTempColumns['image'] = array (
 		'exclude' => 0,
 		'l10n_mode' => 'mergeIfNotBlank',
-		'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.category_image',
+		'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.category_image',
 		'config' => array (
 			'type' => 'group',
 			'internal_type' => 'file',
 			'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
 			'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-			'uploadfolder' => 'uploads/tx_tkblog',
+			'uploadfolder' => 'uploads/tx_efblog',
 			'disable_controls' => upload,
 			'show_thumbs' => 1,
 			'size' => 1,
@@ -128,13 +130,13 @@ if (t3lib_extMgm::isLoaded('dam')) {
 	);
 }
 
-t3lib_div::loadTCA('tx_tkblog_domain_model_category');
-t3lib_extMgm::addTCAcolumns('tx_tkblog_domain_model_category', $categoryTempColumns, tx_tkblog);
+t3lib_div::loadTCA('tx_efblog_domain_model_category');
+t3lib_extMgm::addTCAcolumns('tx_efblog_domain_model_category', $categoryTempColumns, tx_efblog);
 
-t3lib_extMgm::allowTableOnStandardPages('tx_tkblog_domain_model_comment');
-$TCA['tx_tkblog_domain_model_comment'] = array (
+t3lib_extMgm::allowTableOnStandardPages('tx_efblog_domain_model_comment');
+$TCA['tx_efblog_domain_model_comment'] = array (
 	'ctrl' => array (
-		'title' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment',
+		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment',
 		'label' => 'author',
 		'label_alt' => 'title',
 		'label_alt_force' => 1,
@@ -152,13 +154,13 @@ $TCA['tx_tkblog_domain_model_comment'] = array (
 			'disabled' => 'hidden'
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Comment.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_tkblog_domain_model_comment.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_comment.gif'
 	)
 );
 
 t3lib_div::loadTCA('fe_users');
 if (is_array($TCA['fe_users']['columns']['tx_extbase_type'])) {
-	$TCA['fe_users']['types']['Tx_Tkblog_Domain_Model_Administrator'] = $TCA['fe_users']['types']['0'];
-	array_push($TCA['fe_users']['columns']['tx_extbase_type']['config']['items'], array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:feuser_type', 'Tx_Tkblog_Domain_Model_Administrator'));
+	$TCA['fe_users']['types']['Tx_Efblog_Domain_Model_Administrator'] = $TCA['fe_users']['types']['0'];
+	array_push($TCA['fe_users']['columns']['tx_extbase_type']['config']['items'], array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:feuser_type', 'Tx_Efblog_Domain_Model_Administrator'));
 }
 ?>

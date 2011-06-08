@@ -24,13 +24,13 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Tkblog_Domain_Model_Comment
+ * Repository for Tx_Efblog_Domain_Model_Comment
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Efblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findMainComments ($post = NULL) {
 		$query = $this->createQuery();
@@ -49,7 +49,7 @@ class Tx_Tkblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persisten
 		return $query->execute();
 	}
 
-	public function findAllChildren (Tx_Tkblog_Domain_Model_Comment $comment) {
+	public function findAllChildren (Tx_Efblog_Domain_Model_Comment $comment) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_comment', $comment)

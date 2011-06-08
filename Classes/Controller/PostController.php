@@ -30,10 +30,10 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * @var Tx_Tkblog_Domain_Repository_PostRepository
+	 * @var Tx_Efblog_Domain_Repository_PostRepository
 	 */
 	protected $postRepository;
 	/**
@@ -48,7 +48,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 * @return void
 	 */
 	protected function initializeAction () {
-		$this->postRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_PostRepository');
+		$this->postRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_PostRepository');
 	}
 
 	/**
@@ -91,12 +91,12 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 	/**
 	 * post detail
-	 * @param Tx_Tkblog_Domain_Model_Post $post
-	 * @param Tx_Tkblog_Domain_Model_Comment $newComment
+	 * @param Tx_Efblog_Domain_Model_Post $post
+	 * @param Tx_Efblog_Domain_Model_Comment $newComment
 	 * @return void
 	 * @dontvalidate $newComment
 	 */
-	public function detailAction (Tx_Tkblog_Domain_Model_Post $post, Tx_Tkblog_Domain_Model_Comment $newComment = NULL) {
+	public function detailAction (Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
 		if ($post) {
 			$content = $post->getContent();
 			$pages = array ();
@@ -117,7 +117,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
 			//get Main Comments
-			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+			$commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
 			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
 			$allowComments = $this->checkAllowComments($post);
@@ -161,7 +161,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	public function categoryListAction () {
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
-			$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+			$categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
 			$category = $categoryRepository->findByUid($this->request->getArgument('category'));
 			$categories = $this->findSubCategories($category, $categoryRepository);
 			$this->settings['listView']['category'] = $categories;
@@ -204,11 +204,36 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
+	
+	public function combinedListAction () {
+		$posts = $this->postRepository->findPosts($this->settings);
+		
+		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
+		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
+		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
+		$combinedSettings = array();
+		foreach($combinedPid as $key => $value){
+			$combinedSettings[$value][pid] = $combinedPid[$key];
+			$combinedSettings[$value][detail] = $detailUid[$key];
+			$combinedSettings[$value][name] = $combinedNames[$key];
+		}
+		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		foreach($posts as $post){
+			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
+			$post->setBlogName($combinedSettings[$post->getPid()][name]);
+			$combinedPosts->attach($post);
+		}
+		
+		$this->view->assign('posts', $combinedPosts );
+		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
+	}
 
 	
 
 	public function latestPostsWidgetAction () {
 		$this->settings['listView']['maxEntries'] = $this->settings['latestPostsWidget']['maxEntries'];
+		$this->settings['listView']['orderBy'] = $this->settings['latestPostsWidget']['orderBy'];
+		$this->settings['listView']['sortDirection'] = $this->settings['latestPostsWidget']['sortDirection'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
@@ -241,7 +266,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$rssItems[$key]['comments'] = $post->getComments();
 
 			$content = $post->getContent();
-//render Description
+			//render Description
 			if ($post->getTeaserDescription()) {
 				$description = $post->getTeaserDescription();
 			} else {
@@ -300,7 +325,7 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$request = $this->request->getArguments();
 		if ($request['parentComment'] != '') {
 			$newComment['parentComment'] = $this->request->getArgument('parentComment');
-			$commentRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+			$commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
 			$parentComment = $commentRepository->findByUid((int) $newComment['parentComment']);
 			$extensionName = $this->request->getControllerExtensionName();
 			$newComment['title'] = Tx_Extbase_Utility_Localization::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
@@ -364,8 +389,11 @@ class Tx_Tkblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	}
 
 	protected function updateViews ($post) {
-		$currentViews = $post->getViews();
-		$post->setViews($currentViews + 1);
+		if(!$GLOBALS['BE_USER']->user['uid']){
+			$currentViews = $post->getViews();
+			$post->setViews($currentViews + 1);
+		}
+		
 	}
 
 	protected function createDescription ($post, $content) {

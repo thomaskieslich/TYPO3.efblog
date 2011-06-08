@@ -45,7 +45,7 @@
  * @author Bastian Waidelich <bastian@typo3.org>
  * @license http://www.gnu.org/copyleft/gpl.html
  */
-class Tx_Tkblog_ViewHelpers_Be_IconViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class Tx_Efblog_ViewHelpers_Be_IconViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
 
     /**
      * @var array allowed icons to be used with this view helper
@@ -66,7 +66,7 @@ class Tx_Tkblog_ViewHelpers_Be_IconViewHelper extends Tx_Fluid_ViewHelpers_Be_Ab
         if (!in_array($icon, $this->allowedIcons)) {
             throw new Tx_Fluid_Core_ViewHelper_Exception('"' . $icon . '" is no valid icon. Allowed are "' . implode('", "', $this->allowedIcons) . '".', 1253208523);
         }
-        $returnUrl = urlencode('mod.php?M=web_TkblogTxTkblogBe1&id=' . t3lib_div::_GP('id'));
+        $returnUrl = urlencode('mod.php?M=web_EfblogTxEfblogBe1&id=' . t3lib_div::_GP('id'));
         $setAction = $action . '[' . $table . '][' . $uid . ']=' . $action;
         $iconScript = "window.location.href='alt_doc.php?returnUrl=$returnUrl&$setAction'; return false;";
 

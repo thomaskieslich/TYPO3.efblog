@@ -16,12 +16,12 @@ jQuery(document).ready(function($) {
     });
 	
 	//Commentform
-    $('#tx-tkblog-comment-form #tx-tkblog-link').parent().hide();
+    $('#tx-efblog-comment-form #tx-efblog-link').parent().hide();
 	
     //Archive menu
-    $('.tx-tkblog-widget-content .year').next().hide();
+    $('.tx-efblog-widget-content .year').next().hide();
     
-    var cookie = $.cookie("tx_tkblog"),
+    var cookie = $.cookie("tx_efblog"),
     expanded = cookie ? cookie.split("|").getUnique() : [],
     cookieExpires = 7;
    
@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
         $('#' + this).show();
     })
     
-    $('.tx-tkblog-widget-content .year').click(function(){
+    $('.tx-efblog-widget-content .year').click(function(){
         $(this).next().slideToggle('300', function(){
             updateCookie(this);
         });
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
             tmp.push(el.id);
         }
         expanded = tmp.getUnique();
-        $.cookie("tx_tkblog", expanded.join('|'), {
+        $.cookie("tx_efblog", expanded.join('|'), {
             expires: cookieExpires
         } );   
     }

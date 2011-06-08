@@ -1,24 +1,14 @@
-plugin.tx_tkblog {
+plugin.tx_efblog {
 	view {
-		 # cat=plugin.tx_tkblog/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:tkblog/Resources/Private/Templates/
-		 # cat=plugin.tx_tkblog/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:tkblog/Resources/Private/Partials/
-		 # cat=plugin.tx_tkblog/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:tkblog/Resources/Private/Layouts/
+		 # cat=plugin.tx_efblog/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:efblog/Resources/Private/Templates/
+		 # cat=plugin.tx_efblog/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:efblog/Resources/Private/Partials/
+		 # cat=plugin.tx_efblog/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:efblog/Resources/Private/Layouts/
 	}
 	persistence {
-		 # cat=plugin.tx_tkblog//a; type=int+; label=Default storage PID
+		 # cat=plugin.tx_efblog//a; type=int+; label=Default storage PID
 		storagePid =
-	}
-}
-module.tx_tkblog {
-	view {
-		 # cat=module.tx_tkblog/file; type=string; label=Path to template root (BE)
-		templateRootPath = EXT:tkblog/Resources/Private/Backend/Templates/
-		 # cat=plugin.tx_tkblog/file; type=string; label=Path to template partials (BE)
-		partialRootPath = EXT:tkblog/Resources/Private/Partials/
-		 # cat=plugin.tx_tkblog/file; type=string; label=Path to template layouts (BE)
-		layoutRootPath = EXT:tkblog/Resources/Private/Backend/Layouts/
 	}
 }

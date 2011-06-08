@@ -49,7 +49,7 @@
  * // if the key is not found, the output is "default value"
  * </output>
  */
-class Tx_Tkblog_ViewHelpers_TranslateViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class Tx_Efblog_ViewHelpers_TranslateViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
 	 * Translate a given key or use the tag body as default.

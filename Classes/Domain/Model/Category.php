@@ -31,7 +31,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
 
     /**
      * title
@@ -55,13 +55,13 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
     /**
      * parentCategory
      *
-     * @var Tx_Tkblog_Domain_Model_Category $parentCategory
+     * @var Tx_Efblog_Domain_Model_Category $parentCategory
      */
     protected $parentCategory;
 	/**
      * children
      *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $children
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $children
      */
     protected $children;
 	
@@ -119,7 +119,7 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
      */
     public function getImage () {
         if (t3lib_extMgm::isLoaded('dam')) {
-			$damPics = tx_dam_db::getReferencedFiles('tx_tkblog_domain_model_category', $this->uid, 'tx_tkblog_domain_model_category_image');
+			$damPics = tx_dam_db::getReferencedFiles('tx_efblog_domain_model_category', $this->uid, 'tx_efblog_domain_model_category_image');
 			return $damPics['rows'];
 		} else {
 			return explode(',', $this->image);
@@ -137,7 +137,7 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
     /**
      * Returns the parentCategory
      *
-     * @return Tx_Tkblog_Domain_Model_Category $parentCategory
+     * @return Tx_Efblog_Domain_Model_Category $parentCategory
      */
     public function getParentCategory () {
         return $this->parentCategory;
@@ -146,7 +146,7 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
     /**
      * Sets the parentCategory
      *
-     * @param Tx_Tkblog_Domain_Model_Category $parentCategory
+     * @param Tx_Efblog_Domain_Model_Category $parentCategory
      * @return void
      */
     public function setParentCategory ($parentCategory) {
@@ -156,10 +156,10 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
      * Returns the child categories
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $children
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $children
      */
     public function getChildren () {
-        $categoryRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+        $categoryRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_CategoryRepository');
         $children = $categoryRepository->findChilds($this);
         return clone $children;
     }
@@ -167,10 +167,10 @@ class Tx_Tkblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
      * Returns post in categories
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $posts
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $posts
      */
     public function getPosts () {        
-        $postRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_PostRepository');
+        $postRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_PostRepository');
         $posts = $postRepository->countCategoryPosts($this)->count();
         return $posts;
     }

@@ -1,6 +1,6 @@
 <f:layout name="Default" />
 <f:section name="content">
-    <div class="tx-tkblog-view-category">
+    <div class="tx-efblog-view-category">
 
         <f:for each="{maincategories}" as="maincategory">          
             <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
@@ -15,7 +15,7 @@
 				-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:maincategory}', pageUid : '{settings.categoryUid}')}
 								</f:then>
 								<f:else>
-				{f:image(src: "uploads/tx_tkblog/{image}", alt: "{post.title}", width: "150m", height: "150m")
+				{f:image(src: "uploads/tx_efblog/{image}", alt: "{post.title}", width: "150m", height: "150m")
 				-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:maincategory}', pageUid : '{settings.categoryUid}')} 
 								</f:else>
 							</f:if>

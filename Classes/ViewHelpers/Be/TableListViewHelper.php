@@ -49,7 +49,7 @@
 require_once (PATH_typo3 . 'class.db_list.inc');
 require_once (PATH_typo3 . 'class.db_list_extra.inc');
 
-class Tx_Tkblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
+class Tx_Efblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
 
 	/**
 	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface

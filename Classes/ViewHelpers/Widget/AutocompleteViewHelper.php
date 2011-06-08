@@ -45,7 +45,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
  */
-class Tx_Tkblog_ViewHelpers_Widget_AutocompleteViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
+class Tx_Efblog_ViewHelpers_Widget_AutocompleteViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
 
 	/**
 	 * @var bool
@@ -53,15 +53,15 @@ class Tx_Tkblog_ViewHelpers_Widget_AutocompleteViewHelper extends Tx_Fluid_Core_
 	protected $ajaxWidget = TRUE;
 
 	/**
-	 * @var Tx_Tkblog_ViewHelpers_Widget_Controller_AutocompleteController
+	 * @var Tx_Efblog_ViewHelpers_Widget_Controller_AutocompleteController
 	 */
 	protected $controller;
 
 	/**
-	 * @param Tx_Tkblog_ViewHelpers_Widget_Controller_AutocompleteController $controller
+	 * @param Tx_Efblog_ViewHelpers_Widget_Controller_AutocompleteController $controller
 	 * @return void
 	 */
-	public function injectController(Tx_Tkblog_ViewHelpers_Widget_Controller_AutocompleteController $controller) {		
+	public function injectController(Tx_Efblog_ViewHelpers_Widget_Controller_AutocompleteController $controller) {		
 		$this->controller = $controller;
 	}
 

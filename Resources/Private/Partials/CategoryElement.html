@@ -38,7 +38,7 @@
 </f:if> 
 
 <f:section name="categoryLink">
-	<f:link.action action="categoryList" controller="Post" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category.uid}}" title="{category.title}">
+	<f:link.action action="categoryList" controller="Post" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category.uid}}" title="{category.title}">
 						{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}',  append: "{f:translate(key : 'widget_category_more')}")}
 		<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
 	</f:link.action>

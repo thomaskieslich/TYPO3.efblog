@@ -31,7 +31,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
 
     /**
      * Title
@@ -47,7 +47,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     protected $hidden;
     /**
-     * @var Tx_Tkblog_Domain_Model_Administrator
+     * @var Tx_Efblog_Domain_Model_Administrator
      */
     protected $author;
     /**
@@ -83,7 +83,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * CE Element
      *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Content> $content
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Content> $content
      */
     protected $content;
     /**
@@ -119,23 +119,35 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * categories
      *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $categories
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
      */
     protected $categories;
     /**
      * related post
      *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $relatedPosts
      */
     protected $relatedPosts;
     /**
      * post comments
      *
-     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $comments
      */
     protected $comments;
+	
+	/**
+	 *
+	 * @var integer
+	 */
+	protected $detailUid;
+	
+	/**
+	 *
+	 * @var string
+	 */
+	protected $blogName;
 
-    /**
+	/**
      * The constructor of this Post
      *
      * @return void
@@ -173,15 +185,15 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     }    
 
     /**
-     * @param Tx_Tkblog_Domain_Model_Administrator $author
+     * @param Tx_Efblog_Domain_Model_Administrator $author
      * @return void
      */
-    public function setAuthor(Tx_Tkblog_Domain_Model_Administrator $author) {
+    public function setAuthor(Tx_Efblog_Domain_Model_Administrator $author) {
         $this->author = $author;
     }
 	
 	/**
-     * @return Tx_Tkblog_Domain_Model_Administrator
+     * @return Tx_Efblog_Domain_Model_Administrator
      */
     public function getAuthor() {
         return $this->author;
@@ -319,7 +331,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     public function getTeaserImage() {
 		if (t3lib_extMgm::isLoaded('dam')) {
-			$damPics = tx_dam_db::getReferencedFiles('tx_tkblog_domain_model_post', $this->uid, 'tx_tkblog_domain_model_post_teaser_image');
+			$damPics = tx_dam_db::getReferencedFiles('tx_efblog_domain_model_post', $this->uid, 'tx_efblog_domain_model_post_teaser_image');
 			return $damPics['rows'];
 		} else {
 			return explode(',', $this->teaserImage);
@@ -375,27 +387,27 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Adds a Category
      *
-     * @param Tx_Tkblog_Domain_Model_Category $category
+     * @param Tx_Efblog_Domain_Model_Category $category
      * @return void
      */
-    public function addCategory(Tx_Tkblog_Domain_Model_Category $category) {
+    public function addCategory(Tx_Efblog_Domain_Model_Category $category) {
         $this->categories->attach($categories);
     }
 
     /**
      * Removes a Category
      *
-     * @param Tx_Tkblog_Domain_Model_Category $categoryToRemove The Category to be removed
+     * @param Tx_Efblog_Domain_Model_Category $categoryToRemove The Category to be removed
      * @return void
      */
-    public function removeCategory(Tx_Tkblog_Domain_Model_Category $categoryToRemove) {
+    public function removeCategory(Tx_Efblog_Domain_Model_Category $categoryToRemove) {
         $this->categories->detach($categoryToRemove);
     }
 
     /**
      * Returns the categories
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $category
      */
     public function getCategories() {
         return $this->categories;
@@ -404,7 +416,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Sets the categories
      *
-     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Category> $category
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $category
      * @return void
      */
     public function setCategories($categories) {
@@ -414,27 +426,27 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Adds a Post
      *
-     * @param Tx_Tkblog_Domain_Model_Post $relatedPosts
+     * @param Tx_Efblog_Domain_Model_Post $relatedPosts
      * @return void
      */
-    public function addRelatedPost(Tx_Tkblog_Domain_Model_Post $relatedPost) {
+    public function addRelatedPost(Tx_Efblog_Domain_Model_Post $relatedPost) {
         $this->relatedPosts->attach($relatedPosts);
     }
 
     /**
      * Removes a Post
      *
-     * @param Tx_Tkblog_Domain_Model_Post $relatedPostsToRemove The Post to be removed
+     * @param Tx_Efblog_Domain_Model_Post $relatedPostsToRemove The Post to be removed
      * @return void
      */
-    public function removeRelatedPost(Tx_Tkblog_Domain_Model_Post $relatedPostToRemove) {
+    public function removeRelatedPost(Tx_Efblog_Domain_Model_Post $relatedPostToRemove) {
         $this->relatedPosts->detach($relatedPostToRemove);
     }
 
     /**
      * Returns the relatedPosts
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $relatedPosts
      */
     public function getRelatedPosts() {
         return $this->relatedPosts;
@@ -443,7 +455,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Sets the relatedPosts
      *
-     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Post> $relatedPosts
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $relatedPosts
      * @return void
      */
     public function setRelatedPosts($relatedPosts) {
@@ -453,27 +465,27 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Adds a Comments
      *
-     * @param Tx_Tkblog_Domain_Model_Comment $comment
+     * @param Tx_Efblog_Domain_Model_Comment $comment
      * @return void
      */
-    public function addComment(Tx_Tkblog_Domain_Model_Comment $comment) {
+    public function addComment(Tx_Efblog_Domain_Model_Comment $comment) {
         $this->comments->attach($comment);
     }
 
     /**
      * Removes a Comments
      *
-     * @param Tx_Tkblog_Domain_Model_Comment $commentToRemove The Comments to be removed
+     * @param Tx_Efblog_Domain_Model_Comment $commentToRemove The Comments to be removed
      * @return void
      */
-    public function removeComment(Tx_Tkblog_Domain_Model_Comment $commentToRemove) {
+    public function removeComment(Tx_Efblog_Domain_Model_Comment $commentToRemove) {
         $this->comments->detach($commentToRemove);
     }
 
     /**
      * Returns the comments
      *
-     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $comments
      */
     public function getComments() {
         return $this->comments;
@@ -482,7 +494,7 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     /**
      * Sets the comments
      *
-     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $comments
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $comments
      * @return void
      */
     public function setComments($comments) {
@@ -497,7 +509,25 @@ class Tx_Tkblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     public function getContent() {
         return $this->content;
     }
+	
+	public function getDetailUid () {
+		return $this->detailUid;
+	}
 
+	public function setDetailUid ($detailUid) {
+		$this->detailUid = $detailUid;
+	}
+	
+	public function getBlogName () {
+		return $this->blogName;
+	}
+
+	public function setBlogName ($blogName) {
+		$this->blogName = $blogName;
+	}
+
+	
+	
     /**
      * Sets the content
      *

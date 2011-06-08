@@ -31,7 +31,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * hidden
@@ -90,7 +90,7 @@ class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * parentComment
 	 *
-	 * @var Tx_Tkblog_Domain_Model_Comment $parentComment
+	 * @var Tx_Efblog_Domain_Model_Comment $parentComment
 	 */
 	protected $parentComment;
 	/**
@@ -290,7 +290,7 @@ class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the parentComment
 	 *
-	 * @return Tx_Tkblog_Domain_Model_Comment $parentComment
+	 * @return Tx_Efblog_Domain_Model_Comment $parentComment
 	 */
 	public function getParentComment () {
 		return $this->parentComment;
@@ -299,7 +299,7 @@ class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the parentComment
 	 *
-	 * @param Tx_Tkblog_Domain_Model_Comment $parentComment
+	 * @param Tx_Efblog_Domain_Model_Comment $parentComment
 	 * @return void
 	 */
 	public function setParentComment ($parentComment) {
@@ -309,10 +309,10 @@ class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the child comments
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Tkblog_Domain_Model_Comment> $children
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $children
 	 */
 	public function getChildren () {
-		$commentRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Tkblog_Domain_Repository_CommentRepository');
+		$commentRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_CommentRepository');
 		$children = $commentRepository->findAllChildren($this);
 		return clone $children;
 	}
@@ -321,7 +321,7 @@ class Tx_Tkblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	public function getAvatar () {
 		$avatarImage = NULL;
 		if ($this->email) {
-			$avatarImage = Tx_Tkblog_Service_AvatarService::findAvatarByEmail($this->email);
+			$avatarImage = Tx_Efblog_Service_AvatarService::findAvatarByEmail($this->email);
 		}
 		return $avatarImage;
 	}

@@ -31,18 +31,18 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_ViewHelpers_Widget_PaginateViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
+class Tx_Efblog_ViewHelpers_Widget_PaginateViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
 
 	/**
-	 * @var Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController
+	 * @var Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController
 	 */
 	protected $controller;
 
 	/**
-	 * @param Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController $controller
+	 * @param Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController $controller
 	 * @return void
 	 */
-	public function injectController(Tx_Tkblog_ViewHelpers_Widget_Controller_PaginateController $controller) {
+	public function injectController(Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController $controller) {
 		$this->controller = $controller;
 	}
 

@@ -24,13 +24,13 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Tkblog_Domain_Model_Category
+ * Repository for Tx_Efblog_Domain_Model_Category
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Efblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findMainCategories ($settings) {
 		$query = $this->createQuery();
@@ -56,7 +56,7 @@ class Tx_Tkblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persiste
 		return $query->execute();
 	}
 
-	public function findChilds (Tx_Tkblog_Domain_Model_Category $category) {
+	public function findChilds (Tx_Efblog_Domain_Model_Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_category', $category)

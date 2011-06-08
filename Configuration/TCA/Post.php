@@ -4,84 +4,84 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-$TCA['tx_tkblog_domain_model_post'] = array (
-	'ctrl' => $TCA['tx_tkblog_domain_model_post']['ctrl'],
+$TCA['tx_efblog_domain_model_post'] = array (
+	'ctrl' => $TCA['tx_efblog_domain_model_post']['ctrl'],
 	'interface' => array (
 		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,teaser_options,views,category,related_post,comments,fe_group'
 	),
 	'types' => array (
 		'0' => array (
 			'showitem' =>
-			'--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_post,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_post;post,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_content;content,
-				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_categorize,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
-                                --div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
+			'--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post;post,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_content;content,
+				--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_categorize,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
+                                --div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
 					--palette--;;teaserImage,
 					--palette--;;teaserOptions,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
-				--div--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related;related,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_comments;comments,					
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
+				--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related;related,
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments;comments,					
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
-					--palette--;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_palette_access;access,'
+					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_access;access,'
 		)
 	),
 	'palettes' => array (
 		'post' => array (
 			'showitem' =>
-			'title;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_title, --linebreak--,
-			date;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_date,
-			archive;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_archive, --linebreak--,
-			author;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_author, --linebreak--,
-			teaser_link;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserLink, --linebreak--,
-			teaser_link_title;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title,',
+			'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title, --linebreak--,
+			date;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_date,
+			archive;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_archive, --linebreak--,
+			author;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_author, --linebreak--,
+			teaser_link;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink, --linebreak--,
+			teaser_link_title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title,',
 			'canNotCollapse' => 1,
 		),
 		'content' => array (
 			'showitem' =>
-			'content;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_content',
+			'content;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_content',
 			'canNotCollapse' => 1,
 		),
 		'tags' => array (
 			'showitem' =>
-			'tags;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags,--linebreak--,
-			teaser_description;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription,',
+			'tags;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tags,--linebreak--,
+			teaser_description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription,',
 			'canNotCollapse' => 1,
 		),
 		'category' => array (
 			'showitem' =>
-			'categories;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_category,',
+			'categories;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_category,',
 			'canNotCollapse' => 1,
 		),
 		'teaserImage' => array (
 			'showitem' =>			 
-             'teaser_image;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_image,',
+             'teaser_image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_image,',
 			'canNotCollapse' => 1,
 		),
 		'teaserOptions' => array (
 			'showitem' =>
-			'teaser_options;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options,',
+			'teaser_options;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options,',
 			'canNotCollapse' => 1,
 		),
 		'related' => array (
 			'showitem' =>
-			'related_posts;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
+			'related_posts;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
 			'canNotCollapse' => 1,
 		),
 		'comments' => array (
 			'showitem' =>
-			'allow_comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments, --linebreak--,
-            comments;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_comments,',
+			'allow_comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments, --linebreak--,
+            comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments,',
 			'canNotCollapse' => 1,
 		),
 		'views' => array (
 			'showitem' =>
-			'views;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_views,',
+			'views;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_views,',
 			'canNotCollapse' => 1,
 		),
 		'visibility' => array (
@@ -91,7 +91,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'access' => array (
 			'showitem' =>
-			'fe_group;LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_access,',
+			'fe_group;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_access,',
 			'canNotCollapse' => 1,
 		),
 	),
@@ -118,8 +118,8 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 				'items' => array (
 					array ('', 0),
 				),
-				'foreign_table' => 'tx_tkblog_domain_model_post',
-				'foreign_table_where' => 'AND tx_tkblog_domain_model_post.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_post.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_efblog_domain_model_post',
+				'foreign_table_where' => 'AND tx_efblog_domain_model_post.uid=###REC_FIELD_l18n_parent### AND tx_efblog_domain_model_post.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => array (
@@ -170,7 +170,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'title' => array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_title',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title',
 			'config' => array (
 				'type' => 'input',
 				'eval' => 'required'
@@ -178,11 +178,11 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'author' => array (
 			'exclude' => 1,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_author',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_author',
 			'config' => array (
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
-				'foreign_table_where' => "AND fe_users.tx_extbase_type='Tx_Tkblog_Domain_Model_Administrator'",
+				'foreign_table_where' => "AND fe_users.tx_extbase_type='Tx_efblog_Domain_Model_Administrator'",
 				'items' => array (
 					array ('--none--', 0),
 				),
@@ -193,7 +193,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'date' => array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_date',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_date',
 			'config' => array (
 				'type' => 'input',
 				'size' => '12',
@@ -205,7 +205,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'archive' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_archive',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_archive',
 			'config' => Array (
 				'type' => 'input',
 				'size' => '12',
@@ -216,7 +216,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'teaser_link' => Array (
 			"exclude" => 1,
-			"label" => "LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserLink",
+			"label" => "LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink",
 			"config" => Array (
 				"type" => "input",
 				"max" => "255",
@@ -237,18 +237,18 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'teaser_link_title' => array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title',
 			'config' => array (
 				'type' => 'input'
 			)
 		),
 		'content' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_content',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_content',
 			'config' => array (
 				'type' => 'inline',
 				'foreign_table' => 'tt_content',
-				'foreign_field' => 'tx_tkblog_post_content_mm',
+				'foreign_field' => 'tx_efblog_post_content_mm',
 				'maxitems' => 99,
 				'appearance' => array (
 					'showSynchronizationLink' => 1,
@@ -261,7 +261,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'tags' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_tags',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tags',
 			'config' => Array (
 				'type' => 'input',
 				'size' => '150',
@@ -271,7 +271,7 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'categories' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_category',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_category',
 			'config' => array (
 				'type' => 'select',
 				'renderMode' => 'tree',
@@ -282,10 +282,10 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 						'showHeader' => TRUE,
 					),
 				),
-				'MM' => 'tx_tkblog_post_category_mm',
-				'foreign_table' => 'tx_tkblog_domain_model_category',
-				'foreign_table_where' => ' AND tx_tkblog_domain_model_category.pid = ###CURRENT_PID### 
-				    AND tx_tkblog_domain_model_category.sys_language_uid = 0',
+				'MM' => 'tx_efblog_post_category_mm',
+				'foreign_table' => 'tx_efblog_domain_model_category',
+				'foreign_table_where' => ' AND tx_efblog_domain_model_category.pid = ###CURRENT_PID### 
+				    AND tx_efblog_domain_model_category.sys_language_uid = 0',
 				'size' => 10,
 				'autoSizeMax' => 20,
 				'minitems' => 0,
@@ -294,20 +294,20 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'related_posts' => array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_related_post',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related_post',
 			'config' => array (
 				'type' => 'group',
 				'internal_type' => 'db',
-				'allowed' => 'tx_tkblog_domain_model_post',
-				'foreign_table' => 'tx_tkblog_domain_model_post',
+				'allowed' => 'tx_efblog_domain_model_post',
+				'foreign_table' => 'tx_efblog_domain_model_post',
 				'size' => 5,
 				'minitems' => 0,
 				'maxitems' => 10,
-				'MM' => 'tx_tkblog_post_post_mm',
+				'MM' => 'tx_efblog_post_post_mm',
 				'wizards' => array (
 					'suggest' => array (
 						'type' => 'suggest',
-						'tx_tkblog_domain_model_post' => array (
+						'tx_efblog_domain_model_post' => array (
 							'maxItemsInResultList' => 15,
 							'searchCondition' => 'sys_language_uid=0',
 						),
@@ -317,10 +317,10 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'comments' => array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:tx_tkblog_domain_model_post.comments',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.comments',
 			'config' => array (
 				'type' => 'inline',
-				'foreign_table' => 'tx_tkblog_domain_model_comment',
+				'foreign_table' => 'tx_efblog_domain_model_comment',
 				'foreign_field' => 'post',
 				'maxitems' => 9999,
 				'appearance' => array (
@@ -334,21 +334,21 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'allow_comments' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments',
 			'config' => Array (
 				'type' => 'radio',
 				'default' => 0,
 				'items' => Array (
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.0', '0'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.1', '1'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.2', '2'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.3', '3'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.0', '0'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.1', '1'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.2', '2'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments.I.3', '3'),
 				),
 			)
 		),
 		'teaser_description' => Array (
 			'exclude' => 1,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_description',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_description',
 			'config' => Array (
 				'type' => 'text',
 				'size' => '40',
@@ -356,21 +356,21 @@ $TCA['tx_tkblog_domain_model_post'] = array (
 		),
 		'teaser_options' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_post_teaser_options',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_post_teaser_options',
 			'config' => Array (
 				'type' => 'radio',
 				'default' => 1,
 				'items' => Array (
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.0', '0'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.1', '1'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.2', '2'),
-					Array ('LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.3', '3'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.0', '0'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.1', '1'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.2', '2'),
+					Array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options.I.3', '3'),
 				),
 			)
 		),
 		'views' => Array (
 			'exclude' => 0,
-			'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:post_views',
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_views',
 			'config' => Array (
 				'type' => 'input',
 				'size' => '8',

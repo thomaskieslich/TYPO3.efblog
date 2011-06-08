@@ -1,4 +1,4 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
     <f:if condition="{post}">
@@ -9,9 +9,9 @@
 					->tk:document.description()}
 	{post.author.name -> f:if(condition: '{settings.replaceAuthor}') -> tk:document.author()}
 
-        <div class="tx-tkblog-detail-container">
+        <div class="tx-efblog-detail-container">
 			<f:if condition="{settings.detailView.showBreadCrumb}">
-				<div class="tx-tkblog-detail-breadCrumb">
+				<div class="tx-efblog-detail-breadCrumb">
 					<div class="left">
 						<f:if condition="{breadCrumb.0}">
 							<f:then>
@@ -55,7 +55,7 @@
                 <f:for each="{pages}" as="page"  iteration="elementIterator">
                     <div class="tab_content" id="tab{elementIterator.cycle}">
                         <f:for each="{page.elements}" as="element">
-                            <f:cObject typoscriptObjectPath="plugin.tx_tkblog.renderElement" data="{element}" />
+                            <f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}" />
                         </f:for>
                     </div>                
                 </f:for>
@@ -67,7 +67,7 @@
 			</f:if>
 
 
-			<div id="tx-tkblog-detail-footer">
+			<div id="tx-efblog-detail-footer">
 				<div class="more">
 					<f:if condition="{post.teaserLink.link}">
 						{f:if(condition: '{post.teaserLink.target}', then: 
@@ -82,12 +82,12 @@
 					<f:for each="{post.categories}" as="category"  iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
 								 {category.title}	
 								</f:link.action>								
 							</f:then>
 							<f:else>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_tkblog_fe1:{category : category}}" title="{category.title}">
+								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
 								 {category.title}, 	
 								</f:link.action> 
 							</f:else>
@@ -97,12 +97,12 @@
 			</div>
 
 			<f:if condition="{post.relatedPosts}">
-				<div id="tx-tkblog-detail-relatedPost">
+				<div id="tx-efblog-detail-relatedPost">
 					<h3>{f:translate(key : 'detail_related_post')}</h3>
 					<ul>
 						<f:for each="{post.relatedPosts}" as="relatedPost">
 							<li>
-							<f:link.action action="detail" additionalParams="{tx_tkblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
+							<f:link.action action="detail" additionalParams="{tx_efblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
 						{relatedPost.title}<br>
 							</f:link.action>
 							</li>
@@ -122,12 +122,12 @@
 				<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comment')}</h3>
 			</f:else>
 		</f:if>
-		<p class="tx-tkblog-comments-rss">
+		<p class="tx-efblog-comments-rss">
 		{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}', 
 		pageUid : '{settings.detailUid}', pageType : '101')} 
 		</p>
 
-        <div class="tx-tkblog-comments-list">
+        <div class="tx-efblog-comments-list">
 			<f:for each="{comments}" as="comment" iteration="comIterator">
                 <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
                     <div class="item {row}" id="comment_{comment.uid}">						

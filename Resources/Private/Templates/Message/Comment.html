@@ -1,4 +1,4 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,34 +7,34 @@
 	</head>
 	<body>
 		<h1>{post.title -> f:link.action(action : 'detail', arguments : '{post : post}', absolute : '1', 
-			extensionName : 'Tkblog', pluginName : 'fe1')}</h1>
+			extensionName : 'Efblog', pluginName : 'fe1')}</h1>
 
         <div>
-            {tk:translate(key : 'comment_form_author', extensionName : 'Tkblog')}: {newComment.author}
+            {tk:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
         </div>
 		<div>
-            {tk:translate(key : 'comment_form_email', extensionName : 'Tkblog')}: {newComment.email}
+            {tk:translate(key : 'comment_form_email', extensionName : 'Efblog')}: {newComment.email}
         </div>
 		<div>
-            {tk:translate(key : 'comment_form_website', extensionName : 'Tkblog')}: {newComment.website}
+            {tk:translate(key : 'comment_form_website', extensionName : 'Efblog')}: {newComment.website}
         </div>
 		<div>
-            {tk:translate(key : 'comment_form_location', extensionName : 'Tkblog')}: {newComment.location}
+            {tk:translate(key : 'comment_form_location', extensionName : 'Efblog')}: {newComment.location}
         </div>
 		<div>
-            <h2>{tk:translate(key : 'comment_form_title', extensionName : 'Tkblog')}: {newComment.title}</h2>
+            <h2>{tk:translate(key : 'comment_form_title', extensionName : 'Efblog')}: {newComment.title}</h2>
         </div>
 		<div>
-            {tk:translate(key : 'comment_message_message', extensionName : 'Tkblog')}
+            {tk:translate(key : 'comment_message_message', extensionName : 'Efblog')}
 			{newComment.message -> f:format.html()}
         </div>
 		<hr>
 		<div>
-            {tk:translate(key : 'comment_message_spampoints', extensionName : 'Tkblog')}: {newComment.spampoints}
+            {tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')}: {newComment.spampoints}
         </div>
 		<div>
 			<f:if condition='{newComment.hidden}'>
-				{tk:translate(key : 'comment_message_hidden', extensionName : 'Tkblog')}
+				{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}
 			</f:if>            
         </div>
 	</body>

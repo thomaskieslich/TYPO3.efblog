@@ -24,13 +24,13 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Tkblog_Domain_Model_Administrator
+ * Repository for Tx_Efblog_Domain_Model_Administrator
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Repository_AdministratorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
+class Tx_Efblog_Domain_Repository_AdministratorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
 
 }
 

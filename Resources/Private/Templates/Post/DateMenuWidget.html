@@ -1,10 +1,10 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
 	<a name="dateMenu">&nbsp;</a>
-    <div class="tx-tkblog-widget-container">
+    <div class="tx-efblog-widget-container">
         <h1>{f:translate(key : 'widget_dateMenu_header')}</h1>
-        <div class="tx-tkblog-widget-content">			
+        <div class="tx-efblog-widget-content">			
             <f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
 				<ul>
 					<li>

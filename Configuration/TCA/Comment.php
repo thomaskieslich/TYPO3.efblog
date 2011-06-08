@@ -4,8 +4,8 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$TCA['tx_tkblog_domain_model_comment'] = array(
-    'ctrl' => $TCA['tx_tkblog_domain_model_comment']['ctrl'],
+$TCA['tx_efblog_domain_model_comment'] = array(
+    'ctrl' => $TCA['tx_efblog_domain_model_comment']['ctrl'],
     'interface' => array(
         'showRecordFieldList'	=> 'author,email,website,location,title,message,date,spampoints,ip,parent_comment',
     ),
@@ -38,8 +38,8 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
                 'items' => array(
                     array('', 0),
                 ),
-                'foreign_table' => 'tx_tkblog_domain_model_comment',
-                'foreign_table_where' => 'AND tx_tkblog_domain_model_comment.uid=###REC_FIELD_l18n_parent### AND tx_tkblog_domain_model_comment.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_efblog_domain_model_comment',
+                'foreign_table_where' => 'AND tx_efblog_domain_model_comment.uid=###REC_FIELD_l18n_parent### AND tx_efblog_domain_model_comment.sys_language_uid IN (-1,0)',
             )
         ),
         'l18n_diffsource' => array(
@@ -64,7 +64,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'author' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_author',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_author',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -73,7 +73,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'email' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_email',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_email',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -82,7 +82,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'website' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_website',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_website',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
@@ -91,7 +91,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'location' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_location',
+			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_location',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
@@ -100,7 +100,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
 		),
 		'title' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_title',
+			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_title',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
@@ -109,7 +109,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
 		),
         'message' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_message',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_message',
             'config' => array(
                 'type' => 'text',
                 'cols' => 40,
@@ -119,7 +119,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
         'date' => array(
             'exclude' => 0,
-            'label' => 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_date',
+            'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_date',
             'config' => array(
                 'type' => 'input',
                 'size' => 12,
@@ -131,7 +131,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
         ),
 		'spampoints' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_spampoints',
+			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_spampoints',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 10,
@@ -140,7 +140,7 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
 		),
 		'ip' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_ip',
+			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_ip',
 			'config'	=> array(
 				'type' => 'input',
 				'size' => 30,
@@ -149,10 +149,10 @@ $TCA['tx_tkblog_domain_model_comment'] = array(
 		),
 		'parent_comment' => array(
 			'exclude'	=> 0,
-			'label'		=> 'LLL:EXT:tkblog/Resources/Private/Language/locallang_db.xml:comment_parent_comment',
+			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_parent_comment',
 			'config'	=> array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_tkblog_domain_model_comment',
+				'foreign_table' => 'tx_efblog_domain_model_comment',
 				'minitems' => 0,
 				'maxitems' => 1,
 				'appearance' => array(

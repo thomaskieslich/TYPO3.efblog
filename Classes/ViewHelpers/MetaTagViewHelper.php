@@ -28,7 +28,7 @@
  * @package TYPO3
  * @subpackage tx_news2
  */
-class Tx_Tkblog_ViewHelpers_MetaTagViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
+class Tx_Efblog_ViewHelpers_MetaTagViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
 
 	/**
 	 * @var	string

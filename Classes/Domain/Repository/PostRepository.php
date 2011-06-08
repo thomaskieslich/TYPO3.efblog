@@ -24,13 +24,13 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Tkblog_Domain_Model_Post
+ * Repository for Tx_Efblog_Domain_Model_Post
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findPosts ($settings) {
 		$query = $this->createQuery();
@@ -116,7 +116,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		if ($settings['listView']['category']) {
 			$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
 		} else {
-			$categoryRepository = $this->objectManager->get('Tx_Tkblog_Domain_Repository_CategoryRepository');
+			$categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
 			$categories = $categoryRepository->findAll();
 		}
 
@@ -180,7 +180,7 @@ class Tx_Tkblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		return $orderings;
 	}
 
-	public function countCategoryPosts (Tx_Tkblog_Domain_Model_Category $category) {
+	public function countCategoryPosts (Tx_Efblog_Domain_Model_Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->contains('categories', $category)

@@ -1,4 +1,4 @@
-{namespace tk=Tx_Tkblog_ViewHelpers}
+{namespace tk=Tx_Efblog_ViewHelpers}
 <div class="header">
 	<div class="gravatar">
 		<f:if condition="{comment.avatar}">
@@ -11,9 +11,9 @@
 			</f:then>
 			<f:else>
 				{f:if(condition: '{comment.website}',
-				then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-tkblog-gravatar')
+				then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-efblog-gravatar')
 				-> f:link.external(uri: '{comment.website}', target: '_blank')}",
-				else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-tkblog-gravatar')}"                                
+				else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-efblog-gravatar')}"                                
 				)}
 			</f:else>
 		</f:if>
