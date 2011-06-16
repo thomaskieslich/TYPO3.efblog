@@ -47,7 +47,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 *
 	 * @return void
 	 */
-	protected function initializeAction () {
+	protected function initializeAction() {
 		$this->postRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_PostRepository');
 	}
 
@@ -56,8 +56,8 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 *
 	 * @return string The rendered list action
 	 */
-	public function listAction () {
-		$pagerConfig = array (
+	public function listAction() {
+		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
@@ -96,10 +96,10 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 * @return void
 	 * @dontvalidate $newComment
 	 */
-	public function detailAction (Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
+	public function detailAction(Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
 		if ($post) {
 			$content = $post->getContent();
-			$pages = array ();
+			$pages = array();
 			$divider = 0;
 
 			foreach ($content as $single) {
@@ -129,17 +129,20 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 				$this->view->assign('newComment', $newComment);
 			}
 
-//Update Views
+			//Update Views
 			$views = $this->updateViews($post);
 
-//render Description
+			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 		} else {
 			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
 		}
 	}
 
-	public function searchListAction () {
+	/**
+	 * return search result
+	 */
+	public function searchListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['searchPhrase'])) {
 			$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
@@ -149,7 +152,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
-		$pagerConfig = array (
+		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
@@ -158,7 +161,10 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
 
-	public function categoryListAction () {
+	/**
+	 * list by category
+	 */
+	public function categoryListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
 			$categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
@@ -171,7 +177,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
-		$pagerConfig = array (
+		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
@@ -180,7 +186,10 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
 
-	public function dateMenuListAction () {
+	/**
+	 * return list by date
+	 */
+	public function dateMenuListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['year'])) {
 			$this->settings['listView']['year'] = $this->request->getArgument('year');
@@ -196,7 +205,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 
 		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
-		$pagerConfig = array (
+		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
@@ -204,60 +213,72 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
-	
-	public function combinedListAction () {
+
+	/**
+	 * return list from multiple blogs
+	 */
+	public function combinedListAction() {
 		$posts = $this->postRepository->findPosts($this->settings);
-		
+
 		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
 		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
 		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
 		$combinedSettings = array();
-		foreach($combinedPid as $key => $value){
+		foreach ($combinedPid as $key => $value) {
 			$combinedSettings[$value][pid] = $combinedPid[$key];
 			$combinedSettings[$value][detail] = $detailUid[$key];
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
 		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
-		foreach($posts as $post){
-			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
+		foreach ($posts as $post) {
+			$post->setDetailUid((int) $combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
 			$combinedPosts->attach($post);
 		}
-		
-		$this->view->assign('posts', $combinedPosts );
+
+		$this->view->assign('posts', $combinedPosts);
 		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 	}
 
-	
-
-	public function latestPostsWidgetAction () {
+	/**
+	 * return latest posts for widget
+	 */
+	public function latestPostsWidgetAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['latestPostsWidget']['maxEntries'];
 		$this->settings['listView']['orderBy'] = $this->settings['latestPostsWidget']['orderBy'];
 		$this->settings['listView']['sortDirection'] = $this->settings['latestPostsWidget']['sortDirection'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
-	public function viewsWidgetAction () {
+	/**
+	 * return posts with most views
+	 */
+	public function viewsWidgetAction() {
 		$this->settings['listView']['orderBy'] = views;
 		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
-	public function searchWidgetAction () {
+	/**
+	 * return searchform for widget
+	 */
+	public function searchWidgetAction() {
 		
 	}
 
-	
-	public function dateMenuWidgetAction () {
+	/**
+	 * return posts by date
+	 */
+	public function dateMenuWidgetAction() {
 		$this->settings['listView']['orderBy'] = $this->settings['dateMenuWidget']['orderBy'];
 		$this->settings['listView']['sortDirection'] = $this->settings['dateMenuWidget']['sortDirection'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
-	public function postRssAction () {
+	public function postRssAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
-		$rssItems = array ();
+		$rssItems = array();
 
 		foreach ($posts as $key => $post) {
 			$rssItems[$key]['title'] = $post->getTitle();
@@ -289,19 +310,74 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		}
 		$this->view->assign('rssItems', $rssItems);
 	}
+	
+	public function combinedRssAction() {
+		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
+		$posts = $this->postRepository->findPosts($this->settings);
+		
+		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
+		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
+		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
+		$combinedSettings = array();
+		foreach ($combinedPid as $key => $value) {
+			$combinedSettings[$value][pid] = $combinedPid[$key];
+			$combinedSettings[$value][detail] = $detailUid[$key];
+			$combinedSettings[$value][name] = $combinedNames[$key];
+		}
+		
+		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		foreach ($posts as $post) {
+			$post->setDetailUid((int) $combinedSettings[$post->getPid()][detail]);
+			$post->setBlogName($combinedSettings[$post->getPid()][name]);
+			$combinedPosts->attach($post);
+		}
+		
+		$rssItems = array();
 
-	public function commentsRssAction () {
+		foreach ($combinedPosts as $key => $post) {
+			$rssItems[$key]['title'] = $post->getTitle();
+			$rssItems[$key]['date'] = $post->getDate();
+			$rssItems[$key]['post'] = $post->getUid();
+			$rssItems[$key]['comments'] = $post->getComments();
+			$rssItems[$key]['detailUid'] = $combinedSettings[$post->getPid()][detail];
+
+			$content = $post->getContent();
+			//render Description
+			if ($post->getTeaserDescription()) {
+				$description = $post->getTeaserDescription();
+			} else {
+				$singleCounter = 0;
+				foreach ($content as $element) {
+					if ($singleCounter == 0 && $element->getBodytext()) {
+						$description = $element->getBodytext();
+						$singleCounter++;
+					}
+				}
+			}
+			$rssItems[$key]['description'] = strip_tags($description);
+			$categories = '';
+
+			foreach ($post->getCategories() as $category) {
+				$categories .= $category->getTitle() . ' ';
+			}
+			$rssItems[$key]['categories'] = $categories;
+			$rssItems[$key]['views'] = $post->getViews();
+		}
+		$this->view->assign('rssItems', $rssItems);
+	}
+
+	public function commentsRssAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['post'])) {
 			$postId = $request['post'];
 			$post = $this->postRepository->findByUid((int) $postId);
-			$rssItems = array ();
+			$rssItems = array();
 			if ($post->getComments()) {
 				$comments = $post->getComments()->toArray();
 				$comments = array_reverse($comments);
 				foreach ($comments as $key => $comment) {
 					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . Tx_Extbase_Utility_Localization::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
-					$rssItems[$key]['section'] = 'comment_'.$comment->getUid();
+					$rssItems[$key]['section'] = 'comment_' . $comment->getUid();
 					$rssItems[$key]['date'] = $comment->getDate();
 					$rssItems[$key]['message'] = $comment->getMessage();
 					$rssItems[$key]['post'] = $postId;
@@ -314,7 +390,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		}
 	}
 
-	protected function prefillCommentForm () {
+	protected function prefillCommentForm() {
 		$newComment = '';
 		if ($GLOBALS['TSFE']->loginUser) {
 			$newComment['author'] = $GLOBALS['TSFE']->fe_user->user['name'];
@@ -333,7 +409,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		return $newComment;
 	}
 
-	protected function checkAllowComments ($post) {
+	protected function checkAllowComments($post) {
 		$allowComments = FALSE;
 		if ($post->getAllowComments() == 0) {
 			$allowComments = TRUE;
@@ -370,15 +446,15 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) && in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])) {
 			$allowComments = TRUE;
 		}
-		if($this->settings['comments']['allowComments'] == 0){
+		if ($this->settings['comments']['allowComments'] == 0) {
 			$allowComments = FALSE;
 		}
 		return $allowComments;
 	}
 
-	protected function createBreadCrumb ($post) {
+	protected function createBreadCrumb($post) {
 		$posts = $this->postRepository->findPosts($this->settings)->toArray();
-		$breadCrumb = array ();
+		$breadCrumb = array();
 		foreach ($posts as $key => $value) {
 			if ($post->getUid() == $value->getUid()) {
 				$breadCrumb[0] = $posts[$key - 1];
@@ -388,15 +464,14 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		return $breadCrumb;
 	}
 
-	protected function updateViews ($post) {
-		if(!$GLOBALS['BE_USER']->user['uid']){
+	protected function updateViews($post) {
+		if (!$GLOBALS['BE_USER']->user['uid']) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
 		}
-		
 	}
 
-	protected function createDescription ($post, $content) {
+	protected function createDescription($post, $content) {
 		$description = '';
 		if ($post->getTeaserDescription()) {
 			$description = $post->getTeaserDescription();
@@ -412,10 +487,8 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		$description = strip_tags($description);
 		return $description;
 	}
-	
 
-
-	protected function findSubCategories ($category, $categoryRepository) {
+	protected function findSubCategories($category, $categoryRepository) {
 		$subCategories = $category->getUid();
 		$childs = $categoryRepository->findChilds($category);
 		if ($childs) {
@@ -431,7 +504,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			}
 		}
 		return $subCategories;
-	}	
+	}
 
 }
 

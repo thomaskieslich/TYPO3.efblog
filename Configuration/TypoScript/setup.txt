@@ -342,3 +342,29 @@ commentsRss {
   }
 
 }
+
+combinedRss = PAGE
+combinedRss {
+  typeNum = 102
+  10 = USER
+  10 {
+	userFunc = tx_extbase_core_bootstrap->run
+	pluginName = Fe1
+	extensionName = Efblog
+	switchableControllerActions {
+		Post {
+			1 = combinedRss
+		}
+	}
+	settings =< plugin.tx_efblog.settings
+	persistence =< plugin.tx_efblog.persistence
+	view =< plugin.tx_efblog.view
+  }
+
+  config {
+	disableAllHeaderCode = 1
+	additionalHeaders = Content-type:application/xml
+	xhtml_cleaning = 0
+	admPanel = 0
+  }
+}
