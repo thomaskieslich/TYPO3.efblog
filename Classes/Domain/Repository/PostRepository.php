@@ -81,6 +81,17 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 					$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
 			);
 		}
+		
+		
+		//archive by year
+		else if ($settings['listView']['year'] > 0 && !$settings['listView']['month']) {
+			$begin = mktime(0, 0, 0, 1, 0, $settings['listView']['year']);
+			$end = mktime(0, 0, 0, 12, 31, $settings['listView']['year']);
+
+			$constraints[] = $query->logicalAnd(
+					$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
+			);
+		}
 
 		$archiveMode = $settings['listView']['displayArchived'];
 		// daysToArchive
