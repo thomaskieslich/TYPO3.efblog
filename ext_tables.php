@@ -158,9 +158,4 @@ $TCA['tx_efblog_domain_model_comment'] = array (
 	)
 );
 
-t3lib_div::loadTCA('fe_users');
-if (is_array($TCA['fe_users']['columns']['tx_extbase_type'])) {
-	$TCA['fe_users']['types']['Tx_Efblog_Domain_Model_Administrator'] = $TCA['fe_users']['types']['0'];
-	array_push($TCA['fe_users']['columns']['tx_extbase_type']['config']['items'], array ('LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:feuser_type', 'Tx_Efblog_Domain_Model_Administrator'));
-}
 ?>

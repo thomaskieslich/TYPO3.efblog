@@ -266,7 +266,6 @@ plugin.tx_efblog{
 		Tx_Efblog_Domain_Model_Administrator {
 			mapping {
 				tableName = fe_users
-				recordType = Tx_Efblog_Domain_Model_Administrator
 			}
 		}
 		}

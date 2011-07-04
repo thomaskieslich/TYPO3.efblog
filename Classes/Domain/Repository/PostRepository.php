@@ -72,7 +72,7 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		$today = time();
 		$constraints[] = $query->lessThan('date', $today);
 
-		//Month for archive
+		//archive by month and year
 		if ($settings['listView']['year'] > 0 && $settings['listView']['month'] > 0) {
 			$begin = mktime(0, 0, 0, $settings['listView']['month'], 0, $settings['listView']['year']);
 			$end = mktime(0, 0, 0, ($settings['listView']['month'] + 1), 0, $settings['listView']['year']);

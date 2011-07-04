@@ -182,7 +182,6 @@ $TCA['tx_efblog_domain_model_post'] = array (
 			'config' => array (
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
-				'foreign_table_where' => "AND fe_users.tx_extbase_type='Tx_efblog_Domain_Model_Administrator'",
 				'items' => array (
 					array ('--none--', 0),
 				),
