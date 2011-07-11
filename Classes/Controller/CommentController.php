@@ -3,8 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011 Thomas Kieslich <thomas.kieslich@gmail.com> *  	
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,10 +25,6 @@
 
 /**
  * Controller for the Comments object
- *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
 
