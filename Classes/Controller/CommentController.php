@@ -26,7 +26,7 @@
 /**
  * Controller for the Comments object
  */
-class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_AbstractController {
 
 	/**
 	 * @var Tx_Efblog_Domain_Repository_CommentRepository
@@ -34,12 +34,12 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 	protected $commentRepository;
 
 	/**
-	 * Initializes the current action
 	 *
+	 * @param Tx_Efblog_Domain_Repository_CommentRepository $commentRepository 
 	 * @return void
 	 */
-	protected function initializeAction () {
-		$this->commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
+	public function injectCommentRepository(Tx_Efblog_Domain_Repository_CommentRepository $commentRepository) {
+		$this->commentRepository = $commentRepository;
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 	 * @param Tx_Efblog_Domain_Model_Comment $newComment 
 	 * @return void
 	 */
-	public function createAction (Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment) {
+	public function createAction(Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment) {
 		if ($this->settings['comments']['allowComments'] == 1) {
 			$spampoints = $this->checkForSpam($newComment);
 			$newComment->setIp($_SERVER['REMOTE_ADDR']);
@@ -73,14 +73,14 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 			$this->flashMessageContainer->add('Your new Comments was created.');
 		}
 
-		$this->redirect('detail', 'Post', NULL, array ('post' => $post));
+		$this->redirect('detail', 'Post', NULL, array('post' => $post));
 	}
 
-	public function latestCommentsWidgetAction () {
+	public function latestCommentsWidgetAction() {
 		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
 	}
 
-	protected function checkForSpam ($newComment) {
+	protected function checkForSpam($newComment) {
 		$spampoints = 0;
 		//check dummy field
 		$dummyField = t3lib_div::_POST('tx_Efblog_fe');
@@ -133,8 +133,8 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 		return $spampoints;
 	}
 
-	protected function sendMessage ($post, $newComment) {
-		$recipient = array ();
+	protected function sendMessage($post, $newComment) {
+		$recipient = array();
 		if ($this->settings['comments']['messageAuthor']) {
 			$recipient[] = $post->getAuthor()->getEmail();
 		}
@@ -149,7 +149,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 
 		$sender = $this->settings['comments']['messageSender'];
 		$senderName = $this->settings['comments']['messageSenderName'];
-		$from = $senderName ? array ($sender => $senderName) : array ($sender);
+		$from = $senderName ? array($sender => $senderName) : array($sender);
 
 		$subject = 'new Comment: ' . $post->getTitle();
 
@@ -163,7 +163,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 			$htmlView = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
 			$htmlView->setFormat('html');
 			$htmlView->setTemplatePathAndFilename($templateRootPath . $htmlTemplate);
-			$htmlView->assignMultiple(array ('newComment' => $newComment, 'post' => $post));
+			$htmlView->assignMultiple(array('newComment' => $newComment, 'post' => $post));
 			$htmlContent = $htmlView->render();
 		}
 
@@ -173,7 +173,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 		$textView = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
 		$textView->setFormat('txt');
 		$textView->setTemplatePathAndFilename($templateRootPath . $textTemplate);
-		$textView->assignMultiple(array ('newComment' => $newComment, 'post' => $post));
+		$textView->assignMultiple(array('newComment' => $newComment, 'post' => $post));
 		$plainTextContent = $textView->render();
 
 		//Create Mail
@@ -187,8 +187,8 @@ class Tx_Efblog_Controller_CommentController extends Tx_Extbase_MVC_Controller_A
 		}
 
 		$mailMessage->setSubject($subject)
-			->setFrom($from)
-			->setTo($recipient);
+				->setFrom($from)
+				->setTo($recipient);
 
 		$mailMessage->send();
 		return $mailMessage->isSent();

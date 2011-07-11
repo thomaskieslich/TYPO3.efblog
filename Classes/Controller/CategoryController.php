@@ -26,7 +26,7 @@
 /**
  * Controller for the Category object
  */
-class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Efblog_Controller_CategoryController extends Tx_Efblog_Controller_AbstractController {
 
 	/**
 	 * @var Tx_Efblog_Domain_Repository_CategoryRepository
@@ -34,15 +34,15 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 	protected $categoryRepository;
 
 	/**
-	 * Initializes the current action
 	 *
+	 * @param Tx_Efblog_Domain_Repository_CategoryRepository $categoryRepository 
 	 * @return void
 	 */
-	protected function initializeAction () {
-		$this->categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
+	public function injectCategoryRepository(Tx_Efblog_Domain_Repository_CategoryRepository $categoryRepository) {
+		$this->categoryRepository = $categoryRepository;
 	}
 
-	public function categoryOverviewAction () {
+	public function categoryOverviewAction() {
 		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
 		$this->view->assign('maincategories', $mainCategories);
 
@@ -51,14 +51,14 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 	}
 
-	public function categoryWidgetAction () {
+	public function categoryWidgetAction() {
 		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
 		$categories = $this->createCategoryTree($mainCategories);
 		$this->view->assign('categories', $categories);
 	}
 
-	protected function createCategoryTree ($mainCategories) {
-		$categories = array ();
+	protected function createCategoryTree($mainCategories) {
+		$categories = array();
 
 		foreach ($mainCategories as $key => $category) {
 			$categories[$key]['title'] = $category->getTitle();
@@ -76,8 +76,8 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 		return $categories;
 	}
 
-	protected function findCategoryChilds ($category, $parent = 0) {
-		$child = array ();
+	protected function findCategoryChilds($category, $parent = 0) {
+		$child = array();
 		$childs = $this->categoryRepository->findChilds($category);
 		if ($childs) {
 			foreach ($childs as $key => $category) {
@@ -92,7 +92,7 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 		return $child;
 	}
 
-	protected function findCategoryLevels ($categories, $level = 0) {
+	protected function findCategoryLevels($categories, $level = 0) {
 		$return = $level;
 		$level_new = 0;
 		foreach ($categories as $category) {
@@ -106,7 +106,7 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 		return $return;
 	}
 
-	protected function updateCategoryValues ($category) {
+	protected function updateCategoryValues($category) {
 		$categoryLevels = $this->findCategoryLevels($category);
 		$levels = ($categoryLevels - 1) / 2;
 		if ($levels == 1) {
@@ -130,7 +130,7 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Extbase_MVC_Controller_
 		return $category;
 	}
 
-	protected function updateCategoryLevel ($parent) {
+	protected function updateCategoryLevel($parent) {
 		foreach ($parent['children'] as $child) {
 			$parent['link'] .= ',' . $child['link'];
 			$parent['posts'] += $child['posts'];

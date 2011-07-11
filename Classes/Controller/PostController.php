@@ -26,25 +26,20 @@
 /**
  * Controller for the Post object
  */
-class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractController {
 
 	/**
 	 * @var Tx_Efblog_Domain_Repository_PostRepository
 	 */
 	protected $postRepository;
-	/**
-	 *
-	 * @var object 
-	 */
-	protected $cObj;
 
 	/**
-	 * Initializes the current action
 	 *
+	 * @param Tx_Efblog_Domain_Repository_PostRepository $postRepository 
 	 * @return void
 	 */
-	protected function initializeAction() {
-		$this->postRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_PostRepository');
+	public function injectPostRepository(Tx_Efblog_Domain_Repository_PostRepository $postRepository) {
+		$this->postRepository = $postRepository;
 	}
 
 	/**
@@ -53,6 +48,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 	 * @return string The rendered list action
 	 */
 	public function listAction() {
+
 		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
@@ -306,11 +302,11 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 		}
 		$this->view->assign('rssItems', $rssItems);
 	}
-	
+
 	public function combinedRssAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
-		
+
 		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
 		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
 		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
@@ -320,14 +316,14 @@ class Tx_Efblog_Controller_PostController extends Tx_Extbase_MVC_Controller_Acti
 			$combinedSettings[$value][detail] = $detailUid[$key];
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
-		
+
 		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		foreach ($posts as $post) {
 			$post->setDetailUid((int) $combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
 			$combinedPosts->attach($post);
 		}
-		
+
 		$rssItems = array();
 
 		foreach ($combinedPosts as $key => $post) {
