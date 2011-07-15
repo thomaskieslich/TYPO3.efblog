@@ -1,4 +1,6 @@
 page.includeCSS.tx_efblog = EXT:efblog/Resources/Public/CSS/extension.css
+page.includeCSS.tx_efblog_uibase = EXT:efblog/Resources/Public/CSS/uithemes/base/jquery.ui.base.css
+page.includeCSS.tx_efblog_uitheme = EXT:efblog/Resources/Public/CSS/uithemes/ui-darkness/jquery-ui-1.8.14.custom.css
 page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
 
@@ -16,6 +18,8 @@ plugin.tx_efblog{
 
 		//Admin roles
 		superAdminGroup = 4
+
+		enableFuturePosts = 0
 
 
 		//Page
@@ -61,6 +65,10 @@ plugin.tx_efblog{
 			hideDivider = 1
 			showSocial = 1
 			closeCommentsAfter = 120
+		}
+
+		calendarView{
+
 		}
 
 		openGraph {
@@ -120,7 +128,7 @@ plugin.tx_efblog{
 		}
 
 		latestCommentsWidget{
-			
+
 			maxEntries = 12
 			cropLink = 33
 			showGravatar = 1
@@ -150,9 +158,9 @@ plugin.tx_efblog{
 			maxEntries = 25
 			title = Blog RSS
 			description = RSS for Blog
-			blogUrl = 
-			atomUrl = 
-			image = 
+			blogUrl =
+			atomUrl =
+			image =
 		}
 	}
 	widgets{
@@ -258,11 +266,6 @@ plugin.tx_efblog{
 					}
 				}
 			}
-		Tx_Extbase_Domain_Model_FrontendUser {
-			subclasses {
-				Tx_Efblog_Domain_Model_Administrator = Tx_Efblog_Domain_Model_Administrator
-			}
-		}
 		Tx_Efblog_Domain_Model_Administrator {
 			mapping {
 				tableName = fe_users

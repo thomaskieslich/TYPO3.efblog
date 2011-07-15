@@ -69,11 +69,15 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		}
 
 		if (isset($request['year'])) {
-			$this->settings['listView']['year'] = $this->request->getArgument('year');
+			$this->settings['year'] = $this->request->getArgument('year');
 		}
 
 		if (isset($request['month'])) {
-			$this->settings['listView']['month'] = $this->request->getArgument('month');
+			$this->settings['month'] = $this->request->getArgument('month');
+		}
+		
+		if (isset($request['day'])) {
+			$this->settings['day'] = $this->request->getArgument('day');
 		}
 
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
@@ -177,6 +181,21 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
+	
+	public function calendarViewAction() {
+		$this->settings['enableFuturePosts'] = 1;
+		$this->settings['listView']['sortDirection'] = asc;
+		$this->settings['listView']['maxEntries'] = 5;
+		$this->settings['year'] = 2011;
+		$this->settings['month'] = 7;
+		$this->settings['day'] = 15;
+		
+		$this->view->assign('todayPosts', $this->postRepository->findPosts($this->settings));
+		
+		$this->settings['startDate'] = strtotime('+1 day', strtotime($this->settings['year'].'-'.$this->settings['month'].'-'.$this->settings['day']));
+		$this->settings['year'] = $this->settings['month'] =$this->settings['day'] = Null;
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+	}
 
 	/**
 	 * return list by date
@@ -184,12 +203,12 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	public function dateMenuListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['year'])) {
-			$this->settings['listView']['year'] = $this->request->getArgument('year');
+			$this->settings['year'] = $this->request->getArgument('year');
 			$this->view->assign('year', $this->request->getArgument('year'));
 		}
 
 		if (isset($request['month'])) {
-			$this->settings['listView']['month'] = $this->request->getArgument('month');
+			$this->settings['month'] = $this->request->getArgument('month');
 			$this->view->assign('month', $this->request->getArgument('month'));
 		}
 

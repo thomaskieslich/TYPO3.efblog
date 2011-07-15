@@ -32,12 +32,13 @@
  */
 class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_Repository {
 
-	public function findPosts ($settings) {
+	public function findPosts($settings) {
 		$query = $this->createQuery();
 
-		if ($constraints = $this->createConstraintsFromSettings($query, $settings)) {
+		$constraints = $this->createConstraintsFromSettings($query, $settings);
+		if ($constraints) {
 			$query->matching(
-				$query->logicalAnd($constraints)
+					$query->logicalAnd($constraints)
 			);
 		}
 
@@ -55,12 +56,12 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	}
 
 	//Utilities
-	protected function createConstraintsfromSettings (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
-		$constraints = array ();
+	protected function createConstraintsfromSettings(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraints = array();
 
 		//categories
 		if ($settings['listView']['category'] || $settings['listView']['hideNoCategorized'] == 1) {
-		$constraints[] = $this->createCategoryConstraint($query, $settings);
+			$constraints[] = $this->createCategoryConstraint($query, $settings);
 		}
 
 		//search
@@ -68,30 +69,83 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			$constraints[] = $this->createSearchConstraint($query, $settings);
 		}
 
-		//no future posts
+		//date
+		if ($this->createDateTimeConstraint($query, $settings)) {
+			$constraints[] = $this->createDateTimeConstraint($query, $settings);
+		}
+
+		//archive
+		if ($settings['listView']['displayArchived']) {
+			$constraints[] = $this->createArchiveConstraint($query, $settings);
+		}
+
+		return $constraints;
+	}
+
+	/**
+	 * dateTime constraints
+	 * @param Tx_Extbase_Persistence_QueryInterface $query
+	 * @param array $settings
+	 * @return array 
+	 */
+	protected function createDateTimeConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraints = NULL;
+		$dateConstraints = array();
 		$today = time();
-		$constraints[] = $query->lessThan('date', $today);
 
-		//archive by month and year
-		if ($settings['listView']['year'] > 0 && $settings['listView']['month'] > 0) {
-			$begin = mktime(0, 0, 0, $settings['listView']['month'], 0, $settings['listView']['year']);
-			$end = mktime(0, 0, 0, ($settings['listView']['month'] + 1), 0, $settings['listView']['year']);
+		//no future posts
+		if ($settings['enableFuturePosts'] == 0) {
+			$dateConstraints[] = $query->lessThan('date', $today);
+		}
 
-			$constraints[] = $query->logicalAnd(
-					$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
-			);
+		
+		if ($settings['startDate']) {
+			$dateConstraints[] = $query->greaterThanOrEqual('date', $settings['startDate']);
+		}
+
+		
+		$start = '';
+		$stop = '';
+		
+		if($settings['year']){
+			$date = $settings['year'].'-1-1';
+			$start = strtotime($date);
+			$stop = strtotime('+1 year', strtotime($date));
 		}
 		
+		if($settings['month']){
+			$date = $settings['year'].'-'.$settings['month'].'-1';
+			$start = strtotime($date);
+			$stop = strtotime('+1 month', strtotime($date));
+		}
 		
-		//archive by year
-		else if ($settings['listView']['year'] > 0 && !$settings['listView']['month']) {
-			$begin = mktime(0, 0, 0, 1, 0, $settings['listView']['year']);
-			$end = mktime(0, 0, 0, 12, 31, $settings['listView']['year']);
-
-			$constraints[] = $query->logicalAnd(
-					$query->greaterThanOrEqual('date', $begin), $query->lessThanOrEqual('date', $end)
+		if($settings['day']){
+			$date = $settings['year'].'-'.$settings['month'].'-'.$settings['day'];
+			$start = strtotime($date);
+			$stop = strtotime('+1 day', strtotime($date));
+		}
+		
+		if ($settings['year'] || $settings['month'] || $settings['day']) {
+			$dateConstraints[] = $query->logicalAnd(
+							$query->greaterThanOrEqual('date', $start), $query->lessThanOrEqual('date', $stop)
 			);
 		}
+
+		if ($dateConstraints) {
+			$constraints = $query->logicalAnd($dateConstraints);
+		}
+		return $constraints;
+	}
+
+	/**
+	 * set constraints for archived posts
+	 * @param Tx_Extbase_Persistence_QueryInterface $query
+	 * @param array $settings
+	 * @return array 
+	 */
+	protected function createArchiveConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+		$constraints = NULL;
+		$archiveConstraints = array();
 
 		$archiveMode = $settings['listView']['displayArchived'];
 		// daysToArchive
@@ -99,31 +153,34 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			$archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int) $settings['listView']['daysToArchive'], date("Y"));
 
 			if ($archiveMode == 'archived') {
-				$constraints[] = $query->lessThan('date', $archiveDate);
+				$archiveConstraints[] = $query->lessThan('date', $archiveDate);
 			} elseif ($archiveMode == 'active') {
-				$constraints[] = $query->greaterThanOrEqual('date', $archiveDate);
+				$archiveConstraints[] = $query->greaterThanOrEqual('date', $archiveDate);
 			}
 		}
 		// archived
 		else {
 			if ($archiveMode == 'archived') {
-				$constraints[] = $query->logicalAnd(
-						$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
+				$archiveConstraints[] = $query->logicalAnd(
+								$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
 				);
 			} elseif ($archiveMode == 'active') {
-				$constraints[] = $query->logicalOr(
-						$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
+				$archiveConstraints[] = $query->logicalOr(
+								$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
 				);
 			}
 		}
 
-
+		if ($archiveConstraints) {
+			$constraints = $query->logicalAnd($archiveConstraints);
+		}
 		return $constraints;
 	}
 
-	protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+	protected function createCategoryConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 		$constraint = NULL;
-		$categoryConstraints = array ();
+		$categories = NULL;
+		$categoryConstraints = array();
 		if ($settings['listView']['category']) {
 			$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
 		} else {
@@ -156,10 +213,10 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		return $constraint;
 	}
 
-	protected function createSearchConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+	protected function createSearchConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 
 		$constraint = NULL;
-		$searchConstraints = array ();
+		$searchConstraints = array();
 		$terms = t3lib_div::trimExplode(' ', $settings['listView']['searchPhrase'], TRUE);
 		$fields = t3lib_div::trimExplode(',', $settings['listView']['searchFields'], TRUE);
 
@@ -172,8 +229,8 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		return $constraint;
 	}
 
-	protected function createOrderingsfromSettings ($settings) {
-		$orderings = array ();
+	protected function createOrderingsfromSettings($settings) {
+		$orderings = array();
 		$orderList = t3lib_div::trimExplode(',', $settings['listView']['orderBy'], TRUE);
 		$sortList = t3lib_div::trimExplode(',', $settings['listView']['sortDirection'], FALSE);
 
@@ -181,8 +238,8 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			foreach ($orderList as $orderNum => $orderItem) {
 				if ($sortList[$orderNum]) {
 					$orderings[$orderItem] = ((strtolower($sortList[$orderNum]) == 'desc') ?
-							Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING :
-							Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING);
+									Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING :
+									Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING);
 				} else {
 					$orderings[$orderItem] = Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING;
 				}
@@ -191,19 +248,19 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		return $orderings;
 	}
 
-	public function countCategoryPosts (Tx_Efblog_Domain_Model_Category $category) {
+	public function countCategoryPosts(Tx_Efblog_Domain_Model_Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
-			$query->contains('categories', $category)
+				$query->contains('categories', $category)
 		);
 		return $query->execute();
 	}
 
-	public function searchPost ($searchString = '') {
+	public function searchPost($searchString = '') {
 		$query = $this->createQuery();
 
 		$terms = t3lib_div::trimExplode(' ', $searchString, TRUE);
-		$constraints = array ();
+		$constraints = array();
 		if ($terms) {
 			foreach ($terms as $term) {
 				$constraints[] = $query->like('title', '%' . $term . '%');
@@ -212,7 +269,7 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			}
 		}
 		$query->matching(
-			$query->logicalOr($constraints)
+				$query->logicalOr($constraints)
 		);
 
 		return $query->execute();
