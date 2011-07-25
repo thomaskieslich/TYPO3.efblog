@@ -7,16 +7,16 @@
 
 	<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 		<f:if condition="{imageIterator.cycle} == 1">
-				<f:if condition="{dam}">
-					<f:then>
-						<tk:metaTag property="og:image" 
-									content="{f:uri.image(src:'{image.file_path}{image.file_name}', maxWidth:'100')}" 
-									forceAbsoluteUrl="1" />
-					</f:then>
-					<f:else>
-						<tk:metaTag property="og:image" content="{f:uri.image(src:'uploads/pics/{image}', maxWidth:'100')}" forceAbsoluteUrl="1" />
-					</f:else>
-				</f:if> 
+			<f:if condition="{dam}">
+				<f:then>
+					<tk:metaTag property="og:image" 
+								content="{f:uri.image(src:'{image.file_path}{image.file_name}', maxWidth:'100')}" 
+								forceAbsoluteUrl="1" />
+				</f:then>
+				<f:else>
+					<tk:metaTag property="og:image" content="{f:uri.image(src:'uploads/pics/{image}', maxWidth:'100')}" forceAbsoluteUrl="1" />
+				</f:else>
+			</f:if> 
 		</f:if>
 	</f:for>
 	<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
@@ -35,15 +35,21 @@
 </f:if>
 
 <div id="tx-efblog-detail-social">
-	<div class="facebook">
-		<!--FB Like-->
-		<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
-		<fb:like layout="standard" show_faces="true" width="230" font="arial" colorscheme="light"></fb:like>
+	<div class="googleplus">
+		<g:plusone size="medium"></g:plusone>
+		<![CDATA[
+		<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+		  {lang: 'de'}
+		</script>
+		]]>
 	</div>
-
 	<div class="twitter">
-		<!--	Twitter-->
 		<a href="http://twitter.com/share" class="twitter-share-button" data-url="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" data-text="{post.title}" data-count="horizontal" data-via="thomaskieslich" data-lang="de">Tweet</a>
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
+	<div class="facebook">
+		<div id="fb-root"></div>
+		<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
+		<fb:like send="false" layout="button_count" width="100" show_faces="false" action="recommend"></fb:like>
 	</div>
 </div>

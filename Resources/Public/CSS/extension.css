@@ -134,7 +134,7 @@ border: none;
 	margin-bottom: 14px;
 	padding-top: 6px;
 }
-
+/*social*/
 #tx-efblog-detail-social{
 	border-radius: 6px;
 	border: 1px solid #353333;
@@ -145,15 +145,20 @@ border: none;
 	width: 554px;
 }
 
-#tx-efblog-detail-social .facebook{
+#tx-efblog-detail-social .googleplus{
 	float: left;
-	width: 60%;
 }
 
 #tx-efblog-detail-social .twitter{
-	float: right;
-	width: 40%;
+	float: left;
+	margin-right:30px;
 }
+
+#tx-efblog-detail-social .facebook{
+	float: left;
+}
+
+
 
 #tx-efblog-detail-footer{
     clear: both;
