@@ -117,6 +117,7 @@ CREATE TABLE tx_efblog_domain_model_comment (
 	message text NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
 	spampoints int(11) DEFAULT '0' NOT NULL,
+	spam_categories text,
 	ip text NOT NULL,
 	parent_comment int(11) unsigned DEFAULT '0',
 

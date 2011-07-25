@@ -1,15 +1,17 @@
 {namespace tk=Tx_Efblog_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
-	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
+	<tk:format.raw>
 	<script>
 		$(function() {
 			$.datepicker.setDefaults($.datepicker.regional['de']);
 			
 			
 			$("#datepicker").datepicker({ 
-				onSelect: function(value, date) { 
-					alert('The chosen date is ' + value); 
+				dateFormat: '@',
+
+				onSelect: function(value, date) { 					
+					window.location.href = '<f:uri.action action="calendarView" absolute="TRUE" />&tx_efblog_fe1[date]=' + value;
 				},
 				showWeek: false,
 				inline: true
@@ -17,20 +19,43 @@
 
 		});
 	</script>
+	</tk:format.raw>
     <div class="tx-efblog-calendar-container">
 
-		<div id="datepicker" style="float: left; width: 240px;">
-		</div>
+		<div id="datepicker" style="float: left; width: 240px;"></div>
 		<div id="calEntries" style="float: right; width: 420px;">
-			<h2>today</h2>
-			<f:for each="{todayPosts}" as="today">
-				{today.date -> tk:format.date(format:'%d. %B %Y - %H:%M')} Uhr - {today.title -> f:link.action(action : 'detail', arguments : '{post:today}', pageUid : '{settings.detailUid}')}<br>
-			</f:for>
-			
-			<h2>posts</h2>
-			<f:for each="{posts}" as="post">
-				{post.date -> tk:format.date(format:'%d. %B %Y - %H:%M')} Uhr - {post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
-			</f:for>
+			<h2><tk:format.date format="%d. %B %Y">@{thisDay}</tk:format.date></h2>
+			<f:if condition="{todayPosts}">
+				<f:then>
+					<f:for each="{todayPosts}" as="today"  iteration="todayIterator">
+						<p>{today.date -> tk:format.date(format:'%H:%M')} Uhr - 
+						{today.title -> f:link.action(action : 'detail', arguments : '{post:today}', pageUid : '{settings.detailUid}')}</p>
+					</f:for>
+				</f:then>
+				<f:else>
+					<p>Keine Termine für diesen Tag.</p>
+				</f:else>				
+			</f:if>
+
+
+			<div style="border-bottom: 1px dotted #96bd48;">&nbsp;</div>
+			<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
+				<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
+					<f:groupedFor each="{postsByMonth}" as="postsByDay" groupBy="dayOf{date}"  groupKey="day">
+						<f:for each="{postsByDay}" as="post"  iteration="dayIterator">
+							<f:if condition="{dayIterator.isFirst}">
+								<f:then>
+									<h2>{post.date -> tk:format.date(format:'%d. %B %Y')}</h2>
+									{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
+								</f:then>
+								<f:else>
+									{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
+								</f:else>
+							</f:if>
+						</f:for>
+					</f:groupedFor>
+				</f:groupedFor>
+			</f:groupedFor>
 		</div>
 	</div>
 

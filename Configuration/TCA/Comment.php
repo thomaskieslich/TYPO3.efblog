@@ -138,6 +138,12 @@ $TCA['tx_efblog_domain_model_comment'] = array(
 				'eval' => 'int'
 			),
 		),
+		'spam_categories' => array(
+			'exclude'	=> 0,
+			'config'	=> array(
+				'type' => 'input'
+			),
+		),
 		'ip' => array(
 			'exclude'	=> 0,
 			'label'		=> 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment_ip',

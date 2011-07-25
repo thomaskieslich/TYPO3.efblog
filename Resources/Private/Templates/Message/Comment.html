@@ -30,11 +30,14 @@
         </div>
 		<hr>
 		<div>
-            {tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')}: {newComment.spampoints}
+            <h2>{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):</h2> 
+			<f:for each="{newComment.spamCategories}" as="spamcategory" key="label">
+				{label}: {spamcategory}<br>
+			</f:for>
         </div>
 		<div>
 			<f:if condition='{newComment.hidden}'>
-				{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}
+				<strong style="color: #f90;">{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}</strong>
 			</f:if>            
         </div>
 	</body>

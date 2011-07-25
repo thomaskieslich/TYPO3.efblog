@@ -102,7 +102,6 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 		if ($settings['startDate']) {
 			$dateConstraints[] = $query->greaterThanOrEqual('date', $settings['startDate']);
 		}
-
 		
 		$start = '';
 		$stop = '';

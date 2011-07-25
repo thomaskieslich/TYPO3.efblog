@@ -50,8 +50,14 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 	 */
 	public function createAction(Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment) {
 		if ($this->settings['comments']['allowComments'] == 1) {
-			$spampoints = $this->checkForSpam($newComment);
+			$spamcategories = $this->checkForSpam($newComment);
 			$newComment->setIp($_SERVER['REMOTE_ADDR']);
+			$newComment->setSpamCategories($spamcategories);
+			
+			$spampoints = 0;
+			foreach($spamcategories as $key => $value){
+				$spampoints += $value;
+			}
 			$newComment->setSpampoints($spampoints);
 
 			if ($spampoints > $this->settings['comments']['spam']['spampointsToHide']) {
@@ -63,7 +69,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 
 
 			if ($this->settings['comments']['messageAuthor'] || $this->settings['comments']['messageSuperAdmin']) {
-				if ($spampoints < $this->settings['comments']['messageAllSpam']) {
+				if ($this->settings['comments']['messageAllSpam']) {
 					$this->sendMessage($post, $newComment);
 				} elseif ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
 					$this->sendMessage($post, $newComment);
@@ -81,46 +87,86 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 	}
 
 	protected function checkForSpam($newComment) {
-		$spampoints = 0;
+		$spampoints = array();
+
 		//check dummy field
-		$dummyField = t3lib_div::_POST('tx_Efblog_fe');
-		if ($dummyField[newComment][link] > 0) {
-			$spampoints += 100;
-		}
-		//bodycheck
-		$message = t3lib_div::strtolower($newComment->getMessage());
-		//check body length
-		$bodyLength = strlen($message);
-		if ($bodyLength < $this->settings['comments']['spam']['bodyLength']) {
-			$spampoints += 20;
+		$dummyField = t3lib_div::_POST('tx_efblog_fe');
+		if ($dummyField[newComment][link]) {
+			$spampoints['dummy'] = 100;
 		}
 
-		//start with
-		$messageArray = t3lib_div::trimExplode(' ', $message, TRUE, 500);
-		$bodyStartWith = t3lib_div::strtolower($this->settings['comments']['spam']['bodyStartWith']);
-		$bodyStartWords = t3lib_div::trimExplode(',', $bodyStartWith, TRUE);
-		$firstWord = in_array($messageArray[0], $bodyStartWords);
-		if ($firstWord) {
-			$spampoints += 10;
+		//author
+		$author = t3lib_div::strtolower($newComment->getAuthor());
+		$authorKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['authorKeywords'], TRUE);
+		$authorPoints = 0;
+		foreach ($authorKeywords as $keyword) {
+			$authorPoints += substr_count($author, $keyword);
+		}
+		if ($authorPoints) {
+			$spampoints[authorPoints] = $authorPoints * $this->settings['comments']['spam']['authorKeywordsPoints'];
 		}
 
-		//Keyword search 		
-		$keywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['keywords'], TRUE);
-		$messageArray = array_count_values($messageArray);
-		foreach ($keywords as $word) {
-			$spampoints += $messageArray[$word] * $this->settings['comments']['spam']['keywordMultiplicator'];
-		}
 
-		//link count
-		$http = t3lib_div::trimExplode('http://', $message, TRUE);
-		$spampoints += count($http) * $this->settings['comments']['spam']['bodyLinkMultiplicator'];
-		$www = t3lib_div::trimExplode('www.', $message, TRUE);
-		$spampoints += count($www) * $this->settings['comments']['spam']['bodyLinkMultiplicator'];
+		//email
+		$email = t3lib_div::strtolower($newComment->getEmail());
+		if ($email && !substr_count($email, '@')) {
+			$spampoints[emailNoAt] = (int) $this->settings['comments']['spam']['emailNoAtPoints'];
+		}
 
 		//website
 		$websiteLength = strlen($newComment->getWebsite());
 		if ($websiteLength > $this->settings['comments']['spam']['websiteLength']) {
-			$spampoints += $websiteLength - $this->settings['comments']['spam']['websiteLength'];
+			$spampoints[websiteLength] += $websiteLength - $this->settings['comments']['spam']['websiteLengthPoints'];
+		}
+
+		//location
+		$location = t3lib_div::strtolower($newComment->getLocation());
+		$locationKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['locationKeywords'], TRUE);
+		$locationPoints = 0;
+		foreach ($locationKeywords as $keyword) {
+			$locationPoints += substr_count($location, $keyword);
+		}
+		if ($locationPoints) {
+			$spampoints[locationPoints] = $locationPoints * $this->settings['comments']['spam']['locationKeywordsPoints'];
+		}
+
+		//title
+		$title = t3lib_div::strtolower($newComment->getTitle());
+		$titleKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['titleKeywords'], TRUE);
+		$titlePoints = 0;
+		foreach ($titleKeywords as $keyword) {
+			$titlePoints += substr_count($title, $keyword);
+		}
+		if ($titlePoints) {
+			$spampoints[titlePoints] = $titlePoints * $this->settings['comments']['spam']['titleKeywordsPoints'];
+		}
+
+		//message
+		$message = t3lib_div::strtolower($newComment->getMessage());
+
+		//message length
+		$messageLength = strlen($message);
+		if ($messageLength < $this->settings['comments']['spam']['messageLength']) {
+			$spampoints[messageLength] += $this->settings['comments']['spam']['messageLengthPoints'];
+		}
+
+		//message start with
+		$messageArray = t3lib_div::trimExplode(' ', $message, TRUE, 500);
+		$messageStartWith = t3lib_div::strtolower($this->settings['comments']['spam']['messageStartWith']);
+		$messageStartWords = t3lib_div::trimExplode(',', $messageStartWith, TRUE);
+		$firstWord = in_array($messageArray[0], $messageStartWords);
+		if ($firstWord) {
+			$spampoints[messageStartWith] += $this->settings['comments']['spam']['messageStartWithPoints'];
+		}
+
+		//message Keyword search 		
+		$keywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['messageKeywords'], TRUE);
+		$keywordPoints = 0;
+		foreach ($keywords as $keyword) {
+			$keywordPoints += substr_count($message, $keyword);
+		}
+		if ($keywordPoints) {
+			$spampoints[messageKeywords] += $keywordPoints * $this->settings['comments']['spam']['messageKeywordsPoints'];
 		}
 
 		//blockedIps
@@ -135,7 +181,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 
 	protected function sendMessage($post, $newComment) {
 		$recipient = array();
-		if ($this->settings['comments']['messageAuthor']) {
+		if ($this->settings['comments']['messageAuthor'] && $post->getAuthor()->getEmail()) {
 			$recipient[] = $post->getAuthor()->getEmail();
 		}
 

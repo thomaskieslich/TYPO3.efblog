@@ -185,16 +185,27 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	public function calendarViewAction() {
 		$this->settings['enableFuturePosts'] = 1;
 		$this->settings['listView']['sortDirection'] = asc;
-		$this->settings['listView']['maxEntries'] = 5;
-		$this->settings['year'] = 2011;
-		$this->settings['month'] = 7;
-		$this->settings['day'] = 15;
+		$today = '';
+		
+		$request = $this->request->getArguments();
+		if (isset($request['date'])) {
+			$today = $request['date']/1000;
+		}
+		else{
+			$today = time();
+		}		
+				
+		$this->settings['startDate'] = strtotime('+1 day', mktime(0,0,0,date('n'),date('j'),date('Y')));
+		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+		
+		
+		$this->settings['startDate'] = Null;
+		$this->settings['year'] = date('Y', $today);
+		$this->settings['month'] = date('m', $today);
+		$this->settings['day'] = date('d', $today);
 		
 		$this->view->assign('todayPosts', $this->postRepository->findPosts($this->settings));
-		
-		$this->settings['startDate'] = strtotime('+1 day', strtotime($this->settings['year'].'-'.$this->settings['month'].'-'.$this->settings['day']));
-		$this->settings['year'] = $this->settings['month'] =$this->settings['day'] = Null;
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+		$this->view->assign('thisDay', $today);
 	}
 
 	/**

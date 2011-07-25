@@ -546,6 +546,10 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
     public function getMonthOf() {
         return $this->date->format('m');
     }
+	
+	public function getDayOf() {
+        return $this->date->format('d');
+    }
 
 }
 

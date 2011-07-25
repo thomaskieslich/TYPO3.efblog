@@ -1,6 +1,6 @@
 page.includeCSS.tx_efblog = EXT:efblog/Resources/Public/CSS/extension.css
 page.includeCSS.tx_efblog_uibase = EXT:efblog/Resources/Public/CSS/uithemes/base/jquery.ui.base.css
-page.includeCSS.tx_efblog_uitheme = EXT:efblog/Resources/Public/CSS/uithemes/ui-darkness/jquery-ui-1.8.14.custom.css
+page.includeCSS.tx_efblog_uitheme = EXT:efblog/Resources/Public/CSS/uithemes/smoothness/jquery-ui-1.8.14.custom.css
 page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
 
@@ -102,18 +102,35 @@ plugin.tx_efblog{
 
 			//Spam protection
 			spam{
-				//if shorter 20 points +
-				bodyLength = 20
-				bodyStartWith = Interesting, Sorry, Nice, Cool
-				keywords = viagra, penis, casino
-				keywordMultiplicator = 10
-				bodyLinkMultiplicator = 5
+				authorKeywords = www,http
+				authorKeywordsPoints = 30
+
+				emailNoAtPoints = 25
+
 				websiteLength = 30
+				websiteLengthPoints = 30
+
+				locationKeywords = http, www
+				locationKeywordsPoints = 40
+
+				titleKeywords = http, www
+				titleKeywordsPoints = 30
+
+				messageLength = 20
+				messageLengthPoints = 25
+
+				messageStartWith = Interesting, Sorry, Nice, Cool
+				messageStartWithPoints = 15
+
+				messageKeywords = http,www,viagra, penis, casino
+				messageKeywordsPoints = 10
+
+				
 				blockedIps =
 				ipPoints = 60
 
-				spampointsToHide = 55
-				spampointsToDie = 99
+				spampointsToHide = 30
+				spampointsToDie = 999
 			}
 		}
 

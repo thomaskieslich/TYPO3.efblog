@@ -25,54 +25,49 @@
  * ************************************************************* */
 
 /**
- * Comments
- *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Comments Model
  */
 class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * hidden
-	 *
 	 * @var integer
 	 */
 	protected $hidden;
 	/**
 	 * post
 	 *
-	 * @var string $post
+	 * @var Tx_Efblog_Domain_Model_Post $post
 	 */
 	protected $post;
 	/**
 	 * @var string
-	 * @validate NotEmpty
-	 * @validate StringLength(maximum = 120)
+	 * @validate NotEmpty, Text, StringLength(maximum = 120)
 	 */
 	protected $author;
 	/**
 	 * @var string
+	 * @validate Tx_Efblog_Domain_Validator_EmptyEmailValidator
 	 */
 	protected $email;
 	/**
 	 * @var string
+	 * @validate Text
 	 */
 	protected $website;
 	/**
 	 * @var string
+	 * @validate Text
 	 */
 	protected $location;
 	/**
 	 * @var string
-	 * @validate NotEmpty
-	 * @validate StringLength(maximum = 120)
+	 * @validate NotEmpty, Text, StringLength(maximum = 250)
 	 */
 	protected $title;
 	/**
 	 * @var string
-	 * @validate NotEmpty
-	 * @validate StringLength(maximum = 1200)
+	 * @validate NotEmpty StringLength(maximum = 2000)
 	 */
 	protected $message;
 	/**
@@ -84,7 +79,11 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	protected $spampoints;
 	/**
-	 * @var integer
+	 * @var array
+	 */
+	protected $spamCategories;
+	/**
+	 * @var string
 	 */
 	protected $ip;
 	/**
@@ -109,6 +108,10 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 		$this->hidden = $hidden;
 	}
 	
+	
+	/**
+	 * @return Tx_Efblog_Domain_Model_Post
+	 */
 	public function getPost () {
 		return $this->post;
 	}
@@ -253,19 +256,29 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	public function getDate () {
 		return $this->date;
 	}
+	
+	public function getSpampoints() {
+		return $this->spampoints;
+	}
 
-	/**
-	 * Sets the spampoints
-	 *
-	 * @param integer $spampoints
-	 * @return void
-	 */
-	public function setSpampoints ($spampoints) {
+	public function setSpampoints($spampoints) {
 		$this->spampoints = $spampoints;
 	}
 
-	public function getSpampoints () {
-		return $this->spampoints;
+		
+
+	/**
+	 * Sets the spamCategories
+	 *
+	 * @param array $spamCategories
+	 * @return void
+	 */
+	public function setSpamCategories ($spamCategories) {
+		$this->spamCategories = serialize($spamCategories);
+	}
+
+	public function getSpamCategories () {
+		return unserialize($this->spamCategories);
 	}
 
 	/**

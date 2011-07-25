@@ -1,0 +1,10 @@
+<script type="text/javascript">
+jQuery(function() {
+	jQuery("#{id}").text('hä');
+	
+	jQuery("#{id}").text({
+		source: "{f:widget.uri(action:'calendar', ajax: 1)}"
+	});
+});
+</script>
+{f:widget.uri(action:'calendar', ajax: 1)}

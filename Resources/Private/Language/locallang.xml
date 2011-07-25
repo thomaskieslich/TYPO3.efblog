@@ -123,6 +123,7 @@
 			<label index="error.code.1238108069">The given &lt;strong&gt;%s&lt;/strong&gt; is too long</label>
 			<label index="error.code.1221559976">The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email address</label>
 			<label index="error.code.1221560718">The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</label>
+			<label index="error.code.1221565786">The given &lt;strong&gt;%s&lt;/strong&gt; should not contain sourcecode.</label>
 		</languageKey>
 
 
@@ -217,6 +218,27 @@
 			<label index="widget_dateMenu_header">Archiv</label>
 			<label index="widget_dateMenu_item">Eintrag</label>
 			<label index="widget_dateMenu_items">Einträge</label>
+			
+			<!--Error Messages-->
+			<label index="notice_error">Fehler!</label>
+			<label index="notice_noPost">Es ist kein Beitrag vorhanden!</label>
+
+			<label index="error.errorsOccurred">Folgende Fehler sind aufgetreten:</label>
+			<label index="error.Comment.createAction">Konnte keinen Kommentar erstellen</label>
+
+			<label index="property_author">Name</label>
+			<label index="property_email">Mail</label>
+			<label index="property_website">Webseite</label>
+			<label index="property_location">Ort</label>
+			<label index="property_title">Titel</label>
+			<label index="property_message">Kommentar</label>
+
+			<label index="error.code.1238108067">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang oder zu kurz.</label>
+			<label index="error.code.1238108068">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu kurz.</label>
+			<label index="error.code.1238108069">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang.</label>
+			<label index="error.code.1221559976">Das Feld &lt;strong&gt;%s&lt;/strong&gt; enthält keine korrekte E-Mail Adresse.</label>
+			<label index="error.code.1221560718">Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf nicht leer sein.</label>
+			<label index="error.code.1221565786">Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf keinen Quellcode enthalten.</label>
 
 		</languageKey>
 
