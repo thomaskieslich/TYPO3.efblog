@@ -75,7 +75,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		if (isset($request['month'])) {
 			$this->settings['month'] = $this->request->getArgument('month');
 		}
-		
+
 		if (isset($request['day'])) {
 			$this->settings['day'] = $this->request->getArgument('day');
 		}
@@ -181,29 +181,28 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
-	
+
 	public function calendarViewAction() {
 		$this->settings['enableFuturePosts'] = 1;
 		$this->settings['listView']['sortDirection'] = asc;
 		$today = '';
-		
+
 		$request = $this->request->getArguments();
 		if (isset($request['date'])) {
-			$today = $request['date']/1000;
-		}
-		else{
+			$today = $request['date'] / 1000;
+		} else {
 			$today = time();
-		}		
-				
-		$this->settings['startDate'] = strtotime('+1 day', mktime(0,0,0,date('n'),date('j'),date('Y')));
+		}
+
+		$this->settings['startDate'] = strtotime('+1 day', mktime(0, 0, 0, date('n'), date('j'), date('Y')));
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-		
-		
+
+
 		$this->settings['startDate'] = Null;
 		$this->settings['year'] = date('Y', $today);
 		$this->settings['month'] = date('m', $today);
 		$this->settings['day'] = date('d', $today);
-		
+
 		$this->view->assign('todayPosts', $this->postRepository->findPosts($this->settings));
 		$this->view->assign('thisDay', $today);
 	}
@@ -459,12 +458,14 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			$allowComments = TRUE;
 		}
 
-//Post Owner
-		if ($post->getAuthor() && $GLOBALS['TSFE']->fe_user->user['uid'] == $post->getAuthor()->getUid()) {
-			$allowComments = TRUE;
+		//Post Owner
+		foreach ($post->getAuthor() as $author) {
+			if ($author && $GLOBALS['TSFE']->fe_user->user['uid'] == $author->getUid()) {
+				$allowComments = TRUE;
+			}
 		}
 
-//Superadmin
+		//Superadmin
 		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) && in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])) {
 			$allowComments = TRUE;
 		}

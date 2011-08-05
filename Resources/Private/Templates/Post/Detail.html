@@ -62,7 +62,19 @@
                     </div>                
                 </f:for>
             </div>
-			<h3>{f:translate(key : 'detail_from')} {post.author.name}</h3>
+			<h3>{f:translate(key : 'detail_from')} 
+				<f:for each="{post.author}" as="pauthor"  iteration="authorIterator">
+					<f:if condition="{authorIterator.isLast}">
+						<f:then>
+							{pauthor.name}
+						</f:then>
+						<f:else>
+							{pauthor.name},
+						</f:else>
+					</f:if>
+					
+				</f:for>
+				</h3>
 			<!--Social-->
 			<f:if condition="{settings.detailView.showSocial}">
 				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}" />

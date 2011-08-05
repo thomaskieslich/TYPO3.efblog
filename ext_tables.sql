@@ -71,6 +71,16 @@ CREATE TABLE tx_efblog_post_post_mm (
 	KEY uid_foreign (uid_foreign)
 );
 
+CREATE TABLE tx_efblog_post_author_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	tablenames varchar(255) DEFAULT '' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
 CREATE TABLE tx_efblog_domain_model_category (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,

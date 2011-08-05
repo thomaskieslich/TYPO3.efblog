@@ -47,7 +47,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      */
     protected $hidden;
     /**
-     * @var Tx_Efblog_Domain_Model_Administrator
+     * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Administrator> $author
      */
     protected $author;
     /**
@@ -181,22 +181,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 
     public function setHidden($hidden) {
         $this->hidden = $hidden;
-    }    
-
-    /**
-     * @param Tx_Efblog_Domain_Model_Administrator $author
-     * @return void
-     */
-    public function setAuthor(Tx_Efblog_Domain_Model_Administrator $author) {
-        $this->author = $author;
-    }
-	
-	/**
-     * @return Tx_Efblog_Domain_Model_Administrator
-     */
-    public function getAuthor() {
-        return $this->author;
-    }
+    }        
 
     public function getTeaserLink() {
         $link = explode(' ', $this->teaserLink);
@@ -376,6 +361,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
         $this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
         $this->content = new Tx_Extbase_Persistence_ObjectStorage();
         $this->comments = new Tx_Extbase_Persistence_ObjectStorage();
+        $this->author = new Tx_Extbase_Persistence_ObjectStorage();
     }
 
     /**
@@ -519,6 +505,21 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	public function setBlogName ($blogName) {
 		$this->blogName = $blogName;
 	}
+	
+	/**
+     * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Administrator> $author
+     * @return void
+     */
+    public function setAuthor(Tx_Efblog_Domain_Model_Administrator $author) {
+        $this->author = $author;
+    }
+	
+	/**
+     * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Administrator> $author
+     */
+    public function getAuthor() {
+        return $this->author;
+    }
 
 	
 	
