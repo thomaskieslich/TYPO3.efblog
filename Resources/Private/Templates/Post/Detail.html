@@ -44,11 +44,13 @@
 
             <h1>{post.title}</h1>			
             <f:if condition="<f:count subject='{pages}' /> > 1">
-                <ul class="tabs">
-                    <f:for each="{pages}" as="page" key="count">
-                        <li><a href="#" id="tab{count}">{page.title}</a></li>                    
-                    </f:for>
-                </ul>
+				<div class="detailpager">
+					<ul class="tabs">
+						<f:for each="{pages}" as="page" key="count">
+							<li><a href="#" id="tab{count}">{page.title}</a></li>                    
+						</f:for>
+					</ul>
+				</div>
             </f:if>
 
             <div class="tab_container">

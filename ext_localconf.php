@@ -7,9 +7,9 @@ if (!defined('TYPO3_MODE')) {
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY, 'Fe1', 
 	array (
-	'Post' => 'list, detail, rss',
-	'Category' => 'categoryOverview',
-	'Comment' => 'create',
+		'Post' => 'list,detail,rss',
+		'Category' => 'categoryOverview',
+		'Comment' => 'create',
 	), 
 	array (
 

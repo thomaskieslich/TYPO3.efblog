@@ -37,7 +37,7 @@
 }
 
 .tx-efblog-list-imagerow a:hover{
-border: none;
+	border: none;
 }
 
 .tx-efblog-list-body h1{
@@ -97,8 +97,17 @@ border: none;
 	background: url(images/breadcrumb_right.png) no-repeat top right;
 }
 
-.tx-efblog-detail-container ul.tabs {
-    padding: 8px 0 0 0;
+/* detail pager */
+
+.tx-efblog-detail-container .detailpager{
+	overflow: auto;
+	border-radius: 6px;
+	border: 1px solid #353333;
+	padding: 8px;
+    background: #fff;
+	margin-top: 6px;
+}
+.tx-efblog-detail-container ul.tabs { 
     float: left;
     list-style: none;
     width: 100%;
@@ -385,7 +394,7 @@ border: none;
 	display: inline-block;
 	margin-top: 8px;
 	width: 100%;
-	
+
 }
 
 .tx-efblog-category-infos .image{
@@ -421,7 +430,7 @@ border: none;
 .tx-efblog-combined-entry{
 	display: block;
 	height: 50px;
-	
+
 }
 
 .tx-efblog-combined-image{
