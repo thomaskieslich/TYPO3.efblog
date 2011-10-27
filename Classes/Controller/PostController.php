@@ -194,6 +194,19 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			$today = time();
 		}
 
+		//month posts
+		$this->settings['startDate'] = Null;
+		$this->settings['year'] = date('Y', $today);
+		$this->settings['month'] = date('m', $today);
+
+		$monthDates = array();
+		foreach ($this->postRepository->findPosts($this->settings) as $mposts) {
+			$date = $mposts->getDate();
+			$monthDates[] = $date->format('d-m-Y');
+		}
+		$this->view->assign('monthDates', json_encode($monthDates));
+
+		//more posts
 		$this->settings['startDate'] = strtotime('+1 day', mktime(0, 0, 0, date('n'), date('j'), date('Y')));
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
@@ -205,6 +218,27 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 
 		$this->view->assign('todayPosts', $this->postRepository->findPosts($this->settings));
 		$this->view->assign('thisDay', $today);
+	}
+	
+	public function ajaxCalendarUpdateAction() {
+		$this->settings['enableFuturePosts'] = 1;
+		$this->settings['listView']['sortDirection'] = asc;
+		$this->settings['startDate'] = Null;
+		$request = $this->request->getArguments();
+		if (isset($request['year'])) {
+			$this->settings['year'] = $this->request->getArgument('year');
+		}
+
+		if (isset($request['month'])) {
+			$this->settings['month'] = $this->request->getArgument('month');
+		}
+		
+		$monthDates = array();
+		foreach ($this->postRepository->findPosts($this->settings) as $mposts) {
+			$date = $mposts->getDate();
+			$monthDates[] = $date->format('d-m-Y');
+		}
+		return json_encode($monthDates);
 	}
 
 	/**

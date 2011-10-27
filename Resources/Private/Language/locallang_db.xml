@@ -9,6 +9,9 @@
 			<!--Plugin-->
 			<label index="plugin_fe1_title">Simple Blog</label>
 			
+			<!--FE USER-->
+			<label index="fe_users.tx_efblog_profile_page">Profile Page</label>
+			
 			
 			<!--Flexform-->
 			<label index="flexform_options_general">Simple Blog</label>			
@@ -86,6 +89,9 @@
 		<languageKey index="de" type="array">	
 			<!--Plugin-->
 			<label index="plugin_fe1_title">Einfacher Blog</label>
+			
+			<!--FE USER-->
+			<label index="fe_users.tx_efblog_profile_page">Profilseite</label>
 			
 			
 			<!--Flexform-->

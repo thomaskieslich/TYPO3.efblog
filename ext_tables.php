@@ -158,4 +158,34 @@ $TCA['tx_efblog_domain_model_comment'] = array (
 	)
 );
 
+//extend fe_users
+$tempFeusers = array(
+	'tx_efblog_profile_page' => array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:fe_users.tx_efblog_profile_page',
+		'config' => Array(
+			'type' => 'group',
+			'internal_type' => 'db',
+			'allowed' => 'pages',
+			'size' => '1',
+			'maxitems' => '1',
+			'minitems' => '0',
+			'show_thumbs' => '0',
+			'wizards' => array(
+					'suggest' => array(
+						'type' => 'suggest',
+						'fe_users' => array(
+							'maxItemsInResultList' => 15
+						),
+					),
+				),
+		)
+	),
+	);
+
+t3lib_div::loadTCA('fe_users');
+t3lib_extMgm::addTCAcolumns('fe_users', $tempFeusers, 1);
+t3lib_extMgm::addToAllTCAtypes('fe_users', 'tx_efblog_profile_page', '', 'after:company');
+
+
 ?>

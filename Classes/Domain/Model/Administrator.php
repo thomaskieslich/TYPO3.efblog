@@ -33,6 +33,14 @@
  */
 
 class Tx_Efblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
+	/**
+	 *
+	 * @var int
+	 */
+	protected $profilepage;
 	
+	public function getProfilepage() {
+		return $this->profilepage;
+	}
 }
 ?>

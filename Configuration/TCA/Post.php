@@ -172,6 +172,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title',
 			'config' => array(
+				'size' => '150',
 				'type' => 'input',
 				'eval' => 'required'
 			)
@@ -227,7 +228,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 			"config" => Array(
 				"type" => "input",
 				"max" => "255",
-				"checkbox" => "1",
+				'size' => '150',
 				"eval" => "trim",
 				"wizards" => array(
 					"_PADDING" => 2,
@@ -246,6 +247,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title',
 			'config' => array(
+				'size' => '150',
 				'type' => 'input'
 			)
 		),

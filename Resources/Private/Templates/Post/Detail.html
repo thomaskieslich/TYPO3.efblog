@@ -54,7 +54,7 @@
             </f:if>
 
             <div class="tab_container">
-                <f:for each="{pages}" as="page"  iteration="elementIterator">
+                <f:for each="{pages}" as="page"  iteration="elementIterator">					
                     <div class="tab_content" id="tab{elementIterator.cycle}">
                         <f:for each="{page.elements}" as="element">
                             <f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}" />

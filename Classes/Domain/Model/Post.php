@@ -356,7 +356,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
      *
      * @return void
      */
-    protected function initStorageObjects() {
+    protected function initStorageObjects() {		
         $this->categories = new Tx_Extbase_Persistence_ObjectStorage();
         $this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
         $this->content = new Tx_Extbase_Persistence_ObjectStorage();

@@ -286,6 +286,9 @@ plugin.tx_efblog{
 		Tx_Efblog_Domain_Model_Administrator {
 			mapping {
 				tableName = fe_users
+				columns {
+                       tx_efblog_profile_page.mapOnProperty = profilepage
+				}
 			}
 		}
 		}
@@ -303,10 +306,37 @@ plugin.tx_efblog{
 				10 {
 					source.field = uid
 					tables = tt_content
-					conf.tt_content < tt_content
+					#conf.tt_content < tt_content
 				}
 			}
 	}
+
+#
+# AJAX Page Prototype
+#
+lib.AJAXPrototype = PAGE
+lib.AJAXPrototype {
+    typeNum = 6660
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+        no_cache = 1
+        //additionalHeaders = Content-type:application/json
+    }
+}
+
+ajaxCalendarUpdate < lib.AJAXPrototype
+ajaxCalendarUpdate{
+	typeNum = 6661
+	10 = USER
+	10 {
+		userFunc = tx_extbase_core_bootstrap->run
+		pluginName = Fe1
+		extensionName = Efblog
+	}
+}
 
 //RSS
 postRss = PAGE
