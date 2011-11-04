@@ -3,89 +3,148 @@
 <f:section name="content">
 	<tk:format.raw>
 		<script>
-			$(function() {
+			var highlightedDates = [];
+			
+			getDates();
+			
+			$(document).ready(function() {
 				$.datepicker.setDefaults($.datepicker.regional['de']);			
 			
 				$("#datepicker").datepicker({ 
-					dateFormat: '@',
-					beforeShowDay:  highlightDays,
-					onSelect: function(value, date) { 					
-						window.location.href = '<f:uri.action action="calendarView" absolute="TRUE" />&tx_efblog_fe1[date]=' + value;
-					},
-					onChangeMonthYear:function(year, month, inst) {
-						getDates(year, month, inst);
-					},
+					dateFormat: 'yy-mm-dd',
 					showWeek: false,
-					inline: true
+					inline: true,
+					beforeShowDay:  highlightDays,
+					onSelect: function(date) { 						
+						getDayDates(date);
+					},
+					onChangeMonthYear:function(year, month) {
+						getDates(year, month);
+					}					
 				});
-
+				getDayDates();
 			});
-			
-			var highlightedDates = {monthDates};
-			
-			function getDates(year, month, inst) {
-					$.ajax({
-						async: false,
-						url: '<f:uri.action action="ajaxCalendarUpdate" pageType="6661" absolute="TRUE" noCacheHash="TRUE" />',
-						data: {
-							'tx_efblog_fe1[month]': month,
-							'tx_efblog_fe1[year]': year
-						},
-						type: "GET",
-						dataType: "json",
-						success: function(result) {
-							highlightedDates = result;
-							 $(inst).datepicker("refresh");
+
+			function getDayDates(date){
+				if(date){
+					var selectedDate = date.split("-");
+					var year = selectedDate[0];
+					var month = selectedDate[1];
+					var day = selectedDate[2];
+				}
+				else {
+					var currentTime = new Date();
+					year = currentTime.getFullYear();
+					month = currentTime.getMonth()+1;
+					day = currentTime.getDate();
+				}
+				var dates = [];
+				$.ajax({
+					async: false,
+					type: "GET",
+					dataType: "json",
+					url: '<f:uri.action action="ajaxCalendarDay" pageType="6661" noCacheHash="TRUE" />',
+					data: {
+						'tx_efblog_fe1[year]': year,
+						'tx_efblog_fe1[month]': month,
+						'tx_efblog_fe1[day]': day
+					},
+					
+					success: function(result) {
+						dates = result;
+					}
+				});
+				var content = '';
+				$.each(dates, function(i, item) {
+					console.log(item.date);
+					if(i == 0){
+						content += '<h2>'+item.date+'</h2>';
+					}
+					
+					if(item.details){
+						content += '<p class="toggler">'+item.time+' Uhr - ';
+						content += '<a href="#">' + item.title + '</a><span class="foldSign">&nbsp;</span></p>';
+					}
+					else{
+						content += '<p">';
+						if(item.time){
+							content += item.time+' Uhr - ';
 						}
-					});
+						content += item.title + '</p>';
+					}
+					
+					content += '<div class="details">' + item.details + '</div>';
+				})				
+				//alert(content);
+				$('#todayEntries').html(content);
+				
+				$('#todayEntries .toggler').click(function(){
+					$(this).next('.details').slideToggle('fast');
+					$(this).toggleClass('act');
+				})
+			}
+			
+			function getDates(year, month) {
+				// if no month and year set it to current
+				if (!year && !month) {
+					var currentTime = new Date();
+					year = currentTime.getFullYear();
+					month = currentTime.getMonth()+1;
+				}
+				
+				$.ajax({
+					async: false,
+					type: "GET",
+					dataType: "json",
+					url: '<f:uri.action action="ajaxCalendarMonth" pageType="6661" noCacheHash="TRUE" />',
+					data: {
+						'tx_efblog_fe1[year]': year,
+						'tx_efblog_fe1[month]': month
+					},
+					
+					success: function(result) {
+						highlightedDates = result;
+					}
+				});
 			}	
 			
 			function highlightDays(date)
 			{
-				dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-				if ($.inArray(dmy, highlightedDates) == -1) {
+				var dateFormatted = $.datepicker.formatDate('yy-mm-dd', date);
+				if ($.inArray(dateFormatted, highlightedDates) == -1) {					
 					return [false, "",""];
-				} else {
+				} else {							
 					return [true,"",""];
 				}
 			}
 		</script>
 	</tk:format.raw>
     <div class="tx-efblog-calendar-container">
-		<div id="datepicker" style="float: left; width: 240px;"></div>
-		<div id="calEntries" style="float: right; width: 420px;">
-			<h2><tk:format.date format="%d. %B %Y">@{thisDay}</tk:format.date></h2>
-			<f:if condition="{todayPosts}">
-				<f:then>
-					<f:for each="{todayPosts}" as="today"  iteration="todayIterator">
-						<p>{today.date -> tk:format.date(format:'%H:%M')} Uhr - 
-							{today.title -> f:link.action(action : 'detail', arguments : '{post:today}', pageUid : '{settings.detailUid}')}</p>
-					</f:for>
-				</f:then>
-				<f:else>
-					<p>Keine Termine für diesen Tag.</p>
-				</f:else>				
-			</f:if>
+		<div id="datepicker"></div>
+		<div id="calEntries">
+			<div id="todayEntries">
+				<p>Keine Termine für diesen Tag.</p>
+			</div>
 
-
-			<div style="border-bottom: 1px dotted #96bd48;">&nbsp;</div>
-			<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
-				<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
-					<f:groupedFor each="{postsByMonth}" as="postsByDay" groupBy="dayOf{date}"  groupKey="day">
-						<f:for each="{postsByDay}" as="post"  iteration="dayIterator">
-							<f:if condition="{dayIterator.isFirst}">
-								<f:then>
-									<h2>{post.date -> tk:format.date(format:'%d. %B %Y')}</h2>
-									{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
-								</f:then>
-								<f:else>
-									{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
-								</f:else>
-							</f:if>
-						</f:for>
+			<div id="moreEntries">
+				<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
+					<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
+						<f:groupedFor each="{postsByMonth}" as="postsByDay" groupBy="dayOf{date}"  groupKey="day">
+							<f:for each="{postsByDay}" as="post"  iteration="dayIterator">
+								<f:if condition="{dayIterator.isFirst}">
+									<f:then>
+										<h2>{post.date -> tk:format.date(format:'%d. %B %Y')}</h2>
+										{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
+									</f:then>
+									<f:else>
+										{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
+									</f:else>
+								</f:if>
+							</f:for>
+						</f:groupedFor>
 					</f:groupedFor>
 				</f:groupedFor>
-			</f:groupedFor>
+			</div>
 		</div>
 	</div>
 

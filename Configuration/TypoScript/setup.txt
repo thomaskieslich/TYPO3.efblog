@@ -311,24 +311,9 @@ plugin.tx_efblog{
 			}
 	}
 
-#
-# AJAX Page Prototype
-#
-lib.AJAXPrototype = PAGE
-lib.AJAXPrototype {
-    typeNum = 6660
-    config {
-        disableAllHeaderCode = 1
-        xhtml_cleaning = 0
-        admPanel = 0
-        debug = 0
-        no_cache = 1
-        //additionalHeaders = Content-type:application/json
-    }
-}
-
-ajaxCalendarUpdate < lib.AJAXPrototype
-ajaxCalendarUpdate{
+//###Ajax Page
+txefblogAjax = PAGE
+txefblogAjax{
 	typeNum = 6661
 	10 = USER
 	10 {
@@ -336,6 +321,14 @@ ajaxCalendarUpdate{
 		pluginName = Fe1
 		extensionName = Efblog
 	}
+	config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+        no_cache = 1
+        additionalHeaders = Content-type:application/json
+    }
 }
 
 //RSS

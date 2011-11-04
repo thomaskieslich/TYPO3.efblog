@@ -449,3 +449,38 @@
 	color: #F88601;
 }
 
+/*calendar view*/
+.tx-efblog-calendar-container #datepicker{
+	float: left; 
+	width: 240px;
+}
+
+.tx-efblog-calendar-container #calEntries{
+	float: right; 
+	width: 420px;
+	
+}
+
+.tx-efblog-calendar-container #todayEntries{
+	border-bottom: 1px dotted #96bd48;
+}
+
+.tx-efblog-calendar-container #todayEntries .toggler a{
+	padding-right: 2px;
+	
+}
+.tx-efblog-calendar-container #todayEntries .toggler span.foldSign{
+	display: inline-block;
+	width: 15px;
+	height: 14px;
+	background: url(images/fold.png) no-repeat 0 0;
+	cursor: pointer;
+}
+.tx-efblog-calendar-container #todayEntries .toggler.act span.foldSign{
+	background-position: 0 -20px;
+}
+
+.tx-efblog-calendar-container #todayEntries .details{
+	display: none;
+}
+
