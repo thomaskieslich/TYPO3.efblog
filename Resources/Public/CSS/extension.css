@@ -304,10 +304,11 @@
 .tx-efblog-widget-container{
     border: 1px solid #333;
     margin-top: 15px;
-    margin-left: 6px;
+    margin-left: 12px;
     padding-bottom: 3px;
     border-radius: 6px;
     box-shadow: 3px 3px 6px #888;
+	width: 200px;
 }
 .tx-efblog-widget-container h1{
 	font-size: 16px;
@@ -324,8 +325,8 @@
 }
 
 .tx-efblog-widget-content ul{
-    padding-left: 0;
-    margin: 0px;
+	margin: 6px 0;
+    padding: 0 0 0 16px;
     list-style: none;
     list-style-image: url(images/list_sidebar.png);
 }
@@ -378,8 +379,8 @@
 }
 
 .tx-efblog-view-category ul{
-    padding-left: 0;
-    margin: 0px;
+    margin: 6px 0;
+    padding: 0 0 0 16px;
     list-style: none;
     list-style-image: url(images/list_sidebar.png);
 }

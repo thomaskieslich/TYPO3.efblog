@@ -5,6 +5,7 @@
 	    <!-- Post Image-->
 		<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 		    <f:if condition="{post.teaserImage}">  
+		    <f:if condition="{image}">  
 			<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
 			    <div class="tx-efblog-list-imagerow">
 				<f:if condition="{dam}">
@@ -18,6 +19,7 @@
 				    </f:else>
 				</f:if> 
 			    </div>
+			</f:if>
 			</f:if>
 		    </f:if>
 		</f:for>

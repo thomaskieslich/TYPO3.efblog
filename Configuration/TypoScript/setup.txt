@@ -5,6 +5,7 @@ page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
 
 plugin.tx_efblog{
+	mvc.callDefaultActionIfActionCantBeResolved = 1
 	settings {
 		##targets
 		listUid =
@@ -191,9 +192,6 @@ plugin.tx_efblog{
 				1 = latestPostsWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 
 		latestCommentsWidget = USER
@@ -206,9 +204,6 @@ plugin.tx_efblog{
 				1 = latestCommentsWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 
 		viewsWidget = USER
@@ -221,9 +216,6 @@ plugin.tx_efblog{
 				1 = viewsWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 
 		searchWidget = USER
@@ -236,9 +228,6 @@ plugin.tx_efblog{
 				1 = searchWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 
 		categoryWidget = USER
@@ -251,9 +240,6 @@ plugin.tx_efblog{
 				1 = categoryWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 
 		dateMenuWidget = USER
@@ -266,9 +252,6 @@ plugin.tx_efblog{
 				1 = dateMenuWidget
 				}
 			}
-			settings =< plugin.tx_efblog.settings
-			persistence =< plugin.tx_efblog.persistence
-			view =< plugin.tx_efblog.view
 		}
 	}
 

@@ -53,9 +53,9 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 			$spamcategories = $this->checkForSpam($newComment);
 			$newComment->setIp($_SERVER['REMOTE_ADDR']);
 			$newComment->setSpamCategories($spamcategories);
-			
+
 			$spampoints = 0;
-			foreach($spamcategories as $key => $value){
+			foreach ($spamcategories as $key => $value) {
 				$spampoints += $value;
 			}
 			$newComment->setSpampoints($spampoints);
@@ -181,17 +181,23 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 
 	protected function sendMessage($post, $newComment) {
 		$recipient = array();
-		if ($this->settings['comments']['messageAuthor'] && $post->getAuthor()->getEmail()) {
-			$recipient[] = $post->getAuthor()->getEmail();
+		if ($this->settings['comments']['messageAuthor'] && $post->getAuthor()->count() > 0) {
+			foreach ($post->getAuthor() as $author) {
+				$recipient[] = $author->getEmail();
+			}
 		}
 
 		if ($this->settings['comments']['messageSuperAdmin']) {
-			$feuserRepository = $this->objectManager->get('Tx_Extbase_Domain_Repository_FrontendUserRepository');
+			$feuserRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_AdministratorRepository');
 			$superAdmins = $feuserRepository->findByUsergroup((int) $this->settings['superAdminGroup']);
-			foreach ($superAdmins as $admin) {
-				$recipient[] = $admin->getEmail();
+			if ($superAdmins->count() > 0) {
+				foreach ($superAdmins as $admin) {
+					$recipient[] = $admin->getEmail();
+				}
 			}
 		}
+
+		var_dump($recipient);
 
 		$sender = $this->settings['comments']['messageSender'];
 		$senderName = $this->settings['comments']['messageSenderName'];

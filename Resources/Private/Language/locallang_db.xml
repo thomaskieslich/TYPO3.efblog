@@ -103,11 +103,11 @@
 			<label index="flexform_options_general_list_category">Kategorie - Liste</label>
 			<label index="flexform_options_general_list_dateMenu">Datums Menü - Liste</label>
 			<label index="flexform_options_general_view_calendar">Kalenderansicht</label>
-			<label index="flexform_options_general_view_category">Kategorieen - Übersicht</label>
+			<label index="flexform_options_general_view_category">Kategorien - Übersicht</label>
 			<label index="flexform_options_general_widgets_latestPosts">Letzte Posts - Widget</label>
 			<label index="flexform_options_general_widgets_latestComments">Letzte Kommentare - Widget</label>
 			<label index="flexform_options_general_widgets_views">Meiste Ansichten - Widget</label>
-			<label index="flexform_options_general_widgets_category">Kategorieen - Widget</label>
+			<label index="flexform_options_general_widgets_category">Kategorien - Widget</label>
 			<label index="flexform_options_general_widgets_search">Suche - Widget</label>
 			<label index="flexform_options_general_widgets_dateMenu">Datums Menü - Widget</label>
 			
