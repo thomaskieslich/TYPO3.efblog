@@ -25,6 +25,9 @@
 
 /**
  * Controller for the Category object
+ * 
+ * @package Efblog
+ * @subpackage Controller
  */
 class Tx_Efblog_Controller_CategoryController extends Tx_Efblog_Controller_AbstractController {
 

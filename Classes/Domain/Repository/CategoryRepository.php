@@ -26,9 +26,8 @@
 /**
  * Repository for Tx_Efblog_Domain_Model_Category
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Efblog
+ * @subpackage Repository
  */
 class Tx_Efblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
 
@@ -77,7 +76,7 @@ class Tx_Efblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persiste
 		foreach ($categories as $category) {
 			$categoryConstraints[] = $query->equals('uid', $category);
 		}
-
+		
 		switch (strtolower($settings['listView']['categoryMode'])) {
 			case 'or':
 				$constraint = $query->logicalOr($categoryConstraints);

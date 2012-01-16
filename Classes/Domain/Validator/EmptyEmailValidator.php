@@ -25,7 +25,10 @@
  * ************************************************************* */
 
 /**
- * Comments Model
+ * Validator for Empty Email
+ * 
+ * @package Efblog
+ * @subpackage Validator
  */
 class Tx_Efblog_Domain_Validator_EmptyEmailValidator extends Tx_Extbase_Validation_Validator_EmailAddressValidator {
 

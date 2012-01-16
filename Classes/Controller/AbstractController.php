@@ -23,6 +23,13 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+/**
+ * Abstract Controller 
+ * 
+ * @package Efblog
+ * @subpackage Controller
+ */
+
 abstract class Tx_Efblog_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 }

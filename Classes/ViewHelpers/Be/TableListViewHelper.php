@@ -43,11 +43,19 @@
  * Clicking on a username will open the TYPO3 info popup for the respective record
  * </output>
  *
- * @author Bastian Waidelich <bastian@typo3.org>
- * @license http://www.gnu.org/copyleft/gpl.html
+ * 
  */
+
+
 require_once (PATH_typo3 . 'class.db_list.inc');
 require_once (PATH_typo3 . 'class.db_list_extra.inc');
+
+/**
+ * Table List for Backend
+ * 
+ * @package Efblog
+ * @subpackage ViewHelpers
+ */
 
 class Tx_Efblog_ViewHelpers_Be_TableListViewHelper extends Tx_Fluid_ViewHelpers_Be_AbstractBackendViewHelper {
 

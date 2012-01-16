@@ -48,6 +48,9 @@
  * // with "%1" and "%2" are replaced by "dog" and "fox" (printf)
  * // if the key is not found, the output is "default value"
  * </output>
+ * 
+ * @package Efblog
+ * @subpackage ViewHelpers
  */
 class Tx_Efblog_ViewHelpers_TranslateViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 

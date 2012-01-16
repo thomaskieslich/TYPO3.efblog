@@ -40,7 +40,7 @@ plugin.tx_efblog{
 			//days for auto archive
 			daysToArchive =
 			//or, notor, notand, and
-			categoryMode =
+			categoryMode = or
 			category =
 			hideNoCategorized =  0
 

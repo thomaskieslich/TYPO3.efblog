@@ -23,6 +23,13 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+/**
+ * Controller for Calendar Widget
+ * 
+ * @package Efblog
+ * @subpackage ViewHelpers 
+ */
+
 class Tx_Efblog_ViewHelpers_Widget_Controller_CalendarController extends Tx_Fluid_Core_Widget_AbstractWidgetController {
 
 	/**

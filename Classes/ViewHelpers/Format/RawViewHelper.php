@@ -41,8 +41,8 @@
  * (depending on the value of {someContent})
  * </output>
  *
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- * @api
+ * @package Efblog
+ * @subpackage ViewHelpers
  */
 class Tx_Efblog_ViewHelpers_Format_RawViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 

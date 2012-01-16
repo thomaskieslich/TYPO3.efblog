@@ -23,10 +23,10 @@
 ***************************************************************/
 
 /**
- * ViewHelper to render meta tags
+ * ViewHelper to render meta tags.
  *
- * @package TYPO3
- * @subpackage tx_news2
+ * @package Efblog
+ * @subpackage ViewHelpers
  */
 class Tx_Efblog_ViewHelpers_MetaTagViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
 

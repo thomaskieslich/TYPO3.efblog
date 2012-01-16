@@ -26,9 +26,8 @@
 /**
  * Repository for Tx_Efblog_Domain_Model_Comment
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Efblog
+ * @subpackage Repository
  */
 class Tx_Efblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persistence_Repository {
 

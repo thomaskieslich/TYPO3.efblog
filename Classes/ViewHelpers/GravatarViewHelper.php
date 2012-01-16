@@ -36,6 +36,9 @@
  * <output>
  * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
  * </output>
+ * 
+ * @package Efblog
+ * @subpackage ViewHelpers
  */
 class Tx_Efblog_ViewHelpers_GravatarViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
 

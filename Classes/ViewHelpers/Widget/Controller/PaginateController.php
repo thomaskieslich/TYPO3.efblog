@@ -25,11 +25,10 @@
  * ************************************************************* */
 
 /**
- * Pager
+ * Controller for Paginator
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Efblog
+ * @subpackage ViewHelpers
  */
 class Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController extends Tx_Fluid_Core_Widget_AbstractWidgetController {
 

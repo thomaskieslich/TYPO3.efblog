@@ -27,9 +27,8 @@
 /**
  * An Administrator of a Post
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package Efblog
+ * @subpackage Model
  */
 
 class Tx_Efblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {

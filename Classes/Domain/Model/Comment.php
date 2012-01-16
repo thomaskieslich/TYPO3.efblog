@@ -25,7 +25,10 @@
  * ************************************************************* */
 
 /**
- * Comments Model
+ * Post Comments
+ * 
+ * @package Efblog
+ * @subpackage Model
  */
 class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
 
