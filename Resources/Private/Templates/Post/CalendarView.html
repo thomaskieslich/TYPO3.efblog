@@ -1,4 +1,4 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
+{namespace vh=Tx_Tkflatmanager_ViewHelpers_ViewHelpers}
 <f:layout name="Default" />
 <f:section name="content">
 	<tk:format.raw>
@@ -56,7 +56,7 @@
 				});
 				var content = '';
 				$.each(dates, function(i, item) {
-					console.log(item.date);
+					//console.log(item.date);
 					if(i == 0){
 						content += '<h2>'+item.date+'</h2>';
 					}

@@ -85,7 +85,7 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	 * dateTime constraints
 	 * @param Tx_Extbase_Persistence_QueryInterface $query
 	 * @param array $settings
-	 * @return array 
+	 * @return array
 	 */
 	protected function createDateTimeConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 		$constraints = NULL;
@@ -97,32 +97,32 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 			$dateConstraints[] = $query->lessThan('date', $today);
 		}
 
-		
+
 		if ($settings['startDate']) {
 			$dateConstraints[] = $query->greaterThanOrEqual('date', $settings['startDate']);
 		}
-		
+
 		$start = '';
 		$stop = '';
-		
+
 		if($settings['year']){
 			$date = $settings['year'].'-1-1';
 			$start = strtotime($date);
 			$stop = strtotime('+1 year', strtotime($date));
 		}
-		
+
 		if($settings['month']){
 			$date = $settings['year'].'-'.$settings['month'].'-1';
 			$start = strtotime($date);
 			$stop = strtotime('+1 month', strtotime($date));
 		}
-		
+
 		if($settings['day']){
 			$date = $settings['year'].'-'.$settings['month'].'-'.$settings['day'];
 			$start = strtotime($date);
 			$stop = strtotime('+1 day', strtotime($date));
 		}
-		
+
 		if ($settings['year'] || $settings['month'] || $settings['day']) {
 			$dateConstraints[] = $query->logicalAnd(
 							$query->greaterThanOrEqual('date', $start), $query->lessThanOrEqual('date', $stop)
@@ -139,7 +139,7 @@ class Tx_Efblog_Domain_Repository_PostRepository extends Tx_Extbase_Persistence_
 	 * set constraints for archived posts
 	 * @param Tx_Extbase_Persistence_QueryInterface $query
 	 * @param array $settings
-	 * @return array 
+	 * @return array
 	 */
 	protected function createArchiveConstraint(Tx_Extbase_Persistence_QueryInterface $query, $settings) {
 		$constraints = NULL;

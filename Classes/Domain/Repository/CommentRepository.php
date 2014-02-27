@@ -31,7 +31,7 @@
  */
 class Tx_Efblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persistence_Repository {
 
-	public function findMainComments ($post = NULL) {
+	public function findMainComments($post = NULL) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->logicalAnd(
@@ -40,7 +40,7 @@ class Tx_Efblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persisten
 			)
 		);
 		$query->setOrderings(
-			array (
+			array(
 				'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
 			)
 		);
@@ -48,34 +48,33 @@ class Tx_Efblog_Domain_Repository_CommentRepository extends Tx_Extbase_Persisten
 		return $query->execute();
 	}
 
-	public function findAllChildren (Tx_Efblog_Domain_Model_Comment $comment) {
+	public function findAllChildren(Tx_Efblog_Domain_Model_Comment $comment) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_comment', $comment)
 		);
 		$query->setOrderings(
-			array (
+			array(
 				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
 			)
 		);
 		return $query->execute();
 	}
-	
-	public function findLatestComments ($settings) {
+
+	public function findLatestComments($settings) {
 		$query = $this->createQuery();
 
 		$query->setOrderings(
-			array (
+			array(
 				'date' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
 			)
 		);
-		
+
 		//Limit
 		if ($settings['latestCommentsWidget']['maxEntries'] > 0) {
-			$query->setLimit((int) $settings['latestCommentsWidget']['maxEntries']);
+			$query->setLimit((int)$settings['latestCommentsWidget']['maxEntries']);
 		}
-		
+
 		return $query->execute();
 	}
-
 }
