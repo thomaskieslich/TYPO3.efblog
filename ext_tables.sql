@@ -155,5 +155,5 @@ CREATE TABLE tx_efblog_domain_model_comment (
 );
 
 CREATE TABLE fe_users (
-	tx_efblog_profile_page int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_efblog_profile_page int(11) unsigned DEFAULT '0' NOT NULL
 );

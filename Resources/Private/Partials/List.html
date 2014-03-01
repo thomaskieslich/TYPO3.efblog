@@ -9,7 +9,7 @@
 							<f:then>				
 								<f:if condition="{post.teaserOptions} < 2">
 									<f:then>
-										<f:render partial="ListElement" arguments="{post : post, count : 1, dam : dam}" />
+										<f:render partial="ListElement" arguments="{post : post, count : 1}" />
 									</f:then>
 									<f:else>
 										<f:render partial="ListRawElement" arguments="{post : post, count : 1}" />

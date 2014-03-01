@@ -7,93 +7,7 @@ if (!defined('TYPO3_MODE')) {
 $TCA['tx_efblog_domain_model_post'] = array(
 	'ctrl' => $TCA['tx_efblog_domain_model_post']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,author,date,archive,content,tags,allow_comments,teaser_options,views,category,related_post,comments,fe_group'
-	),
-	'types' => array(
-		'0' => array(
-			'showitem' =>
-			'--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post;post,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_content;content,
-				--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_categorize,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
-                                --div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
-					--palette--;;teaserImage,
-					--palette--;;teaserOptions,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
-				--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related;related,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments;comments,					
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
-				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
-					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
-					--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_access;access,'
-		)
-	),
-	'palettes' => array(
-		'post' => array(
-			'showitem' =>
-			'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title, --linebreak--,
-			date;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_date,
-			archive;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_archive, --linebreak--,
-			author;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_author, --linebreak--,
-			teaser_link;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink, --linebreak--,
-			teaser_link_title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title,',
-			'canNotCollapse' => 1,
-		),
-		'content' => array(
-			'showitem' =>
-			'content;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_content',
-			'canNotCollapse' => 1,
-		),
-		'tags' => array(
-			'showitem' =>
-			'tags;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tags,--linebreak--,
-			teaser_description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription,',
-			'canNotCollapse' => 1,
-		),
-		'category' => array(
-			'showitem' =>
-			'categories;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_category,',
-			'canNotCollapse' => 1,
-		),
-		'teaserImage' => array(
-			'showitem' =>
-			'teaser_image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_image,',
-			'canNotCollapse' => 1,
-		),
-		'teaserOptions' => array(
-			'showitem' =>
-			'teaser_options;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options,',
-			'canNotCollapse' => 1,
-		),
-		'related' => array(
-			'showitem' =>
-			'related_posts;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
-			'canNotCollapse' => 1,
-		),
-		'comments' => array(
-			'showitem' =>
-			'allow_comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments, --linebreak--,
-            comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments,',
-			'canNotCollapse' => 1,
-		),
-		'views' => array(
-			'showitem' =>
-			'views;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_views,',
-			'canNotCollapse' => 1,
-		),
-		'visibility' => array(
-			'showitem' =>
-			'hidden;LLL:EXT:cms/locallang_ttc.xml:hidden_formlabel,',
-			'canNotCollapse' => 1,
-		),
-		'access' => array(
-			'showitem' =>
-			'fe_group;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_access,',
-			'canNotCollapse' => 1,
-		),
+		'showRecordFieldList' => 'title,author,date'
 	),
 	'columns' => array(
 		'sys_language_uid' => array(
@@ -208,7 +122,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 				'max' => '20',
 				'eval' => 'datetime',
 				'checkbox' => '0',
-				'default' => mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"))
+				'default' => mktime(date('H'), date('i'), 0, date('m'), date('d'), date('Y'))
 			)
 		),
 		'archive' => Array(
@@ -223,22 +137,22 @@ $TCA['tx_efblog_domain_model_post'] = array(
 			)
 		),
 		'teaser_link' => Array(
-			"exclude" => 1,
-			"label" => "LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink",
-			"config" => Array(
-				"type" => "input",
-				"max" => "255",
+			'exclude' => 1,
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink',
+			'config' => Array(
+				'type' => 'input',
+				'max' => '255',
 				'size' => '150',
-				"eval" => "trim",
-				"wizards" => array(
-					"_PADDING" => 2,
-					"link" => array(
-						"type" => "popup",
-						"title" => "Link",
-						"icon" => "link_popup.gif",
-						"script" => "browse_links.php?mode=wizard",
-						"JSopenParams" =>
-						"height=300,width=500,status=0,menubar=0,scrollbars=1"
+				'eval' => 'trim',
+				'wizards' => array(
+					'_PADDING' => 2,
+					'link' => array(
+						'type' => 'popup',
+						'title' => 'Link',
+						'icon' => 'link_popup.gif',
+						'script' => 'browse_links.php?mode=wizard',
+						'JSopenParams' =>
+							'height=300,width=500,status=0,menubar=0,scrollbars=1'
 					)
 				)
 			)
@@ -355,6 +269,24 @@ $TCA['tx_efblog_domain_model_post'] = array(
 				),
 			)
 		),
+		'teaser_image' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.post_teaserImage',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('teaser_image', array(
+						'appearance' => array(
+							'useSortable' => FALSE,
+							'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+						),
+						'foreign_types' => array(
+							\TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
+								'showitem' => '
+									--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+									--palette--;;filePalette'
+							),
+						),
+					), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+				),
+		),
 		'teaser_description' => Array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_description',
@@ -388,5 +320,90 @@ $TCA['tx_efblog_domain_model_post'] = array(
 			)
 		),
 	),
+	'types' => array(
+		'0' => array(
+			'showitem' =>
+				'--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_post;post,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_content;content,
+					--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_categorize,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_tags;tags,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_category;category,
+									--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_teaser,
+						--palette--;;teaserImage,
+						--palette--;;teaserOptions,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_showTeaserImage;showTeaserImage,
+					--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tab_interactive,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related;related,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments;comments,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_numberViews;views,
+					--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
+						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
+						--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_palette_access;access,'
+		)
+	),
+	'palettes' => array(
+		'post' => array(
+			'showitem' =>
+				'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title, --linebreak--,
+				date;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_date,
+				archive;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_archive, --linebreak--,
+				author;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_author, --linebreak--,
+				teaser_link;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink, --linebreak--,
+				teaser_link_title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserLink_title,',
+			'canNotCollapse' => 1,
+		),
+		'content' => array(
+			'showitem' =>
+				'content;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_content',
+			'canNotCollapse' => 1,
+		),
+		'tags' => array(
+			'showitem' =>
+				'tags;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_tags,--linebreak--,
+				teaser_description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaserDescription,',
+			'canNotCollapse' => 1,
+		),
+		'category' => array(
+			'showitem' =>
+				'categories;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_category,',
+			'canNotCollapse' => 1,
+		),
+		'teaserImage' => array(
+			'showitem' =>
+				'teaser_image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_image,',
+			'canNotCollapse' => 1,
+		),
+		'teaserOptions' => array(
+			'showitem' =>
+				'teaser_options;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_options,',
+			'canNotCollapse' => 1,
+		),
+		'related' => array(
+			'showitem' =>
+				'related_posts;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_related_post,',
+			'canNotCollapse' => 1,
+		),
+		'comments' => array(
+			'showitem' =>
+				'allow_comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_allow_comments, --linebreak--,
+				comments;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_comments,',
+			'canNotCollapse' => 1,
+		),
+		'views' => array(
+			'showitem' =>
+				'views;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_views,',
+			'canNotCollapse' => 1,
+		),
+		'visibility' => array(
+			'showitem' =>
+				'hidden;LLL:EXT:cms/locallang_ttc.xml:hidden_formlabel,',
+			'canNotCollapse' => 1,
+		),
+		'access' => array(
+			'showitem' =>
+				'fe_group;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_access,',
+			'canNotCollapse' => 1,
+		),
+	),
 );
-?>

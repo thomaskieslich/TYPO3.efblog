@@ -3,16 +3,15 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY, 
-	'Fe1', 
-	array (
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	$_EXTKEY,
+	'Fe1',
+	array(
 		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Category' => 'categoryOverview',
 		'Comment' => 'create',
-	), 
-	array (
-		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay'	
+	),
+	array(
+		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay'
 	)
 );
-?>

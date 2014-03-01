@@ -24,7 +24,7 @@
  * ************************************************************* */
 
 /**
- * Repository for Tx_Efblog_Domain_Model_Post
+ * Repository for ThomasKieslich\Efblog\Domain\Model\Post
  *
  * @package Efblog
  * @subpackage Repository
