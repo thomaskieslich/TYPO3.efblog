@@ -9,43 +9,6 @@ $TCA['tx_efblog_domain_model_category'] = array(
 	'interface' => array(
 		'showRecordFieldList' => 'title,description,parent_category',
 	),
-	'types' => array(
-		'0' => array(
-			'showitem' =>
-				'--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize,
-				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize;category,
-				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category;parent,
-				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
-						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
-						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
-		)
-	),
-	'palettes' => array(
-		'category' => array(
-			'showitem' =>
-				'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_title, --linebreak--,
-				description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_description, --linebreak--,
-							image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_image',
-			'canNotCollapse' => 1,
-		),
-		'parent' => array(
-			'showitem' =>
-				'parent_category;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category,',
-			'canNotCollapse' => 1,
-		),
-		'visibility' => array(
-			'showitem' =>
-				'hidden;LLL:EXT:cms/locallang_ttc.xml:hidden_formlabel,',
-			'canNotCollapse' => 1,
-		),
-		'access' => array(
-			'showitem' =>
-				'starttime;LLL:EXT:cms/locallang_ttc.xml:starttime_formlabel,
-				endtime;LLL:EXT:cms/locallang_ttc.xml:endtime_formlabel, --linebreak--,
-				fe_group;LLL:EXT:cms/locallang_ttc.xml:fe_group_formlabel',
-			'canNotCollapse' => 1,
-		),
-	),
 	'columns' => array(
 		'sys_language_uid' => array(
 			'exclude' => 1,
@@ -156,5 +119,41 @@ $TCA['tx_efblog_domain_model_category'] = array(
 			),
 		),
 	),
+	'types' => array(
+		'0' => array(
+			'showitem' =>
+				'--div--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize,
+				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize;category,
+				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category;parent,
+				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
+						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
+						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
+		)
+	),
+	'palettes' => array(
+		'category' => array(
+			'showitem' =>
+				'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_title, --linebreak--,
+				description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_description, --linebreak--,
+							image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_image',
+			'canNotCollapse' => 1,
+		),
+		'parent' => array(
+			'showitem' =>
+				'parent_category;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category,',
+			'canNotCollapse' => 1,
+		),
+		'visibility' => array(
+			'showitem' =>
+				'hidden;LLL:EXT:cms/locallang_ttc.xml:hidden_formlabel,',
+			'canNotCollapse' => 1,
+		),
+		'access' => array(
+			'showitem' =>
+				'starttime;LLL:EXT:cms/locallang_ttc.xml:starttime_formlabel,
+				endtime;LLL:EXT:cms/locallang_ttc.xml:endtime_formlabel, --linebreak--,
+				fe_group;LLL:EXT:cms/locallang_ttc.xml:fe_group_formlabel',
+			'canNotCollapse' => 1,
+		),
+	),
 );
-?>
