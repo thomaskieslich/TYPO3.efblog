@@ -1,36 +1,27 @@
-<f:layout name="Default" />
+<f:layout name="Default"/>
 <f:section name="content">
-    <div class="tx-efblog-view-category">
-
-        <f:for each="{maincategories}" as="maincategory">          
-            <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
-                <div class="element {row}">    
-                    <h2>{maincategory.title}</h2>
-                    <p>{maincategory.description}</p>
+	<div class="tx-efblog-view-category">
+		<f:for each="{maincategories}" as="maincategory">
+			<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
+				<div class="element {row}">
+					<h2>{maincategory.title}</h2>
+					<p>{maincategory.description}</p>
 					<f:for each="{maincategory.image}" as="image" iteration="imageIterator">
 						<f:if condition="{image}">
-							<f:if condition="{dam}">
-								<f:then>
-				{f:image(src: "{image.file_path}{image.file_name}", alt: "{category.title}", width: "150m", height: "150m")
-				-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:maincategory}', pageUid : '{settings.categoryUid}')}
-								</f:then>
-								<f:else>
-				{f:image(src: "uploads/tx_efblog/{image}", alt: "{post.title}", width: "150m", height: "150m")
-				-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:maincategory}', pageUid : '{settings.categoryUid}')} 
-								</f:else>
-							</f:if>
+							{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "80m", height: "80m")
+							-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:maincategory}',
+							pageUid : '{settings.categoryUid}')}
 						</f:if>
 					</f:for>
 					<ul>
 						<f:for each="{categories}" as="category">
 							<f:if condition="{maincategory.uid} == {category.uid}">
-								<f:render partial="CategoryElement" arguments="{category : category}" />
-							</f:if>					
+								<f:render partial="CategoryElement" arguments="{category : category}"/>
+							</f:if>
 						</f:for>
 					</ul>
-                </div>
-            </f:cycle>
-        </f:for>
-
-    </div>
+				</div>
+			</f:cycle>
+		</f:for>
+	</div>
 </f:section>

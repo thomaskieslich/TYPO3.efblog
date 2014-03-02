@@ -71,27 +71,6 @@ $TCA['tx_efblog_domain_model_category'] = array(
 	)
 );
 
-$categoryTempColumns = array();
-	$categoryTempColumns['image'] = array(
-		'exclude' => 0,
-		'l10n_mode' => 'mergeIfNotBlank',
-		'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:tx_efblog_domain_model_post.category_image',
-		'config' => array(
-			'type' => 'group',
-			'internal_type' => 'file',
-			'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-			'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-			'uploadfolder' => 'uploads/tx_efblog',
-			'disable_controls' => upload,
-			'show_thumbs' => 1,
-			'size' => 1,
-			'minitems' => 0,
-			'maxitems' => 1,
-		)
-	);
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_efblog_domain_model_category', $categoryTempColumns, tx_efblog);
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_efblog_domain_model_comment');
 $TCA['tx_efblog_domain_model_comment'] = array(
 	'ctrl' => array(

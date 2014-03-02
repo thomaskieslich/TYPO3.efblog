@@ -117,12 +117,32 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
      * @return string $image 
      */
     public function getImage () {
-        if (t3lib_extMgm::isLoaded('dam')) {
-			$damPics = tx_dam_db::getReferencedFiles('tx_efblog_domain_model_category', $this->uid, 'tx_efblog_domain_model_category_image');
-			return $damPics['rows'];
-		} else {
-			return explode(',', $this->image);
-		}
+	    $fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+	    $fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'image', $this->getUid());
+
+	    $files = array();
+	    foreach ($fileObjects as $file) {
+		    $original = $file->getOriginalFile()->getProperties();
+		    $reference = $file->getReferenceProperties();
+
+		    $title = $reference['title'];
+		    if (!$title) {
+			    $title = $original['title'];
+		    }
+
+		    $description = $reference['description'];
+		    if (!description) {
+			    $description = $original['description'];
+		    }
+
+		    $files[] = array(
+			    'title' => $title,
+			    'description' => $description,
+			    'publicUrl' => $file->getPublicUrl(TRUE)
+		    );
+	    }
+
+	    return $files;
     }
 
     /**
