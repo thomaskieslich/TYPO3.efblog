@@ -126,8 +126,8 @@ $TCA['tx_efblog_domain_model_category'] = array(
 				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_tab_categorize;category,
 				--palette--;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category;parent,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
-						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
-						--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
+					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.visibility;visibility,
+					--palette--;LLL:EXT:cms/locallang_ttc.xml:palette.access;access,'
 		)
 	),
 	'palettes' => array(
@@ -135,7 +135,7 @@ $TCA['tx_efblog_domain_model_category'] = array(
 			'showitem' =>
 				'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_title, --linebreak--,
 				description;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_description, --linebreak--,
-							image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_image',
+					image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_image',
 			'canNotCollapse' => 1,
 		),
 		'parent' => array(

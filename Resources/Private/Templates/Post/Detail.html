@@ -1,15 +1,16 @@
 {namespace tk=Tx_Efblog_ViewHelpers}
-<f:layout name="Default" />
+<f:layout name="Default"/>
 <f:section name="content">
-    <f:if condition="{post}">
-	{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
-	{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
-	{description -> f:if(condition: '{settings.replaceDescription}') 
-					->	f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0) 
-					->tk:document.description()}
-	{post.author.name -> f:if(condition: '{settings.replaceAuthor}') -> tk:document.author()}
+	<f:flashMessages renderMode="div"/>
+	<f:if condition="{post}">
+		{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
+		{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
+		{description -> f:if(condition: '{settings.replaceDescription}')
+		-> f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+		->tk:document.description()}
+		{post.author.name -> f:if(condition: '{settings.replaceAuthor}') -> tk:document.author()}
 
-        <div class="tx-efblog-detail-container">
+		<div class="tx-efblog-detail-container">
 			<f:if condition="{settings.detailView.showBreadCrumb}">
 				<div class="tx-efblog-detail-breadCrumb">
 					<div class="left">
@@ -39,31 +40,31 @@
 							</f:else>
 						</f:if>
 					</div>
-				</div>	
+				</div>
 			</f:if>
 
-            <h1>{post.title}</h1>			
-            <f:if condition="<f:count subject='{pages}' /> > 1">
+			<h1>{post.title}</h1>
+			<f:if condition="<f:count subject='{pages}' /> > 1">
 				<div class="detailpager">
 					<ul class="tabs">
 						<f:for each="{pages}" as="page" key="count">
-							<li><a href="#" id="tab{count}">{page.title}</a></li>                    
+							<li><a href="#" id="tab{count}">{page.title}</a></li>
 						</f:for>
 					</ul>
 				</div>
-            </f:if>
+			</f:if>
 
-            <div class="tab_container">
-                <f:for each="{pages}" as="page"  iteration="elementIterator">					
-                    <div class="tab_content" id="tab{elementIterator.cycle}">
-                        <f:for each="{page.elements}" as="element">
-                            <f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}" />
-                        </f:for>
-                    </div>                
-                </f:for>
-            </div>
-			<h3>{f:translate(key : 'detail_from')} 
-				<f:for each="{post.author}" as="pauthor"  iteration="authorIterator">
+			<div class="tab_container">
+				<f:for each="{pages}" as="page" iteration="elementIterator">
+					<div class="tab_content" id="tab{elementIterator.cycle}">
+						<f:for each="{page.elements}" as="element">
+							<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}"/>
+						</f:for>
+					</div>
+				</f:for>
+			</div>
+			<h3>{f:translate(key : 'detail_from')}
+				<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
 					<f:if condition="{authorIterator.isLast}">
 						<f:then>
 							{pauthor.name}
@@ -72,40 +73,39 @@
 							{pauthor.name},
 						</f:else>
 					</f:if>
-					
+
 				</f:for>
-				</h3>
+			</h3>
 			<!--Social-->
 			<f:if condition="{settings.detailView.showSocial}">
-				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}" />
+				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}"/>
 			</f:if>
-
 
 			<div id="tx-efblog-detail-footer">
 				<div class="more">
 					<f:if condition="{post.teaserLink.link}">
-						{f:if(condition: '{post.teaserLink.target}', then: 
+						{f:if(condition: '{post.teaserLink.target}', then:
 						"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
 						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
 					</f:if>
 				</div>
 
 				<div class="info">
-					{post.views} {f:translate(key : 'detail_views')} | 
-					{post.date -> tk:format.date(format:'%d. %B %Y')} | 
-					<f:for each="{post.categories}" as="category"  iteration="catIterator">
+					{post.views} {f:translate(key : 'detail_views')} |
+					{post.date -> tk:format.date(format:'%d. %B %Y')} |
+					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
 								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-								 {category.title}	
-								</f:link.action>								
+									{category.title}
+								</f:link.action>
 							</f:then>
 							<f:else>
 								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-								 {category.title}, 	
-								</f:link.action> 
+									{category.title},
+								</f:link.action>
 							</f:else>
-						</f:if>                            
+						</f:if>
 					</f:for>
 				</div>
 			</div>
@@ -116,17 +116,18 @@
 					<ul>
 						<f:for each="{post.relatedPosts}" as="relatedPost">
 							<li>
-							<f:link.action action="detail" additionalParams="{tx_efblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
-						{relatedPost.title}<br>
-							</f:link.action>
+								<f:link.action action="detail" additionalParams="{tx_efblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
+									{relatedPost.title}<br>
+								</f:link.action>
 							</li>
 						</f:for>
-					</ul>	
+					</ul>
 				</div>
 			</f:if>
-    </f:if>
+	</f:if>
 
-    <f:if condition="{post.comments}">
+
+	<f:if condition="{post.comments}">
 		<a name="comments">&nbsp;</a>
 		<f:if condition="{post.comments -> f:count()} > 1">
 			<f:then>
@@ -137,31 +138,29 @@
 			</f:else>
 		</f:if>
 		<p class="tx-efblog-comments-rss">
-		{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}', 
-		pageUid : '{settings.detailUid}', pageType : '101')} 
-		</p>
+			{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}',
+			pageUid : '{settings.detailUid}', pageType : '101')} </p>
 
-        <div class="tx-efblog-comments-list">
+		<div class="tx-efblog-comments-list">
 			<f:for each="{comments}" as="comment" iteration="comIterator">
-                <f:cycle as="row" values="{0: 'odd', 1: 'even'}">
-                    <div class="item {row}" id="comment_{comment.uid}">						
-                        <f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}" /> 
+				<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
+					<div class="item {row}" id="comment_{comment.uid}">
+						<f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}"/>
 						<f:for each="{comment.children}" as="child">
 							<div style="margin-left: 50px">
-								<f:render partial="CommentElement" arguments="{comment: child, comIterator:comIterator, post : post}" /> 
+								<f:render partial="CommentElement" arguments="{comment: child, comIterator:comIterator, post : post}"/>
 							</div>
 						</f:for>
-                    </div>
-                </f:cycle>				
-            </f:for>
-        </div>
-    </f:if>
+					</div>
+				</f:cycle>
+			</f:for>
+		</div>
+	</f:if>
 
-    <f:if condition='{allowComments}'>
+	<f:if condition='{allowComments}'>
 		<div class="addComment">
 			<h3>{f:translate(key : 'comments_add')}</h3><a name="comments_form">&nbsp;</a>
-			<f:render partial='CommentForm' arguments="{object: newComment, objectName: 'newComment', post: post, newComment : newComment}" />
+			<f:render partial='CommentForm' arguments="{object: newComment, objectName: 'newComment', post: post, newComment : newComment}"/>
 		</div>
-    </f:if>
-</div>
+	</f:if>
 </f:section>

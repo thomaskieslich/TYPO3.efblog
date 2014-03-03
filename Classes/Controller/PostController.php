@@ -85,7 +85,6 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 	}
 
 	/**
@@ -93,9 +92,9 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	 * @param Tx_Efblog_Domain_Model_Post $post
 	 * @param Tx_Efblog_Domain_Model_Comment $newComment
 	 * @return void
-	 * @dontvalidate $newComment
 	 */
-	public function detailAction(Tx_Efblog_Domain_Model_Post $post, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
+	public function detailAction(Tx_Efblog_Domain_Model_Post $post = NULL, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
+
 		if ($post) {
 			$content = $post->getContent();
 			$pages = array();
@@ -112,7 +111,6 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			}
 			$this->view->assign('pages', $pages);
 			$this->view->assign('post', $post);
-			$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
 			//get Main Comments
@@ -134,7 +132,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 		} else {
-			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('notice_noPost', $this->extensionName), Tx_Extbase_Utility_Localization::translate('notice_error', $this->extensionName), t3lib_Flashmessage::WARNING);
+			$this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('notice_noPost', $this->extensionName));
 		}
 	}
 
