@@ -129,7 +129,8 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * categories
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
+	 * @lazy
 	 */
 	protected $categories;
 
@@ -390,11 +391,11 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->content = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->author = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->relatedPosts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->content = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->comments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->author = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -404,7 +405,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	 * @return void
 	 */
 	public function addCategory(Tx_Efblog_Domain_Model_Category $category) {
-		$this->categories->attach($categories);
+		$this->categories->attach($category);
 	}
 
 	/**
@@ -420,7 +421,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Returns the categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
 	 */
 	public function getCategories() {
 		return $this->categories;
@@ -429,7 +430,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Sets the categories
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage <Tx_Efblog_Domain_Model_Category> $category
+	 * @param Tx_Efblog_Domain_Model_Category $categories
 	 * @return void
 	 */
 	public function setCategories($categories) {
@@ -443,7 +444,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	 * @return void
 	 */
 	public function addRelatedPost(Tx_Efblog_Domain_Model_Post $relatedPost) {
-		$this->relatedPosts->attach($relatedPosts);
+		$this->relatedPosts->attach($relatedPost);
 	}
 
 	/**

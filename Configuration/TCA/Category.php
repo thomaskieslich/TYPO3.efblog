@@ -97,18 +97,19 @@ $TCA['tx_efblog_domain_model_category'] = array(
 			'label' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category_parent_category',
 			'config' => array(
 				'type' => 'select',
-				'size' => 8,
-				'autoSizeMax' => 20,
 				'foreign_table' => 'tx_efblog_domain_model_category',
 				'foreign_table_where' => ' AND tx_efblog_domain_model_category.pid = ###CURRENT_PID###
 					AND tx_efblog_domain_model_category.uid != ###THIS_UID###
-				    AND tx_efblog_domain_model_category.sys_language_uid = 0',
+					AND tx_efblog_domain_model_category.sys_language_uid = 0',
+				'size' => 10,
+				'autoSizeMax' => 50,
+				'maxitems' => 9999,
 				'renderMode' => 'tree',
 				'treeConfig' => array(
 					'parentField' => 'parent_category',
 					'appearance' => array(
 						'expandAll' => TRUE,
-						'showHeader' => TRUE,
+						'showHeader' => FALSE,
 					),
 				),
 			)

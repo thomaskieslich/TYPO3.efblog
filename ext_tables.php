@@ -66,7 +66,6 @@ $TCA['tx_efblog_domain_model_category'] = array(
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Category.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_category.gif',
-		'treeParentField' => 'parent_category',
 		'dividers2tabs' => 1
 	)
 );

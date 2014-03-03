@@ -5,6 +5,7 @@ page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
 page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
 
 plugin.tx_efblog{
+	mvc.callDefaultActionIfActionCantBeResolved = 1
 	settings {
 		##targets
 		listUid =
