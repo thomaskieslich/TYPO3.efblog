@@ -122,7 +122,7 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function getImage() {
 		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
-		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'image', $this->getUid());
+		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'tx_efblog_domain_model_category_image', $this->getUid());
 
 		$files = array();
 		foreach ($fileObjects as $file) {

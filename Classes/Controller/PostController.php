@@ -539,10 +539,11 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		return $breadCrumb;
 	}
 
-	protected function updateViews($post) {
+	protected function updateViews(Tx_Efblog_Domain_Model_Post $post) {
 		if (!$GLOBALS['BE_USER']->user['uid']) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
+			$this->postRepository->update($post);
 		}
 	}
 
@@ -582,5 +583,3 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	}
 
 }
-
-?>

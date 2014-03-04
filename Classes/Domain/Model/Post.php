@@ -329,7 +329,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	 */
 	public function getTeaserImage() {
 		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
-		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'teaser_image', $this->getUid());
+		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'tx_efblog_domain_model_post_teaser_image', $this->getUid());
 
 		$files = array();
 		foreach ($fileObjects as $file) {
