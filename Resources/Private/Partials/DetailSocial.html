@@ -7,16 +7,7 @@
 
 	<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 		<f:if condition="{imageIterator.cycle} == 1">
-			<f:if condition="{dam}">
-				<f:then>
-					<tk:metaTag property="og:image" 
-								content="{f:uri.image(src:'{image.file_path}{image.file_name}', maxWidth:'100')}" 
-								forceAbsoluteUrl="1" />
-				</f:then>
-				<f:else>
-					<tk:metaTag property="og:image" content="{f:uri.image(src:'uploads/pics/{image}', maxWidth:'100')}" forceAbsoluteUrl="1" />
-				</f:else>
-			</f:if> 
+			<tk:metaTag property="og:image" content="{f:uri.image(src:'{image.publicUrl}', maxWidth:'100')}" forceAbsoluteUrl="1"/>
 		</f:if>
 	</f:for>
 	<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
