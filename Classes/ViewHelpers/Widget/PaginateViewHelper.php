@@ -25,36 +25,24 @@
  * ************************************************************* */
 
 /**
- * Pager
- *
- * @package Efblog
- * @subpackage ViewHelpers
+ * Paginate
  */
-class Tx_Efblog_ViewHelpers_Widget_PaginateViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
+class Tx_Efblog_ViewHelpers_Widget_PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper {
 
 	/**
 	 * @var Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController
+	 * @inject
 	 */
 	protected $controller;
 
 	/**
-	 * @param Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController $controller
-	 * @return void
-	 */
-	public function injectController(Tx_Efblog_ViewHelpers_Widget_Controller_PaginateController $controller) {
-		$this->controller = $controller;
-	}
-
-	/**
-	 *
-	 * @param Tx_Extbase_Persistence_QueryResultInterface $objects
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
 	 * @param string $as
 	 * @param array $configuration
 	 * @return string
 	 */
-	public function render(Tx_Extbase_Persistence_QueryResultInterface $objects, $as, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maxPages' => 5)) {
-            return $this->initiateSubRequest();
+	public function render(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects, $as,
+		array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99)) {
+		return $this->initiateSubRequest();
 	}
 }
-
-?>

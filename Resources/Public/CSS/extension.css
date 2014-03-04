@@ -3,7 +3,7 @@
     height: 22px;
     padding-top: 6px;
 }
-.tx-efblog-widget-paginator ul{
+.tx-efblog-widget-paginator{
     text-align: center;
     list-style: none inside none;
     width: 100%;

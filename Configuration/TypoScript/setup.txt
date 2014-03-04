@@ -51,10 +51,10 @@ plugin.tx_efblog{
 			imageHeight =
 
 			//Pager
-			itemsPerPage = 10
+			itemsPerPage = 3
 			insertAbove = 1
 			insertBelow = 1
-			maxPages = 5
+			maximumNumberOfLinks = 4
 
 			//Search
 			searchFields = title, content.header, content.bodytext

@@ -48,7 +48,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	/**
 	 * list action
 	 *
-	 * @return string The rendered list action
+	 * @return void
 	 */
 	public function listAction() {
 
@@ -56,8 +56,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
 			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maxPages' => $this->settings['listView']['maxPages'],
-			'maxItems' => $this->settings['listView']['maxEntries']
+			'maximumNumberOfLinks' => $this->settings['listView']['maximumNumberOfLinks']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 
