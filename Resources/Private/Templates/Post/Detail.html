@@ -8,7 +8,6 @@
 		{description -> f:if(condition: '{settings.replaceDescription}')
 		-> f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
 		->tk:document.description()}
-		{post.author.name -> f:if(condition: '{settings.replaceAuthor}') -> tk:document.author()}
 
 		<div class="tx-efblog-detail-container">
 			<f:if condition="{settings.detailView.showBreadCrumb}">

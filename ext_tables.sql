@@ -88,7 +88,7 @@ CREATE TABLE tx_efblog_domain_model_category (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	image text,
-	parent_category int(11) UNSIGNED DEFAULT '0',
+	parent_category int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

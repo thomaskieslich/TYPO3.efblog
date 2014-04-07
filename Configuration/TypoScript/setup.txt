@@ -276,7 +276,7 @@ plugin.tx_efblog{
 			mapping {
 				tableName = fe_users
 				columns {
-                       tx_efblog_profile_page.mapOnProperty = profilepage
+					tx_efblog_profile_page.mapOnProperty = profilepage
 				}
 			}
 		}

@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,16 +30,17 @@
  * @package Efblog
  * @subpackage Model
  */
-
 class Tx_Efblog_Domain_Model_Administrator extends Tx_Extbase_Domain_Model_FrontendUser {
+
 	/**
 	 *
 	 * @var int
 	 */
 	protected $profilepage;
-	
+
 	public function getProfilepage() {
 		return $this->profilepage;
 	}
 }
+
 ?>
