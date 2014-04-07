@@ -1,8 +1,14 @@
-page.includeCSS.tx_efblog = EXT:efblog/Resources/Public/CSS/extension.css
-page.includeCSS.tx_efblog_uibase = EXT:efblog/Resources/Public/CSS/uithemes/base/jquery.ui.base.css
-page.includeCSS.tx_efblog_uitheme = EXT:efblog/Resources/Public/CSS/uithemes/smoothness/jquery-ui-1.8.14.custom.css
-page.includeJS.jquery_cookie = EXT:efblog/Resources/Public/JS/jquery.cookie.js
-page.includeJS.tx_efblog = EXT:efblog/Resources/Public/JS/extension.js
+page {
+	includeCSS {
+		tx_efblog = EXT:efblog/Resources/Public/Css/extension.css
+		tx_efblog_uibase = EXT:efblog/Resources/Public/Css/uithemes/base/jquery.ui.base.css
+		tx_efblog_uitheme = EXT:efblog/Resources/Public/Css/uithemes/smoothness/jquery-ui-1.8.14.custom.css
+	}
+	includeJSFooterlibs {
+		jquery_cookie = EXT:efblog/Resources/Public/Js/jquery.cookie.js
+		tx_efblog = EXT:efblog/Resources/Public/Js/extension.js
+	}
+}
 
 plugin.tx_efblog{
 	mvc.callDefaultActionIfActionCantBeResolved = 1
