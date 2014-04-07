@@ -61,10 +61,10 @@ plugin.tx_efblog{
 		}
 
 		detailView{
-			showBreadCrumb = 0
+			showBreadCrumb = 1
 			divType = div
 			hideDivider = 1
-			showSocial = 1
+			showSocial = 0
 			closeCommentsAfter = 120
 		}
 

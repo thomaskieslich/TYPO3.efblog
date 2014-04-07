@@ -277,7 +277,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return void
 	 */
 	public function setSpamCategories ($spamCategories) {
-		$this->spamCategories = serialize($spamCategories);
+		$this->spamCategories = $spamCategories;
 	}
 
 	public function getSpamCategories () {
