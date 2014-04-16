@@ -1,20 +1,23 @@
 <?php
+namespace ThomasKieslich\Efblog\Domain\Model;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,15 +25,14 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Post Category
- *
- * @package Efblog
- * @subpackage Model
  */
-class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Category extends AbstractEntity {
 
 	/**
 	 * title
@@ -57,14 +59,14 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * parentCategory
 	 *
-	 * @var Tx_Efblog_Domain_Model_Category $parentCategory
+	 * @var \ThomasKieslich\Efblog\Domain\Model\Category $parentCategory
 	 */
 	protected $parentCategory;
 
 	/**
 	 * children
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $children
+	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
 	 */
 	protected $children;
 
@@ -161,7 +163,7 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Returns the parentCategory
 	 *
-	 * @return Tx_Efblog_Domain_Model_Category $parentCategory
+	 * @return \ThomasKieslich\Efblog\Domain\Model\Category $parentCategory
 	 */
 	public function getParentCategory() {
 		return $this->parentCategory;
@@ -170,7 +172,7 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Sets the parentCategory
 	 *
-	 * @param Tx_Efblog_Domain_Model_Category $parentCategory
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $parentCategory
 	 * @return void
 	 */
 	public function setParentCategory($parentCategory) {
@@ -180,10 +182,10 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Returns the child categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Category> $children
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
 	 */
 	public function getChildren() {
-		$categoryRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_CategoryRepository');
+		$categoryRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CategoryRepository');
 		$children = $categoryRepository->findChilds($this);
 		return clone $children;
 	}
@@ -191,13 +193,11 @@ class Tx_Efblog_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Returns post in categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $posts
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $posts
 	 */
 	public function getPosts() {
-		$postRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_PostRepository');
+		$postRepository = GeneralUtility::makeInstance('ThomasKieslich\Efblog\Domain\Repository\PostRepository');
 		$posts = $postRepository->countCategoryPosts($this)->count();
 		return $posts;
 	}
 }
-
-?>

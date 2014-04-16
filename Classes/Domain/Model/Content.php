@@ -1,20 +1,23 @@
 <?php
+namespace ThomasKieslich\Efblog\Domain\Model;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,15 +25,13 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Content Elements
- *
- * @package Efblog
- * @subpackage Model
  */
-class Tx_Efblog_Domain_Model_Content extends Tx_Extbase_DomainObject_AbstractEntity {
+class Content extends AbstractEntity {
 
 	/**
 	 * Header
@@ -38,18 +39,21 @@ class Tx_Efblog_Domain_Model_Content extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @var string $header
 	 */
 	protected $header;
+
 	/**
 	 * Body text
 	 *
 	 * @var string $bodytext
 	 */
 	protected $bodytext;
+
 	/**
 	 * image
 	 *
 	 * @var string $image
 	 */
 	protected $image;
+
 	/**
 	 * ctype
 	 *
@@ -71,20 +75,35 @@ class Tx_Efblog_Domain_Model_Content extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return string
 	 */
 	public function getImage() {
-		if (t3lib_extMgm::isLoaded('dam')) {
-			$damPics = tx_dam_db::getReferencedFiles('tt_content', $this->uid, 'tx_damttcontent_files');
-			return $damPics['rows'];
-		} else {
-			return explode(',', $this->image);
+		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'tx_efblog_domain_model_category_image', $this->getUid());
+
+		$files = array();
+		foreach ($fileObjects as $file) {
+			$original = $file->getOriginalFile()->getProperties();
+			$reference = $file->getReferenceProperties();
+
+			$title = $reference['title'];
+			if (!$title) {
+				$title = $original['title'];
+			}
+
+			$description = $reference['description'];
+			if (!description) {
+				$description = $original['description'];
+			}
+
+			$files[] = array(
+				'title' => $title,
+				'description' => $description,
+				'publicUrl' => $file->getPublicUrl(TRUE)
+			);
 		}
+
+		return $files;
 	}
-	
+
 	public function getCtype() {
 		return $this->ctype;
 	}
-
-
-
 }
-
-?>

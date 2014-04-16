@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	$_EXTKEY,
+	'ThomasKieslich.' . $_EXTKEY,
 	'Fe1',
 	array(
 		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay',

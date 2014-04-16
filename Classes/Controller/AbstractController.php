@@ -1,9 +1,10 @@
 <?php
+namespace ThomasKieslich\Efblog\Controller;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomas.kieslich@gmail.com>
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -14,6 +15,9 @@
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,17 +25,12 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
- * Abstract Controller 
- * 
- * @package Efblog
- * @subpackage Controller
+ * Abstract Controller
  */
+abstract class AbstractController extends ActionController {
 
-abstract class Tx_Efblog_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
-	
 }
-
-?>

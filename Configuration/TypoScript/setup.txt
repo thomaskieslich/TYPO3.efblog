@@ -264,7 +264,7 @@ plugin.tx_efblog{
 	persistence{
 		storagePid = {$plugin.tx_efblog.persistence.storagePid}
 		classes{
-			Tx_Efblog_Domain_Model_Content{
+			ThomasKieslich\Efblog\Domain\Model\Content{
 				mapping {
 					tableName = tt_content
 					columns{
@@ -272,7 +272,7 @@ plugin.tx_efblog{
 					}
 				}
 			}
-		Tx_Efblog_Domain_Model_Administrator {
+		ThomasKieslich\Efblog\Domain\Model\Administrator {
 			mapping {
 				tableName = fe_users
 				columns {

@@ -1,49 +1,42 @@
 <?php
+namespace ThomasKieslich\Efblog\Controller;
 
-/* * *************************************************************
- *  Copyright notice
- *
- *  (c) 2011 Thomas Kieslich <thomas.kieslich@gmail.com>
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+	/***************************************************************
+	 *  Copyright notice
+	 *
+	 *  (c) 2011-2014 Thomas Kieslich
+	 *  All rights reserved
+	 *
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *  A copy is found in the text file GPL.txt and important notices to the license
+	 *  from the author is found in LICENSE.txt distributed with these scripts.
+	 *
+	 *
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
 
 /**
  * Controller for the Category object
- * 
- * @package Efblog
- * @subpackage Controller
  */
-class Tx_Efblog_Controller_CategoryController extends Tx_Efblog_Controller_AbstractController {
+class CategoryController extends AbstractController {
 
 	/**
-	 * @var Tx_Efblog_Domain_Repository_CategoryRepository
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\CategoryRepository
+	 * @inject
 	 */
 	protected $categoryRepository;
-
-	/**
-	 *
-	 * @param Tx_Efblog_Domain_Repository_CategoryRepository $categoryRepository 
-	 * @return void
-	 */
-	public function injectCategoryRepository(Tx_Efblog_Domain_Repository_CategoryRepository $categoryRepository) {
-		$this->categoryRepository = $categoryRepository;
-	}
 
 	public function categoryOverviewAction() {
 		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
@@ -140,7 +133,4 @@ class Tx_Efblog_Controller_CategoryController extends Tx_Efblog_Controller_Abstr
 		}
 		return $parent;
 	}
-
 }
-
-?>

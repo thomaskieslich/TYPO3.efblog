@@ -1,20 +1,23 @@
 <?php
+namespace ThomasKieslich\Efblog\Domain\Model;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Thomas Kieslich <thomaskieslich@gmx.net>
- *  	
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,61 +25,70 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Post Comments
- * 
- * @package Efblog
- * @subpackage Model
  */
-class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEntity {
+class Comment extends AbstractEntity {
 
 	/**
 	 * hidden
+	 *
 	 * @var integer
 	 */
 	protected $hidden;
+
 	/**
 	 * post
 	 *
-	 * @var Tx_Efblog_Domain_Model_Post $post
+	 * @var \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 */
 	protected $post;
+
 	/**
 	 * @var string
 	 * @validate NotEmpty, Text, StringLength(maximum = 120)
 	 */
 	protected $author;
+
 	/**
 	 * @var string
 	 * @validate EmailAddress
 	 */
 	protected $email;
+
 	/**
 	 * @var string
 	 * @validate Text
 	 */
 	protected $website;
+
 	/**
 	 * @var string
 	 * @validate Text
 	 */
 	protected $location;
+
 	/**
 	 * @var string
 	 * @validate NotEmpty, Text, StringLength(maximum = 250)
 	 */
 	protected $title;
+
 	/**
 	 * @var string
 	 * @validate NotEmpty StringLength(maximum = 2000)
 	 */
 	protected $message;
+
 	/**
 	 * @var DateTime
 	 */
 	protected $date;
+
 	/**
 	 * @var integer
 	 */
@@ -86,48 +98,47 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @var string
 	 */
 	protected $spamCategories;
+
 	/**
 	 * @var string
 	 */
 	protected $ip;
+
 	/**
 	 * parentComment
 	 *
-	 * @var Tx_Efblog_Domain_Model_Comment $parentComment
+	 * @var \ThomasKieslich\Efblog\Domain\Model\Comment $parentComment
 	 */
 	protected $parentComment;
+
 	/**
 	 *
 	 * @var string
 	 */
 	protected $avatar;
 
-
-
-	public function getHidden () {
+	public function getHidden() {
 		return $this->hidden;
 	}
 
-	public function setHidden ($hidden) {
+	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
-	
-	
+
 	/**
-	 * @return Tx_Efblog_Domain_Model_Post
+	 * @return \ThomasKieslich\Efblog\Domain\Model\Post
 	 */
-	public function getPost () {
+	public function getPost() {
 		return $this->post;
 	}
 
-	
 	/**
 	 * Setter for author
 	 *
 	 * @param string $author author
 	 * @return void
 	 */
-	public function setAuthor ($author) {
+	public function setAuthor($author) {
 		$this->author = $author;
 	}
 
@@ -136,7 +147,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string author
 	 */
-	public function getAuthor () {
+	public function getAuthor() {
 		return $this->author;
 	}
 
@@ -146,7 +157,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $email email
 	 * @return void
 	 */
-	public function setEmail ($email) {
+	public function setEmail($email) {
 		$this->email = $email;
 	}
 
@@ -155,7 +166,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string email
 	 */
-	public function getEmail () {
+	public function getEmail() {
 		return $this->email;
 	}
 
@@ -165,7 +176,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $website website
 	 * @return void
 	 */
-	public function setWebsite ($website) {
+	public function setWebsite($website) {
 		$this->website = $website;
 	}
 
@@ -174,7 +185,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string website
 	 */
-	public function getWebsite () {
+	public function getWebsite() {
 		return $this->website;
 	}
 
@@ -183,7 +194,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string $location
 	 */
-	public function getLocation () {
+	public function getLocation() {
 		return $this->location;
 	}
 
@@ -193,7 +204,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $location
 	 * @return void
 	 */
-	public function setLocation ($location) {
+	public function setLocation($location) {
 		$this->location = $location;
 	}
 
@@ -202,7 +213,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string $title
 	 */
-	public function getTitle () {
+	public function getTitle() {
 		return $this->title;
 	}
 
@@ -212,14 +223,14 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $title
 	 * @return void
 	 */
-	public function setTitle ($title) {
+	public function setTitle($title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Constructs this comment
 	 */
-	public function __construct () {
+	public function __construct() {
 		$this->date = new DateTime();
 	}
 
@@ -229,7 +240,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $message message
 	 * @return void
 	 */
-	public function setMessage ($message) {
+	public function setMessage($message) {
 		$this->message = $message;
 	}
 
@@ -238,7 +249,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string $message
 	 */
-	public function getMessage () {
+	public function getMessage() {
 		return $this->message;
 	}
 
@@ -248,7 +259,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param DateTime $date date
 	 * @return void
 	 */
-	public function setDate (DateTime $date) {
+	public function setDate(DateTime $date) {
 		$this->date = $date;
 	}
 
@@ -257,10 +268,10 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return DateTime date
 	 */
-	public function getDate () {
+	public function getDate() {
 		return $this->date;
 	}
-	
+
 	public function getSpampoints() {
 		return $this->spampoints;
 	}
@@ -269,19 +280,17 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 		$this->spampoints = $spampoints;
 	}
 
-		
-
 	/**
 	 * Sets the spamCategories
 	 *
 	 * @param array $spamCategories
 	 * @return void
 	 */
-	public function setSpamCategories ($spamCategories) {
+	public function setSpamCategories($spamCategories) {
 		$this->spamCategories = serialize($spamCategories);
 	}
 
-	public function getSpamCategories () {
+	public function getSpamCategories() {
 		return unserialize($this->spamCategories);
 	}
 
@@ -290,7 +299,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return string $ip
 	 */
-	public function getIp () {
+	public function getIp() {
 		return $this->ip;
 	}
 
@@ -300,49 +309,46 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param string $ip
 	 * @return void
 	 */
-	public function setIp ($ip) {
+	public function setIp($ip) {
 		$this->ip = $ip;
 	}
 
 	/**
 	 * Returns the parentComment
 	 *
-	 * @return Tx_Efblog_Domain_Model_Comment $parentComment
+	 * @return \ThomasKieslich\Efblog\Domain\Model\Comment $parentComment
 	 */
-	public function getParentComment () {
+	public function getParentComment() {
 		return $this->parentComment;
 	}
 
 	/**
 	 * Sets the parentComment
 	 *
-	 * @param Tx_Efblog_Domain_Model_Comment $parentComment
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $parentComment
 	 * @return void
 	 */
-	public function setParentComment ($parentComment) {
+	public function setParentComment($parentComment) {
 		$this->parentComment = $parentComment;
 	}
 
 	/**
 	 * Returns the child comments
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $children
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $children
 	 */
-	public function getChildren () {
-		$commentRepository = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager')->get('Tx_Efblog_Domain_Repository_CommentRepository');
+	public function getChildren() {
+		$commentRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
 		$children = $commentRepository->findAllChildren($this);
 		return clone $children;
 	}
 
 	//helper
-	public function getAvatar () {
+	public function getAvatar() {
 		$avatarImage = NULL;
 		if ($this->email) {
-			$avatarImage = Tx_Efblog_Service_AvatarService::findAvatarByEmail($this->email);
+			$avatarImage = \ThomasKieslich\Efblog\Service\AvatarService::findAvatarByEmail($this->email);
 		}
 		return $avatarImage;
 	}
-
 }
-
-?>

@@ -1,49 +1,43 @@
 <?php
+namespace ThomasKieslich\Efblog\Controller;
 
-/* * *************************************************************
- *  Copyright notice
- *
- *  (c) 2011 Thomas Kieslich <thomas.kieslich@gmail.com>
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+	/***************************************************************
+	 *  Copyright notice
+	 *
+	 *  (c) 2011-2014 Thomas Kieslich
+	 *  All rights reserved
+	 *
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *  A copy is found in the text file GPL.txt and important notices to the license
+	 *  from the author is found in LICENSE.txt distributed with these scripts.
+	 *
+	 *
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
 
 /**
  * Controller for the Post object
- * 
- * @package Efblog
- * @subpackage Controller
  */
-class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractController {
+class PostController extends AbstractController {
 
 	/**
-	 * @var Tx_Efblog_Domain_Repository_PostRepository
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
+	 * @inject
 	 */
 	protected $postRepository;
 
-	/**
-	 *
-	 * @param Tx_Efblog_Domain_Repository_PostRepository $postRepository 
-	 * @return void
-	 */
-	public function injectPostRepository(Tx_Efblog_Domain_Repository_PostRepository $postRepository) {
-		$this->postRepository = $postRepository;
-	}
 
 	/**
 	 * list action
@@ -59,7 +53,6 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			'maximumNumberOfLinks' => $this->settings['listView']['maximumNumberOfLinks']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
-
 
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
@@ -83,16 +76,16 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		}
 
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-
 	}
 
 	/**
 	 * post detail
-	 * @param Tx_Efblog_Domain_Model_Post $post
-	 * @param Tx_Efblog_Domain_Model_Comment $newComment
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
 	 * @return void
 	 */
-	public function detailAction(Tx_Efblog_Domain_Model_Post $post = NULL, Tx_Efblog_Domain_Model_Comment $newComment = NULL) {
+	public function detailAction(\ThomasKieslich\Efblog\Domain\Model\Post $post = NULL, \ThomasKieslich\Efblog\Domain\Model\Comment $newComment = NULL) {
 
 		if ($post) {
 			$content = $post->getContent();
@@ -113,7 +106,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
 			//get Main Comments
-			$commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
+			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
 			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
 			$allowComments = $this->checkAllowComments($post);
@@ -163,7 +156,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	public function categoryListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
-			$categoryRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CategoryRepository');
+			$categoryRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CategoryRepository');
 			$category = $categoryRepository->findByUid($this->request->getArgument('category'));
 			$categories = $this->findSubCategories($category, $categoryRepository);
 			$this->settings['listView']['category'] = $categories;
@@ -183,7 +176,6 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	}
 
 	public function calendarViewAction() {
-		
 	}
 
 	public function ajaxCalendarDayAction() {
@@ -303,7 +295,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		}
 		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		foreach ($posts as $post) {
-			$post->setDetailUid((int) $combinedSettings[$post->getPid()][detail]);
+			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
 			$combinedPosts->attach($post);
 		}
@@ -335,7 +327,6 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 	 * return searchform for widget
 	 */
 	public function searchWidgetAction() {
-		
 	}
 
 	/**
@@ -399,7 +390,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 
 		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
 		foreach ($posts as $post) {
-			$post->setDetailUid((int) $combinedSettings[$post->getPid()][detail]);
+			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
 			$combinedPosts->attach($post);
 		}
@@ -442,7 +433,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		$request = $this->request->getArguments();
 		if (isset($request['post'])) {
 			$postId = $request['post'];
-			$post = $this->postRepository->findByUid((int) $postId);
+			$post = $this->postRepository->findByUid((int)$postId);
 			$rssItems = array();
 			if ($post->getComments()) {
 				$comments = $post->getComments()->toArray();
@@ -473,8 +464,8 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		$request = $this->request->getArguments();
 		if ($request['parentComment'] != '') {
 			$newComment['parentComment'] = $this->request->getArgument('parentComment');
-			$commentRepository = $this->objectManager->get('Tx_Efblog_Domain_Repository_CommentRepository');
-			$parentComment = $commentRepository->findByUid((int) $newComment['parentComment']);
+			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
+			$parentComment = $commentRepository->findByUid((int)$newComment['parentComment']);
 			$extensionName = $this->request->getControllerExtensionName();
 			$newComment['title'] = Tx_Extbase_Utility_Localization::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
 		}
@@ -489,7 +480,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 
 		if ($this->settings['detailView']['closeCommentsAfter'] > 0) {
 			$days = ($this->settings['detailView']['closeCommentsAfter'] * 24 * 60 * 60);
-			$postDate = (int) $post->getDate()->format('U');
+			$postDate = (int)$post->getDate()->format('U');
 			if (($postDate + $days) > time()) {
 				$allowComments = TRUE;
 			} else {
@@ -538,7 +529,7 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		return $breadCrumb;
 	}
 
-	protected function updateViews(Tx_Efblog_Domain_Model_Post $post) {
+	protected function updateViews(\ThomasKieslich\Efblog\Domain\Model\Post $post) {
 		if (!$GLOBALS['BE_USER']->user['uid']) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
@@ -580,5 +571,4 @@ class Tx_Efblog_Controller_PostController extends Tx_Efblog_Controller_AbstractC
 		}
 		return $subCategories;
 	}
-
 }

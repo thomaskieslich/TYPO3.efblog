@@ -1,20 +1,23 @@
 <?php
+namespace ThomasKieslich\Efblog\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Thomas Kieslich
- *
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,11 +26,12 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Model for Posts
  */
-class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
+class Post extends AbstractEntity {
 
 	/**
 	 * Title
@@ -45,7 +49,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	protected $hidden;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Administrator> $author
+	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 */
 	protected $author;
 
@@ -87,7 +91,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * CE Element
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Content> $content
+	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
 	 */
 	protected $content;
 
@@ -129,7 +133,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * categories
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
 	 * @lazy
 	 */
 	protected $categories;
@@ -137,14 +141,14 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * related post
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $relatedPosts
+	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 */
 	protected $relatedPosts;
 
 	/**
 	 * post comments
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $comments
+	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 */
 	protected $comments;
 
@@ -401,27 +405,27 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Adds a Category
 	 *
-	 * @param Tx_Efblog_Domain_Model_Category $category
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $category
 	 * @return void
 	 */
-	public function addCategory(Tx_Efblog_Domain_Model_Category $category) {
+	public function addCategory(\ThomasKieslich\Efblog\Domain\Model\Category $category) {
 		$this->categories->attach($category);
 	}
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param Tx_Efblog_Domain_Model_Category $categoryToRemove The Category to be removed
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $categoryToRemove The Category to be removed
 	 * @return void
 	 */
-	public function removeCategory(Tx_Efblog_Domain_Model_Category $categoryToRemove) {
+	public function removeCategory(\ThomasKieslich\Efblog\Domain\Model\Category $categoryToRemove) {
 		$this->categories->detach($categoryToRemove);
 	}
 
 	/**
 	 * Returns the categories
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Efblog_Domain_Model_Category> $categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
 	 */
 	public function getCategories() {
 		return $this->categories;
@@ -430,7 +434,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Sets the categories
 	 *
-	 * @param Tx_Efblog_Domain_Model_Category $categories
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $categories
 	 * @return void
 	 */
 	public function setCategories($categories) {
@@ -440,27 +444,27 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Adds a Post
 	 *
-	 * @param Tx_Efblog_Domain_Model_Post $relatedPosts
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $relatedPosts
 	 * @return void
 	 */
-	public function addRelatedPost(Tx_Efblog_Domain_Model_Post $relatedPost) {
+	public function addRelatedPost(\ThomasKieslich\Efblog\Domain\Model\Post $relatedPost) {
 		$this->relatedPosts->attach($relatedPost);
 	}
 
 	/**
 	 * Removes a Post
 	 *
-	 * @param Tx_Efblog_Domain_Model_Post $relatedPostsToRemove The Post to be removed
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $relatedPostsToRemove The Post to be removed
 	 * @return void
 	 */
-	public function removeRelatedPost(Tx_Efblog_Domain_Model_Post $relatedPostToRemove) {
+	public function removeRelatedPost(\ThomasKieslich\Efblog\Domain\Model\Post $relatedPostToRemove) {
 		$this->relatedPosts->detach($relatedPostToRemove);
 	}
 
 	/**
 	 * Returns the relatedPosts
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Post> $relatedPosts
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 */
 	public function getRelatedPosts() {
 		return $this->relatedPosts;
@@ -469,7 +473,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Sets the relatedPosts
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage <Tx_Efblog_Domain_Model_Post> $relatedPosts
+	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 * @return void
 	 */
 	public function setRelatedPosts($relatedPosts) {
@@ -479,27 +483,27 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Adds a Comments
 	 *
-	 * @param Tx_Efblog_Domain_Model_Comment $comment
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $comment
 	 * @return void
 	 */
-	public function addComment(Tx_Efblog_Domain_Model_Comment $comment) {
+	public function addComment(\ThomasKieslich\Efblog\Domain\Model\Comment $comment) {
 		$this->comments->attach($comment);
 	}
 
 	/**
 	 * Removes a Comments
 	 *
-	 * @param Tx_Efblog_Domain_Model_Comment $commentToRemove The Comments to be removed
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $commentToRemove The Comments to be removed
 	 * @return void
 	 */
-	public function removeComment(Tx_Efblog_Domain_Model_Comment $commentToRemove) {
+	public function removeComment(\ThomasKieslich\Efblog\Domain\Model\Comment $commentToRemove) {
 		$this->comments->detach($commentToRemove);
 	}
 
 	/**
 	 * Returns the comments
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Comment> $comments
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 */
 	public function getComments() {
 		return $this->comments;
@@ -508,7 +512,7 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	/**
 	 * Sets the comments
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage <Tx_Efblog_Domain_Model_Comment> $comments
+	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 * @return void
 	 */
 	public function setComments($comments) {
@@ -541,15 +545,15 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * @param Tx_Extbase_Persistence_ObjectStorage <Tx_Efblog_Domain_Model_Administrator> $author
+	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 * @return void
 	 */
-	public function setAuthor(Tx_Efblog_Domain_Model_Administrator $author) {
+	public function setAuthor(\ThomasKieslich\Efblog\Domain\Model\Administrator $author) {
 		$this->author = $author;
 	}
 
 	/**
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Efblog_Domain_Model_Administrator> $author
+	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 */
 	public function getAuthor() {
 		return $this->author;
@@ -578,5 +582,3 @@ class Tx_Efblog_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity
 		return $this->date->format('d');
 	}
 }
-
-?>

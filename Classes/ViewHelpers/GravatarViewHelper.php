@@ -1,9 +1,10 @@
 <?php
+namespace ThomasKieslich\Efblog\ViewHelpers;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
- *  (c) 2011 Bastian Waidelich <bastian@typo3.org>
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -14,6 +15,9 @@
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,6 +26,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  * View helper for rendering gravatar images.
@@ -36,11 +41,8 @@
  * <output>
  * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
  * </output>
- * 
- * @package Efblog
- * @subpackage ViewHelpers
  */
-class Tx_Efblog_ViewHelpers_GravatarViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractTagBasedViewHelper {
+class GravatarViewHelper extends AbstractTagBasedViewHelper {
 
 	/**
 	 * @var string
@@ -68,7 +70,7 @@ class Tx_Efblog_ViewHelpers_GravatarViewHelper extends Tx_Fluid_Core_ViewHelper_
 	 */
 	public function render($emailAddress, $size = NULL, $defaultImageUri = NULL) {
 		$gravatarUri = 'http://www.gravatar.com/avatar/' . md5($emailAddress);
-                $baseUri =$GLOBALS['TSFE']->config['config']['baseURL'];
+		$baseUri = $GLOBALS['TSFE']->config['config']['baseURL'];
 		$uriParts = array();
 		if ($defaultImageUri !== NULL) {
 			$uriParts[] = 'd=' . $baseUri . urlencode($defaultImageUri);
@@ -84,6 +86,3 @@ class Tx_Efblog_ViewHelpers_GravatarViewHelper extends Tx_Fluid_Core_ViewHelper_
 		return $this->tag->render();
 	}
 }
-
-
-?>

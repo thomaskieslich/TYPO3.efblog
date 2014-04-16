@@ -1,19 +1,23 @@
 <?php
+namespace ThomasKieslich\Efblog\Domain\Repository;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,62 +25,62 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * Repository for Tx_Efblog_Domain_Model_Category
- *
- * @package Efblog
- * @subpackage Repository
+ * Repository for \ThomasKieslich\Efblog\Domain\Model\Category
  */
-class Tx_Efblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
+class CategoryRepository extends Repository {
 
-	public function findMainCategories ($settings) {
+	public function findMainCategories($settings) {
 		$query = $this->createQuery();
 		$constraint = NULL;
 		if ($settings['listView']['category']) {
 			$constraint = $query->logicalAnd(
-				$this->createCategoryConstraint($query, $settings), 
+				$this->createCategoryConstraint($query, $settings),
 				$query->equals('parent_category', 0)
 			);
 		} else {
 			$constraint = $query->equals('parent_category', 0);
 		}
-		
+
 		$query->matching(
 			$constraint
 		);
 		$query->setOrderings(
-			array (
-				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			array(
+				'title' => QueryInterface::ORDER_ASCENDING
 			)
 		);
 
 		return $query->execute();
 	}
 
-	public function findChilds (Tx_Efblog_Domain_Model_Category $category) {
+	public function findChilds(\ThomasKieslich\Efblog\Domain\Model\Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_category', $category)
 		);
 		$query->setOrderings(
-			array (
-				'title' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			array(
+				'title' => QueryInterface::ORDER_ASCENDING
 			)
 		);
 		return $query->execute();
 	}
 
-	protected function createCategoryConstraint (Tx_Extbase_Persistence_QueryInterface $query, $settings) {
+	protected function createCategoryConstraint(QueryInterface $query, $settings) {
 		$constraint = NULL;
-		$categoryConstraints = array ();
-		$categories = t3lib_div::trimExplode(',', $settings['listView']['category'], TRUE);
+		$categoryConstraints = array();
+		$categories =  GeneralUtility::trimExplode(',', $settings['listView']['category'], TRUE);
 
 		foreach ($categories as $category) {
 			$categoryConstraints[] = $query->equals('uid', $category);
 		}
-		
+
 		switch (strtolower($settings['listView']['categoryMode'])) {
 			case 'or':
 				$constraint = $query->logicalOr($categoryConstraints);
@@ -93,5 +97,4 @@ class Tx_Efblog_Domain_Repository_CategoryRepository extends Tx_Extbase_Persiste
 		}
 		return $constraint;
 	}
-
 }
