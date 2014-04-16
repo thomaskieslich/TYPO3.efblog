@@ -22,6 +22,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Controller for the Comments object
@@ -56,7 +57,6 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
             $spamcategories = $this->checkForSpam($newComment);
             $newComment->setIp($_SERVER['REMOTE_ADDR']);
             $newComment->setSpamCategories($spamcategories);
-
             $spampoints = 0;
             foreach ($spamcategories as $key => $value) {
                 $spampoints += $value;
@@ -93,14 +93,14 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         $spampoints = array();
 
         //check dummy field
-        $dummyField = t3lib_div::_POST('tx_efblog_fe');
+        $dummyField = GeneralUtility::_POST('tx_efblog_fe');
         if ($dummyField[newComment][link]) {
             $spampoints['dummy'] = 100;
         }
 
         //author
-        $author = t3lib_div::strtolower($newComment->getAuthor());
-        $authorKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['authorKeywords'], TRUE);
+        $author = GeneralUtility::strtolower($newComment->getAuthor());
+        $authorKeywords = GeneralUtility::trimExplode(',', $this->settings['comments']['spam']['authorKeywords'], TRUE);
         $authorPoints = 0;
         foreach ($authorKeywords as $keyword) {
             $authorPoints += substr_count($author, $keyword);
@@ -111,7 +111,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
 
 
         //email
-        $email = t3lib_div::strtolower($newComment->getEmail());
+        $email = GeneralUtility::strtolower($newComment->getEmail());
         if ($email && !substr_count($email, '@')) {
             $spampoints[emailNoAt] = (int) $this->settings['comments']['spam']['emailNoAtPoints'];
         }
@@ -123,8 +123,8 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         }
 
         //location
-        $location = t3lib_div::strtolower($newComment->getLocation());
-        $locationKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['locationKeywords'], TRUE);
+        $location = GeneralUtility::strtolower($newComment->getLocation());
+        $locationKeywords = GeneralUtility::trimExplode(',', $this->settings['comments']['spam']['locationKeywords'], TRUE);
         $locationPoints = 0;
         foreach ($locationKeywords as $keyword) {
             $locationPoints += substr_count($location, $keyword);
@@ -134,8 +134,8 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         }
 
         //title
-        $title = t3lib_div::strtolower($newComment->getTitle());
-        $titleKeywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['titleKeywords'], TRUE);
+        $title = GeneralUtility::strtolower($newComment->getTitle());
+        $titleKeywords = GeneralUtility::trimExplode(',', $this->settings['comments']['spam']['titleKeywords'], TRUE);
         $titlePoints = 0;
         foreach ($titleKeywords as $keyword) {
             $titlePoints += substr_count($title, $keyword);
@@ -145,7 +145,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         }
 
         //message
-        $message = t3lib_div::strtolower($newComment->getMessage());
+        $message = GeneralUtility::strtolower($newComment->getMessage());
 
         //message length
         $messageLength = strlen($message);
@@ -154,16 +154,16 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         }
 
         //message start with
-        $messageArray = t3lib_div::trimExplode(' ', $message, TRUE, 500);
-        $messageStartWith = t3lib_div::strtolower($this->settings['comments']['spam']['messageStartWith']);
-        $messageStartWords = t3lib_div::trimExplode(',', $messageStartWith, TRUE);
+        $messageArray = GeneralUtility::trimExplode(' ', $message, TRUE, 500);
+        $messageStartWith = GeneralUtility::strtolower($this->settings['comments']['spam']['messageStartWith']);
+        $messageStartWords = GeneralUtility::trimExplode(',', $messageStartWith, TRUE);
         $firstWord = in_array($messageArray[0], $messageStartWords);
         if ($firstWord) {
             $spampoints[messageStartWith] += $this->settings['comments']['spam']['messageStartWithPoints'];
         }
 
-        //message Keyword search 		
-        $keywords = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['messageKeywords'], TRUE);
+        //message Keyword search
+        $keywords = GeneralUtility::trimExplode(',', $this->settings['comments']['spam']['messageKeywords'], TRUE);
         $keywordPoints = 0;
         foreach ($keywords as $keyword) {
             $keywordPoints += substr_count($message, $keyword);
@@ -173,7 +173,7 @@ class Tx_Efblog_Controller_CommentController extends Tx_Efblog_Controller_Abstra
         }
 
         //blockedIps
-        $ipArray = t3lib_div::trimExplode(',', $this->settings['comments']['spam']['blockedIps'], TRUE);
+        $ipArray = GeneralUtility::trimExplode(',', $this->settings['comments']['spam']['blockedIps'], TRUE);
         $ipBlocked = in_array($_SERVER['REMOTE_ADDR'], $ipArray);
         if ($ipBlocked) {
             $spampoints += $this->settings['comments']['spam']['ipPoints'];

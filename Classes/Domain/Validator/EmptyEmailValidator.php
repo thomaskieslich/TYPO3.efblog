@@ -30,7 +30,7 @@
  * @package Efblog
  * @subpackage Validator
  */
-class Tx_Efblog_Domain_Validator_EmptyEmailValidator extends Tx_Extbase_Validation_Validator_EmailAddressValidator {
+class Tx_Efblog_Domain_Validator_EmptyEmailValidator extends \TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator {
 
 	public function isValid($value) {
 		if (empty($value)) {

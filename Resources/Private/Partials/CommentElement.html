@@ -26,8 +26,7 @@
 		{f:if(condition: '{comment.website}', 
 		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}", 
 		else: '{comment.author}')}
-		{f:if(condition : '{comment.email} == {post.author.email}',
-		then : "{f:translate(key : 'comments_author')}")}
+		<!--{f:if(condition : '{comment.email} == {post.authors}', then : "{f:translate(key : 'comments_author')}")}email-->
 		{f:translate(key : 'comments_wrote')}
 		{comment.date -> f:format.date(format:'d.m.Y, h:m')}
 		{f:if(condition: '{comment.location}',

@@ -246,12 +246,10 @@ $TCA['tx_efblog_domain_model_post'] = array(
 				'foreign_table' => 'tx_efblog_domain_model_comment',
 				'foreign_field' => 'post',
 				'maxitems' => 9999,
+				'multiple' => 0,
 				'appearance' => array(
-					'collapse' => 0,
-					'newRecordLinkPosition' => 'bottom',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+					'collapseAll' => 1,
+					'expandSingle' => 1,
 				),
 			),
 		),

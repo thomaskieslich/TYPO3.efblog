@@ -50,7 +50,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $author;
 	/**
 	 * @var string
-	 * @validate Tx_Efblog_Domain_Validator_EmptyEmailValidator
+	 * @validate EmailAddress
 	 */
 	protected $email;
 	/**
@@ -81,8 +81,9 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @var integer
 	 */
 	protected $spampoints;
+
 	/**
-	 * @var array
+	 * @var string
 	 */
 	protected $spamCategories;
 	/**
@@ -277,7 +278,7 @@ class Tx_Efblog_Domain_Model_Comment extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return void
 	 */
 	public function setSpamCategories ($spamCategories) {
-		$this->spamCategories = $spamCategories;
+		$this->spamCategories = serialize($spamCategories);
 	}
 
 	public function getSpamCategories () {
