@@ -6,6 +6,7 @@ page {
 	}
 	includeJSFooterlibs {
 		jquery_cookie = EXT:efblog/Resources/Public/Js/jquery.cookie.js
+		jquery_social = EXT:efblog/Resources/Public/Js/jquery.socialshareprivacy.min.js
 		tx_efblog = EXT:efblog/Resources/Public/Js/extension.js
 	}
 }
@@ -87,7 +88,7 @@ plugin.tx_efblog {
 			showBreadCrumb = 1
 			divType = div
 			hideDivider = 1
-			showSocial = 0
+			showSocial = 1
 			closeCommentsAfter = 120
 		}
 
@@ -96,7 +97,7 @@ plugin.tx_efblog {
 		}
 
 		openGraph {
-			allowOpenGraph = 0
+			allowOpenGraph = 1
 			type = article
 			cropDescription = 280
 			defaultImage = typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png

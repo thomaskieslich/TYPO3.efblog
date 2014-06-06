@@ -1,0 +1,12 @@
+<div id="tx-efblog-detail-relatedPost">
+	<h3>{f:translate(key : 'detail_related_post')}</h3>
+	<ul>
+		<f:for each="{post.relatedPosts}" as="relatedPost">
+			<li>
+				<f:link.action additionalParams="{tx_efblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
+					{relatedPost.title}
+				</f:link.action>
+			</li>
+		</f:for>
+	</ul>
+</div>

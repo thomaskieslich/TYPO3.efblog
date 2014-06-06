@@ -1,4 +1,4 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
 <f:if condition="{settings.openGraph.allowOpenGraph}">
 	<tk:metaTag property="og:title" content="{post.title}" />
 	<tk:metaTag property="og:type" content="{settings.openGraph.type}" />
@@ -25,22 +25,4 @@
 	<tk:metaTag property="og:country-name" content="{settings.openGraph.country-name}" />
 </f:if>
 
-<div id="tx-efblog-detail-social">
-	<div class="googleplus">
-		<g:plusone size="medium"></g:plusone>
-		<![CDATA[
-		<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-		  {lang: 'de'}
-		</script>
-		]]>
-	</div>
-	<div class="twitter">
-		<a href="http://twitter.com/share" class="twitter-share-button" data-url="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" data-text="{post.title}" data-count="horizontal" data-via="thomaskieslich" data-lang="de">Tweet</a>
-		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-	</div>
-	<div class="facebook">
-		<div id="fb-root"></div>
-		<script src="http://connect.facebook.net/de_DE/all.js#xfbml=1"></script>
-		<fb:like send="false" layout="button_count" width="100" show_faces="false" action="recommend"></fb:like>
-	</div>
-</div>
+<div class="tx-efblog-detail-social"></div>

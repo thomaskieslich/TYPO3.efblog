@@ -10,56 +10,18 @@
 				<f:render partial="Post/DetailBreadCrumb" arguments="{breadCrumb: breadCrumb}"/>
 			</f:if>
 
-			<f:render partial="Post/DetailBody" arguments="{_all}"/>
+			<f:render partial="Post/DetailBody" arguments="{post: post, pages: pages}"/>
 
 
 			<!--Social-->
 			<f:if condition="{settings.detailView.showSocial}">
-				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}"/>
+				<f:render partial="Post/DetailSocial" arguments="{post: post, description : description}"/>
 			</f:if>
 
-			<div id="tx-efblog-detail-footer">
-				<div class="more">
-					<f:if condition="{post.teaserLink.link}">
-						{f:if(condition: '{post.teaserLink.target}', then:
-						"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
-					</f:if>
-				</div>
-
-				<div class="info">
-					{post.views} {f:translate(key : 'detail_views')} |
-					{post.date -> f:format.date(format:'%d. %B %Y')} |
-					<f:for each="{post.categories}" as="category" iteration="catIterator">
-						<f:if condition="{catIterator.isLast}">
-							<f:then>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-									{category.title}
-								</f:link.action>
-							</f:then>
-							<f:else>
-								<f:link.action action="categoryList" pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-									{category.title},
-								</f:link.action>
-							</f:else>
-						</f:if>
-					</f:for>
-				</div>
-			</div>
+			<f:render partial="Post/DetailFooter" arguments="{post: post}"/>
 
 			<f:if condition="{post.relatedPosts}">
-				<div id="tx-efblog-detail-relatedPost">
-					<h3>{f:translate(key : 'detail_related_post')}</h3>
-					<ul>
-						<f:for each="{post.relatedPosts}" as="relatedPost">
-							<li>
-								<f:link.action action="detail" additionalParams="{tx_efblog_fe1:{post:relatedPost.uid}}" title="{relatedPost.title}">
-									{relatedPost.title}<br>
-								</f:link.action>
-							</li>
-						</f:for>
-					</ul>
-				</div>
+				<f:render partial="Post/DetailRelated" arguments="{post: post}"/>
 			</f:if>
 	</f:if>
 
