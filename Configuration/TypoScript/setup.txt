@@ -10,8 +10,23 @@ page {
 	}
 }
 
-plugin.tx_efblog{
-	mvc.callDefaultActionIfActionCantBeResolved = 1
+plugin.tx_efblog {
+	mvc {
+		throwPageNotFoundExceptionIfActionCantBeResolved = 0
+	}
+	features {
+		# this enables/disables the reworked property mapper (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/PropertyMapper_rework)
+		rewrittenPropertyMapper = 1
+		# if enabled, default controller and/or action is skipped when creating URIs through the URI Builder (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs)
+		skipDefaultArguments = 1
+		# if set to 1, the enable fields are ignored in BE context
+		ignoreAllEnableFieldsInBe = 0
+	}
+	legacy {
+		enableLegacyFlashMessageHandling = 1
+	}
+
+	#    mvc.callDefaultActionIfActionCantBeResolved = 1
 	settings {
 		##targets
 		listUid =
@@ -21,7 +36,7 @@ plugin.tx_efblog{
 		dateMenuUid =
 		backUid =
 
-		blogTitle = efblog
+		blogTitle = efblog Title
 
 		//Admin roles
 		superAdminGroup = 4
@@ -35,7 +50,7 @@ plugin.tx_efblog{
 		replaceKeywords = 1
 		replaceAuthor = 1
 
-		listView{
+		listView {
 			//Sorting
 			orderBy = date,title
 			//asc, desc
@@ -48,7 +63,7 @@ plugin.tx_efblog{
 			//or, notor, notand, and
 			categoryMode = or
 			category =
-			hideNoCategorized =  0
+			hideNoCategorized = 0
 
 			//Teaser Rendering
 			cropText = 300
@@ -56,17 +71,19 @@ plugin.tx_efblog{
 			imageWidth = 80m
 			imageHeight =
 
-			//Pager
-			itemsPerPage = 3
-			insertAbove = 1
-			insertBelow = 1
-			maximumNumberOfLinks = 4
+			//Paginator
+			paginator {
+				itemsPerPage = 3
+				insertAbove = 1
+				insertBelow = 1
+				maximumNumberOfLinks = 4
+			}
 
 			//Search
 			searchFields = title, content.header, content.bodytext
 		}
 
-		detailView{
+		detailView {
 			showBreadCrumb = 1
 			divType = div
 			hideDivider = 1
@@ -74,7 +91,7 @@ plugin.tx_efblog{
 			closeCommentsAfter = 120
 		}
 
-		calendarView{
+		calendarView {
 
 		}
 
@@ -92,7 +109,7 @@ plugin.tx_efblog{
 			country-name =
 		}
 
-		comments{
+		comments {
 			allowComments = 1
 			//Gravatar
 			defaultGravatar = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
@@ -108,7 +125,7 @@ plugin.tx_efblog{
 			messageAllSpam = 1
 
 			//Spam protection
-			spam{
+			spam {
 				authorKeywords = www,http
 				authorKeywordsPoints = 30
 
@@ -132,7 +149,7 @@ plugin.tx_efblog{
 				messageKeywords = http,www,viagra, penis, casino
 				messageKeywordsPoints = 10
 
-				
+
 				blockedIps =
 				ipPoints = 60
 
@@ -141,7 +158,7 @@ plugin.tx_efblog{
 			}
 		}
 
-		latestPostsWidget{
+		latestPostsWidget {
 			//Sorting
 			orderBy = date,title
 			//asc, desc
@@ -151,34 +168,34 @@ plugin.tx_efblog{
 			showViews = 1
 		}
 
-		latestCommentsWidget{
+		latestCommentsWidget {
 
 			maxEntries = 12
 			cropLink = 33
 			showGravatar = 1
 		}
 
-		viewsWidget{
+		viewsWidget {
 			maxEntries = 10
 			cropLink = 44
 		}
 
-		categoryWidget{
+		categoryWidget {
 			cropLink = 44
 			viewCounts = 1
-			viewEmpty   = 1
+			viewEmpty = 1
 		}
 
-		searchWidget{
+		searchWidget {
 		}
 
-		dateMenuWidget{
+		dateMenuWidget {
 			//Sorting
 			orderBy = date
 			//asc, desc
 			sortDirection = desc
 		}
-		rss{
+		rss {
 			maxEntries = 25
 			title = Blog RSS
 			description = RSS for Blog
@@ -187,99 +204,99 @@ plugin.tx_efblog{
 			image =
 		}
 	}
-	widgets{
+	widgets {
 		latestPostsWidget = USER
-		latestPostsWidget{
+		latestPostsWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Post {
-				1 = latestPostsWidget
+					1 = latestPostsWidget
 				}
 			}
 		}
 
 		latestCommentsWidget = USER
-		latestCommentsWidget{
+		latestCommentsWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Comment {
-				1 = latestCommentsWidget
+					1 = latestCommentsWidget
 				}
 			}
 		}
 
 		viewsWidget = USER
-		viewsWidget{
+		viewsWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Post {
-				1 = viewsWidget
+					1 = viewsWidget
 				}
 			}
 		}
 
 		searchWidget = USER
-		searchWidget{
+		searchWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Post {
-				1 = searchWidget
+					1 = searchWidget
 				}
 			}
 		}
 
 		categoryWidget = USER
-		categoryWidget{
+		categoryWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Category {
-				1 = categoryWidget
+					1 = categoryWidget
 				}
 			}
 		}
 
 		dateMenuWidget = USER
-		dateMenuWidget{
+		dateMenuWidget {
 			userFunc = tx_extbase_core_bootstrap->run
 			pluginName = Fe1
 			extensionName = Efblog
 			switchableControllerActions {
 				Post {
-				1 = dateMenuWidget
+					1 = dateMenuWidget
 				}
 			}
 		}
 	}
 
-	persistence{
+	persistence {
 		storagePid = {$plugin.tx_efblog.persistence.storagePid}
-		classes{
-			ThomasKieslich\Efblog\Domain\Model\Content{
+		classes {
+			ThomasKieslich\Efblog\Domain\Model\Content {
 				mapping {
 					tableName = tt_content
-					columns{
+					columns {
 						CType.mapOnProperty = ctype
 					}
 				}
 			}
-		ThomasKieslich\Efblog\Domain\Model\Administrator {
-			mapping {
-				tableName = fe_users
-				columns {
-					tx_efblog_profile_page.mapOnProperty = profilepage
+			ThomasKieslich\Efblog\Domain\Model\Administrator {
+				mapping {
+					tableName = fe_users
+					columns {
+						tx_efblog_profile_page.mapOnProperty = profilepage
+					}
 				}
 			}
-		}
 		}
 	}
 
@@ -287,22 +304,22 @@ plugin.tx_efblog{
 		templateRootPath = {$plugin.tx_efblog.view.templateRootPath}
 		partialRootPath = {$plugin.tx_efblog.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_efblog.view.layoutRootPath}
-		}
+	}
 
 	renderElement = COA
 	renderElement {
-				10 = RECORDS
-				10 {
-					source.field = uid
-					tables = tt_content
-					#conf.tt_content < tt_content
-				}
-			}
+		10 = RECORDS
+		10 {
+			source.field = uid
+			tables = tt_content
+			#conf.tt_content < tt_content
+		}
 	}
+}
 
 //###Ajax Page
 txefblogAjax = PAGE
-txefblogAjax{
+txefblogAjax {
 	typeNum = 6661
 	10 = USER
 	10 {
@@ -311,91 +328,91 @@ txefblogAjax{
 		extensionName = Efblog
 	}
 	config {
-        disableAllHeaderCode = 1
-        xhtml_cleaning = 0
-        admPanel = 0
-        debug = 0
-        no_cache = 1
-        additionalHeaders = Content-type:application/json
-    }
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
+		no_cache = 1
+		additionalHeaders = Content-type:application/json
+	}
 }
 
 //RSS
 postRss = PAGE
 postRss {
-  typeNum = 100
-  10 = USER
-  10 {
-	userFunc = tx_extbase_core_bootstrap->run
-	pluginName = Fe1
-	extensionName = Efblog
-	switchableControllerActions {
-		Post {
-			1 = postRss
+	typeNum = 100
+	10 = USER
+	10 {
+		userFunc = tx_extbase_core_bootstrap->run
+		pluginName = Fe1
+		extensionName = Efblog
+		switchableControllerActions {
+			Post {
+				1 = postRss
+			}
 		}
+		settings =< plugin.tx_efblog.settings
+		persistence =< plugin.tx_efblog.persistence
+		view =< plugin.tx_efblog.view
 	}
-	settings =< plugin.tx_efblog.settings
-	persistence =< plugin.tx_efblog.persistence
-	view =< plugin.tx_efblog.view
-  }
 
-  config {
-	disableAllHeaderCode = 1
-	additionalHeaders = Content-type:application/xml
-	xhtml_cleaning = 0
-	admPanel = 0
-  }
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
 }
 
 commentsRss = PAGE
 commentsRss {
-  typeNum = 101
-  10 = USER
-  10 {
-	userFunc = tx_extbase_core_bootstrap->run
-	pluginName = Fe1
-	extensionName = Efblog
-	switchableControllerActions {
-		Post {
-			1 = commentsRss
+	typeNum = 101
+	10 = USER
+	10 {
+		userFunc = tx_extbase_core_bootstrap->run
+		pluginName = Fe1
+		extensionName = Efblog
+		switchableControllerActions {
+			Post {
+				1 = commentsRss
+			}
 		}
+		settings =< plugin.tx_efblog.settings
+		persistence =< plugin.tx_efblog.persistence
+		view =< plugin.tx_efblog.view
 	}
-	settings =< plugin.tx_efblog.settings
-	persistence =< plugin.tx_efblog.persistence
-	view =< plugin.tx_efblog.view
-  }
 
 	config {
-	disableAllHeaderCode = 1
-	additionalHeaders = Content-type:application/xml
-	xhtml_cleaning = 0
-	admPanel = 0
-  }
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
 
 }
 
 combinedRss = PAGE
 combinedRss {
-  typeNum = 102
-  10 = USER
-  10 {
-	userFunc = tx_extbase_core_bootstrap->run
-	pluginName = Fe1
-	extensionName = Efblog
-	switchableControllerActions {
-		Post {
-			1 = combinedRss
+	typeNum = 102
+	10 = USER
+	10 {
+		userFunc = tx_extbase_core_bootstrap->run
+		pluginName = Fe1
+		extensionName = Efblog
+		switchableControllerActions {
+			Post {
+				1 = combinedRss
+			}
 		}
+		settings =< plugin.tx_efblog.settings
+		persistence =< plugin.tx_efblog.persistence
+		view =< plugin.tx_efblog.view
 	}
-	settings =< plugin.tx_efblog.settings
-	persistence =< plugin.tx_efblog.persistence
-	view =< plugin.tx_efblog.view
-  }
 
-  config {
-	disableAllHeaderCode = 1
-	additionalHeaders = Content-type:application/xml
-	xhtml_cleaning = 0
-	admPanel = 0
-  }
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
 }

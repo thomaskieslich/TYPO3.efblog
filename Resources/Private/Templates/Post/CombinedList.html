@@ -32,7 +32,7 @@
 						</f:link.action>
 					</h1>
 				</div>
-				<div class="infos">{post.date -> tk:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
+				<div class="infos">{post.date -> f:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
 					<f:if condition="{post.comments -> f:count()} > 1">
 						<f:then>
 							<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>

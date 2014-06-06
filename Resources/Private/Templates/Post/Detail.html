@@ -1,80 +1,18 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
 <f:layout name="Default"/>
 <f:section name="content">
 	<f:flashMessages renderMode="div"/>
 	<f:if condition="{post}">
-		{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
-		{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
-		{description -> f:if(condition: '{settings.replaceDescription}')
-		-> f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-		->tk:document.description()}
+		<f:render partial="Post/DetailMeta" arguments="{post: post, description: description}"/>
 
 		<div class="tx-efblog-detail-container">
 			<f:if condition="{settings.detailView.showBreadCrumb}">
-				<div class="tx-efblog-detail-breadCrumb">
-					<div class="left">
-						<f:if condition="{breadCrumb.0}">
-							<f:then>
-								{breadCrumb.0.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-								-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.0}', pageUid : '{settings.detailUid}', title: '{breadCrumb.0.title}')}
-							</f:then>
-							<f:else>
-								&nbsp;
-							</f:else>
-						</f:if>
-					</div>
-					<div class="center">
-						<f:if condition="{settings.backUid}">
-							{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
-						</f:if>
-					</div>
-					<div class="right">
-						<f:if condition="{breadCrumb.1}">
-							<f:then>
-								{breadCrumb.1.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-								-> f:link.action(action : 'detail', arguments : '{post:breadCrumb.1}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
-							</f:then>
-							<f:else>
-								&nbsp;
-							</f:else>
-						</f:if>
-					</div>
-				</div>
+				<f:render partial="Post/DetailBreadCrumb" arguments="{breadCrumb: breadCrumb}"/>
 			</f:if>
 
-			<h1>{post.title}</h1>
-			<f:if condition="<f:count subject='{pages}' /> > 1">
-				<div class="detailpager">
-					<ul class="tabs">
-						<f:for each="{pages}" as="page" key="count">
-							<li><a href="#" id="tab{count}">{page.title}</a></li>
-						</f:for>
-					</ul>
-				</div>
-			</f:if>
+			<f:render partial="Post/DetailBody" arguments="{_all}"/>
 
-			<div class="tab_container">
-				<f:for each="{pages}" as="page" iteration="elementIterator">
-					<div class="tab_content" id="tab{elementIterator.cycle}">
-						<f:for each="{page.elements}" as="element">
-							<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}"/>
-						</f:for>
-					</div>
-				</f:for>
-			</div>
-			<h3>{f:translate(key : 'detail_from')}
-				<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
-					<f:if condition="{authorIterator.isLast}">
-						<f:then>
-							{pauthor.name}
-						</f:then>
-						<f:else>
-							{pauthor.name},
-						</f:else>
-					</f:if>
 
-				</f:for>
-			</h3>
 			<!--Social-->
 			<f:if condition="{settings.detailView.showSocial}">
 				<f:render partial="DetailSocial" arguments="{post: post, description : description, dam : dam}"/>
@@ -91,7 +29,7 @@
 
 				<div class="info">
 					{post.views} {f:translate(key : 'detail_views')} |
-					{post.date -> tk:format.date(format:'%d. %B %Y')} |
+					{post.date -> f:format.date(format:'%d. %B %Y')} |
 					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>

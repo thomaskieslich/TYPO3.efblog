@@ -1,0 +1,34 @@
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<h1>{post.title}</h1>
+<f:if condition="<f:count subject='{pages}' /> > 1">
+	<div class="detailpager">
+		<ul class="tabs">
+			<f:for each="{pages}" as="page" key="count">
+				<li><a href="#" id="tab{count}">{page.title}</a></li>
+			</f:for>
+		</ul>
+	</div>
+</f:if>
+
+<div class="tab_container">
+	<f:for each="{pages}" as="page" iteration="elementIterator">
+		<div class="tab_content" id="tab{elementIterator.cycle}">
+			<f:for each="{page.elements}" as="element">
+				{tk:Content(uid: '{element.uid}')}
+			</f:for>
+		</div>
+	</f:for>
+</div>
+<h3>{f:translate(key : 'detail_from')}
+	<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
+		<f:if condition="{authorIterator.isLast}">
+			<f:then>
+				{pauthor.name}
+			</f:then>
+			<f:else>
+				{pauthor.name},
+			</f:else>
+		</f:if>
+
+	</f:for>
+</h3>

@@ -69,7 +69,7 @@ class CommentRepository extends Repository {
 
 		$query->setOrderings(
 			array(
-				'date' => QueryInterfaceQueryInterface::ORDER_DESCENDING
+				'date' => QueryInterface::ORDER_DESCENDING
 			)
 		);
 

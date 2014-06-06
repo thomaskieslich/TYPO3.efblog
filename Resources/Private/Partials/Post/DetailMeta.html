@@ -1,0 +1,7 @@
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+
+{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
+{post.tags -> f:if(condition: '{settings.replaceKeywords}') -> tk:document.keywords()}
+{description -> f:if(condition: '{settings.replaceDescription}')
+	-> f:format.crop(maxCharacters: '180', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+	->tk:document.description()}

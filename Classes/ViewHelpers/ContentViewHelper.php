@@ -1,5 +1,5 @@
 <?php
-namespace ThomasKieslich\Efblog\ViewHelpers\Document;
+namespace ThomasKieslich\Efblog\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
@@ -28,25 +28,37 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Document;
  ***************************************************************/
 
 /**
- * Author View helper
+ * Content ViewHelper
  *
  * @package Efblog
  * @subpackage ViewHelpers
  */
-class AuthorViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ContentViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * replace the keywords
-	 *
-	 * @return void
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+	 * @inject
 	 */
-	public function render() {
-		$renderedContent = $this->renderChildren();
-		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['author.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['author'] = $renderedContent;
-		}
+	protected $configurationManager;
+
+	/**
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+	 */
+	protected $contentObject;
+
+	/**
+	 * Parse content element
+	 *
+	 * @param    int           UID des Content Element
+	 * @return   string        Geparstes Content Element
+	 */
+	public function render($uid) {
+		$conf = array(
+			'tables' => 'tt_content',
+			'source' => $uid,
+			'dontCheckPid' => 1
+		);
+		$this->contentObject = $this->configurationManager->getContentObject();
+		return $this->contentObject->RECORDS($conf);
 	}
 }
-
-?>

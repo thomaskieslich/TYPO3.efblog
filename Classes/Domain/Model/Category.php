@@ -66,17 +66,15 @@ class Category extends AbstractEntity {
 	/**
 	 * children
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
 	 */
 	protected $children;
 
 	/**
 	 * The constructor of this Category
-	 *
-	 * @return void
 	 */
 	public function __construct() {
-		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -182,7 +180,6 @@ class Category extends AbstractEntity {
 	/**
 	 * Returns the child categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
 	 */
 	public function getChildren() {
 		$categoryRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CategoryRepository');
@@ -193,7 +190,7 @@ class Category extends AbstractEntity {
 	/**
 	 * Returns post in categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $posts
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $posts
 	 */
 	public function getPosts() {
 		$postRepository = GeneralUtility::makeInstance('ThomasKieslich\Efblog\Domain\Repository\PostRepository');

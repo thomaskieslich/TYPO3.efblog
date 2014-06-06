@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(function () {
     //detail tabs
     $(".tab_content").hide();
     $("ul.tabs li:first").addClass("active").show();

@@ -344,6 +344,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 		'post' => array(
 			'showitem' =>
 				'title;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_title, --linebreak--,
+				teaser_image;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_teaser_image, --linebreak--
 				date;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_date,
 				archive;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_archive, --linebreak--,
 				author;LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post_author, --linebreak--,

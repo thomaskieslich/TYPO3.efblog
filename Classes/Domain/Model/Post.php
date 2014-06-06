@@ -49,7 +49,7 @@ class Post extends AbstractEntity {
 	protected $hidden;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 */
 	protected $author;
 
@@ -91,7 +91,7 @@ class Post extends AbstractEntity {
 	/**
 	 * CE Element
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
 	 */
 	protected $content;
 
@@ -141,14 +141,14 @@ class Post extends AbstractEntity {
 	/**
 	 * related post
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 */
 	protected $relatedPosts;
 
 	/**
 	 * post comments
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 */
 	protected $comments;
 
@@ -390,16 +390,16 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all properties.
 	 *
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->relatedPosts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->content = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->comments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->author = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->categories = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$this->relatedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$this->content = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$this->comments = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$this->author = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 	}
 
 	/**
@@ -464,7 +464,7 @@ class Post extends AbstractEntity {
 	/**
 	 * Returns the relatedPosts
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 */
 	public function getRelatedPosts() {
 		return $this->relatedPosts;
@@ -473,7 +473,7 @@ class Post extends AbstractEntity {
 	/**
 	 * Sets the relatedPosts
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
 	 * @return void
 	 */
 	public function setRelatedPosts($relatedPosts) {
@@ -503,7 +503,7 @@ class Post extends AbstractEntity {
 	/**
 	 * Returns the comments
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 */
 	public function getComments() {
 		return $this->comments;
@@ -512,7 +512,7 @@ class Post extends AbstractEntity {
 	/**
 	 * Sets the comments
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 * @return void
 	 */
 	public function setComments($comments) {
@@ -545,7 +545,7 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * @param Tx_Extbase_Persistence_ObjectStorage <\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 * @return void
 	 */
 	public function setAuthor(\ThomasKieslich\Efblog\Domain\Model\Administrator $author) {
@@ -553,7 +553,7 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
 	 */
 	public function getAuthor() {
 		return $this->author;

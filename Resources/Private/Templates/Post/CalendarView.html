@@ -133,7 +133,7 @@
 							<f:for each="{postsByDay}" as="post"  iteration="dayIterator">
 								<f:if condition="{dayIterator.isFirst}">
 									<f:then>
-										<h2>{post.date -> tk:format.date(format:'%d. %B %Y')}</h2>
+										<h2>{post.date -> f:format.date(format:'%d. %B %Y')}</h2>
 										{post.title -> f:link.action(action : 'detail', arguments : '{post:post}', pageUid : '{settings.detailUid}')}<br>
 									</f:then>
 									<f:else>

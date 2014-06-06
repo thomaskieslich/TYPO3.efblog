@@ -1,31 +1,37 @@
 <?php
 namespace ThomasKieslich\Efblog\Controller;
 
-	/***************************************************************
-	 *  Copyright notice
-	 *
-	 *  (c) 2011-2014 Thomas Kieslich
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *  A copy is found in the text file GPL.txt and important notices to the license
-	 *  from the author is found in LICENSE.txt distributed with these scripts.
-	 *
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2011-2014 Thomas Kieslich
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+use ThomasKieslich\Efblog\Domain\Model\Comment;
+use ThomasKieslich\Efblog\Domain\Model\Post;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller for the Post object
@@ -38,7 +44,6 @@ class PostController extends AbstractController {
 	 */
 	protected $postRepository;
 
-
 	/**
 	 * list action
 	 *
@@ -46,33 +51,27 @@ class PostController extends AbstractController {
 	 */
 	public function listAction() {
 
-		$pagerConfig = array(
-			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-			'insertAbove' => $this->settings['listView']['insertAbove'],
-			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maximumNumberOfLinks' => $this->settings['listView']['maximumNumberOfLinks']
-		);
-		$this->view->assign('pagerConfig', $pagerConfig);
+		$arguments = $this->request->getArguments();
+		if ($arguments) {
+			if (isset($arguments['category'])) {
+				$this->settings['listView']['category'] = $this->request->getArgument('category');
+			}
 
-		$request = $this->request->getArguments();
-		if (isset($request['category'])) {
-			$this->settings['listView']['category'] = $this->request->getArgument('category');
-		}
+			if (isset($arguments['searchPhrase'])) {
+				$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
+			}
 
-		if (isset($request['searchPhrase'])) {
-			$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-		}
+			if (isset($arguments['year'])) {
+				$this->settings['year'] = $this->request->getArgument('year');
+			}
 
-		if (isset($request['year'])) {
-			$this->settings['year'] = $this->request->getArgument('year');
-		}
+			if (isset($arguments['month'])) {
+				$this->settings['month'] = $this->request->getArgument('month');
+			}
 
-		if (isset($request['month'])) {
-			$this->settings['month'] = $this->request->getArgument('month');
-		}
-
-		if (isset($request['day'])) {
-			$this->settings['day'] = $this->request->getArgument('day');
+			if (isset($arguments['day'])) {
+				$this->settings['day'] = $this->request->getArgument('day');
+			}
 		}
 
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
@@ -81,11 +80,11 @@ class PostController extends AbstractController {
 	/**
 	 * post detail
 	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
+	 * @param Post $post
+	 * @param Comment $newComment
 	 * @return void
 	 */
-	public function detailAction(\ThomasKieslich\Efblog\Domain\Model\Post $post = NULL, \ThomasKieslich\Efblog\Domain\Model\Comment $newComment = NULL) {
+	public function detailAction(Post $post = NULL, Comment $newComment = NULL) {
 
 		if ($post) {
 			$content = $post->getContent();
@@ -124,12 +123,14 @@ class PostController extends AbstractController {
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 		} else {
-			$this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('notice_noPost', $this->extensionName));
+			$this->addFlashMessage(LocalizationUtility::translate('notice_noPost', $this->extensionName));
 		}
 	}
 
 	/**
 	 * return search result
+	 *
+	 * @return void
 	 */
 	public function searchListAction() {
 		$request = $this->request->getArguments();
@@ -138,8 +139,6 @@ class PostController extends AbstractController {
 			$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
 		}
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 
 		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
@@ -152,6 +151,8 @@ class PostController extends AbstractController {
 
 	/**
 	 * list by category
+	 *
+	 * @return void
 	 */
 	public function categoryListAction() {
 		$request = $this->request->getArguments();
@@ -164,8 +165,6 @@ class PostController extends AbstractController {
 		}
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
-
 		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
@@ -175,9 +174,15 @@ class PostController extends AbstractController {
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function calendarViewAction() {
 	}
 
+	/**
+	 * @return string
+	 */
 	public function ajaxCalendarDayAction() {
 		$this->settings['enableFuturePosts'] = 1;
 		$this->settings['listView']['sortDirection'] = asc;
@@ -220,7 +225,7 @@ class PostController extends AbstractController {
 			$dates[] = array(
 				'date' => strftime('%e. %B %Y', time()),
 				'time' => '',
-				'title' => "Keine Termine für diesen Tag.",
+				'title' => 'Keine Termine für diesen Tag.',
 				'details' => '',
 				'post' => 0
 			);
@@ -229,6 +234,9 @@ class PostController extends AbstractController {
 		return json_encode($dates);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function ajaxCalendarMonthAction() {
 		$this->settings['enableFuturePosts'] = 1;
 		$this->settings['listView']['sortDirection'] = asc;
@@ -252,6 +260,8 @@ class PostController extends AbstractController {
 
 	/**
 	 * return list by date
+	 *
+	 * @return void
 	 */
 	public function dateMenuListAction() {
 		$request = $this->request->getArguments();
@@ -267,8 +277,6 @@ class PostController extends AbstractController {
 
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
-
 		$pagerConfig = array(
 			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
 			'insertAbove' => $this->settings['listView']['insertAbove'],
@@ -280,20 +288,22 @@ class PostController extends AbstractController {
 
 	/**
 	 * return list from multiple blogs
+	 *
+	 * @return void
 	 */
 	public function combinedListAction() {
 		$posts = $this->postRepository->findPosts($this->settings);
 
-		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
-		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
-		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
+		$combinedPid = GeneralUtility::trimExplode(',', $this->settings['combinedPid'], TRUE);
+		$detailUid = GeneralUtility::trimExplode(',', $this->settings['detailUid'], TRUE);
+		$combinedNames = GeneralUtility::trimExplode(',', $this->settings['combinedNames'], TRUE);
 		$combinedSettings = array();
 		foreach ($combinedPid as $key => $value) {
 			$combinedSettings[$value][pid] = $combinedPid[$key];
 			$combinedSettings[$value][detail] = $detailUid[$key];
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
-		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
@@ -301,11 +311,13 @@ class PostController extends AbstractController {
 		}
 
 		$this->view->assign('posts', $combinedPosts);
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
+		$this->view->assign('dam', ExtensionManagementUtility::isLoaded('dam'));
 	}
 
 	/**
 	 * return latest posts for widget
+	 *
+	 * @return void
 	 */
 	public function latestPostsWidgetAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['latestPostsWidget']['maxEntries'];
@@ -316,6 +328,8 @@ class PostController extends AbstractController {
 
 	/**
 	 * return posts with most views
+	 *
+	 * @return void
 	 */
 	public function viewsWidgetAction() {
 		$this->settings['listView']['orderBy'] = views;
@@ -325,12 +339,16 @@ class PostController extends AbstractController {
 
 	/**
 	 * return searchform for widget
+	 *
+	 * @return void
 	 */
 	public function searchWidgetAction() {
 	}
 
 	/**
 	 * return posts by date
+	 *
+	 * @return void
 	 */
 	public function dateMenuWidgetAction() {
 		$this->settings['listView']['orderBy'] = $this->settings['dateMenuWidget']['orderBy'];
@@ -338,6 +356,9 @@ class PostController extends AbstractController {
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
+	/**
+	 * @return void
+	 */
 	public function postRssAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
@@ -374,6 +395,9 @@ class PostController extends AbstractController {
 		$this->view->assign('rssItems', $rssItems);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function combinedRssAction() {
 		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
@@ -388,7 +412,7 @@ class PostController extends AbstractController {
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
 
-		$combinedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		$combinedPosts = new ObjectStorage();
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
@@ -429,6 +453,9 @@ class PostController extends AbstractController {
 		$this->view->assign('rssItems', $rssItems);
 	}
 
+	/**
+	 * @return void
+	 */
 	public function commentsRssAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['post'])) {
@@ -439,7 +466,7 @@ class PostController extends AbstractController {
 				$comments = $post->getComments()->toArray();
 				$comments = array_reverse($comments);
 				foreach ($comments as $key => $comment) {
-					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . Tx_Extbase_Utility_Localization::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
+					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . LocalizationUtility::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
 					$rssItems[$key]['section'] = 'comment_' . $comment->getUid();
 					$rssItems[$key]['date'] = $comment->getDate();
 					$rssItems[$key]['message'] = $comment->getMessage();
@@ -467,11 +494,15 @@ class PostController extends AbstractController {
 			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
 			$parentComment = $commentRepository->findByUid((int)$newComment['parentComment']);
 			$extensionName = $this->request->getControllerExtensionName();
-			$newComment['title'] = Tx_Extbase_Utility_Localization::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
+			$newComment['title'] = LocalizationUtility::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
 		}
 		return $newComment;
 	}
 
+	/**
+	 * @param $post
+	 * @return bool
+	 */
 	protected function checkAllowComments($post) {
 		$allowComments = FALSE;
 		if ($post->getAllowComments() == 0) {
@@ -517,6 +548,10 @@ class PostController extends AbstractController {
 		return $allowComments;
 	}
 
+	/**
+	 * @param $post
+	 * @return array
+	 */
 	protected function createBreadCrumb($post) {
 		$posts = $this->postRepository->findPosts($this->settings)->toArray();
 		$breadCrumb = array();
@@ -529,7 +564,10 @@ class PostController extends AbstractController {
 		return $breadCrumb;
 	}
 
-	protected function updateViews(\ThomasKieslich\Efblog\Domain\Model\Post $post) {
+	/**
+	 * @param Post $post
+	 */
+	protected function updateViews(Post $post) {
 		if (!$GLOBALS['BE_USER']->user['uid']) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
@@ -554,6 +592,11 @@ class PostController extends AbstractController {
 		return $description;
 	}
 
+	/**
+	 * @param $category
+	 * @param $categoryRepository
+	 * @return string
+	 */
 	protected function findSubCategories($category, $categoryRepository) {
 		$subCategories = $category->getUid();
 		$childs = $categoryRepository->findChilds($category);

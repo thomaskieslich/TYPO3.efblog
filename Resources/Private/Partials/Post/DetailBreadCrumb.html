@@ -1,0 +1,29 @@
+<div class="tx-efblog-detail-breadCrumb">
+	<div class="left">
+		<f:if condition="{breadCrumb.0}">
+			<f:then>
+				{breadCrumb.0.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+				-> f:link.action(arguments : '{post:breadCrumb.0}', pageUid : '{settings.detailUid}', title: '{breadCrumb.0.title}')}
+			</f:then>
+			<f:else>
+				&nbsp;
+			</f:else>
+		</f:if>
+	</div>
+	<div class="center">
+		<f:if condition="{settings.backUid}">
+			{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
+		</f:if>
+	</div>
+	<div class="right">
+		<f:if condition="{breadCrumb.1}">
+			<f:then>
+				{breadCrumb.1.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
+				-> f:link.action(arguments : '{post:breadCrumb.1}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
+			</f:then>
+			<f:else>
+				&nbsp;
+			</f:else>
+		</f:if>
+	</div>
+</div>

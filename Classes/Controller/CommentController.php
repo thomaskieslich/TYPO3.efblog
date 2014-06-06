@@ -35,7 +35,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CommentController extends AbstractController {
 
 	/**
-	 * @var CommentRepository
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\CommentRepository
 	 * @inject
 	 */
 	protected $commentRepository;
@@ -207,7 +207,7 @@ class CommentController extends AbstractController {
 		//html Content
 		if ($this->settings['comments']['messageHtml']) {
 			$htmlTemplate = $this->settings['comments']['messsageHtmlTemplate'];
-			$htmlView = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+			$htmlView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 			$htmlView->setFormat('html');
 			$htmlView->setTemplatePathAndFilename($templateRootPath . $htmlTemplate);
 			$htmlView->assignMultiple(array('newComment' => $newComment, 'post' => $post));
@@ -216,7 +216,7 @@ class CommentController extends AbstractController {
 
 		//plaintext content
 		$textTemplate = $this->settings['comments']['messsageTextTemplate'];
-		$textView = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+		$textView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$textView->setFormat('txt');
 		$textView->setTemplatePathAndFilename($templateRootPath . $textTemplate);
 		$textView->assignMultiple(array('newComment' => $newComment, 'post' => $post));

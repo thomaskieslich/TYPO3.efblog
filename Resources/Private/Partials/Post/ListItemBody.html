@@ -1,0 +1,28 @@
+<div class="tx-efblog-list-body">
+		<f:for each="{post.content}" as="element" iteration="elementIterator">
+			<f:if condition="{elementIterator.cycle} == 1">
+				<f:if condition="{element.ctype} != {settings.detailView.divType}">
+					<f:then>
+						<f:if condition="{post.teaserOptions} < 2">
+							<f:then>
+								<f:render partial="Post/ListElement" arguments="{post : post, count : 1}"/>
+							</f:then>
+							<f:else>
+								<f:render partial="Post/ListRawElement" arguments="{post : post, count : 1}"/>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<f:if condition="{post.teaserOptions} < 2">
+							<f:then>
+								<f:render partial="Post/ListElement" arguments="{post : post, count : 2, dam : dam}"/>
+							</f:then>
+							<f:else>
+								<f:render partial="Post/ListRawElement" arguments="{post : post, count : 2}"/>
+							</f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</f:if>
+		</f:for>
+	</div>

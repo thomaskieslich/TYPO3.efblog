@@ -335,7 +335,7 @@ class Comment extends AbstractEntity {
 	/**
 	 * Returns the child comments
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $children
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $children
 	 */
 	public function getChildren() {
 		$commentRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
