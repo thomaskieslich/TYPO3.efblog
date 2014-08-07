@@ -5,13 +5,12 @@
 	<f:if condition="{post}">
 		<f:render partial="Post/DetailMeta" arguments="{post: post, description: description}"/>
 
-		<div class="tx-efblog-detail-container">
+		<div class="tx-efblog-detail-container" data-uid="{post.uid}">
 			<f:if condition="{settings.detailView.showBreadCrumb}">
 				<f:render partial="Post/DetailBreadCrumb" arguments="{breadCrumb: breadCrumb}"/>
 			</f:if>
 
 			<f:render partial="Post/DetailBody" arguments="{post: post, pages: pages}"/>
-
 
 			<!--Social-->
 			<f:if condition="{settings.detailView.showSocial}">
@@ -23,8 +22,8 @@
 			<f:if condition="{post.relatedPosts}">
 				<f:render partial="Post/DetailRelated" arguments="{post: post}"/>
 			</f:if>
+		</div>
 	</f:if>
-
 
 	<f:if condition="{post.comments}">
 		<a name="comments">&nbsp;</a>

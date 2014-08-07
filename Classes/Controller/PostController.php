@@ -84,7 +84,7 @@ class PostController extends AbstractController {
 	 * @param Comment $newComment
 	 * @return void
 	 */
-	public function detailAction(Post $post = NULL, Comment $newComment = NULL) {
+	public function detailAction(Post $post = NULL) {
 
 		if ($post) {
 			$content = $post->getContent();
@@ -105,17 +105,17 @@ class PostController extends AbstractController {
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
 			//get Main Comments
-			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
-			$this->view->assign('comments', $commentRepository->findMainComments($post));
+//			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
+//			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
-			$allowComments = $this->checkAllowComments($post);
-			$this->view->assign('allowComments', $allowComments);
+//			$allowComments = $this->checkAllowComments($post);
+//			$this->view->assign('allowComments', $allowComments);
 
-			if (!$newComment && $allowComments) {
-				$this->view->assign('newComment', $this->prefillCommentForm());
-			} elseif ($allowComments) {
-				$this->view->assign('newComment', $newComment);
-			}
+//			if (!$newComment && $allowComments) {
+//				$this->view->assign('newComment', $this->prefillCommentForm());
+//			} elseif ($allowComments) {
+//				$this->view->assign('newComment', $newComment);
+//			}
 
 			//Update Views
 			$views = $this->updateViews($post);

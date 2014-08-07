@@ -26,7 +26,6 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -69,13 +68,6 @@ class Category extends AbstractEntity {
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $children
 	 */
 	protected $children;
-
-	/**
-	 * The constructor of this Category
-	 */
-	public function __construct() {
-		$this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
 
 	/**
 	 * Returns the title
@@ -123,29 +115,24 @@ class Category extends AbstractEntity {
 	public function getImage() {
 		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
 		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'tx_efblog_domain_model_category_image', $this->getUid());
-
 		$files = array();
 		foreach ($fileObjects as $file) {
 			$original = $file->getOriginalFile()->getProperties();
 			$reference = $file->getReferenceProperties();
-
 			$title = $reference['title'];
 			if (!$title) {
 				$title = $original['title'];
 			}
-
 			$description = $reference['description'];
 			if (!description) {
 				$description = $original['description'];
 			}
-
 			$files[] = array(
 				'title' => $title,
 				'description' => $description,
 				'publicUrl' => $file->getPublicUrl(TRUE)
 			);
 		}
-
 		return $files;
 	}
 
@@ -175,26 +162,5 @@ class Category extends AbstractEntity {
 	 */
 	public function setParentCategory($parentCategory) {
 		$this->parentCategory = $parentCategory;
-	}
-
-	/**
-	 * Returns the child categories
-	 *
-	 */
-	public function getChildren() {
-		$categoryRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CategoryRepository');
-		$children = $categoryRepository->findChilds($this);
-		return clone $children;
-	}
-
-	/**
-	 * Returns post in categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $posts
-	 */
-	public function getPosts() {
-		$postRepository = GeneralUtility::makeInstance('ThomasKieslich\Efblog\Domain\Repository\PostRepository');
-		$posts = $postRepository->countCategoryPosts($this)->count();
-		return $posts;
 	}
 }

@@ -1,16 +1,16 @@
 $(function () {
 	//detail tabs
-	$(".tab_content").hide();
-	$("ul.tabs li:first").addClass("active").show();
-	$(".tab_content:first").show();
+	$('.tx-efblog-detail-container .tab_content').hide();
+	$('ul.tabs li:first').addClass('active').show();
+	$('.tab_content:first').show();
 
-	$("ul.tabs li").click(function () {
+	$('ul.tabs li').click(function () {
 
-		$("ul.tabs li").removeClass("active");
-		$(this).addClass("active");
-		$(".tab_content").hide();
+		$('ul.tabs li').removeClass('active');
+		$(this).addClass('active');
+		$('.tab_content').hide();
 
-		var activeTab = $(this).find("a").attr("id");
+		var activeTab = $(this).find('a').attr('id');
 		$('.tab_content#' + activeTab).show();
 		return false;
 	});
@@ -18,10 +18,29 @@ $(function () {
 	//Social
 	if ($('.tx-efblog-detail-social').length > 0) {
 		$('.tx-efblog-detail-social').socialSharePrivacy({
-			"css_path": "/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/socialshareprivacy.css",
-			"lang_path": "/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/lang/",
-			"language": "de"
+			'css_path': '/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/socialshareprivacy.css',
+			'lang_path': '/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/lang/',
+			'language': 'de'
 		});
+	}
+
+	//Post Hit Counter
+	if ($('.tx-efblog-detail-container').length > 0) {
+		var agent = window.navigator.userAgent;
+		var postUid = $('.tx-efblog-detail-container').data('uid');
+		var pattern = /bot|spider/;
+
+		if (!pattern.test(agent)) {
+			console.log($.cookie('txEfblogPostCount'));
+			$.cookie('txEfblogPostCount', postUid, {
+				expires: 1,
+				secure: false
+			});
+
+			console.log($.cookie('txEfblogPostCount'));
+			console.log(postUid);
+
+		}
 	}
 
 	//Commentform
@@ -30,8 +49,8 @@ $(function () {
 	//Archive menu
 	$('.tx-efblog-widget-content .year').next().hide();
 
-	var cookie = $.cookie("tx_efblog"),
-		expanded = cookie ? cookie.split("|").getUnique() : [],
+	var cookie = $.cookie('tx_efblog'),
+		expanded = cookie ? cookie.split('|').getUnique() : [],
 		cookieExpires = 7;
 
 	$.each(expanded, function () {
@@ -53,7 +72,7 @@ $(function () {
 			tmp.push(el.id);
 		}
 		expanded = tmp.getUnique();
-		$.cookie("tx_efblog", expanded.join('|'), {
+		$.cookie('tx_efblog', expanded.join('|'), {
 			expires: cookieExpires
 		});
 	}

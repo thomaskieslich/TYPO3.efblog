@@ -26,7 +26,6 @@ namespace ThomasKieslich\Efblog\Controller;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
-
 /**
  * Controller for the Category object
  */
@@ -38,13 +37,18 @@ class CategoryController extends AbstractController {
 	 */
 	protected $categoryRepository;
 
+	/**
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
+	 * @inject
+	 */
+	protected $postRepository;
+
 	public function categoryOverviewAction() {
 		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
 		$this->view->assign('maincategories', $mainCategories);
 
 		$categories = $this->createCategoryTree($mainCategories);
 		$this->view->assign('categories', $categories);
-		$this->view->assign('dam', t3lib_extMgm::isLoaded('dam'));
 	}
 
 	public function categoryWidgetAction() {
@@ -58,9 +62,8 @@ class CategoryController extends AbstractController {
 
 		foreach ($mainCategories as $key => $category) {
 			$categories[$key]['title'] = $category->getTitle();
-			$categories[$key]['link'] = $category->getUid();
 			$categories[$key]['uid'] = $category->getUid();
-			$categories[$key]['posts'] = $category->getPosts();
+			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
 			$categories[$key]['children'] = $this->findCategoryChilds($category, $key);
 		}
 
@@ -78,9 +81,8 @@ class CategoryController extends AbstractController {
 		if ($childs) {
 			foreach ($childs as $key => $category) {
 				$child[$key]['title'] = $category->getTitle();
-				$child[$key]['link'] = $category->getUid();
 				$child[$key]['uid'] = $category->getUid();
-				$child[$key]['posts'] = $category->getPosts();
+				$child[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
 				$child[$key]['parent'] = $parent;
 				$child[$key]['children'] = $this->findCategoryChilds($category, $key);
 			}
