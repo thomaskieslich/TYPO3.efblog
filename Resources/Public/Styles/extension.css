@@ -46,11 +46,11 @@
 
 .tx-efblog-list-text h1 a{
 	padding: 0 24px 1px 0;
-	background: url(images/list-more.png) no-repeat top right;
+	background: url(../Images/list-more.png) no-repeat top right;
 }
 
 .tx-efblog-list-text h1 a:hover{
-	background: url(images/list-more-act.png) no-repeat top right;
+	background: url(../Images/list-more-act.png) no-repeat top right;
 }
 
 .tx-efblog-list-footer{
@@ -63,7 +63,7 @@
 .tx-efblog-list-footer .more{
     float: left;
 	padding-right: 18px;
-	background: url(images/breadcrumb_right.png) no-repeat top right;
+	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 }
 
 .tx-efblog-list-footer .info{
@@ -80,13 +80,13 @@
     float: left;
     width: 34%;
 	padding-left: 18px;
-	background: url(images/breadcrumb_left.png) no-repeat top left;
+	background: url(../Images/breadcrumb_left.png) no-repeat top left;
 }
 .tx-efblog-detail-breadCrumb .center{
     float: left;
     width: 18%;
 	padding-left: 18px;
-	background: url(images/breadcrumb_top.png) no-repeat top left;
+	background: url(../Images/breadcrumb_top.png) no-repeat top left;
 }
 
 .tx-efblog-detail-breadCrumb .right{
@@ -94,7 +94,7 @@
     text-align: right;
 	padding-right: 18px;
     width: 34%;
-	background: url(images/breadcrumb_right.png) no-repeat top right;
+	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 }
 
 /* detail pager */
@@ -121,7 +121,7 @@
     position: relative;
 }
 .tx-efblog-detail-container ul.tabs li a {
-	background: url(images/list_orange.png) no-repeat left top;
+	background: url(../Images/list_orange.png) no-repeat left top;
 	color: #353333;
     display: block;
     padding: 0 6px 0 16px;
@@ -180,7 +180,7 @@
 #tx-efblog-detail-footer .more{
     float: left;
 	padding-right: 18px;
-	background: url(images/breadcrumb_right.png) no-repeat top right;
+	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 }
 
 #tx-efblog-detail-footer .info{
@@ -198,7 +198,7 @@
 	padding-left: 0;
     margin: 0px;
     list-style: none;
-    list-style-image: url(images/list_sidebar.png);
+    list-style-image: url(../Images/list_sidebar.png);
 }
 
 #tx-efblog-detail-externalLink{
@@ -211,7 +211,7 @@
 .tx-efblog-comments-rss{
 	display: inline-block;
 	padding-right: 18px;
-	background: url(images/breadcrumb_right.png) no-repeat top right;
+	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 }
 .tx-efblog-comments-list{    
     margin: 8px 0px 8px 0px;
@@ -328,7 +328,7 @@
 	margin: 6px 0;
     padding: 0 0 0 16px;
     list-style: none;
-    list-style-image: url(images/list_sidebar.png);
+    list-style-image: url(../Images/list_sidebar.png);
 }
 
 
@@ -382,7 +382,7 @@
     margin: 6px 0;
     padding: 0 0 0 16px;
     list-style: none;
-    list-style-image: url(images/list_sidebar.png);
+    list-style-image: url(../Images/list_sidebar.png);
 }
 .tx-efblog-view-category .tiny{
     font-size: 11px;
@@ -417,7 +417,7 @@
 
 .tx-efblog-category-infos .sub ul{
 	list-style: none;
-    list-style-image: url(images/list_sidebar.png);
+    list-style-image: url(../Images/list_sidebar.png);
 }
 
 /*combined links*/
@@ -443,7 +443,7 @@
 	font-size: 13px;
 	font-weight: bold;
 	padding: 0 24px 1px 0;
-	background: url(images/breadcrumb_right.png) no-repeat top right;
+	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 }
 
 .tx-efblog-combined-entry h1 a:hover{
@@ -474,7 +474,7 @@
 	display: inline-block;
 	width: 15px;
 	height: 14px;
-	background: url(images/fold.png) no-repeat 0 0;
+	background: url(../Images/fold.png) no-repeat 0 0;
 	cursor: pointer;
 }
 .tx-efblog-calendar-container #todayEntries .toggler.act span.foldSign{
