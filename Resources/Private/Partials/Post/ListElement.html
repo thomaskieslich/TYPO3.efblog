@@ -10,7 +10,7 @@
 							<div class="tx-efblog-list-imagerow">
 								{f:image(src: "{image.publicUrl}", alt: "{post.title}", width:"{settings.listView.imageWidth}",
 								height: "{settings.listView.imageHeight}")
-								-> f:link.action(action: 'detail', arguments: '{post:post}', pageUid: '{settings.detailUid}')}
+								-> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid: '{settings.detailUid}')}
 							</div>
 						</f:if>
 					</f:if>
@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="tx-efblog-list-text">
-			<h1>{post.title -> f:link.action(arguments : '{post:post}', pageUid : '{settings.detailUid}')}</h1>
+			<h1>{post.title -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}</h1>
 			<f:if condition="{post.teaserOptions} == 1">
 				<f:then>
 					{element.bodytext -> f:format.html() ->
