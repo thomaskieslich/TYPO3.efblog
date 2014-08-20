@@ -1,33 +1,31 @@
 page {
 	includeCSS {
-		tx_efblog = EXT:efblog/Resources/Public/Css/extension.css
-		tx_efblog_uibase = EXT:efblog/Resources/Public/Css/uithemes/base/jquery.ui.base.css
-		tx_efblog_uitheme = EXT:efblog/Resources/Public/Css/uithemes/smoothness/jquery-ui-1.8.14.custom.css
+		tx_efblog = EXT:efblog/Resources/Public/Styles/extension.css
+		tx_efblog_uibase = EXT:efblog/Resources/Public/Styles/uithemes/base/jquery.ui.base.css
+		tx_efblog_uitheme = EXT:efblog/Resources/Public/Styles/uithemes/smoothness/jquery-ui-1.8.14.custom.css
 	}
 	includeJSFooterlibs {
-		jquery_cookie = EXT:efblog/Resources/Public/Js/jquery.cookie.js
-		jquery_social = EXT:efblog/Resources/Public/Js/jquery.socialshareprivacy.min.js
-		tx_efblog = EXT:efblog/Resources/Public/Js/extension.js
+		jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie.js
+		jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
+		tx_efblog = EXT:efblog/Resources/Public/JavaScript/extension.js
 	}
 }
 
-plugin.tx_efblog {
+plugin.extbase{
 	mvc {
 		throwPageNotFoundExceptionIfActionCantBeResolved = 1
 	}
 	features {
-		# this enables/disables the reworked property mapper (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/PropertyMapper_rework)
 		rewrittenPropertyMapper = 1
-		# if enabled, default controller and/or action is skipped when creating URIs through the URI Builder (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs)
 		skipDefaultArguments = 1
-		# if set to 1, the enable fields are ignored in BE context
-		ignoreAllEnableFieldsInBe = 1
+		ignoreAllEnableFieldsInBe = 0
 	}
 	legacy {
 		enableLegacyFlashMessageHandling = 1
 	}
+}
 
-	#    mvc.callDefaultActionIfActionCantBeResolved = 1
+plugin.tx_efblog {
 	settings {
 		##targets
 		listUid =

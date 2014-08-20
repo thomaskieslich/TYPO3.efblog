@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'ThomasKieslich.' . $_EXTKEY,
 	'Fe1',
 	array(
-		'Post' => 'categoryList,rss,ajaxCalendarMonth,ajaxCalendarDay',
+		'Post' => 'list,detail,categoryList,rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Category' => 'categoryOverview',
 		'Comment' => 'create',
 	),
