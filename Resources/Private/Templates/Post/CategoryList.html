@@ -1,13 +1,13 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
-<f:layout name="Default" />
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<f:layout name="Default"/>
 <f:section name="content">
-    <div class="tx-efblog-category-container">
+	<div class="tx-efblog-category-container">
 		<h1>
 			{posts->f:count()}
 			<f:if condition="<f:count subject='{posts}' /> == 1">
 				<f:then>{f:translate(key : 'list_category_result')}</f:then>
 				<f:else>{f:translate(key : 'list_category_results')}</f:else>
-			</f:if>			
+			</f:if>
 		</h1>
 
 		<div class="tx-efblog-category-infos">
@@ -20,7 +20,8 @@
 			</div>
 			<div class="text">
 				<h2>{category.title}</h2>
-				{category.description -> f:format.html()}</div>
+				{category.description -> f:format.html()}
+			</div>
 			<div class="sub">
 				<f:if condition="{category.children}">
 					<ul>
@@ -32,7 +33,12 @@
 			</div>
 		</div>
 	</div>
-
-
-    <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />
+	<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
+		<f:for each="{paginatedPosts}" as="post">
+			<div class="tx-efblog-list-item">
+				<f:render partial="Post/ListItemBody" arguments="{post : post}"/>
+				<f:render partial="Post/ListItemFooter" arguments="{post : post}"/>
+			</div>
+		</f:for>
+	</tk:widget.paginate>
 </f:section>

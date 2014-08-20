@@ -13,7 +13,7 @@ page {
 
 plugin.tx_efblog {
 	mvc {
-		throwPageNotFoundExceptionIfActionCantBeResolved = 0
+		throwPageNotFoundExceptionIfActionCantBeResolved = 1
 	}
 	features {
 		# this enables/disables the reworked property mapper (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/PropertyMapper_rework)
@@ -21,7 +21,7 @@ plugin.tx_efblog {
 		# if enabled, default controller and/or action is skipped when creating URIs through the URI Builder (see http://forge.typo3.org/projects/typo3v4-mvc/wiki/Skip_default_arguments_in_URIs)
 		skipDefaultArguments = 1
 		# if set to 1, the enable fields are ignored in BE context
-		ignoreAllEnableFieldsInBe = 0
+		ignoreAllEnableFieldsInBe = 1
 	}
 	legacy {
 		enableLegacyFlashMessageHandling = 1
@@ -203,79 +203,6 @@ plugin.tx_efblog {
 			blogUrl =
 			atomUrl =
 			image =
-		}
-	}
-	widgets {
-		latestPostsWidget = USER
-		latestPostsWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Post {
-					1 = latestPostsWidget
-				}
-			}
-		}
-
-		latestCommentsWidget = USER
-		latestCommentsWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Comment {
-					1 = latestCommentsWidget
-				}
-			}
-		}
-
-		viewsWidget = USER
-		viewsWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Post {
-					1 = viewsWidget
-				}
-			}
-		}
-
-		searchWidget = USER
-		searchWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Post {
-					1 = searchWidget
-				}
-			}
-		}
-
-		categoryWidget = USER
-		categoryWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Category {
-					1 = categoryWidget
-				}
-			}
-		}
-
-		dateMenuWidget = USER
-		dateMenuWidget {
-			userFunc = tx_extbase_core_bootstrap->run
-			pluginName = Fe1
-			extensionName = Efblog
-			switchableControllerActions {
-				Post {
-					1 = dateMenuWidget
-				}
-			}
 		}
 	}
 
