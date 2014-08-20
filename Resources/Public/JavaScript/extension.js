@@ -18,8 +18,8 @@ $(function () {
 	//Social
 	if ($('.tx-efblog-detail-social').length > 0) {
 		$('.tx-efblog-detail-social').socialSharePrivacy({
-			'css_path': '/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/socialshareprivacy.css',
-			'lang_path': '/typo3conf/ext/efblog/Resources/Public/Js/socialshareprivacy/lang/',
+			'css_path': '/typo3conf/ext/efblog/Resources/Public/JavaScript/socialshareprivacy/socialshareprivacy.css',
+			'lang_path': '/typo3conf/ext/efblog/Resources/Public/JavaScript/socialshareprivacy/lang/',
 			'language': 'de'
 		});
 	}
