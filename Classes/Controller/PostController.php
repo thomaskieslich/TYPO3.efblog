@@ -105,8 +105,8 @@ class PostController extends AbstractController {
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
 			//get Main Comments
-//			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
-//			$this->view->assign('comments', $commentRepository->findMainComments($post));
+			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
+			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
 //			$allowComments = $this->checkAllowComments($post);
 //			$this->view->assign('allowComments', $allowComments);

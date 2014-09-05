@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-05T19:50:53Z">
+		<header>
+			<description>Language labels for database tables/fields belonging to extension 'efblog'</description>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="category" approved="yes" xml:space="preserve">
+			<source>Category</source>
+			<target>Kategorie</target>
+		</trans-unit>
+		<trans-unit id="category_description" approved="yes" xml:space="preserve">
+			<source>Description</source>
+			<target>Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="category_image" approved="yes" xml:space="preserve">
+			<source>Category Image</source>
+			<target>Kategorie Bild</target>
+		</trans-unit>
+		<trans-unit id="category_parent_category" approved="yes" xml:space="preserve">
+			<source>Parent Category</source>
+			<target>Übergeordnete Kategorie</target>
+		</trans-unit>
+		<trans-unit id="category_tab_access" approved="yes" xml:space="preserve">
+			<source>Access</source>
+			<target>Zugriff</target>
+		</trans-unit>
+		<trans-unit id="category_tab_categorize" approved="yes" xml:space="preserve">
+			<source>Category</source>
+			<target>Kategorie</target>
+		</trans-unit>
+		<trans-unit id="category_title" approved="yes" xml:space="preserve">
+			<source>Category name</source>
+			<target>Kategorie Name</target>
+		</trans-unit>
+		<trans-unit id="comment" approved="yes" xml:space="preserve">
+			<source>Comment</source>
+			<target>Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comment_author" approved="yes" xml:space="preserve">
+			<source>Author</source>
+			<target>Autor</target>
+		</trans-unit>
+		<trans-unit id="comment_date" approved="yes" xml:space="preserve">
+			<source>Date</source>
+			<target>Datum</target>
+		</trans-unit>
+		<trans-unit id="comment_email" approved="yes" xml:space="preserve">
+			<source>Email</source>
+			<target>Email</target>
+		</trans-unit>
+		<trans-unit id="comment_ip" approved="yes" xml:space="preserve">
+			<source>IP</source>
+			<target>IP</target>
+		</trans-unit>
+		<trans-unit id="comment_location" approved="yes" xml:space="preserve">
+			<source>Location</source>
+			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="comment_message" approved="yes" xml:space="preserve">
+			<source>Comment</source>
+			<target>Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comment_parent_comment" approved="yes" xml:space="preserve">
+			<source>Parent Comment</source>
+			<target>übergeordneter Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comment_spampoints" approved="yes" xml:space="preserve">
+			<source>Spampoints</source>
+			<target>Spampoints</target>
+		</trans-unit>
+		<trans-unit id="comment_title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="comment_website" approved="yes" xml:space="preserve">
+			<source>Website</source>
+			<target>Website</target>
+		</trans-unit>
+		<trans-unit id="fe_users.tx_efblog_profile_page" approved="yes" xml:space="preserve">
+			<source>Profile Page</source>
+			<target>Profilseite</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general" approved="yes" xml:space="preserve">
+			<source>Simple Blog</source>
+			<target>Einfacher Blog</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_detail" approved="yes" xml:space="preserve">
+			<source>Details</source>
+			<target>Einzelansicht</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list" approved="yes" xml:space="preserve">
+			<source>Post List</source>
+			<target>Post - Liste</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_category" approved="yes" xml:space="preserve">
+			<source>Category List</source>
+			<target>Kategorie - Liste</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_dateMenu" approved="yes" xml:space="preserve">
+			<source>Date Menu List</source>
+			<target>Datums Menü - Liste</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_search" approved="yes" xml:space="preserve">
+			<source>Search List</source>
+			<target>Suchen - Liste</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_view_calendar" approved="yes" xml:space="preserve">
+			<source>Calendar View</source>
+			<target>Kalenderansicht</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_view_category" approved="yes" xml:space="preserve">
+			<source>Category Overview</source>
+			<target>Kategorien - Übersicht</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets" approved="yes" xml:space="preserve">
+			<source>Widgets</source>
+			<target>Widgets</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_category" approved="yes" xml:space="preserve">
+			<source>Category Widget</source>
+			<target>Kategorien - Widget</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_dateMenu" approved="yes" xml:space="preserve">
+			<source>Date Menu Widget</source>
+			<target>Datums Menü - Widget</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_latestComments" approved="yes" xml:space="preserve">
+			<source>Latest Comments Widget</source>
+			<target>Letzte Kommentare - Widget</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_latestPosts" approved="yes" xml:space="preserve">
+			<source>Latest Posts Widget</source>
+			<target>Letzte Posts - Widget</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_search" approved="yes" xml:space="preserve">
+			<source>Search Widget</source>
+			<target>Suche - Widget</target>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_views" approved="yes" xml:space="preserve">
+			<source>Most Views Widget</source>
+			<target>Meiste Ansichten - Widget</target>
+		</trans-unit>
+		<trans-unit id="plugin_fe1_title" approved="yes" xml:space="preserve">
+			<source>Simple Blog</source>
+			<target>Einfacher Blog</target>
+		</trans-unit>
+		<trans-unit id="post" approved="yes" xml:space="preserve">
+			<source>Post</source>
+			<target>Post</target>
+		</trans-unit>
+		<trans-unit id="post_allow_comments" approved="yes" xml:space="preserve">
+			<source>allow Comments</source>
+			<target>Kommentare erlauben</target>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.0" approved="yes" xml:space="preserve">
+			<source>Everybody can comment this post</source>
+			<target>Jeder darf Kommentare schreiben</target>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.1" approved="yes" xml:space="preserve">
+			<source>Nobody can comment this post</source>
+			<target>Keiner darf Kommentare schreiben</target>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.2" approved="yes" xml:space="preserve">
+			<source>allow Comments(override close comments after)</source>
+			<target>erlaube Kommentare(überschreibt die Zeiteinstellung)</target>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.3" approved="yes" xml:space="preserve">
+			<source>Only registered users can comment</source>
+			<target>Nur angemeldete Benutze dürfen Kommentare schreiben</target>
+		</trans-unit>
+		<trans-unit id="post_archive" approved="yes" xml:space="preserve">
+			<source>Archive Date</source>
+			<target>Archiv Datum</target>
+		</trans-unit>
+		<trans-unit id="post_author" approved="yes" xml:space="preserve">
+			<source>Author</source>
+			<target>Autor</target>
+		</trans-unit>
+		<trans-unit id="post_category" approved="yes" xml:space="preserve">
+			<source>Categories</source>
+			<target>Kategorien</target>
+		</trans-unit>
+		<trans-unit id="post_comments" approved="yes" xml:space="preserve">
+			<source>Comments</source>
+			<target>Kommentare</target>
+		</trans-unit>
+		<trans-unit id="post_content" approved="yes" xml:space="preserve">
+			<source>Content Elements</source>
+			<target>Inhaltselemente</target>
+		</trans-unit>
+		<trans-unit id="post_date" approved="yes" xml:space="preserve">
+			<source>Date &amp; Time</source>
+			<target>Datum &amp; Uhrzeit</target>
+		</trans-unit>
+		<trans-unit id="post_palette_access" approved="yes" xml:space="preserve">
+			<source>Access Rights</source>
+			<target>Zugriffsrechte</target>
+		</trans-unit>
+		<trans-unit id="post_palette_category" approved="yes" xml:space="preserve">
+			<source>Category</source>
+			<target>Kategorie</target>
+		</trans-unit>
+		<trans-unit id="post_palette_content" approved="yes" xml:space="preserve">
+			<source>Content</source>
+			<target>Inhalt</target>
+		</trans-unit>
+		<trans-unit id="post_palette_tags" approved="yes" xml:space="preserve">
+			<source>Tags</source>
+			<target>Tags</target>
+		</trans-unit>
+		<trans-unit id="post_related" approved="yes" xml:space="preserve">
+			<source>Related Posts</source>
+			<target>verbundene Posts</target>
+		</trans-unit>
+		<trans-unit id="post_tab_access" approved="yes" xml:space="preserve">
+			<source>Access</source>
+			<target>Zugriff</target>
+		</trans-unit>
+		<trans-unit id="post_tab_categorize" approved="yes" xml:space="preserve">
+			<source>Categorize</source>
+			<target>Kategorisieren</target>
+		</trans-unit>
+		<trans-unit id="post_tab_interactive" approved="yes" xml:space="preserve">
+			<source>Interactivity</source>
+			<target>Interaktiv</target>
+		</trans-unit>
+		<trans-unit id="post_tab_post" approved="yes" xml:space="preserve">
+			<source>Post</source>
+			<target>Post</target>
+		</trans-unit>
+		<trans-unit id="post_tab_teaser" approved="yes" xml:space="preserve">
+			<source>Teaser</source>
+			<target>Teaser</target>
+		</trans-unit>
+		<trans-unit id="post_tags" approved="yes" xml:space="preserve">
+			<source>Tags (comma separated list)</source>
+			<target>Tags (durch Komma getrennt)</target>
+		</trans-unit>
+		<trans-unit id="post_teaserDescription" approved="yes" xml:space="preserve">
+			<source>Teaser Description</source>
+			<target>Teaser Beschreibung</target>
+		</trans-unit>
+		<trans-unit id="post_teaserLink" approved="yes" xml:space="preserve">
+			<source>Teaserlink</source>
+			<target>Teaserlink</target>
+		</trans-unit>
+		<trans-unit id="post_teaserLink_title" approved="yes" xml:space="preserve">
+			<source>Teaserlink Title</source>
+			<target>Teaserlink Titel</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_image" approved="yes" xml:space="preserve">
+			<source>Teaser Images</source>
+			<target>Teaser Bilder</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_options" approved="yes" xml:space="preserve">
+			<source>Teaser Options</source>
+			<target>Teaser Optionen</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.0" approved="yes" xml:space="preserve">
+			<source>none</source>
+			<target>nichts</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.1" approved="yes" xml:space="preserve">
+			<source>Crop Teaser</source>
+			<target>Teaser einkürzen</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.2" approved="yes" xml:space="preserve">
+			<source>Show first Content Element</source>
+			<target>zeige erstes Inhaltselement komplett</target>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.3" approved="yes" xml:space="preserve">
+			<source>Show all Content Elements</source>
+			<target>zeige alle Inhaltselemente</target>
+		</trans-unit>
+		<trans-unit id="post_title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="post_views" approved="yes" xml:space="preserve">
+			<source>Views</source>
+			<target>Ansichten</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

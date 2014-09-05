@@ -164,40 +164,12 @@ class Post extends AbstractEntity {
 	 */
 	protected $blogName;
 
-	/**
-	 * The constructor of this Post
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		$this->initStorageObjects();
-	}
-
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
 	public function getTitle() {
 		return $this->title;
 	}
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
-
 	public function getHidden() {
 		return $this->hidden;
-	}
-
-	public function setHidden($hidden) {
-		$this->hidden = $hidden;
 	}
 
 	public function getTeaserLink() {
@@ -211,119 +183,32 @@ class Post extends AbstractEntity {
 		return $link;
 	}
 
-	public function setTeaserLink($teaserLink) {
-		$this->teaserLink = $teaserLink;
-	}
-
 	public function getTeaserLinkTitle() {
 		return $this->teaserLinkTitle;
 	}
 
-	public function setTeaserLinkTitle($teaserLinkTitle) {
-		$this->teaserLinkTitle = $teaserLinkTitle;
-	}
-
-	/**
-	 * Returns the date
-	 *
-	 * @return DateTime $date
-	 */
 	public function getDate() {
 		return $this->date;
 	}
 
-	/**
-	 * Sets the date
-	 *
-	 * @param DateTime $date
-	 * @return void
-	 */
-	public function setDate($date) {
-		$this->date = $date;
-	}
-
-	/**
-	 * Returns the archive
-	 *
-	 * @return DateTime $archive
-	 */
 	public function getArchive() {
 		return $this->archive;
 	}
 
-	/**
-	 * Returns the tags
-	 *
-	 * @return string $tags
-	 */
 	public function getTags() {
 		return $this->tags;
 	}
 
-	/**
-	 * Sets the tags
-	 *
-	 * @param string $tags
-	 * @return void
-	 */
-	public function setTags($tags) {
-		$this->tags = $tags;
-	}
-
-	/**
-	 * Sets the archive
-	 *
-	 * @param DateTime $archive
-	 * @return void
-	 */
-	public function setArchive($archive) {
-		$this->archive = $archive;
-	}
-
-	/**
-	 * Returns the allowComments
-	 *
-	 * @return string $allowComments
-	 */
 	public function getAllowComments() {
 		return $this->allowComments;
 	}
 
-	/**
-	 * Sets the allowComments
-	 *
-	 * @param string $allowComments
-	 * @return void
-	 */
-	public function setAllowComments($allowComments) {
-		$this->allowComments = $allowComments;
-	}
-
-	/**
-	 * Returns the teaserOptions
-	 *
-	 * @return integer $teaserOptions
-	 */
 	public function getTeaserOptions() {
 		return $this->teaserOptions;
 	}
 
-	/**
-	 * Sets the teaserOptions
-	 *
-	 * @param integer $teaserOptions
-	 * @return void
-	 */
-	public function setTeaserOptions($teaserOptions) {
-		$this->teaserOptions = $teaserOptions;
-	}
-
 	public function getTeaserDescription() {
 		return $this->teaserDescription;
-	}
-
-	public function setTeaserDescription($teaserDescription) {
-		$this->teaserDescription = $teaserDescription;
 	}
 
 	/**
@@ -361,65 +246,12 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * Sets the teaser Image
-	 *
-	 * @param string $teaserImage
-	 * @return void
-	 */
-	public function setTeaserImage($teaserImage) {
-		$this->teaserImage = $teaserImage;
-	}
-
-	/**
 	 * Returns the views
 	 *
 	 * @return integer $views
 	 */
 	public function getViews() {
 		return $this->views;
-	}
-
-	/**
-	 * Sets the views
-	 *
-	 * @param integer $views
-	 * @return void
-	 */
-	public function setViews($views) {
-		$this->views = $views;
-	}
-
-	/**
-	 * Initializes all properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		$this->categories = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
-		$this->relatedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
-		$this->content = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
-		$this->comments = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
-		$this->author = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
-	}
-
-	/**
-	 * Adds a Category
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $category
-	 * @return void
-	 */
-	public function addCategory(\ThomasKieslich\Efblog\Domain\Model\Category $category) {
-		$this->categories->attach($category);
-	}
-
-	/**
-	 * Removes a Category
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $categoryToRemove The Category to be removed
-	 * @return void
-	 */
-	public function removeCategory(\ThomasKieslich\Efblog\Domain\Model\Category $categoryToRemove) {
-		$this->categories->detach($categoryToRemove);
 	}
 
 	/**
@@ -432,36 +264,6 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * Sets the categories
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $categories
-	 * @return void
-	 */
-	public function setCategories($categories) {
-		$this->categories = $categories;
-	}
-
-	/**
-	 * Adds a Post
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $relatedPosts
-	 * @return void
-	 */
-	public function addRelatedPost(\ThomasKieslich\Efblog\Domain\Model\Post $relatedPost) {
-		$this->relatedPosts->attach($relatedPost);
-	}
-
-	/**
-	 * Removes a Post
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $relatedPostsToRemove The Post to be removed
-	 * @return void
-	 */
-	public function removeRelatedPost(\ThomasKieslich\Efblog\Domain\Model\Post $relatedPostToRemove) {
-		$this->relatedPosts->detach($relatedPostToRemove);
-	}
-
-	/**
 	 * Returns the relatedPosts
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
@@ -471,52 +273,12 @@ class Post extends AbstractEntity {
 	}
 
 	/**
-	 * Sets the relatedPosts
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
-	 * @return void
-	 */
-	public function setRelatedPosts($relatedPosts) {
-		$this->relatedPosts = $relatedPosts;
-	}
-
-	/**
-	 * Adds a Comments
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $comment
-	 * @return void
-	 */
-	public function addComment(\ThomasKieslich\Efblog\Domain\Model\Comment $comment) {
-		$this->comments->attach($comment);
-	}
-
-	/**
-	 * Removes a Comments
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $commentToRemove The Comments to be removed
-	 * @return void
-	 */
-	public function removeComment(\ThomasKieslich\Efblog\Domain\Model\Comment $commentToRemove) {
-		$this->comments->detach($commentToRemove);
-	}
-
-	/**
 	 * Returns the comments
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
 	 */
 	public function getComments() {
 		return $this->comments;
-	}
-
-	/**
-	 * Sets the comments
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
-	 * @return void
-	 */
-	public function setComments($comments) {
-		$this->comments = $comments;
 	}
 
 	/**
@@ -532,24 +294,8 @@ class Post extends AbstractEntity {
 		return $this->detailUid;
 	}
 
-	public function setDetailUid($detailUid) {
-		$this->detailUid = $detailUid;
-	}
-
 	public function getBlogName() {
 		return $this->blogName;
-	}
-
-	public function setBlogName($blogName) {
-		$this->blogName = $blogName;
-	}
-
-	/**
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
-	 * @return void
-	 */
-	public function setAuthor(\ThomasKieslich\Efblog\Domain\Model\Administrator $author) {
-		$this->author = $author;
 	}
 
 	/**
@@ -557,16 +303,6 @@ class Post extends AbstractEntity {
 	 */
 	public function getAuthor() {
 		return $this->author;
-	}
-
-	/**
-	 * Sets the content
-	 *
-	 * @param integer $content
-	 * @return void
-	 */
-	public function setContent($content) {
-		$this->content = $content;
 	}
 
 	//Helper

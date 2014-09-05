@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-05T19:50:44Z">
+		<header>
+			<type>module</type>
+			<description>Language labels for the Simple Blog extension in the FRONTEND</description>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="comment_form_author" approved="yes" xml:space="preserve">
+			<source>Name*</source>
+			<target>Name*</target>
+		</trans-unit>
+		<trans-unit id="comment_form_disclaimer" approved="yes" xml:space="preserve">
+			<source>note, some comments must be approved.</source>
+			<target>Bitte beachtet, das einige Kommentare erst freigeschaltet werden müssen.</target>
+		</trans-unit>
+		<trans-unit id="comment_form_email" approved="yes" xml:space="preserve">
+			<source>Email (for Garvatar, not public)</source>
+			<target>Mail (für Gravatar, nicht öffentlich)</target>
+		</trans-unit>
+		<trans-unit id="comment_form_link" approved="yes" xml:space="preserve">
+			<source>Link</source>
+			<target>Link</target>
+		</trans-unit>
+		<trans-unit id="comment_form_location" approved="yes" xml:space="preserve">
+			<source>Location</source>
+			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="comment_form_message" approved="yes" xml:space="preserve">
+			<source>your message*</source>
+			<target>dein Kommentar*</target>
+		</trans-unit>
+		<trans-unit id="comment_form_submit" approved="yes" xml:space="preserve">
+			<source>submit Comment</source>
+			<target>Kommentar absenden</target>
+		</trans-unit>
+		<trans-unit id="comment_form_title" approved="yes" xml:space="preserve">
+			<source>Title*</source>
+			<target>Titel*</target>
+		</trans-unit>
+		<trans-unit id="comment_form_website" approved="yes" xml:space="preserve">
+			<source>Website</source>
+			<target>Webseite</target>
+		</trans-unit>
+		<trans-unit id="comment_message_hidden" approved="yes" xml:space="preserve">
+			<source>Hidden, must be aproved.</source>
+			<target>Versteckt, muss freigeschaltet werden.</target>
+		</trans-unit>
+		<trans-unit id="comment_message_message" approved="yes" xml:space="preserve">
+			<source>message:</source>
+			<target>nachricht:</target>
+		</trans-unit>
+		<trans-unit id="comment_message_spampoints" approved="yes" xml:space="preserve">
+			<source>Spampoints</source>
+			<target>Spampoints</target>
+		</trans-unit>
+		<trans-unit id="comment_rss_from" approved="yes" xml:space="preserve">
+			<source>from</source>
+			<target>von</target>
+		</trans-unit>
+		<trans-unit id="comment_rss_title" approved="yes" xml:space="preserve">
+			<source>Comments for Post:</source>
+			<target>Kommentare für Artikel:</target>
+		</trans-unit>
+		<trans-unit id="comments_add" approved="yes" xml:space="preserve">
+			<source>add Comment</source>
+			<target>schreibe einen Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comments_author" approved="yes" xml:space="preserve">
+			<source>(author)</source>
+			<target>(autor)</target>
+		</trans-unit>
+		<trans-unit id="comments_comment" approved="yes" xml:space="preserve">
+			<source>Comment</source>
+			<target>Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comments_comments" approved="yes" xml:space="preserve">
+			<source>Comments</source>
+			<target>Kommentare</target>
+		</trans-unit>
+		<trans-unit id="comments_from" approved="yes" xml:space="preserve">
+			<source>from</source>
+			<target>aus</target>
+		</trans-unit>
+		<trans-unit id="comments_reply" approved="yes" xml:space="preserve">
+			<source>reply to this comment</source>
+			<target>antworte auf diesen Kommentar</target>
+		</trans-unit>
+		<trans-unit id="comments_reply_prefix" approved="yes" xml:space="preserve">
+			<source>@</source>
+			<target>@</target>
+		</trans-unit>
+		<trans-unit id="comments_rss" approved="yes" xml:space="preserve">
+			<source>subscribe to comment RSSt</source>
+			<target>Kommentar RSS abbonieren</target>
+		</trans-unit>
+		<trans-unit id="comments_wrote" approved="yes" xml:space="preserve">
+			<source>wrote at</source>
+			<target>schrieb am</target>
+		</trans-unit>
+		<trans-unit id="detail_backto_list" approved="yes" xml:space="preserve">
+			<source>Listview</source>
+			<target>Listenansicht</target>
+		</trans-unit>
+		<trans-unit id="detail_from" approved="yes" xml:space="preserve">
+			<source>from</source>
+			<target>von</target>
+		</trans-unit>
+		<trans-unit id="detail_related_post" approved="yes" xml:space="preserve">
+			<source>related posts</source>
+			<target>ähnliche Artikel</target>
+		</trans-unit>
+		<trans-unit id="detail_views" approved="yes" xml:space="preserve">
+			<source>Views</source>
+			<target>Ansichten</target>
+		</trans-unit>
+		<trans-unit id="error.Comment.createAction" approved="yes" xml:space="preserve">
+			<source>Could not create comment</source>
+			<target>Konnte keinen Kommentar erstellen</target>
+		</trans-unit>
+		<trans-unit id="error.code.1221559976" approved="yes" xml:space="preserve">
+			<source>The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email address</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; enthält keine korrekte E-Mail Adresse.</target>
+		</trans-unit>
+		<trans-unit id="error.code.1221560718" approved="yes" xml:space="preserve">
+			<source>The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf nicht leer sein.</target>
+		</trans-unit>
+		<trans-unit id="error.code.1221565786" approved="yes" xml:space="preserve">
+			<source>The given &lt;strong&gt;%s&lt;/strong&gt; should not contain sourcecode.</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf keinen Quellcode enthalten.</target>
+		</trans-unit>
+		<trans-unit id="error.code.1238108067" approved="yes" xml:space="preserve">
+			<source>The given &lt;strong&gt;%s&lt;/strong&gt; is either too long or too short</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang oder zu kurz.</target>
+		</trans-unit>
+		<trans-unit id="error.code.1238108068" approved="yes" xml:space="preserve">
+			<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too short</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu kurz.</target>
+		</trans-unit>
+		<trans-unit id="error.code.1238108069" approved="yes" xml:space="preserve">
+			<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too long</source>
+			<target>Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang.</target>
+		</trans-unit>
+		<trans-unit id="error.errorsOccurred" approved="yes" xml:space="preserve">
+			<source>Following errors occurred</source>
+			<target>Folgende Fehler sind aufgetreten:</target>
+		</trans-unit>
+		<trans-unit id="link_backTo" approved="yes" xml:space="preserve">
+			<source>&lt;&lt; back</source>
+			<target>&lt;&lt; zurück</target>
+		</trans-unit>
+		<trans-unit id="list_archive_result" approved="yes" xml:space="preserve">
+			<source>Result for</source>
+			<target>Ergebnis für</target>
+		</trans-unit>
+		<trans-unit id="list_archive_results" approved="yes" xml:space="preserve">
+			<source>Results for</source>
+			<target>Ergebnisse für</target>
+		</trans-unit>
+		<trans-unit id="list_category_result" approved="yes" xml:space="preserve">
+			<source>Result for Category:</source>
+			<target>Ergebnis für Kategorie:</target>
+		</trans-unit>
+		<trans-unit id="list_category_results" approved="yes" xml:space="preserve">
+			<source>Results for Category:</source>
+			<target>Ergebnisse für Kategorie:</target>
+		</trans-unit>
+		<trans-unit id="notice_error" approved="yes" xml:space="preserve">
+			<source>Error!</source>
+			<target>Fehler!</target>
+		</trans-unit>
+		<trans-unit id="notice_noPost" approved="yes" xml:space="preserve">
+			<source>There is no Post to show!</source>
+			<target>Es ist kein Beitrag vorhanden!</target>
+		</trans-unit>
+		<trans-unit id="property_author" approved="yes" xml:space="preserve">
+			<source>Name</source>
+			<target>Name</target>
+		</trans-unit>
+		<trans-unit id="property_email" approved="yes" xml:space="preserve">
+			<source>E-Mail</source>
+			<target>Mail</target>
+		</trans-unit>
+		<trans-unit id="property_location" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Ort</target>
+		</trans-unit>
+		<trans-unit id="property_message" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Kommentar</target>
+		</trans-unit>
+		<trans-unit id="property_title" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="property_website" approved="yes" xml:space="preserve">
+			<source></source>
+			<target>Webseite</target>
+		</trans-unit>
+		<trans-unit id="read_more" approved="yes" xml:space="preserve">
+			<source>more</source>
+			<target>mehr</target>
+		</trans-unit>
+		<trans-unit id="teaser_more" approved="yes" xml:space="preserve">
+			<source> …&lt;br /&gt;			</source>
+			<target> …&lt;br /&gt;			</target>
+		</trans-unit>
+		<trans-unit id="view_search_result" approved="yes" xml:space="preserve">
+			<source>Result for</source>
+			<target>Ergebnis für</target>
+		</trans-unit>
+		<trans-unit id="view_search_results" approved="yes" xml:space="preserve">
+			<source>Results for</source>
+			<target>Ergebnisse für</target>
+		</trans-unit>
+		<trans-unit id="widget.pagination.first" approved="yes" xml:space="preserve">
+			<source>&lt;&lt; first</source>
+			<target>&lt;&lt; erster</target>
+		</trans-unit>
+		<trans-unit id="widget.pagination.last" approved="yes" xml:space="preserve">
+			<source>last &gt;&gt;</source>
+			<target>letzter &gt;&gt;</target>
+		</trans-unit>
+		<trans-unit id="widget.pagination.next" approved="yes" xml:space="preserve">
+			<source>next &gt;</source>
+			<target>nächster &gt;</target>
+		</trans-unit>
+		<trans-unit id="widget.pagination.previous" approved="yes" xml:space="preserve">
+			<source>&lt; previous</source>
+			<target>&lt; vorheriger</target>
+		</trans-unit>
+		<trans-unit id="widget_category_header" approved="yes" xml:space="preserve">
+			<source>Categories</source>
+			<target>Kategorien</target>
+		</trans-unit>
+		<trans-unit id="widget_category_more" approved="yes" xml:space="preserve">
+			<source> …&lt;br /&gt;			</source>
+			<target> …&lt;br /&gt;			</target>
+		</trans-unit>
+		<trans-unit id="widget_dateMenu_header" approved="yes" xml:space="preserve">
+			<source>by Date</source>
+			<target>Archiv</target>
+		</trans-unit>
+		<trans-unit id="widget_dateMenu_item" approved="yes" xml:space="preserve">
+			<source>Item</source>
+			<target>Eintrag</target>
+		</trans-unit>
+		<trans-unit id="widget_dateMenu_items" approved="yes" xml:space="preserve">
+			<source>Items</source>
+			<target>Einträge</target>
+		</trans-unit>
+		<trans-unit id="widget_latestComments_header" approved="yes" xml:space="preserve">
+			<source>Latest Comments</source>
+			<target>Letzte Kommentare</target>
+		</trans-unit>
+		<trans-unit id="widget_latestComments_more" approved="yes" xml:space="preserve">
+			<source> …&lt;br /&gt;			</source>
+			<target> …&lt;br /&gt;			</target>
+		</trans-unit>
+		<trans-unit id="widget_latestPosts_header" approved="yes" xml:space="preserve">
+			<source>Latest Posts</source>
+			<target>Neueste Artikel</target>
+		</trans-unit>
+		<trans-unit id="widget_latestPosts_more" approved="yes" xml:space="preserve">
+			<source> …&lt;br /&gt;			</source>
+			<target> …&lt;br /&gt;			</target>
+		</trans-unit>
+		<trans-unit id="widget_search_header" approved="yes" xml:space="preserve">
+			<source>Search Post</source>
+			<target>Suche</target>
+		</trans-unit>
+		<trans-unit id="widget_views_header" approved="yes" xml:space="preserve">
+			<source>Most Views</source>
+			<target>Beliebte Artikel</target>
+		</trans-unit>
+		<trans-unit id="widget_views_more" approved="yes" xml:space="preserve">
+			<source> …&lt;br /&gt;			</source>
+			<target> …&lt;br /&gt;			</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

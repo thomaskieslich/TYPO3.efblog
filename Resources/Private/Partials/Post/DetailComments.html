@@ -1,0 +1,29 @@
+<div class="tx-efblog-detail-comments" id="comments">
+	<f:if condition="{post.comments -> f:count()} > 1">
+		<f:then>
+			<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comments')}</h3>
+		</f:then>
+		<f:else>
+			<h3>{post.comments -> f:count()} {f:translate(key : 'comments_comment')}</h3>
+		</f:else>
+	</f:if>
+	<p class="tx-efblog-comments-rss">
+		{f:translate(key : 'comments_rss') -> f:link.action(action : 'detail', arguments : '{post:post}',
+		pageUid : '{settings.detailUid}', pageType : '101')}
+	</p>
+
+	<div class="tx-efblog-comments-list">
+		<f:for each="{post.comments}" as="comment" iteration="comIterator">
+			<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
+				<div class="item {row}" id="comment_{comment.uid}">
+					<f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}"/>
+					<f:for each="{comment.children}" as="child">
+						<div style="margin-left: 50px">
+							<f:render partial="CommentElement" arguments="{comment: child, comIterator:comIterator, post : post}"/>
+						</div>
+					</f:for>
+				</div>
+			</f:cycle>
+		</f:for>
+	</div>
+</div>

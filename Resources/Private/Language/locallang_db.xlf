@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-05T19:50:53Z">
+		<header>
+			<description>Language labels for database tables/fields belonging to extension 'efblog'</description>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="category" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="category_description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="category_image" xml:space="preserve">
+			<source>Category Image</source>
+		</trans-unit>
+		<trans-unit id="category_parent_category" xml:space="preserve">
+			<source>Parent Category</source>
+		</trans-unit>
+		<trans-unit id="category_tab_access" xml:space="preserve">
+			<source>Access</source>
+		</trans-unit>
+		<trans-unit id="category_tab_categorize" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="category_title" xml:space="preserve">
+			<source>Category name</source>
+		</trans-unit>
+		<trans-unit id="comment" xml:space="preserve">
+			<source>Comment</source>
+		</trans-unit>
+		<trans-unit id="comment_author" xml:space="preserve">
+			<source>Author</source>
+		</trans-unit>
+		<trans-unit id="comment_date" xml:space="preserve">
+			<source>Date</source>
+		</trans-unit>
+		<trans-unit id="comment_email" xml:space="preserve">
+			<source>Email</source>
+		</trans-unit>
+		<trans-unit id="comment_ip" xml:space="preserve">
+			<source>IP</source>
+		</trans-unit>
+		<trans-unit id="comment_location" xml:space="preserve">
+			<source>Location</source>
+		</trans-unit>
+		<trans-unit id="comment_message" xml:space="preserve">
+			<source>Comment</source>
+		</trans-unit>
+		<trans-unit id="comment_parent_comment" xml:space="preserve">
+			<source>Parent Comment</source>
+		</trans-unit>
+		<trans-unit id="comment_spampoints" xml:space="preserve">
+			<source>Spampoints</source>
+		</trans-unit>
+		<trans-unit id="comment_title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="comment_website" xml:space="preserve">
+			<source>Website</source>
+		</trans-unit>
+		<trans-unit id="fe_users.tx_efblog_profile_page" xml:space="preserve">
+			<source>Profile Page</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general" xml:space="preserve">
+			<source>Simple Blog</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_detail" xml:space="preserve">
+			<source>Details</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list" xml:space="preserve">
+			<source>Post List</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_category" xml:space="preserve">
+			<source>Category List</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_dateMenu" xml:space="preserve">
+			<source>Date Menu List</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_list_search" xml:space="preserve">
+			<source>Search List</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_view_calendar" xml:space="preserve">
+			<source>Calendar View</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_view_category" xml:space="preserve">
+			<source>Category Overview</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets" xml:space="preserve">
+			<source>Widgets</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_category" xml:space="preserve">
+			<source>Category Widget</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_dateMenu" xml:space="preserve">
+			<source>Date Menu Widget</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_latestComments" xml:space="preserve">
+			<source>Latest Comments Widget</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_latestPosts" xml:space="preserve">
+			<source>Latest Posts Widget</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_search" xml:space="preserve">
+			<source>Search Widget</source>
+		</trans-unit>
+		<trans-unit id="flexform_options_general_widgets_views" xml:space="preserve">
+			<source>Most Views Widget</source>
+		</trans-unit>
+		<trans-unit id="plugin_fe1_title" xml:space="preserve">
+			<source>Simple Blog</source>
+		</trans-unit>
+		<trans-unit id="post" xml:space="preserve">
+			<source>Post</source>
+		</trans-unit>
+		<trans-unit id="post_allow_comments" xml:space="preserve">
+			<source>allow Comments</source>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.0" xml:space="preserve">
+			<source>Everybody can comment this post</source>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.1" xml:space="preserve">
+			<source>Nobody can comment this post</source>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.2" xml:space="preserve">
+			<source>allow Comments(override close comments after)</source>
+		</trans-unit>
+		<trans-unit id="post_allow_comments.I.3" xml:space="preserve">
+			<source>Only registered users can comment</source>
+		</trans-unit>
+		<trans-unit id="post_archive" xml:space="preserve">
+			<source>Archive Date</source>
+		</trans-unit>
+		<trans-unit id="post_author" xml:space="preserve">
+			<source>Author</source>
+		</trans-unit>
+		<trans-unit id="post_category" xml:space="preserve">
+			<source>Categories</source>
+		</trans-unit>
+		<trans-unit id="post_comments" xml:space="preserve">
+			<source>Comments</source>
+		</trans-unit>
+		<trans-unit id="post_content" xml:space="preserve">
+			<source>Content Elements</source>
+		</trans-unit>
+		<trans-unit id="post_date" xml:space="preserve">
+			<source>Date &amp; Time</source>
+		</trans-unit>
+		<trans-unit id="post_palette_access" xml:space="preserve">
+			<source>Access Rights</source>
+		</trans-unit>
+		<trans-unit id="post_palette_category" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="post_palette_content" xml:space="preserve">
+			<source>Content</source>
+		</trans-unit>
+		<trans-unit id="post_palette_tags" xml:space="preserve">
+			<source>Tags</source>
+		</trans-unit>
+		<trans-unit id="post_related" xml:space="preserve">
+			<source>Related Posts</source>
+		</trans-unit>
+		<trans-unit id="post_tab_access" xml:space="preserve">
+			<source>Access</source>
+		</trans-unit>
+		<trans-unit id="post_tab_categorize" xml:space="preserve">
+			<source>Categorize</source>
+		</trans-unit>
+		<trans-unit id="post_tab_interactive" xml:space="preserve">
+			<source>Interactivity</source>
+		</trans-unit>
+		<trans-unit id="post_tab_post" xml:space="preserve">
+			<source>Post</source>
+		</trans-unit>
+		<trans-unit id="post_tab_teaser" xml:space="preserve">
+			<source>Teaser</source>
+		</trans-unit>
+		<trans-unit id="post_tags" xml:space="preserve">
+			<source>Tags (comma separated list)</source>
+		</trans-unit>
+		<trans-unit id="post_teaserDescription" xml:space="preserve">
+			<source>Teaser Description</source>
+		</trans-unit>
+		<trans-unit id="post_teaserLink" xml:space="preserve">
+			<source>Teaserlink</source>
+		</trans-unit>
+		<trans-unit id="post_teaserLink_title" xml:space="preserve">
+			<source>Teaserlink Title</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_image" xml:space="preserve">
+			<source>Teaser Images</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_options" xml:space="preserve">
+			<source>Teaser Options</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.0" xml:space="preserve">
+			<source>none</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.1" xml:space="preserve">
+			<source>Crop Teaser</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.2" xml:space="preserve">
+			<source>Show first Content Element</source>
+		</trans-unit>
+		<trans-unit id="post_teaser_options.I.3" xml:space="preserve">
+			<source>Show all Content Elements</source>
+		</trans-unit>
+		<trans-unit id="post_title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="post_views" xml:space="preserve">
+			<source>Views</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

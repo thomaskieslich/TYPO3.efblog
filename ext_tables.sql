@@ -1,44 +1,45 @@
+# noinspection SqlNoDataSourceInspection
 CREATE TABLE tx_efblog_domain_model_post (
-	uid int(11) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
+	uid INT(11) NOT NULL AUTO_INCREMENT,
+	pid INT(11) DEFAULT '0' NOT NULL,
 	
-	title varchar(255) DEFAULT '' NOT NULL,
-	author int(11) unsigned DEFAULT '0' NOT NULL,
-	date int(11) DEFAULT '0' NOT NULL,
-	archive int(11) DEFAULT '0' NOT NULL,
-	content int(11) DEFAULT '0' NOT NULL,
-	tags varchar(255) DEFAULT '' NOT NULL,
-	allow_comments int(11) DEFAULT '0' NOT NULL,	
-	teaser_image text,
-	teaser_description text,
-	teaser_link text,
-	teaser_link_title text,
-	teaser_options int(11) DEFAULT '0' NOT NULL,
-	views int(11) DEFAULT '0' NOT NULL,
-	categories int(11) unsigned DEFAULT '0' NOT NULL,
-	related_posts int(11) unsigned DEFAULT '0' NOT NULL,
-    comments int(11) unsigned DEFAULT '0' NOT NULL,
+	title VARCHAR(255) DEFAULT '' NOT NULL,
+	author INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	date INT(11) DEFAULT '0' NOT NULL,
+	archive INT(11) DEFAULT '0' NOT NULL,
+	content INT(11) DEFAULT '0' NOT NULL,
+	tags VARCHAR(255) DEFAULT '' NOT NULL,
+	allow_comments INT(11) DEFAULT '0' NOT NULL,
+	teaser_image TEXT,
+	teaser_description TEXT,
+	teaser_link TEXT,
+	teaser_link_title TEXT,
+	teaser_options INT(11) DEFAULT '0' NOT NULL,
+	views INT(11) DEFAULT '0' NOT NULL,
+	categories INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	related_posts INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	comments INT(11) UNSIGNED DEFAULT '0' NOT NULL,
 
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	fe_group varchar(100) DEFAULT '0' NOT NULL,
+	tstamp INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	crdate INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	deleted TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
+	hidden TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
+	fe_group VARCHAR(100) DEFAULT '0' NOT NULL,
 
-	t3ver_oid int(11) DEFAULT '0' NOT NULL,
-	t3ver_id int(11) DEFAULT '0' NOT NULL,
-	t3ver_wsid int(11) DEFAULT '0' NOT NULL,
-	t3ver_label varchar(255) DEFAULT '' NOT NULL,
-	t3ver_state tinyint(4) DEFAULT '0' NOT NULL,
-	t3ver_stage int(11) DEFAULT '0' NOT NULL,
-	t3ver_count int(11) DEFAULT '0' NOT NULL,
-	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
-	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+	t3ver_oid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_id INT(11) DEFAULT '0' NOT NULL,
+	t3ver_wsid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_label VARCHAR(255) DEFAULT '' NOT NULL,
+	t3ver_state TINYINT(4) DEFAULT '0' NOT NULL,
+	t3ver_stage INT(11) DEFAULT '0' NOT NULL,
+	t3ver_count INT(11) DEFAULT '0' NOT NULL,
+	t3ver_tstamp INT(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id INT(11) DEFAULT '0' NOT NULL,
 
-	t3_origuid int(11) DEFAULT '0' NOT NULL,
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l18n_parent int(11) DEFAULT '0' NOT NULL,
-	l18n_diffsource mediumblob NOT NULL,
+	t3_origuid INT(11) DEFAULT '0' NOT NULL,
+	sys_language_uid INT(11) DEFAULT '0' NOT NULL,
+	l18n_parent INT(11) DEFAULT '0' NOT NULL,
+	l18n_diffsource MEDIUMBLOB NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
@@ -47,116 +48,116 @@ CREATE TABLE tx_efblog_domain_model_post (
 
 
 CREATE TABLE tt_content (
-	tx_efblog_post_content_mm int(11) DEFAULT '0' NOT NULL,
+	tx_efblog_post_content_mm INT(11) DEFAULT '0' NOT NULL,
 
 	KEY efblog (tx_efblog_post_content_mm,sorting)
 );
 
 CREATE TABLE tx_efblog_post_category_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	tablenames varchar(255) DEFAULT '' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_local INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	uid_foreign INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	tablenames VARCHAR(255) DEFAULT '' NOT NULL,
+	sorting INT(11) UNSIGNED DEFAULT '0' NOT NULL,
 
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
 
 CREATE TABLE tx_efblog_post_post_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	tablenames varchar(255) DEFAULT '' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_local INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	uid_foreign INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	tablenames VARCHAR(255) DEFAULT '' NOT NULL,
+	sorting INT(11) UNSIGNED DEFAULT '0' NOT NULL,
 
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
 
 CREATE TABLE tx_efblog_post_author_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	tablenames varchar(255) DEFAULT '' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_local INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	uid_foreign INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	tablenames VARCHAR(255) DEFAULT '' NOT NULL,
+	sorting INT(11) UNSIGNED DEFAULT '0' NOT NULL,
 
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
 
 CREATE TABLE tx_efblog_domain_model_category (
-	uid int(11) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
+	uid INT(11) NOT NULL AUTO_INCREMENT,
+	pid INT(11) DEFAULT '0' NOT NULL,
 	
-	title varchar(255) DEFAULT '' NOT NULL,
-	description text NOT NULL,
-	image text,
-	parent_category int(11) unsigned DEFAULT '0',
+	title VARCHAR(255) DEFAULT '' NOT NULL,
+	description TEXT NOT NULL,
+	image TEXT,
+	parent_category INT(11) UNSIGNED DEFAULT '0',
 
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	tstamp INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	crdate INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	deleted TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
+	hidden TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
 
-	t3ver_oid int(11) DEFAULT '0' NOT NULL,
-	t3ver_id int(11) DEFAULT '0' NOT NULL,
-	t3ver_wsid int(11) DEFAULT '0' NOT NULL,
-	t3ver_label varchar(255) DEFAULT '' NOT NULL,
-	t3ver_state tinyint(4) DEFAULT '0' NOT NULL,
-	t3ver_stage int(11) DEFAULT '0' NOT NULL,
-	t3ver_count int(11) DEFAULT '0' NOT NULL,
-	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
-	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+	t3ver_oid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_id INT(11) DEFAULT '0' NOT NULL,
+	t3ver_wsid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_label VARCHAR(255) DEFAULT '' NOT NULL,
+	t3ver_state TINYINT(4) DEFAULT '0' NOT NULL,
+	t3ver_stage INT(11) DEFAULT '0' NOT NULL,
+	t3ver_count INT(11) DEFAULT '0' NOT NULL,
+	t3ver_tstamp INT(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id INT(11) DEFAULT '0' NOT NULL,
 
-	t3_origuid int(11) DEFAULT '0' NOT NULL,
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l18n_parent int(11) DEFAULT '0' NOT NULL,
-	l18n_diffsource mediumblob NOT NULL,
+	t3_origuid INT(11) DEFAULT '0' NOT NULL,
+	sys_language_uid INT(11) DEFAULT '0' NOT NULL,
+	l18n_parent INT(11) DEFAULT '0' NOT NULL,
+	l18n_diffsource MEDIUMBLOB NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
 CREATE TABLE tx_efblog_domain_model_comment (
-	uid int(11) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
+	uid INT(11) NOT NULL AUTO_INCREMENT,
+	pid INT(11) DEFAULT '0' NOT NULL,
 	
-	post int(11) unsigned DEFAULT '0' NOT NULL,
+	post INT(11) UNSIGNED DEFAULT '0' NOT NULL,
 	
-	author varchar(255) DEFAULT '' NOT NULL,
-	email varchar(255) DEFAULT '' NOT NULL,
-	website varchar(255) DEFAULT '' NOT NULL,
-	location varchar(255) DEFAULT '' NOT NULL,
-	title text NOT NULL,
-	message text NOT NULL,
-	date int(11) DEFAULT '0' NOT NULL,
-	spampoints int(11) DEFAULT '0' NOT NULL,
-	spam_categories text,
-	ip text NOT NULL,
-	parent_comment int(11) unsigned DEFAULT '0',
+	author VARCHAR(255) DEFAULT '' NOT NULL,
+	email VARCHAR(255) DEFAULT '' NOT NULL,
+	website VARCHAR(255) DEFAULT '' NOT NULL,
+	location VARCHAR(255) DEFAULT '' NOT NULL,
+	title TEXT NOT NULL,
+	message TEXT NOT NULL,
+	date INT(11) DEFAULT '0' NOT NULL,
+	spampoints INT(11) DEFAULT '0' NOT NULL,
+	spam_categories TEXT,
+	ip TEXT NOT NULL,
+	parent_comment INT(11) UNSIGNED DEFAULT '0',
 
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	tstamp INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	crdate INT(11) UNSIGNED DEFAULT '0' NOT NULL,
+	deleted TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
+	hidden TINYINT(4) UNSIGNED DEFAULT '0' NOT NULL,
 
-	t3ver_oid int(11) DEFAULT '0' NOT NULL,
-	t3ver_id int(11) DEFAULT '0' NOT NULL,
-	t3ver_wsid int(11) DEFAULT '0' NOT NULL,
-	t3ver_label varchar(255) DEFAULT '' NOT NULL,
-	t3ver_state tinyint(4) DEFAULT '0' NOT NULL,
-	t3ver_stage int(11) DEFAULT '0' NOT NULL,
-	t3ver_count int(11) DEFAULT '0' NOT NULL,
-	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
-	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+	t3ver_oid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_id INT(11) DEFAULT '0' NOT NULL,
+	t3ver_wsid INT(11) DEFAULT '0' NOT NULL,
+	t3ver_label VARCHAR(255) DEFAULT '' NOT NULL,
+	t3ver_state TINYINT(4) DEFAULT '0' NOT NULL,
+	t3ver_stage INT(11) DEFAULT '0' NOT NULL,
+	t3ver_count INT(11) DEFAULT '0' NOT NULL,
+	t3ver_tstamp INT(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id INT(11) DEFAULT '0' NOT NULL,
 
-	t3_origuid int(11) DEFAULT '0' NOT NULL,
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l18n_parent int(11) DEFAULT '0' NOT NULL,
-	l18n_diffsource mediumblob NOT NULL,
+	t3_origuid INT(11) DEFAULT '0' NOT NULL,
+	sys_language_uid INT(11) DEFAULT '0' NOT NULL,
+	l18n_parent INT(11) DEFAULT '0' NOT NULL,
+	l18n_diffsource MEDIUMBLOB NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
 
 CREATE TABLE fe_users (
-	tx_efblog_profile_page int(11) unsigned DEFAULT '0' NOT NULL
+	tx_efblog_profile_page INT(11) UNSIGNED DEFAULT '0' NOT NULL
 );
