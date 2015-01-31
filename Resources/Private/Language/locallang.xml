@@ -75,7 +75,7 @@
 			<label index="view_search_result">Result for</label>
 			<label index="view_search_results">Results for</label>
 			<label index="widget.pagination.first">first</label>
-			<label index="widget.pagination.last">last &gt;&gt;</label>
+			<label index="widget.pagination.last">last</label>
 			<label index="widget.pagination.next">next</label>
 			<label index="widget.pagination.previous">previous</label>
 			<label index="widget_category_header">Categories</label>

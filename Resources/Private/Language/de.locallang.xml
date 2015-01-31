@@ -55,7 +55,7 @@
 			<label index="view_search_result">Ergebnis für</label>
 			<label index="view_search_results">Ergebnisse für</label>
 			<label index="widget.pagination.first">erster</label>
-			<label index="widget.pagination.last">letzter &gt;&gt;</label>
+			<label index="widget.pagination.last">letzter</label>
 			<label index="widget.pagination.next">nächster</label>
 			<label index="widget.pagination.previous">vorheriger</label>
 			<label index="widget_category_header">Kategorien</label>
