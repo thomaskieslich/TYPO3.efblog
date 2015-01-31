@@ -54,10 +54,10 @@
 			<label index="teaser_more"> …&lt;br /&gt;			</label>
 			<label index="view_search_result">Ergebnis für</label>
 			<label index="view_search_results">Ergebnisse für</label>
-			<label index="widget.pagination.first">&lt;&lt; erster</label>
+			<label index="widget.pagination.first">erster</label>
 			<label index="widget.pagination.last">letzter &gt;&gt;</label>
-			<label index="widget.pagination.next">nächster &gt;</label>
-			<label index="widget.pagination.previous">&lt; vorheriger</label>
+			<label index="widget.pagination.next">nächster</label>
+			<label index="widget.pagination.previous">vorheriger</label>
 			<label index="widget_category_header">Kategorien</label>
 			<label index="widget_category_more"> …&lt;br /&gt;			</label>
 			<label index="widget_dateMenu_header">Archiv</label>

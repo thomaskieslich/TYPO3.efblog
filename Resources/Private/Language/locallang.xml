@@ -74,10 +74,10 @@
 			<label index="teaser_more"> …&lt;br /&gt;			</label>
 			<label index="view_search_result">Result for</label>
 			<label index="view_search_results">Results for</label>
-			<label index="widget.pagination.first">&lt;&lt; first</label>
+			<label index="widget.pagination.first">first</label>
 			<label index="widget.pagination.last">last &gt;&gt;</label>
-			<label index="widget.pagination.next">next &gt;</label>
-			<label index="widget.pagination.previous">&lt; previous</label>
+			<label index="widget.pagination.next">next</label>
+			<label index="widget.pagination.previous">previous</label>
 			<label index="widget_category_header">Categories</label>
 			<label index="widget_category_more"> …&lt;br /&gt;			</label>
 			<label index="widget_dateMenu_header">by Date</label>
