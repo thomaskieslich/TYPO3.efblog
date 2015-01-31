@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="category">Kategorie</label>
+			<label index="category_description">Beschreibung</label>
+			<label index="category_image">Kategorie Bild</label>
+			<label index="category_parent_category">Übergeordnete Kategorie</label>
+			<label index="category_tab_access">Zugriff</label>
+			<label index="category_tab_categorize">Kategorie</label>
+			<label index="category_title">Kategorie Name</label>
+			<label index="comment">Kommentar</label>
+			<label index="comment_author">Autor</label>
+			<label index="comment_date">Datum</label>
+			<label index="comment_email">Email</label>
+			<label index="comment_ip">IP</label>
+			<label index="comment_location">Ort</label>
+			<label index="comment_message">Kommentar</label>
+			<label index="comment_parent_comment">übergeordneter Kommentar</label>
+			<label index="comment_spampoints">Spampoints</label>
+			<label index="comment_title">Titel</label>
+			<label index="comment_website">Website</label>
+			<label index="fe_users.tx_efblog_profile_page">Profilseite</label>
+			<label index="flexform_options_general">Einfacher Blog</label>
+			<label index="flexform_options_general_detail">Einzelansicht</label>
+			<label index="flexform_options_general_list">Post - Liste</label>
+			<label index="flexform_options_general_list_category">Kategorie - Liste</label>
+			<label index="flexform_options_general_list_dateMenu">Datums Menü - Liste</label>
+			<label index="flexform_options_general_list_search">Suchen - Liste</label>
+			<label index="flexform_options_general_view_calendar">Kalenderansicht</label>
+			<label index="flexform_options_general_view_category">Kategorien - Übersicht</label>
+			<label index="flexform_options_general_widgets">Widgets</label>
+			<label index="flexform_options_general_widgets_category">Kategorien - Widget</label>
+			<label index="flexform_options_general_widgets_dateMenu">Datums Menü - Widget</label>
+			<label index="flexform_options_general_widgets_latestComments">Letzte Kommentare - Widget</label>
+			<label index="flexform_options_general_widgets_latestPosts">Letzte Posts - Widget</label>
+			<label index="flexform_options_general_widgets_search">Suche - Widget</label>
+			<label index="flexform_options_general_widgets_views">Meiste Ansichten - Widget</label>
+			<label index="plugin_fe1_title">Einfacher Blog</label>
+			<label index="post">Post</label>
+			<label index="post_allow_comments">Kommentare erlauben</label>
+			<label index="post_allow_comments.I.0">Jeder darf Kommentare schreiben</label>
+			<label index="post_allow_comments.I.1">Keiner darf Kommentare schreiben</label>
+			<label index="post_allow_comments.I.2">erlaube Kommentare(überschreibt die Zeiteinstellung)</label>
+			<label index="post_allow_comments.I.3">Nur angemeldete Benutze dürfen Kommentare schreiben</label>
+			<label index="post_archive">Archiv Datum</label>
+			<label index="post_author">Autor</label>
+			<label index="post_category">Kategorien</label>
+			<label index="post_comments">Kommentare</label>
+			<label index="post_content">Inhaltselemente</label>
+			<label index="post_date">Datum &amp; Uhrzeit</label>
+			<label index="post_palette_access">Zugriffsrechte</label>
+			<label index="post_palette_category">Kategorie</label>
+			<label index="post_palette_content">Inhalt</label>
+			<label index="post_palette_tags">Tags</label>
+			<label index="post_related">verbundene Posts</label>
+			<label index="post_tab_access">Zugriff</label>
+			<label index="post_tab_categorize">Kategorisieren</label>
+			<label index="post_tab_interactive">Interaktiv</label>
+			<label index="post_tab_post">Post</label>
+			<label index="post_tab_teaser">Teaser</label>
+			<label index="post_tags">Tags (durch Komma getrennt)</label>
+			<label index="post_teaserDescription">Teaser Beschreibung</label>
+			<label index="post_teaserLink">Teaserlink</label>
+			<label index="post_teaserLink_title">Teaserlink Titel</label>
+			<label index="post_teaser_image">Teaser Bilder</label>
+			<label index="post_teaser_options">Teaser Optionen</label>
+			<label index="post_teaser_options.I.0">nichts</label>
+			<label index="post_teaser_options.I.1">Teaser einkürzen</label>
+			<label index="post_teaser_options.I.2">zeige erstes Inhaltselement komplett</label>
+			<label index="post_teaser_options.I.3">zeige alle Inhaltselemente</label>
+			<label index="post_title">Titel</label>
+			<label index="post_views">Ansichten</label>
+		</languageKey>
+	</data>
+</T3locallangExt>

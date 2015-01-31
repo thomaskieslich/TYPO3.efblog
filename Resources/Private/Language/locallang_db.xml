@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>Language labels for database tables/fields belonging to extension 'efblog'</description>
+		<generator>LFEditor</generator>
+		<attributes type="array">
+			<source-language>en</source-language>
+			<target-language>de</target-language>
+			<datatype>plaintext</datatype>
+			<original>messages</original>
+			<date>2015-01-31T21:07:57Z</date>
+		</attributes>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="category">Category</label>
+			<label index="category_description">Description</label>
+			<label index="category_image">Category Image</label>
+			<label index="category_parent_category">Parent Category</label>
+			<label index="category_tab_access">Access</label>
+			<label index="category_tab_categorize">Category</label>
+			<label index="category_title">Category name</label>
+			<label index="comment">Comment</label>
+			<label index="comment_author">Author</label>
+			<label index="comment_date">Date</label>
+			<label index="comment_email">Email</label>
+			<label index="comment_ip">IP</label>
+			<label index="comment_location">Location</label>
+			<label index="comment_message">Comment</label>
+			<label index="comment_parent_comment">Parent Comment</label>
+			<label index="comment_spampoints">Spampoints</label>
+			<label index="comment_title">Title</label>
+			<label index="comment_website">Website</label>
+			<label index="fe_users.tx_efblog_profile_page">Profile Page</label>
+			<label index="flexform_options_general">Simple Blog</label>
+			<label index="flexform_options_general_detail">Details</label>
+			<label index="flexform_options_general_list">Post List</label>
+			<label index="flexform_options_general_list_category">Category List</label>
+			<label index="flexform_options_general_list_dateMenu">Date Menu List</label>
+			<label index="flexform_options_general_list_search">Search List</label>
+			<label index="flexform_options_general_view_calendar">Calendar View</label>
+			<label index="flexform_options_general_view_category">Category Overview</label>
+			<label index="flexform_options_general_widgets">Widgets</label>
+			<label index="flexform_options_general_widgets_category">Category Widget</label>
+			<label index="flexform_options_general_widgets_dateMenu">Date Menu Widget</label>
+			<label index="flexform_options_general_widgets_latestComments">Latest Comments Widget</label>
+			<label index="flexform_options_general_widgets_latestPosts">Latest Posts Widget</label>
+			<label index="flexform_options_general_widgets_search">Search Widget</label>
+			<label index="flexform_options_general_widgets_views">Most Views Widget</label>
+			<label index="plugin_fe1_title">Simple Blog</label>
+			<label index="post">Post</label>
+			<label index="post_allow_comments">allow Comments</label>
+			<label index="post_allow_comments.I.0">Everybody can comment this post</label>
+			<label index="post_allow_comments.I.1">Nobody can comment this post</label>
+			<label index="post_allow_comments.I.2">allow Comments(override close comments after)</label>
+			<label index="post_allow_comments.I.3">Only registered users can comment</label>
+			<label index="post_archive">Archive Date</label>
+			<label index="post_author">Author</label>
+			<label index="post_category">Categories</label>
+			<label index="post_comments">Comments</label>
+			<label index="post_content">Content Elements</label>
+			<label index="post_date">Date &amp; Time</label>
+			<label index="post_palette_access">Access Rights</label>
+			<label index="post_palette_category">Category</label>
+			<label index="post_palette_content">Content</label>
+			<label index="post_palette_tags">Tags</label>
+			<label index="post_related">Related Posts</label>
+			<label index="post_tab_access">Access</label>
+			<label index="post_tab_categorize">Categorize</label>
+			<label index="post_tab_interactive">Interactivity</label>
+			<label index="post_tab_post">Post</label>
+			<label index="post_tab_teaser">Teaser</label>
+			<label index="post_tags">Tags (comma separated list)</label>
+			<label index="post_teaserDescription">Teaser Description</label>
+			<label index="post_teaserLink">Teaserlink</label>
+			<label index="post_teaserLink_title">Teaserlink Title</label>
+			<label index="post_teaser_image">Teaser Images</label>
+			<label index="post_teaser_options">Teaser Options</label>
+			<label index="post_teaser_options.I.0">none</label>
+			<label index="post_teaser_options.I.1">Crop Teaser</label>
+			<label index="post_teaser_options.I.2">Show first Content Element</label>
+			<label index="post_teaser_options.I.3">Show all Content Elements</label>
+			<label index="post_title">Title</label>
+			<label index="post_views">Views</label>
+		</languageKey>
+		<languageKey index="af"></languageKey>
+		<languageKey index="ar"></languageKey>
+		<languageKey index="bs"></languageKey>
+		<languageKey index="bg"></languageKey>
+		<languageKey index="ca"></languageKey>
+		<languageKey index="ch"></languageKey>
+		<languageKey index="cs"></languageKey>
+		<languageKey index="da"></languageKey>
+		<languageKey index="de">EXT:efblog/Resources/Private/Language/de.locallang_db.xml</languageKey>
+		<languageKey index="el"></languageKey>
+		<languageKey index="eo"></languageKey>
+		<languageKey index="es"></languageKey>
+		<languageKey index="et"></languageKey>
+		<languageKey index="eu"></languageKey>
+		<languageKey index="fa"></languageKey>
+		<languageKey index="fi"></languageKey>
+		<languageKey index="fo"></languageKey>
+		<languageKey index="fr"></languageKey>
+		<languageKey index="fr_CA"></languageKey>
+		<languageKey index="gl"></languageKey>
+		<languageKey index="he"></languageKey>
+		<languageKey index="hi"></languageKey>
+		<languageKey index="hr"></languageKey>
+		<languageKey index="hu"></languageKey>
+		<languageKey index="is"></languageKey>
+		<languageKey index="it"></languageKey>
+		<languageKey index="ja"></languageKey>
+		<languageKey index="ka"></languageKey>
+		<languageKey index="kl"></languageKey>
+		<languageKey index="km"></languageKey>
+		<languageKey index="ko"></languageKey>
+		<languageKey index="lt"></languageKey>
+		<languageKey index="lv"></languageKey>
+		<languageKey index="ms"></languageKey>
+		<languageKey index="nl"></languageKey>
+		<languageKey index="no"></languageKey>
+		<languageKey index="pl"></languageKey>
+		<languageKey index="pt"></languageKey>
+		<languageKey index="pt_BR"></languageKey>
+		<languageKey index="ro"></languageKey>
+		<languageKey index="ru"></languageKey>
+		<languageKey index="sk"></languageKey>
+		<languageKey index="sl"></languageKey>
+		<languageKey index="sq"></languageKey>
+		<languageKey index="sr"></languageKey>
+		<languageKey index="sv"></languageKey>
+		<languageKey index="th"></languageKey>
+		<languageKey index="tr"></languageKey>
+		<languageKey index="uk"></languageKey>
+		<languageKey index="vi"></languageKey>
+		<languageKey index="zh"></languageKey>
+	</data>
+</T3locallang>
