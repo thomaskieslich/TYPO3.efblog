@@ -141,10 +141,10 @@ class PostController extends AbstractController {
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
 		$pagerConfig = array(
-			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-			'insertAbove' => $this->settings['listView']['insertAbove'],
-			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maxPages' => $this->settings['listView']['maxPages']
+				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+				'insertAbove' => $this->settings['listView']['insertAbove'],
+				'insertBelow' => $this->settings['listView']['insertBelow'],
+				'maxPages' => $this->settings['listView']['maxPages']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
@@ -166,10 +166,10 @@ class PostController extends AbstractController {
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
 		$pagerConfig = array(
-			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-			'insertAbove' => $this->settings['listView']['insertAbove'],
-			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maxPages' => $this->settings['listView']['maxPages']
+				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+				'insertAbove' => $this->settings['listView']['insertAbove'],
+				'insertBelow' => $this->settings['listView']['insertBelow'],
+				'maxPages' => $this->settings['listView']['maxPages']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
@@ -214,20 +214,20 @@ class PostController extends AbstractController {
 					$details = '';
 				}
 				$dates[] = array(
-					'date' => strftime('%e. %B %Y', $date->format('U')),
-					'time' => strftime('%H:%M', $date->format('U')),
-					'title' => $post->getTitle(),
-					'details' => $details,
-					'post' => $post->getUid()
+						'date' => strftime('%e. %B %Y', $date->format('U')),
+						'time' => strftime('%H:%M', $date->format('U')),
+						'title' => $post->getTitle(),
+						'details' => $details,
+						'post' => $post->getUid()
 				);
 			}
 		} else {
 			$dates[] = array(
-				'date' => strftime('%e. %B %Y', time()),
-				'time' => '',
-				'title' => 'Keine Termine für diesen Tag.',
-				'details' => '',
-				'post' => 0
+					'date' => strftime('%e. %B %Y', time()),
+					'time' => '',
+					'title' => 'Keine Termine für diesen Tag.',
+					'details' => '',
+					'post' => 0
 			);
 		}
 
@@ -255,6 +255,7 @@ class PostController extends AbstractController {
 			$date = $mposts->getDate();
 			$monthDates[] = $date->format('Y-m-d');
 		}
+
 		return json_encode($monthDates);
 	}
 
@@ -278,10 +279,10 @@ class PostController extends AbstractController {
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 
 		$pagerConfig = array(
-			'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-			'insertAbove' => $this->settings['listView']['insertAbove'],
-			'insertBelow' => $this->settings['listView']['insertBelow'],
-			'maxPages' => $this->settings['listView']['maxPages']
+				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
+				'insertAbove' => $this->settings['listView']['insertAbove'],
+				'insertBelow' => $this->settings['listView']['insertBelow'],
+				'maxPages' => $this->settings['listView']['maxPages']
 		);
 		$this->view->assign('pagerConfig', $pagerConfig);
 	}
@@ -496,6 +497,7 @@ class PostController extends AbstractController {
 			$extensionName = $this->request->getControllerExtensionName();
 			$newComment['title'] = LocalizationUtility::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
 		}
+
 		return $newComment;
 	}
 
@@ -545,6 +547,7 @@ class PostController extends AbstractController {
 		if ($this->settings['comments']['allowComments'] == 0) {
 			$allowComments = FALSE;
 		}
+
 		return $allowComments;
 	}
 
@@ -561,6 +564,7 @@ class PostController extends AbstractController {
 				$breadCrumb[1] = $posts[$key + 1];
 			}
 		}
+
 		return $breadCrumb;
 	}
 
@@ -568,7 +572,11 @@ class PostController extends AbstractController {
 	 * @param Post $post
 	 */
 	protected function updateViews(Post $post) {
-		if (!$GLOBALS['BE_USER']->user['uid']) {
+		$useragent = strtolower(GeneralUtility::getIndpEnv('HTTP_USER_AGENT'));
+		if (!$GLOBALS['BE_USER']->user['uid'] &&
+				isset($useragent) &&
+				!preg_match('/bot|crawl|slurp|spider/i', $useragent)
+		) {
 			$currentViews = $post->getViews();
 			$post->setViews($currentViews + 1);
 			$this->postRepository->update($post);
@@ -589,6 +597,7 @@ class PostController extends AbstractController {
 			}
 		}
 		$description = strip_tags($description);
+
 		return $description;
 	}
 
@@ -612,6 +621,7 @@ class PostController extends AbstractController {
 				}
 			}
 		}
+
 		return $subCategories;
 	}
 }

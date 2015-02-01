@@ -31,290 +31,322 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * Model for Posts
  */
-class Post extends AbstractEntity {
+class Post extends AbstractEntity
+{
 
-	/**
-	 * Title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title;
+    /**
+     * Title
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $title;
 
-	/**
-	 * hidden
-	 *
-	 * @var string
-	 */
-	protected $hidden;
+    /**
+     * hidden
+     *
+     * @var string
+     */
+    protected $hidden;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
-	 */
-	protected $author;
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
+     */
+    protected $author;
 
-	/**
-	 * Teaserlink
-	 *
-	 * @var string $teaserLink
-	 */
-	protected $teaserLink;
+    /**
+     * Teaserlink
+     *
+     * @var string $teaserLink
+     */
+    protected $teaserLink;
 
-	/**
-	 * Teaserlink Title
-	 *
-	 * @var string $teaserLinkTitle
-	 */
-	protected $teaserLinkTitle;
+    /**
+     * Teaserlink Title
+     *
+     * @var string $teaserLinkTitle
+     */
+    protected $teaserLinkTitle;
 
-	/**
-	 * Tags
-	 *
-	 * @var string $tags
-	 */
-	protected $tags;
+    /**
+     * Tags
+     *
+     * @var string $tags
+     */
+    protected $tags;
 
-	/**
-	 * start date
-	 *
-	 * @var DateTime $date
-	 */
-	protected $date;
+    /**
+     * start date
+     *
+     * @var DateTime $date
+     */
+    protected $date;
 
-	/**
-	 * archive date
-	 *
-	 * @var DateTime $archive
-	 */
-	protected $archive;
+    /**
+     * archive date
+     *
+     * @var DateTime $archive
+     */
+    protected $archive;
 
-	/**
-	 * CE Element
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
-	 */
-	protected $content;
+    /**
+     * CE Element
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
+     */
+    protected $content;
 
-	/**
-	 * allow Comments
-	 *
-	 * @var string $allowComments
-	 */
-	protected $allowComments;
+    /**
+     * allow Comments
+     *
+     * @var string $allowComments
+     */
+    protected $allowComments;
 
-	/**
-	 * Teaser Options
-	 *
-	 * @var integer
-	 */
-	protected $teaserOptions;
+    /**
+     * Teaser Options
+     *
+     * @var integer
+     */
+    protected $teaserOptions;
 
-	/**
-	 * Teaser description
-	 *
-	 * @var string
-	 */
-	protected $teaserDescription;
+    /**
+     * Teaser description
+     *
+     * @var string
+     */
+    protected $teaserDescription;
 
-	/**
-	 * Teaser image
-	 *
-	 * @var array
-	 */
-	protected $teaserImage;
+    /**
+     * Teaser image
+     *
+     * @var array
+     */
+    protected $teaserImage;
 
-	/**
-	 * number of views
-	 *
-	 * @var integer $views
-	 */
-	protected $views;
+    /**
+     * number of views
+     *
+     * @var integer $views
+     */
+    protected $views;
 
-	/**
-	 * categories
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
-	 * @lazy
-	 */
-	protected $categories;
+    /**
+     * categories
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
+     * @lazy
+     */
+    protected $categories;
 
-	/**
-	 * related post
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
-	 */
-	protected $relatedPosts;
+    /**
+     * related post
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
+     */
+    protected $relatedPosts;
 
-	/**
-	 * post comments
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
-	 */
-	protected $comments;
+    /**
+     * post comments
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
+     */
+    protected $comments;
 
-	/**
-	 *
-	 * @var integer
-	 */
-	protected $detailUid;
+    /**
+     *
+     * @var integer
+     */
+    protected $detailUid;
 
-	/**
-	 *
-	 * @var string
-	 */
-	protected $blogName;
+    /**
+     *
+     * @var string
+     */
+    protected $blogName;
 
-	public function getTitle() {
-		return $this->title;
-	}
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	public function getHidden() {
-		return $this->hidden;
-	}
+    public function getHidden()
+    {
+        return $this->hidden;
+    }
 
-	public function getTeaserLink() {
-		$link = explode(' ', $this->teaserLink);
-		if (count($link) == 1) {
-			$link['link'] = $link[0];
-		} else {
-			$link['link'] = $link[0];
-			$link['target'] = $link[1];
-		}
-		return $link;
-	}
+    public function getTeaserLink()
+    {
+        $link = explode(' ', $this->teaserLink);
+        if (count($link) == 1) {
+            $link['link'] = $link[0];
+        } else {
+            $link['link'] = $link[0];
+            $link['target'] = $link[1];
+        }
+        return $link;
+    }
 
-	public function getTeaserLinkTitle() {
-		return $this->teaserLinkTitle;
-	}
+    public function getTeaserLinkTitle()
+    {
+        return $this->teaserLinkTitle;
+    }
 
-	public function getDate() {
-		return $this->date;
-	}
+    public function getDate()
+    {
+        return $this->date;
+    }
 
-	public function getArchive() {
-		return $this->archive;
-	}
+    public function getArchive()
+    {
+        return $this->archive;
+    }
 
-	public function getTags() {
-		return $this->tags;
-	}
+    public function getTags()
+    {
+        return $this->tags;
+    }
 
-	public function getAllowComments() {
-		return $this->allowComments;
-	}
+    public function getAllowComments()
+    {
+        return $this->allowComments;
+    }
 
-	public function getTeaserOptions() {
-		return $this->teaserOptions;
-	}
+    public function getTeaserOptions()
+    {
+        return $this->teaserOptions;
+    }
 
-	public function getTeaserDescription() {
-		return $this->teaserDescription;
-	}
+    public function getTeaserDescription()
+    {
+        return $this->teaserDescription;
+    }
 
-	/**
-	 * get teaser image
-	 *
-	 * @return string void
-	 */
-	public function getTeaserImage() {
-		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
-		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'tx_efblog_domain_model_post_teaser_image', $this->getUid());
+    /**
+     * get teaser image
+     *
+     * @return string void
+     */
+    public function getTeaserImage()
+    {
+        $fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+        $fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'tx_efblog_domain_model_post_teaser_image', $this->getUid());
 
-		$files = array();
-		foreach ($fileObjects as $file) {
-			$original = $file->getOriginalFile()->getProperties();
-			$reference = $file->getReferenceProperties();
+        $files = array();
+        foreach ($fileObjects as $file) {
+            $original = $file->getOriginalFile()->getProperties();
+            $reference = $file->getReferenceProperties();
 
-			$title = $reference['title'];
-			if (!$title) {
-				$title = $original['title'];
-			}
+            $title = $reference['title'];
+            if (!$title) {
+                $title = $original['title'];
+            }
 
-			$description = $reference['description'];
-			if (!description) {
-				$description = $original['description'];
-			}
+            $description = $reference['description'];
+            if (!description) {
+                $description = $original['description'];
+            }
 
-			$files[] = array(
-				'title' => $title,
-				'description' => $description,
-				'publicUrl' => $file->getPublicUrl(TRUE)
-			);
-		}
+            $files[] = array(
+                'title' => $title,
+                'description' => $description,
+                'publicUrl' => $file->getPublicUrl(TRUE)
+            );
+        }
 
-		return $files;
-	}
+        return $files;
+    }
 
-	/**
-	 * Returns the views
-	 *
-	 * @return integer $views
-	 */
-	public function getViews() {
-		return $this->views;
-	}
+    /**
+     * Returns the views
+     *
+     * @return integer $views
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
 
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
+    /**
+     * @param int $views
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+    }
 
-	/**
-	 * Returns the relatedPosts
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
-	 */
-	public function getRelatedPosts() {
-		return $this->relatedPosts;
-	}
 
-	/**
-	 * Returns the comments
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
-	 */
-	public function getComments() {
-		return $this->comments;
-	}
+    /**
+     * Returns the categories
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Category> $categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 
-	/**
-	 * Returns the content
-	 *
-	 * @return integer $content
-	 */
-	public function getContent() {
-		return $this->content;
-	}
+    /**
+     * Returns the relatedPosts
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Post> $relatedPosts
+     */
+    public function getRelatedPosts()
+    {
+        return $this->relatedPosts;
+    }
 
-	public function getDetailUid() {
-		return $this->detailUid;
-	}
+    /**
+     * Returns the comments
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 
-	public function getBlogName() {
-		return $this->blogName;
-	}
+    /**
+     * Returns the content
+     *
+     * @return integer $content
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
-	 */
-	public function getAuthor() {
-		return $this->author;
-	}
+    public function getDetailUid()
+    {
+        return $this->detailUid;
+    }
 
-	//Helper
-	public function getYearOf() {
-		return $this->date->format('Y');
-	}
+    public function getBlogName()
+    {
+        return $this->blogName;
+    }
 
-	public function getMonthOf() {
-		return $this->date->format('m');
-	}
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Administrator> $author
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
-	public function getDayOf() {
-		return $this->date->format('d');
-	}
+    //Helper
+    public function getYearOf()
+    {
+        return $this->date->format('Y');
+    }
+
+    public function getMonthOf()
+    {
+        return $this->date->format('m');
+    }
+
+    public function getDayOf()
+    {
+        return $this->date->format('d');
+    }
 }
