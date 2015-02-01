@@ -62,7 +62,7 @@
             <label index="error.code.1238108068">The given &lt;strong&gt;%s&lt;/strong&gt; is too short</label>
             <label index="error.code.1238108069">The given &lt;strong&gt;%s&lt;/strong&gt; is too long</label>
             <label index="error.errorsOccurred">Following errors occurred</label>
-            <label index="link_backTo">&lt;&lt; back</label>
+            <label index="link_backTo">back</label>
             <label index="list_archive_result">Result for</label>
             <label index="list_archive_results">Results for</label>
             <label index="list_category_result">Result for Category:</label>
@@ -77,7 +77,7 @@
             <label index="property_comment">Comment</label>
             <label index="property_email">E-Mail</label>
             <label index="read_more">more</label>
-            <label index="teaser_more">…&lt;br /&gt;            </label>
+            <label index="teaser_more">…</label>
             <label index="view_search_result">Result for</label>
             <label index="view_search_results">Results for</label>
             <label index="widget.pagination.first">first</label>
@@ -85,17 +85,17 @@
             <label index="widget.pagination.next">next</label>
             <label index="widget.pagination.previous">previous</label>
             <label index="widget_category_header">Categories</label>
-            <label index="widget_category_more">…&lt;br /&gt;</label>
+            <label index="widget_category_more">…</label>
             <label index="widget_dateMenu_header">by Date</label>
             <label index="widget_dateMenu_item">Item</label>
             <label index="widget_dateMenu_items">Items</label>
             <label index="widget_latestComments_header">Latest Comments</label>
-            <label index="widget_latestComments_more">…&lt;br /&gt;</label>
+            <label index="widget_latestComments_more">…</label>
             <label index="widget_latestPosts_header">Latest Posts</label>
-            <label index="widget_latestPosts_more">…&lt;br /&gt;</label>
+            <label index="widget_latestPosts_more">…</label>
             <label index="widget_search_header">Search Post</label>
             <label index="widget_views_header">Most Views</label>
-            <label index="widget_views_more">…&lt;br /&gt;</label>
+            <label index="widget_views_more">…</label>
         </languageKey>
         <languageKey index="af"></languageKey>
         <languageKey index="ar"></languageKey>
