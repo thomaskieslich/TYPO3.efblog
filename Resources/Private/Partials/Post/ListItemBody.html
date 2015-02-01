@@ -1,28 +1,89 @@
 <div class="tx-efblog-list-body">
-		<f:for each="{post.content}" as="element" iteration="elementIterator">
-			<f:if condition="{elementIterator.cycle} == 1">
-				<f:if condition="{element.ctype} != {settings.detailView.divType}">
-					<f:then>
-						<f:if condition="{post.teaserOptions} < 2">
-							<f:then>
-								<f:render partial="Post/ListElement" arguments="{post : post, count : 1}"/>
-							</f:then>
-							<f:else>
-								<f:render partial="Post/ListRawElement" arguments="{post : post, count : 1}"/>
-							</f:else>
-						</f:if>
-					</f:then>
-					<f:else>
-						<f:if condition="{post.teaserOptions} < 2">
-							<f:then>
-								<f:render partial="Post/ListElement" arguments="{post : post, count : 2, dam : dam}"/>
-							</f:then>
-							<f:else>
-								<f:render partial="Post/ListRawElement" arguments="{post : post, count : 2}"/>
-							</f:else>
-						</f:if>
-					</f:else>
-				</f:if>
+
+	<f:switch expression="{post.teaserOptions}">
+		<f:case value="0">
+			<f:if condition="{post.teaserImage}">
+				<f:render section="image" arguments="{post: post}"/>
 			</f:if>
-		</f:for>
-	</div>
+			<div class="tx-efblog-list-text">
+				<f:render section="title" arguments="{post: post}"/>
+			</div>
+		</f:case>
+
+		<f:case value="1">
+			<f:if condition="{post.teaserImage}">
+				<f:render section="image" arguments="{post: post}"/>
+			</f:if>
+			<div class="tx-efblog-list-text">
+				<f:render section="title" arguments="{post: post}"/>
+				<f:render section="teaser" arguments="{post: post}"/>
+			</div>
+		</f:case>
+
+		<f:case value="2">
+			<f:render section="title" arguments="{post: post}"/>
+			<f:if condition="{post.content.0.ctype} != {settings.detailView.divType}">
+				<f:then>
+					<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.0}"/>
+				</f:then>
+				<f:else>
+					<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.1}"/>
+				</f:else>
+			</f:if>
+		</f:case>
+
+		<f:case value="3">
+			<f:render section="title" arguments="{post: post}"/>
+			<f:for each="{post.content}" as="element">
+				<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}"/>
+			</f:for>
+		</f:case>
+		<f:case default="TRUE">
+			<f:if condition="{post.teaserImage}">
+				<f:render section="image" arguments="{post: post}"/>
+			</f:if>
+			<div class="tx-efblog-list-text">
+				<f:render section="title" arguments="{post: post}"/>
+				<f:render section="teaser" arguments="{post: post}"/>
+			</div>
+		</f:case>
+	</f:switch>
+
+	<f:section name="title">
+		<h2>{post.title -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}</h2>
+	</f:section>
+
+	<f:section name="image">
+		<div class="tx-efblog-list-images">
+			<!-- Post Image-->
+			<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+				<f:if condition="{post.teaserImage}">
+					<f:if condition="{image}">
+						<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
+							<div class="tx-efblog-list-imagerow">
+								{f:image(src: "{image.publicUrl}", alt: "{post.title}", width:"{settings.listView.imageWidth}",
+								height: "{settings.listView.imageHeight}")
+								-> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid: '{settings.detailUid}')}
+							</div>
+						</f:if>
+					</f:if>
+				</f:if>
+			</f:for>
+		</div>
+	</f:section>
+
+	<f:section name="teaser">
+		<f:if condition="{post.content.0.ctype} != {settings.detailView.divType}">
+			<f:then>
+				{post.content.0.bodytext -> f:format.html() ->
+				f:format.crop(maxCharacters: '{settings.listView.cropText}',
+				append: '{f:translate(key : "teaser_more")}')}
+			</f:then>
+			<f:else>
+				{post.content.1.bodytext -> f:format.html() ->
+				f:format.crop(maxCharacters: '{settings.listView.cropText}',
+				append: '{f:translate(key : "teaser_more")}')}
+			</f:else>
+		</f:if>
+	</f:section>
+</div>
