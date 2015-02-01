@@ -31,15 +31,10 @@ $(function () {
 		var pattern = /bot|spider/;
 
 		if (!pattern.test(agent)) {
-			console.log($.cookie('txEfblogPostCount'));
 			$.cookie('txEfblogPostCount', postUid, {
 				expires: 1,
 				secure: false
 			});
-
-			console.log($.cookie('txEfblogPostCount'));
-			console.log(postUid);
-
 		}
 	}
 
