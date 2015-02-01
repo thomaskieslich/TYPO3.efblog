@@ -43,8 +43,8 @@ class DescriptionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 	public function render() {
 		$renderedContent = $this->renderChildren();
 		if ($renderedContent) {
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = NULL;
-			$GLOBALS['TSFE']->pSetup['meta.']['description.'] = $renderedContent;
+			$GLOBALS['TSFE']->pSetup['meta.']['description'] = NULL;
+			$GLOBALS['TSFE']->getPageRenderer()->addMetaTag('<meta name="description" content="' . $renderedContent . '">');
 		}
 	}
 }
