@@ -247,9 +247,10 @@ txefblogAjax {
 	typeNum = 6661
 	10 = USER
 	10 {
-		userFunc = tx_extbase_core_bootstrap->run
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Fe1
 		extensionName = Efblog
+		vendorName = ThomasKieslich
 	}
 	config {
 		disableAllHeaderCode = 1
@@ -267,9 +268,10 @@ postRss {
 	typeNum = 100
 	10 = USER
 	10 {
-		userFunc = tx_extbase_core_bootstrap->run
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Fe1
 		extensionName = Efblog
+		vendorName = ThomasKieslich
 		switchableControllerActions {
 			Post {
 				1 = postRss
@@ -293,9 +295,10 @@ commentsRss {
 	typeNum = 101
 	10 = USER
 	10 {
-		userFunc = tx_extbase_core_bootstrap->run
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Fe1
 		extensionName = Efblog
+		vendorName = ThomasKieslich
 		switchableControllerActions {
 			Post {
 				1 = commentsRss
@@ -320,9 +323,10 @@ combinedRss {
 	typeNum = 102
 	10 = USER
 	10 {
-		userFunc = tx_extbase_core_bootstrap->run
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		pluginName = Fe1
 		extensionName = Efblog
+		vendorName = ThomasKieslich
 		switchableControllerActions {
 			Post {
 				1 = combinedRss
