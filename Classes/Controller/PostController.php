@@ -108,8 +108,8 @@ class PostController extends AbstractController {
 			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
 			$this->view->assign('comments', $commentRepository->findMainComments($post));
 
-//			$allowComments = $this->checkAllowComments($post);
-//			$this->view->assign('allowComments', $allowComments);
+			$allowComments = $this->checkAllowComments($post);
+			$this->view->assign('allowComments', $allowComments);
 
 //			if (!$newComment && $allowComments) {
 //				$this->view->assign('newComment', $this->prefillCommentForm());
