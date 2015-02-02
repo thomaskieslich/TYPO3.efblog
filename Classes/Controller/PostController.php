@@ -596,8 +596,13 @@ class PostController extends AbstractController {
 				}
 			}
 		}
-		$sentence = preg_replace('/(.*?[?!.](?=\s|$)).*/', '\\1', $description);
-		$description = strip_tags($sentence);
+		$end = '.?!';
+		preg_match('/^[^{$end}]+[{$end}]/', $description, $sentence);
+		if (empty($sentence)) {
+			$description = strip_tags($description);
+		} else {
+			$description = strip_tags($sentence[0]);
+		}
 
 		return $description;
 	}
