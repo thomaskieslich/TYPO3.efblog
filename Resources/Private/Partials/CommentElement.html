@@ -3,28 +3,38 @@
 	<div class="gravatar">
 		<f:if condition="{comment.avatar}">
 			<f:then>
-				{f:if(condition: '{comment.website}',
-				then: "{f:image(src: 'uploads/pics/{comment.avatar}', alt: '{comment.author}', width: '{settings.comments.gravatarSize}', height: '{settings.comments.gravatarSize}')
-				-> f:link.external(uri: '{comment.website}', target: '_blank')}",
-				else: "{f:image(src: 'uploads/pics/{comment.avatar}', alt: '{comment.author}', width: '{settings.comments.gravatarSize}', height: '{settings.comments.gravatarSize}')}"                                
-				)}
+				<f:if condition="{comment.website}">
+					<f:then>
+						<f:link.external uri="{comment.website}" target="_blank">
+							<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}" height="{settings.comments.gravatarSize}" class="tx-efblog-gravatar" />
+						</f:link.external>
+					</f:then>
+					<f:else>
+						<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}" height="{settings.comments.gravatarSize}" class="tx-efblog-gravatar" />
+					</f:else>
+				</f:if>
 			</f:then>
 			<f:else>
-				{f:if(condition: '{comment.website}',
-				then: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-efblog-gravatar')
-				-> f:link.external(uri: '{comment.website}', target: '_blank')}",
-				else: "{tk:gravatar(emailAddress: '{comment.email}', defaultImageUri: '{settings.comments.defaultGravatar}', size: '{settings.comments.gravatarSize}', class: 'tx-efblog-gravatar')}"                                
-				)}
+				<f:if condition="{comment.website}">
+					<f:then>
+						<f:link.external uri="{comment.website}" target="_blank">
+							<tk.garavatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}" class="tx-efblog-gravatar"/>
+						</f:link.external>
+					</f:then>
+					<f:else>
+						<tk.garavatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}" class="tx-efblog-gravatar"/>
+					</f:else>
+				</f:if>
 			</f:else>
 		</f:if>
 
 	</div>
 	<div class="number">
-		<a name="comment_{comment.uid}">#{comIterator.cycle}</a>		
+		<a name="comment_{comment.uid}">#{comIterator.cycle}</a>
 	</div>
 	<div class="author">
-		{f:if(condition: '{comment.website}', 
-		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}", 
+		{f:if(condition: '{comment.website}',
+		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}",
 		else: '{comment.author}')}
 		<!--{f:if(condition : '{comment.email} == {post.authors}', then : "{f:translate(key : 'comments_author')}")}email-->
 		{f:translate(key : 'comments_wrote')}
@@ -38,5 +48,5 @@
 <div class="comment">
 	{f:if(condition: '{comment.title}',
 	then: "<h1>{comment.title}</h1>")}
-	{comment.message -> f:format.html()}	
+	{comment.message -> f:format.html()}
 </div>
