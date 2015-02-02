@@ -51,6 +51,7 @@
 			<label index="post_comments">Kommentare</label>
 			<label index="post_content">Inhaltselemente</label>
 			<label index="post_date">Datum &amp; Uhrzeit</label>
+			<label index="post_description">Meta Beschreibung(description)</label>
 			<label index="post_palette_access">Zugriffsrechte</label>
 			<label index="post_palette_category">Kategorie</label>
 			<label index="post_palette_content">Inhalt</label>
@@ -63,8 +64,7 @@
 			<label index="post_tab_post">Post</label>
 			<label index="post_tab_relations">Beziehungen</label>
 			<label index="post_tab_teaser">Teaser</label>
-			<label index="post_tags">Tags (durch Komma getrennt)</label>
-			<label index="post_teaserDescription">Meta Beschreibung(description)</label>
+			<label index="post_tags">Meta Keywords (durch Komma getrennt)</label>
 			<label index="post_teaserLink">Teaserlink</label>
 			<label index="post_teaserLink_title">Teaserlink Titel</label>
 			<label index="post_teaser_image">Teaser Bilder</label>

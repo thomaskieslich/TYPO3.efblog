@@ -372,7 +372,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 						'showitem' => '
 						categories;' . $ll . 'post_category,--linebreak--,
 						tags;' . $ll . 'post_tags,--linebreak--,
-						teaser_description;' . $ll . 'post_teaserDescription,--linebreak--,
+						teaser_description;' . $ll . 'post_description
 				'
 				),
 				'relations' => array(
@@ -381,7 +381,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 						related_from;' . $ll . 'post_related_post_from, --linebreak--,
 						comments;' . $ll . 'post_comments, --linebreak--,
 						allow_comments;' . $ll . 'post_allow_comments, --linebreak--,
-						views;' . $ll . 'post_views,
+						views;' . $ll . 'post_views
 				'
 				),
 				'access' => array(
@@ -389,7 +389,7 @@ $TCA['tx_efblog_domain_model_post'] = array(
 						hidden;' . $ll . 'hidden,
 						date;' . $ll . 'post_date,
 						archive;' . $ll . 'post_archive, --linebreak--,
-						fe_group;' . $ll . 'post_access,
+						fe_group;' . $ll . 'post_access
 				'
 				),
 		),
