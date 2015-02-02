@@ -595,14 +595,14 @@ class PostController extends AbstractController {
 					$singleCounter++;
 				}
 			}
+			$end = '.?!';
+			preg_match("/^[^{$end}]+[{$end}]/", $description, $sentence);
+			if ($sentence[0]) {
+				$description = strip_tags($sentence[0]);
+			}
 		}
-		$end = '.?!';
-		preg_match('/^[^{$end}]+[{$end}]/', $description, $sentence);
-		if (empty($sentence)) {
-			$description = strip_tags($description);
-		} else {
-			$description = strip_tags($sentence[0]);
-		}
+
+		$description = strip_tags($description);
 
 		return $description;
 	}
