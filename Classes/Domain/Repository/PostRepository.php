@@ -36,18 +36,24 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class PostRepository extends Repository {
 
+	/**
+	 * find posts by Settings
+	 *
+	 * @param $settings
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function findPosts($settings) {
 		$query = $this->createQuery();
 
 		$constraints = $this->createConstraintsFromSettings($query, $settings);
 		if ($constraints) {
 			$query->matching(
-				$query->logicalAnd($constraints)
+					$query->logicalAnd($constraints)
 			);
 		}
 
 		//Ordering
-		if ($orderings = $this->createOrderingsfromSettings($settings)) {
+		if (($orderings = $this->createOrderingsfromSettings($settings))) {
 			$query->setOrderings($orderings);
 		}
 
@@ -130,13 +136,14 @@ class PostRepository extends Repository {
 
 		if ($settings['year'] || $settings['month'] || $settings['day']) {
 			$dateConstraints[] = $query->logicalAnd(
-				$query->greaterThanOrEqual('date', $start), $query->lessThanOrEqual('date', $stop)
+					$query->greaterThanOrEqual('date', $start), $query->lessThanOrEqual('date', $stop)
 			);
 		}
 
 		if ($dateConstraints) {
 			$constraints = $query->logicalAnd($dateConstraints);
 		}
+
 		return $constraints;
 	}
 
@@ -161,15 +168,14 @@ class PostRepository extends Repository {
 			} elseif ($archiveMode == 'active') {
 				$archiveConstraints[] = $query->greaterThanOrEqual('date', $archiveDate);
 			}
-		} // archived
-		else {
+		} else {
 			if ($archiveMode == 'archived') {
 				$archiveConstraints[] = $query->logicalAnd(
-					$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
+						$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
 				);
 			} elseif ($archiveMode == 'active') {
 				$archiveConstraints[] = $query->logicalOr(
-					$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
+						$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
 				);
 			}
 		}
@@ -177,9 +183,17 @@ class PostRepository extends Repository {
 		if ($archiveConstraints) {
 			$constraints = $query->logicalAnd($archiveConstraints);
 		}
+
 		return $constraints;
 	}
 
+	/**
+	 * categorie constraints
+	 *
+	 * @param QueryInterface $query
+	 * @param $settings
+	 * @return null|object|\TYPO3\CMS\Extbase\Persistence\Generic\Qom\NotInterface
+	 */
 	protected function createCategoryConstraint(QueryInterface $query, $settings) {
 		$constraint = NULL;
 		$categories = NULL;
@@ -215,6 +229,13 @@ class PostRepository extends Repository {
 		return $constraint;
 	}
 
+	/**
+	 * search constraints
+	 *
+	 * @param QueryInterface $query
+	 * @param $settings
+	 * @return null|object
+	 */
 	protected function createSearchConstraint(QueryInterface $query, $settings) {
 
 		$constraint = NULL;
@@ -228,9 +249,16 @@ class PostRepository extends Repository {
 			}
 		}
 		$constraint = $query->logicalOr($searchConstraints);
+
 		return $constraint;
 	}
 
+	/**
+	 * ordering constraints
+	 *
+	 * @param $settings
+	 * @return array
+	 */
 	protected function createOrderingsfromSettings($settings) {
 		$orderings = array();
 		$orderList = GeneralUtility::trimExplode(',', $settings['listView']['orderBy'], TRUE);
@@ -240,21 +268,23 @@ class PostRepository extends Repository {
 			foreach ($orderList as $orderNum => $orderItem) {
 				if ($sortList[$orderNum]) {
 					$orderings[$orderItem] = ((strtolower($sortList[$orderNum]) == 'desc') ?
-						QueryInterface::ORDER_DESCENDING :
-						QueryInterface::ORDER_ASCENDING);
+							QueryInterface::ORDER_DESCENDING :
+							QueryInterface::ORDER_ASCENDING);
 				} else {
 					$orderings[$orderItem] = QueryInterface::ORDER_ASCENDING;
 				}
 			}
 		}
+
 		return $orderings;
 	}
 
 	public function countCategoryPosts(Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
-			$query->contains('categories', $category)
+				$query->contains('categories', $category)
 		);
+
 		return $query->execute();
 	}
 
@@ -271,7 +301,7 @@ class PostRepository extends Repository {
 			}
 		}
 		$query->matching(
-			$query->logicalOr($constraints)
+				$query->logicalOr($constraints)
 		);
 
 		return $query->execute();
