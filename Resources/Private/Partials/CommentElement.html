@@ -36,9 +36,8 @@
 		{f:if(condition: '{comment.website}',
 		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}",
 		else: '{comment.author}')}
-		<!--{f:if(condition : '{comment.email} == {post.authors}', then : "{f:translate(key : 'comments_author')}")}email-->
 		{f:translate(key : 'comments_wrote')}
-		{comment.date -> f:format.date(format:'d.m.Y, h:m')}
+		{comment.date -> f:format.date(format:'d.m.Y, H:m')}
 		{f:if(condition: '{comment.location}',
 		then: "<br>{f:translate(key : 'comments_from')} {comment.location}")}
 		{f:if(condition: '{isMainComment}',
@@ -47,6 +46,6 @@
 </div>
 <div class="comment">
 	{f:if(condition: '{comment.title}',
-	then: "<h1>{comment.title}</h1>")}
+	then: "<h2>{comment.title}</h2>")}
 	{comment.message -> f:format.html()}
 </div>
