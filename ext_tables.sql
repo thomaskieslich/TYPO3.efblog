@@ -17,7 +17,8 @@ CREATE TABLE tx_efblog_domain_model_post (
 	views int(11) DEFAULT '0' NOT NULL,
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
 	related_posts int(11) unsigned DEFAULT '0' NOT NULL,
-    comments int(11) unsigned DEFAULT '0' NOT NULL,
+	related_from int(11) unsigned DEFAULT '0' NOT NULL,
+	comments int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -67,7 +68,7 @@ CREATE TABLE tx_efblog_post_post_mm (
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	tablenames varchar(255) DEFAULT '' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-
+	sorting_foreign int(11) DEFAULT '0' NOT NULL,
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
