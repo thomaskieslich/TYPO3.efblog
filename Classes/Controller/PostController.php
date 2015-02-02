@@ -26,7 +26,6 @@ namespace ThomasKieslich\Efblog\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use ThomasKieslich\Efblog\Domain\Model\Comment;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -80,8 +79,7 @@ class PostController extends AbstractController {
 	/**
 	 * post detail
 	 *
-	 * @param Post $post
-	 * @param Comment $newComment
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 * @return void
 	 */
 	public function detailAction(Post $post = NULL) {
@@ -110,12 +108,6 @@ class PostController extends AbstractController {
 
 			$allowComments = $this->checkAllowComments($post);
 			$this->view->assign('allowComments', $allowComments);
-
-//			if (!$newComment && $allowComments) {
-//				$this->view->assign('newComment', $this->prefillCommentForm());
-//			} elseif ($allowComments) {
-//				$this->view->assign('newComment', $newComment);
-//			}
 
 			//Update Views
 			$views = $this->updateViews($post);
@@ -175,12 +167,16 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * show calendar
+	 *
 	 * @return void
 	 */
 	public function calendarViewAction() {
 	}
 
 	/**
+	 * show day
+	 *
 	 * @return string
 	 */
 	public function ajaxCalendarDayAction() {
@@ -235,6 +231,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * show month
+	 *
 	 * @return string
 	 */
 	public function ajaxCalendarMonthAction() {
@@ -358,6 +356,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * get post RSS
+	 *
 	 * @return void
 	 */
 	public function postRssAction() {
@@ -397,6 +397,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * get combined RSS
+	 *
 	 * @return void
 	 */
 	public function combinedRssAction() {
@@ -455,6 +457,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * get comments RSS
+	 *
 	 * @return void
 	 */
 	public function commentsRssAction() {
@@ -481,6 +485,10 @@ class PostController extends AbstractController {
 		}
 	}
 
+	/**
+	 * @return string
+	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+	 */
 	protected function prefillCommentForm() {
 		$newComment = '';
 		if ($GLOBALS['TSFE']->loginUser) {
@@ -502,6 +510,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * check comments allowed
+	 *
 	 * @param $post
 	 * @return bool
 	 */
@@ -552,6 +562,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * create Breadcrumb
+	 *
 	 * @param $post
 	 * @return array
 	 */
@@ -569,7 +581,9 @@ class PostController extends AbstractController {
 	}
 
 	/**
-	 * @param Post $post
+	 * update Post views
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 */
 	protected function updateViews(Post $post) {
 		$useragent = strtolower(GeneralUtility::getIndpEnv('HTTP_USER_AGENT'));
@@ -583,6 +597,13 @@ class PostController extends AbstractController {
 		}
 	}
 
+	/**
+	 * create short description
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Content $content
+	 * @return string
+	 */
 	protected function createDescription($post, $content) {
 		$description = '';
 		if ($post->getTeaserDescription()) {
@@ -608,6 +629,8 @@ class PostController extends AbstractController {
 	}
 
 	/**
+	 * find Sub categories
+	 *
 	 * @param $category
 	 * @param $categoryRepository
 	 * @return string
