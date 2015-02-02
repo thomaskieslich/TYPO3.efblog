@@ -69,11 +69,11 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper {
 	 * @return string The rendered image tag
 	 */
 	public function render($emailAddress, $size = NULL, $defaultImageUri = NULL) {
-		$gravatarUri = 'http://www.gravatar.com/avatar/' . md5($emailAddress);
+		$gravatarUri = 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($emailAddress)));
 		$baseUri = $GLOBALS['TSFE']->config['config']['baseURL'];
 		$uriParts = array();
 		if ($defaultImageUri !== NULL) {
-			$uriParts[] = 'd=' . $baseUri . urlencode($defaultImageUri);
+			$uriParts[] = 'd=' . urlencode($baseUri . $defaultImageUri);
 		}
 		if ($size !== NULL) {
 			$uriParts[] = 's=' . urlencode($size);
