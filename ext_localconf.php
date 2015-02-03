@@ -12,6 +12,7 @@ if (!defined('TYPO3_MODE')) {
 		'Comment' => 'create',
 	),
 	array(
-		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay'
+		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay',
+		'Comment' => 'create',
 	)
 );

@@ -12,17 +12,17 @@
 	</p>
 
 	<div class="tx-efblog-comments-list">
-		<f:for each="{post.comments}" as="comment" iteration="comIterator">
-			<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
-				<div class="item {row}" id="comment_{comment.uid}">
-					<f:render partial="CommentElement" arguments="{comment : comment, comIterator : comIterator, isMainComment : 1 post : post}"/>
-					<f:for each="{comment.children}" as="child">
-						<div style="margin-left: 50px">
-							<f:render partial="CommentElement" arguments="{comment: child, comIterator:comIterator, post : post}"/>
+		<f:for each="{comments}" as="comment" iteration="comIterator">
+			<div class="item odd" id="comment_{comment.uid}">
+				<f:render partial="CommentElement" arguments="{comment : comment.main, comIterator : comIterator, isMainComment : 1, post : post, allowComments: allowComments}"/>
+				<f:if condition="{comment.childs}">
+					<f:for each="{comment.childs}" as="answer" iteration="answerIterator">
+						<div class="answers">
+							<f:render partial="CommentElement" arguments="{comment : answer, comIterator : comIterator, isMainComment : 0, post : post}"/>
 						</div>
 					</f:for>
-				</div>
-			</f:cycle>
+				</f:if>
+			</div>
 		</f:for>
 	</div>
 </div>

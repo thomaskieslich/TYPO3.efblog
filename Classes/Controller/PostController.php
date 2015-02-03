@@ -29,13 +29,20 @@ namespace ThomasKieslich\Efblog\Controller;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller for the Post object
  */
-class PostController extends AbstractController {
+class PostController extends ActionController {
+
+	/**
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\CommentRepository
+	 * @inject
+	 */
+	protected $commentRepository;
 
 	/**
 	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
@@ -102,12 +109,11 @@ class PostController extends AbstractController {
 			$this->view->assign('post', $post);
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
 
-			//get Main Comments
-			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
-			$this->view->assign('comments', $commentRepository->findMainComments($post));
-
 			$allowComments = $this->checkAllowComments($post);
 			$this->view->assign('allowComments', $allowComments);
+
+			$comments = $this->orderComments($post);
+			$this->view->assign('comments', $comments);
 
 			//Update Views
 			$views = $this->updateViews($post);
@@ -486,27 +492,21 @@ class PostController extends AbstractController {
 	}
 
 	/**
-	 * @return string
-	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+	 * @param $comments
 	 */
-	protected function prefillCommentForm() {
-		$newComment = '';
-		if ($GLOBALS['TSFE']->loginUser) {
-			$newComment['author'] = $GLOBALS['TSFE']->fe_user->user['name'];
-			$newComment['email'] = $GLOBALS['TSFE']->fe_user->user['email'];
-			$newComment['website'] = $GLOBALS['TSFE']->fe_user->user['www'];
+	protected function orderComments($post) {
+		$comments = array();
+		$mainComments = $this->commentRepository->findMainComments($post)->toArray();
+
+		foreach ($mainComments as $key => $mainComment) {
+			$childs = $this->commentRepository->findAllChildren($mainComment)->toArray();
+			$comments[$key]['main'] = $mainComment;
+			if ($childs) {
+				$comments[$key]['childs'] = $childs;
+			}
 		}
 
-		$request = $this->request->getArguments();
-		if ($request['parentComment'] != '') {
-			$newComment['parentComment'] = $this->request->getArgument('parentComment');
-			$commentRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
-			$parentComment = $commentRepository->findByUid((int)$newComment['parentComment']);
-			$extensionName = $this->request->getControllerExtensionName();
-			$newComment['title'] = LocalizationUtility::translate('comments_reply_prefix', $extensionName) . $parentComment->getTitle();
-		}
-
-		return $newComment;
+		return $comments;
 	}
 
 	/**

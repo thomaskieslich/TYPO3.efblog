@@ -26,10 +26,12 @@ namespace ThomasKieslich\Efblog\Controller;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
  * Controller for the Category object
  */
-class CategoryController extends AbstractController {
+class CategoryController extends ActionController {
 
 	/**
 	 * @var \ThomasKieslich\Efblog\Domain\Repository\CategoryRepository

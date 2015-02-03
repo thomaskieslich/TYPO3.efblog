@@ -30,6 +30,7 @@
 
 	</div>
 	<div class="number">
+		{comment.uid}
 		<a name="comment_{comment.uid}">#{comIterator.cycle}</a>
 	</div>
 	<div class="author">
@@ -42,9 +43,9 @@
 		then: "<br>{f:translate(key : 'comments_from')} {comment.location}")}
 
 		<f:if condition="{isMainComment}">
-			<f:link.action action="detail" section="comments_form">
-				<br>{f:translate(key : 'comments_reply')}
-			</f:link.action>
+			<f:if condition="{allowComments}">
+				<br><a href="#comment-form" class="new-comment" data-comment="{comment.uid}" data-title="{comment.title}" data-post="{post.uid}">{f:translate(key : 'comments_reply')}</a>
+			</f:if>
 		</f:if>
 	</div>
 </div>

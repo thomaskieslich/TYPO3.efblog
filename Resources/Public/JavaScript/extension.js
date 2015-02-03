@@ -1,4 +1,18 @@
 $(function () {
+	//Post Hit Counter
+	if ($('.tx-efblog-detail-container').length > 0) {
+		var agent = window.navigator.userAgent;
+		var postUid = $('.tx-efblog-detail-container').data('uid');
+		var pattern = /bot|spider/;
+
+		if (!pattern.test(agent)) {
+			$.cookie('txEfblogPostCount', postUid, {
+				expires: 1,
+				secure: false
+			});
+		}
+	}
+
 	//detail tabs
 	$('.tx-efblog-detail-container .tab_content').hide();
 	$('ul.tabs li:first').addClass('active').show();
@@ -24,29 +38,21 @@ $(function () {
 		});
 	}
 
-	//Post Hit Counter
-	if ($('.tx-efblog-detail-container').length > 0) {
-		var agent = window.navigator.userAgent;
-		var postUid = $('.tx-efblog-detail-container').data('uid');
-		var pattern = /bot|spider/;
-
-		if (!pattern.test(agent)) {
-			$.cookie('txEfblogPostCount', postUid, {
-				expires: 1,
-				secure: false
-			});
-		}
-	}
-
 	//Commentform
 	$('#tx-efblog-comment-form #tx-efblog-link').parent().hide();
+
+	$('.tx-efblog-comments-list').on('click', '.new-comment', function () {
+		$('#comment-form #tx-efblog-title').val('@' + $(this).data('title'));
+		$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
+
+	});
 
 	//Archive menu
 	$('.tx-efblog-widget-content .year').next().hide();
 
 	var cookie = $.cookie('tx_efblog'),
-		expanded = cookie ? cookie.split('|').getUnique() : [],
-		cookieExpires = 7;
+			expanded = cookie ? cookie.split('|').getUnique() : [],
+			cookieExpires = 7;
 
 	$.each(expanded, function () {
 		$('#' + this).show();

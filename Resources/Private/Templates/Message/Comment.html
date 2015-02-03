@@ -6,8 +6,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
 	<body>
-		<h1>{post.title -> f:link.action(action : 'detail', arguments : '{post : post}', absolute : '1', 
-			extensionName : 'Efblog', pluginName : 'fe1')}</h1>
+		<h1>{post.title -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}',
+			absolute : '1')}</h1>
 
         <div>
             {tk:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
@@ -30,7 +30,7 @@
         </div>
 		<hr>
 		<div>
-            <h2>{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):</h2> 
+            <h2>{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):</h2>
 			<f:for each="{newComment.spamCategories}" as="spamcategory" key="label">
 				{label}: {spamcategory}<br>
 			</f:for>
@@ -38,7 +38,7 @@
 		<div>
 			<f:if condition='{newComment.hidden}'>
 				<strong style="color: #f90;">{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}</strong>
-			</f:if>            
+			</f:if>
         </div>
 	</body>
 </html>

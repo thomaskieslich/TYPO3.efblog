@@ -26,7 +26,6 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -85,6 +84,13 @@ class Comment extends AbstractEntity {
 	protected $message;
 
 	/**
+	 * dummy field for honeypot
+	 *
+	 * @var string
+	 */
+	protected $link;
+
+	/**
 	 * @var DateTime
 	 */
 	protected $date;
@@ -116,6 +122,7 @@ class Comment extends AbstractEntity {
 	 * @var string
 	 */
 	protected $avatar;
+
 
 	public function getHidden() {
 		return $this->hidden;
@@ -231,7 +238,7 @@ class Comment extends AbstractEntity {
 	 * Constructs this comment
 	 */
 	public function __construct() {
-		$this->date = new DateTime();
+		$this->date = new \DateTime();
 	}
 
 	/**
@@ -251,6 +258,20 @@ class Comment extends AbstractEntity {
 	 */
 	public function getMessage() {
 		return $this->message;
+	}
+
+	/**
+	 * @param string $link
+	 */
+	public function setLink($link) {
+		$this->link = $link;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLink() {
+		return $this->link;
 	}
 
 	/**
@@ -332,18 +353,8 @@ class Comment extends AbstractEntity {
 		$this->parentComment = $parentComment;
 	}
 
-	/**
-	 * Returns the child comments
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $children
-	 */
-	public function getChildren() {
-		$commentRepository = GeneralUtility::makeInstance('\ThomasKieslich\Efblog\Domain\Repository\CommentRepository');
-		$children = $commentRepository->findAllChildren($this);
-		return clone $children;
-	}
-
 	//helper
+
 	public function getAvatar() {
 		$avatarImage = NULL;
 		if ($this->email) {

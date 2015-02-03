@@ -1,49 +1,47 @@
 <div id="tx-efblog-comment-form">
-    <f:render partial="FormErrors" />
-    <f:form action="create" controller="Comment"  section="tx-efblog-comment-form" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
-		<f:if condition="{newComment.parentComment}">
+	<f:render partial="FormErrors"/>
+	<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="tx-efblog-comment-form" arguments="{post: post}">
 			{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
-		</f:if>
-        <div class="tf">
-            <label for="tx-efblog-author">{f:translate(key : 'comment_form_author')}</label>
-            {f:form.textfield(property:"author", required: 'required', id: "tx-efblog-author")}
-        </div>
+		<div class="tf">
+			<label for="tx-efblog-author">{f:translate(key : 'comment_form_author')}</label>
+			{f:form.textfield(property:"author", required: 'required', id: "tx-efblog-author")}
+		</div>
 
-        <div class="tf">
-            <label for="tx-efblog-email">{f:translate(key : 'comment_form_email')}</label>
+		<div class="tf">
+			<label for="tx-efblog-email">{f:translate(key : 'comment_form_email')}</label>
 			{f:form.textfield(property:"email", type: 'email', id: "tx-efblog-email")}
-        </div>
+		</div>
 
-        <div class="tf">
-            <label for="tx-efblog-website">{f:translate(key : 'comment_form_website')}</label>
+		<div class="tf">
+			<label for="tx-efblog-website">{f:translate(key : 'comment_form_website')}</label>
 			{f:form.textfield(property:"website", id: "tx-efblog-website")}
-        </div>
-		
+		</div>
+
 		<div class="tf">
-            <label for="tx-efblog-link">{f:translate(key : 'comment_form_link')}</label>
+			<label for="tx-efblog-link">{f:translate(key : 'comment_form_link')}</label>
 			<input id="tx-efblog-link" type="text" name="tx_efblog_fe[newComment][link]">
-        </div>
+		</div>
 
 		<div class="tf">
-            <label for="tx-efblog-location">{f:translate(key : 'comment_form_location')}</label>
-	    {f:form.textfield(property:"location", id: "tx-efblog-location")}
-        </div>
+			<label for="tx-efblog-location">{f:translate(key : 'comment_form_location')}</label>
+			{f:form.textfield(property:"location", id: "tx-efblog-location")}
+		</div>
 
 		<div class="tf">
-            <label for="tx-efblog-title">{f:translate(key : 'comment_form_title')}</label>
-	    {f:form.textfield(property:"title", required: 'required', id: "tx-efblog-title")}
-        </div>
+			<label for="tx-efblog-title">{f:translate(key : 'comment_form_title')}</label>
+			{f:form.textfield(property:"title", required: 'required', id: "tx-efblog-title")}
+		</div>
 
-        <div class="ta">
-            <label for="tx-efblog-message">{f:translate(key : 'comment_form_message')}</label>
-            {f:form.textarea(property: "message", id: "tx-efblog-message", rows: "8", cols: "46")}
-        </div>
+		<div class="ta">
+			<label for="tx-efblog-message">{f:translate(key : 'comment_form_message')}</label>
+			{f:form.textarea(property: "message", id: "tx-efblog-message", rows: "8", cols: "46")}
+		</div>
 
-        <div class="submit">
-            <f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}">
-                <input class="button" type="submit" name="" value="Submit" />
-            </f:form.submit>
-        </div>
-    </f:form>
+		<div class="submit">
+			<f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}">
+				<input class="button" type="submit" name="" value="Submit"/>
+			</f:form.submit>
+		</div>
+	</f:form>
 	<h3>{f:translate(key : 'comment_form_disclaimer')}</h3>
 </div>

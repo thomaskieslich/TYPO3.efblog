@@ -26,13 +26,16 @@ namespace ThomasKieslich\Efblog\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use ExtbaseTeam\BlogExample\Domain\Model\Comment;
+use ThomasKieslich\Efblog\Domain\Model\Comment;
+use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for the Comments object
  */
-class CommentController extends AbstractController {
+class CommentController extends ActionController {
 
 	/**
 	 * @var \ThomasKieslich\Efblog\Domain\Repository\CommentRepository
@@ -40,21 +43,33 @@ class CommentController extends AbstractController {
 	 */
 	protected $commentRepository;
 
+	/**
+	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
+	 * @inject
+	 */
+	protected $postRepository;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
+	 * @inject
+	 */
+	protected $persistenceManager;
 
 	/**
 	 * Adds a comment to a blog post and redirects to detail view
 	 *
-	 * @param Post $post
-	 * @param Comment $newComment
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
 	 * @return void
 	 */
 	public function createAction(Post $post, Comment $newComment) {
+
 		if ($this->settings['comments']['allowComments'] == 1) {
 			$spamcategories = $this->checkForSpam($newComment);
 			$newComment->setIp($_SERVER['REMOTE_ADDR']);
 			$newComment->setSpamCategories($spamcategories);
 			$spampoints = 0;
-			foreach ($spamcategories as $key => $value) {
+			foreach ($spamcategories as $value) {
 				$spampoints += $value;
 			}
 			$newComment->setSpampoints($spampoints);
@@ -64,6 +79,7 @@ class CommentController extends AbstractController {
 			}
 			if ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
 				$post->addComment($newComment);
+				$this->postRepository->update($post);
 			}
 
 			if ($this->settings['comments']['messageAuthor'] || $this->settings['comments']['messageSuperAdmin']) {
@@ -73,24 +89,31 @@ class CommentController extends AbstractController {
 					$this->sendMessage($post, $newComment);
 				}
 			}
-
-			$this->flashMessageContainer->add('Your new Comments was created.');
 		}
-
 		$this->redirect('detail', 'Post', NULL, array('post' => $post));
 	}
 
+	/**
+	 * Widget with latest comments
+	 *
+	 * @return void
+	 */
 	public function latestCommentsWidgetAction() {
 		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
 	}
 
+	/**
+	 * check for possible spam
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
+	 * @return array
+	 */
 	protected function checkForSpam($newComment) {
 		$spampoints = array();
 
-		//check dummy field
-		$dummyField = GeneralUtility::_POST('tx_efblog_fe');
-		if ($dummyField[newComment][link]) {
-			$spampoints['dummy'] = 100;
+		//check honeyPot
+		if ($newComment->getLink()) {
+			$spampoints['honeyPot'] = 100;
 		}
 
 		//author
@@ -176,6 +199,13 @@ class CommentController extends AbstractController {
 		return $spampoints;
 	}
 
+	/**
+	 * Send Messages
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
+	 * @return mixed
+	 */
 	protected function sendMessage($post, $newComment) {
 		$recipient = array();
 		if ($this->settings['comments']['messageAuthor'] && $post->getAuthor()->count() > 0) {
@@ -185,13 +215,18 @@ class CommentController extends AbstractController {
 		}
 
 		if ($this->settings['comments']['messageSuperAdmin']) {
+			/** @var \ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository $htmlView */
 			$feuserRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository');
 			$superAdmins = $feuserRepository->findByUsergroup((int)$this->settings['superAdminGroup']);
-			if ($superAdmins->count() > 0) {
+			if (isset($superAdmins) && $superAdmins->count() > 0) {
 				foreach ($superAdmins as $admin) {
 					$recipient[] = $admin->getEmail();
 				}
 			}
+		}
+
+		if (empty($recipient)) {
+			return FALSE;
 		}
 
 		$sender = $this->settings['comments']['messageSender'];
@@ -201,13 +236,14 @@ class CommentController extends AbstractController {
 		$subject = 'new Comment: ' . $post->getTitle();
 
 		//render content
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 
 		//html Content
 		if ($this->settings['comments']['messageHtml']) {
 			$htmlTemplate = $this->settings['comments']['messsageHtmlTemplate'];
-			$htmlView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $htmlView */
+			$htmlView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 			$htmlView->setFormat('html');
 			$htmlView->setTemplatePathAndFilename($templateRootPath . $htmlTemplate);
 			$htmlView->assignMultiple(array('newComment' => $newComment, 'post' => $post));
@@ -216,14 +252,16 @@ class CommentController extends AbstractController {
 
 		//plaintext content
 		$textTemplate = $this->settings['comments']['messsageTextTemplate'];
-		$textView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $htmlView */
+		$textView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$textView->setFormat('txt');
 		$textView->setTemplatePathAndFilename($templateRootPath . $textTemplate);
 		$textView->assignMultiple(array('newComment' => $newComment, 'post' => $post));
 		$plainTextContent = $textView->render();
 
 		//Create Mail
-		$mailMessage = t3lib_div::makeInstance('t3lib_mail_Message');
+		/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+		$mailMessage = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 
 		if ($this->settings['comments']['messageHtml']) {
 			$mailMessage->setBody($htmlContent, 'text/html');
@@ -233,10 +271,11 @@ class CommentController extends AbstractController {
 		}
 
 		$mailMessage->setSubject($subject)
-			->setFrom($from)
-			->setTo($recipient);
+				->setFrom($from)
+				->setTo($recipient);
 
 		$mailMessage->send();
+
 		return $mailMessage->isSent();
 	}
 }

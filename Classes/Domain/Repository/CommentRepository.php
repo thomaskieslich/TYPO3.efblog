@@ -34,6 +34,10 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CommentRepository extends Repository {
 
+	/**
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function findMainComments($post = NULL) {
 		$query = $this->createQuery();
 		$query->matching(
@@ -44,14 +48,18 @@ class CommentRepository extends Repository {
 		);
 		$query->setOrderings(
 			array(
-				'date' => QueryInterface::ORDER_ASCENDING
+				'date' => QueryInterface::ORDER_DESCENDING
 			)
 		);
 
 		return $query->execute();
 	}
 
-	public function findAllChildren(\ThomasKieslich\Efblog\Domain\Model\Comment $comment) {
+	/**
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $comment
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAllChildren($comment) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_comment', $comment)

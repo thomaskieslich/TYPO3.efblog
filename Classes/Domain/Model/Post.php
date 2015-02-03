@@ -284,6 +284,13 @@ class Post extends AbstractEntity {
 	}
 
 	/**
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $comment
+	 */
+	public function addComment(\ThomasKieslich\Efblog\Domain\Model\Comment $comment) {
+		$this->comments->attach($comment);
+	}
+
+	/**
 	 * Returns the comments
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Comment> $comments

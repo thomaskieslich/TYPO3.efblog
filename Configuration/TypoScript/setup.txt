@@ -258,7 +258,7 @@ txefblogAjax {
 		admPanel = 0
 		debug = 0
 		no_cache = 1
-		additionalHeaders = Content-type:application/json
+		additionalHeaders = Content-type: text/plain
 	}
 }
 
