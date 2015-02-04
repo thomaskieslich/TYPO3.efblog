@@ -312,8 +312,22 @@ class Post extends AbstractEntity {
 		return $this->detailUid;
 	}
 
+	/**
+	 * @param int $detailUid
+	 */
+	public function setDetailUid($detailUid) {
+		$this->detailUid = $detailUid;
+	}
+
 	public function getBlogName() {
 		return $this->blogName;
+	}
+
+	/**
+	 * @param string $blogName
+	 */
+	public function setBlogName($blogName) {
+		$this->blogName = $blogName;
 	}
 
 	/**

@@ -26,11 +26,11 @@
 				</div>
 
 				<div class="title">
-					<h1>
-						<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}'>
+					<h2>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid="{post.detailUid}">
 							{post.title -> f:format.crop(maxCharacters: '44', append: '{f:translate(key : "teaser_more")}')}
-						</f:link.action>
-					</h1>
+						</f:link.page>
+					</h2>
 				</div>
 				<div class="infos">{post.date -> f:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
 					<f:if condition="{post.comments -> f:count()} > 1">

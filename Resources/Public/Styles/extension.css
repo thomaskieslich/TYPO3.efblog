@@ -444,18 +444,21 @@
 .tx-efblog-combined-entry {
 	display: block;
 	height: 50px;
+	clear: both;
 	}
 
 .tx-efblog-combined-image {
 	float: right;
 	width: 50px;
 	}
+.tx-efblog-combined-image figure{
+	margin: 0;
+	padding: 0;
+	}
 
-.tx-efblog-combined-entry h1 a {
-	font-size: 13px;
-	font-weight: bold;
+.tx-efblog-combined-entry h2 a {
+	font-size: 14px;
 	padding: 0 24px 1px 0;
-	background: url(../Images/breadcrumb_right.png) no-repeat top right;
 	}
 
 .tx-efblog-combined-entry h1 a:hover {

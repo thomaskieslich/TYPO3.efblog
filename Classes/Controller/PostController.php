@@ -27,10 +27,8 @@ namespace ThomasKieslich\Efblog\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use ThomasKieslich\Efblog\Domain\Model\Post;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -303,20 +301,21 @@ class PostController extends ActionController {
 		$detailUid = GeneralUtility::trimExplode(',', $this->settings['detailUid'], TRUE);
 		$combinedNames = GeneralUtility::trimExplode(',', $this->settings['combinedNames'], TRUE);
 		$combinedSettings = array();
+
 		foreach ($combinedPid as $key => $value) {
 			$combinedSettings[$value][pid] = $combinedPid[$key];
 			$combinedSettings[$value][detail] = $detailUid[$key];
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
 		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
+//			$this->postRepository->update($post);
 			$combinedPosts->attach($post);
 		}
-
 		$this->view->assign('posts', $combinedPosts);
-		$this->view->assign('dam', ExtensionManagementUtility::isLoaded('dam'));
 	}
 
 	/**
@@ -411,9 +410,9 @@ class PostController extends ActionController {
 		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
 
-		$combinedPid = t3lib_div::trimExplode(',', $this->settings['combinedPid'], TRUE);
-		$detailUid = t3lib_div::trimExplode(',', $this->settings['detailUid'], TRUE);
-		$combinedNames = t3lib_div::trimExplode(',', $this->settings['combinedNames'], TRUE);
+		$combinedPid = GeneralUtility::trimExplode(',', $this->settings['combinedPid'], TRUE);
+		$detailUid = GeneralUtility::trimExplode(',', $this->settings['detailUid'], TRUE);
+		$combinedNames = GeneralUtility::trimExplode(',', $this->settings['combinedNames'], TRUE);
 		$combinedSettings = array();
 		foreach ($combinedPid as $key => $value) {
 			$combinedSettings[$value][pid] = $combinedPid[$key];
@@ -421,7 +420,7 @@ class PostController extends ActionController {
 			$combinedSettings[$value][name] = $combinedNames[$key];
 		}
 
-		$combinedPosts = new ObjectStorage();
+		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
