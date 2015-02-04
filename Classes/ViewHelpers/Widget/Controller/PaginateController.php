@@ -149,7 +149,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 			$pagination['previousPage'] = $this->currentPage - 1;
 		}
 		//avoid pager with one page
-		if ($this->numberOfPages <= 1) {
+		if ($this->numberOfPages == 1) {
 			return FALSE;
 		}
 

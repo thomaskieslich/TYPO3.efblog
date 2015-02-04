@@ -1,12 +1,13 @@
-<f:layout name="Default" />
+<f:layout name="Default"/>
 <f:section name="content">
-    <div class="tx-efblog-widget-container">
-        <h1>{f:translate(key : 'widget_search_header')}</h1>
-        <div class="tx-efblog-widget-content">
-            <f:form  action="list" pageUid="{settings.searchUid}">
-                <f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield" id="searchPhrase" />
-                <input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
-            </f:form>
-        </div>
-    </div>
+	<div class="tx-efblog-widget-container">
+		<h2>{f:translate(key : 'widget_search_header')}</h2>
+
+		<div class="tx-efblog-widget-content">
+			<f:form action="searchList" controller="Post" pageUid="{settings.searchUid}">
+				<f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
+				<input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
+			</f:form>
+		</div>
+	</div>
 </f:section>

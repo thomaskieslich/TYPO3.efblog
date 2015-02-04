@@ -18,9 +18,9 @@
 		</div>
 
 		<div class="search-field">
-			<f:form action="list" pageUid="{settings.target.listUid}">
+			<f:form action="searchList" controller="Post" pageUid="{settings.searchUid}">
 				<f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
-				<input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
+				<input type="submit" alt="go" class="submitbtn" value="go">
 			</f:form>
 		</div>
 

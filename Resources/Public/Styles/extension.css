@@ -357,9 +357,14 @@
 	}
 
 /*search view*/
-.tx-efblog-search-container .results {
+.tx-efblog-search-container .result {
 	margin: 6px 0;
 	}
+
+.tx-efblog-search-container .result .tx-efblog-widget-paginator{
+	display: none;
+	}
+
 
 .tx-efblog-search-container .search-field {
 	/*height: 16px;*/
