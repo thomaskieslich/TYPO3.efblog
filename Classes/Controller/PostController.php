@@ -120,9 +120,7 @@ class PostController extends BaseController {
 		if (isset($request['searchPhrase'])) {
 			$searchPhrase = $this->request->getArgument('searchPhrase');
 			$this->settings['listView']['searchPhrase'] = $searchPhrase;
-
 			$results = $this->postRepository->findPosts($this->settings);
-
 			$this->view->assign('searchPhrase', $searchPhrase);
 			$this->view->assign('posts', $results);
 			$this->view->assign('count', $results->count());

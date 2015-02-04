@@ -70,10 +70,10 @@ plugin.tx_efblog {
 
 			//Paginator
 			paginator {
-				itemsPerPage = 3
+				itemsPerPage = 6
 				insertAbove = 1
 				insertBelow = 1
-				maximumNumberOfLinks = 4
+				maximumNumberOfLinks = 5
 			}
 
 			//Search

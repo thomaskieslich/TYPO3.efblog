@@ -1,31 +1,31 @@
 <?php
 namespace ThomasKieslich\Efblog\ViewHelpers\Widget\Controller;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2011-2014 Thomas Kieslich
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *  A copy is found in the text file GPL.txt and important notices to the license
- *  from the author is found in LICENSE.txt distributed with these scripts.
- *
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+	/***************************************************************
+	 *  Copyright notice
+	 *
+	 *  (c) 2011-2014 Thomas Kieslich
+	 *  All rights reserved
+	 *
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *  A copy is found in the text file GPL.txt and important notices to the license
+	 *  from the author is found in LICENSE.txt distributed with these scripts.
+	 *
+	 *
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
 
 /**
  * Controller for Paginate
@@ -92,7 +92,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 			$modifiedObjects = $query->execute();
 		}
 		$this->view->assign('contentArguments', array(
-			$this->widgetConfiguration['as'] => $modifiedObjects
+				$this->widgetConfiguration['as'] => $modifiedObjects
 		));
 		$this->view->assign('configuration', $this->configuration);
 		$this->view->assign('pagination', $this->buildPagination());
@@ -134,13 +134,13 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 			$pages[] = array('number' => $i, 'isCurrent' => $i === $this->currentPage);
 		}
 		$pagination = array(
-			'pages' => $pages,
-			'current' => $this->currentPage,
-			'numberOfPages' => $this->numberOfPages,
-			'displayRangeStart' => $this->displayRangeStart,
-			'displayRangeEnd' => $this->displayRangeEnd,
-			'hasLessPages' => $this->displayRangeStart > 2,
-			'hasMorePages' => $this->displayRangeEnd + 1 < $this->numberOfPages
+				'pages' => $pages,
+				'current' => $this->currentPage,
+				'numberOfPages' => $this->numberOfPages,
+				'displayRangeStart' => $this->displayRangeStart,
+				'displayRangeEnd' => $this->displayRangeEnd,
+				'hasLessPages' => $this->displayRangeStart > 2,
+				'hasMorePages' => $this->displayRangeEnd + 1 < $this->numberOfPages
 		);
 		if ($this->currentPage < $this->numberOfPages) {
 			$pagination['nextPage'] = $this->currentPage + 1;
@@ -148,6 +148,11 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 		if ($this->currentPage > 1) {
 			$pagination['previousPage'] = $this->currentPage - 1;
 		}
+		//avoid pager with one page
+		if ($this->numberOfPages == 1) {
+			return FALSE;
+		}
+
 		return $pagination;
 	}
 }
