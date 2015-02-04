@@ -28,25 +28,12 @@ namespace ThomasKieslich\Efblog\Controller;
  ***************************************************************/
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Controller for the Post object
  */
-class PostController extends ActionController {
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\CommentRepository
-	 * @inject
-	 */
-	protected $commentRepository;
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
-	 * @inject
-	 */
-	protected $postRepository;
+class PostController extends BaseController {
 
 	/**
 	 * list action
@@ -131,18 +118,15 @@ class PostController extends ActionController {
 	public function searchListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['searchPhrase'])) {
-			$this->settings['listView']['searchPhrase'] = $this->request->getArgument('searchPhrase');
-			$this->view->assign('searchPhrase', $this->request->getArgument('searchPhrase'));
-		}
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+			$searchPhrase = $this->request->getArgument('searchPhrase');
+			$this->settings['listView']['searchPhrase'] = $searchPhrase;
 
-		$pagerConfig = array(
-				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-				'insertAbove' => $this->settings['listView']['insertAbove'],
-				'insertBelow' => $this->settings['listView']['insertBelow'],
-				'maxPages' => $this->settings['listView']['maxPages']
-		);
-		$this->view->assign('pagerConfig', $pagerConfig);
+			$results = $this->postRepository->findPosts($this->settings);
+
+			$this->view->assign('searchPhrase', $searchPhrase);
+			$this->view->assign('posts', $results);
+			$this->view->assign('count', $results->count());
+		}
 	}
 
 	/**
@@ -312,52 +296,9 @@ class PostController extends ActionController {
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
 			$post->setBlogName($combinedSettings[$post->getPid()][name]);
-//			$this->postRepository->update($post);
 			$combinedPosts->attach($post);
 		}
 		$this->view->assign('posts', $combinedPosts);
-	}
-
-	/**
-	 * return latest posts for widget
-	 *
-	 * @return void
-	 */
-	public function latestPostsWidgetAction() {
-		$this->settings['listView']['maxEntries'] = $this->settings['latestPostsWidget']['maxEntries'];
-		$this->settings['listView']['orderBy'] = $this->settings['latestPostsWidget']['orderBy'];
-		$this->settings['listView']['sortDirection'] = $this->settings['latestPostsWidget']['sortDirection'];
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-	}
-
-	/**
-	 * return posts with most views
-	 *
-	 * @return void
-	 */
-	public function viewsWidgetAction() {
-		$this->settings['listView']['orderBy'] = views;
-		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-	}
-
-	/**
-	 * return searchform for widget
-	 *
-	 * @return void
-	 */
-	public function searchWidgetAction() {
-	}
-
-	/**
-	 * return posts by date
-	 *
-	 * @return void
-	 */
-	public function dateMenuWidgetAction() {
-		$this->settings['listView']['orderBy'] = $this->settings['dateMenuWidget']['orderBy'];
-		$this->settings['listView']['sortDirection'] = $this->settings['dateMenuWidget']['sortDirection'];
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
 
 	/**

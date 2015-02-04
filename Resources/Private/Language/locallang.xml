@@ -43,25 +43,6 @@
             <label index="detail_from">from</label>
             <label index="detail_related_post">related posts</label>
             <label index="detail_views">Views</label>
-            <label index="error.Blog.createAction">Could not create blog</label>
-            <label index="error.Blog.invalidTitle">&quot;Extbase&quot; can't be used as a blog title</label>
-            <label index="error.Blog.updateAction">Could not update blog</label>
-            <label index="error.Comment.createAction">Could not create comment</label>
-            <label index="error.Post.createAction">Could not create post</label>
-            <label index="error.Post.updateAction">Could not update post</label>
-            <label index="error.code.1221559976">The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email
-                address
-            </label>
-            <label index="error.code.1221560718">The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</label>
-            <label index="error.code.1221565786">The given &lt;strong&gt;%s&lt;/strong&gt; should not contain
-                sourcecode.
-            </label>
-            <label index="error.code.1238108067">The given &lt;strong&gt;%s&lt;/strong&gt; is either too long or too
-                short
-            </label>
-            <label index="error.code.1238108068">The given &lt;strong&gt;%s&lt;/strong&gt; is too short</label>
-            <label index="error.code.1238108069">The given &lt;strong&gt;%s&lt;/strong&gt; is too long</label>
-            <label index="error.errorsOccurred">Following errors occurred</label>
             <label index="link_backTo">back</label>
             <label index="list_archive_result">Result for</label>
             <label index="list_archive_results">Results for</label>

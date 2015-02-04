@@ -1,25 +1,33 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
-<f:layout name="Default" />
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<f:layout name="Default"/>
 <f:section name="content">
-    <div class="tx-efblog-search-container">
-        <h1>
-            <tk:widget.paginate objects="{posts}"  as="countPosts"  configuration="{insertAbove:0,insertBelow:0}">
-                {countPosts->f:count()}
-                <f:if condition="<f:count subject='{countPosts}' /> == 1">
-                    <f:then>{f:translate(key : 'view_search_result')}</f:then>
-                    <f:else>{f:translate(key : 'view_search_results')}</f:else>
-                </f:if>
-            </tk:widget.paginate>
-            {searchPhrase}</h1>
+	<div class="tx-efblog-search-container">
+		<div class="result">
+			<tk:widget.paginate objects="{posts}" as="countPosts" configuration="{insertAbove:0,insertBelow:0}">
+				{countPosts->f:count()}
+				<f:if condition="<f:count subject='{countPosts}' /> == 1">
+					<f:then>{f:translate(key : 'view_search_result')}</f:then>
+					<f:else>{f:translate(key : 'view_search_results')}</f:else>
+				</f:if>
+			</tk:widget.paginate>
+			{searchPhrase}
+		</div>
 
+		<div class="search-field">
+			<f:form action="list" pageUid="{settings.target.listUid}">
+				<f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
+				<input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
+			</f:form>
+		</div>
 
-            <div class="tx-efblog-view-search">
-                <f:form  action="list" pageUid="{settings.target.listUid}">
-                    <f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield" />
-                    <input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
-                </f:form>
-            </div>
-    </div>
+		<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
+			<f:for each="{paginatedPosts}" as="post">
+				<div class="tx-efblog-list-item">
+					<f:render partial="Post/ListItemBody" arguments="{post : post}"/>
+					<f:render partial="Post/ListItemFooter" arguments="{post : post}"/>
+				</div>
+			</f:for>
+		</tk:widget.paginate>
 
-    <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />
+	</div>
 </f:section>

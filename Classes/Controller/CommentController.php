@@ -30,24 +30,11 @@ use ThomasKieslich\Efblog\Domain\Model\Comment;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for the Comments object
  */
-class CommentController extends ActionController {
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\CommentRepository
-	 * @inject
-	 */
-	protected $commentRepository;
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
-	 * @inject
-	 */
-	protected $postRepository;
+class CommentController extends BaseController {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
@@ -93,14 +80,7 @@ class CommentController extends ActionController {
 		$this->redirect('detail', 'Post', NULL, array('post' => $post));
 	}
 
-	/**
-	 * Widget with latest comments
-	 *
-	 * @return void
-	 */
-	public function latestCommentsWidgetAction() {
-		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
-	}
+
 
 	/**
 	 * check for possible spam

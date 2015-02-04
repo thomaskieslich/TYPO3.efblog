@@ -26,35 +26,16 @@ namespace ThomasKieslich\Efblog\Controller;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for the Category object
  */
-class CategoryController extends ActionController {
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
-
-	/**
-	 * @var \ThomasKieslich\Efblog\Domain\Repository\PostRepository
-	 * @inject
-	 */
-	protected $postRepository;
+class CategoryController extends BaseController {
 
 	public function categoryOverviewAction() {
 		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
 		$this->view->assign('maincategories', $mainCategories);
 
-		$categories = $this->createCategoryTree($mainCategories);
-		$this->view->assign('categories', $categories);
-	}
-
-	public function categoryWidgetAction() {
-		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
 		$categories = $this->createCategoryTree($mainCategories);
 		$this->view->assign('categories', $categories);
 	}

@@ -10,6 +10,7 @@ if (!defined('TYPO3_MODE')) {
 		'Post' => 'list,detail,categoryList,rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Category' => 'categoryOverview',
 		'Comment' => 'create',
+		'Widget' => 'latestPostsWidget, viewsWidget',
 	),
 	array(
 		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay',

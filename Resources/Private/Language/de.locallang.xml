@@ -32,17 +32,6 @@
             <label index="detail_related_post">ähnliche Artikel</label>
             <label index="detail_views">Ansichten</label>
             <label index="error.Comment.createAction">Konnte keinen Kommentar erstellen</label>
-            <label index="error.code.1221559976">Das Feld &lt;strong&gt;%s&lt;/strong&gt; enthält keine korrekte E-Mail
-                Adresse.
-            </label>
-            <label index="error.code.1221560718">Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf nicht leer sein.</label>
-            <label index="error.code.1221565786">Das Feld &lt;strong&gt;%s&lt;/strong&gt; darf keinen Quellcode
-                enthalten.
-            </label>
-            <label index="error.code.1238108067">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang oder zu kurz.
-            </label>
-            <label index="error.code.1238108068">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu kurz.</label>
-            <label index="error.code.1238108069">Das Feld &lt;strong&gt;%s&lt;/strong&gt; ist zu lang.</label>
             <label index="error.errorsOccurred">Folgende Fehler sind aufgetreten:</label>
             <label index="link_backTo">zurück</label>
             <label index="list_archive_result">Ergebnis für</label>
