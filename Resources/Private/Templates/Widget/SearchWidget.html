@@ -4,7 +4,7 @@
 		<h2>{f:translate(key : 'widget_search_header')}</h2>
 
 		<div class="tx-efblog-widget-content">
-			<form method="get">
+			<form action="{f:uri.page(pageUid: '{settings.searchUid}')}" method="get">
 				<input type="hidden" name="id" value="{settings.searchUid}">
 				<input type="hidden" name="noCache" value="1">
 				<input type="text"name="tx_efblog_fe1[searchPhrase]" value="{searchPhrase}" class="searchfield">
