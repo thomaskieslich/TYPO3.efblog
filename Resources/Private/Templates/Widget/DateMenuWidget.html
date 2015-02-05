@@ -1,31 +1,35 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
-<f:layout name="Default" />
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<f:layout name="Default"/>
 <f:section name="content">
 	<a name="dateMenu">&nbsp;</a>
-    <div class="tx-efblog-widget-container">
-        <h1>{f:translate(key : 'widget_dateMenu_header')}</h1>
-        <div class="tx-efblog-widget-content">			
-            <f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}"  groupKey="year">
+
+	<div class="tx-efblog-widget-container">
+		<h1>{f:translate(key : 'widget_dateMenu_header')}</h1>
+
+		<div class="tx-efblog-widget-content">
+			<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}" groupKey="year">
 				<ul>
 					<li>
-					<h3 class="year"><a href="#dateMenu">{year} ({postsByYear -> f:count()})</a></h3>
-                    <ul id="y_{year}">
-                        <f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}"  groupKey="month">
-                            <li id="d_{year}_{month}">
-                            <f:link.action action="dateMenuList" pageUid="{settings.dateMenuUid}" arguments="{year: year, month: month}">
-                                <tk:format.monthName month="{month}" /> {year}</f:link.action>
-								({postsByMonth -> f:count()}
-                            <f:if condition="<f:count subject='{postsByMonth}' /> == 1">
-                                <f:then>{f:translate(key : 'widget_dateMenu_item')}</f:then>
-                                <f:else>{f:translate(key : 'widget_dateMenu_items')}</f:else>
-                            </f:if>
-                            )
-                            </li>
-                        </f:groupedFor>
-                    </ul>
-				</li>
+						<h3 class="year"><a href="#dateMenu">{year} ({postsByYear -> f:count()})</a></h3>
+						<ul id="y_{year}">
+							<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}" groupKey="month">
+								<li id="d_{year}_{month}">
+									<f:link.page pageUid="{settings.dateMenuUid}" additionalParams="{tx_efblog_fe1:{year: year, month: month}}">
+										<tk:format.monthName month="{month}" />
+										{year}
+									</f:link.page>
+									({postsByMonth -> f:count()}
+									<f:if condition="<f:count subject='{postsByMonth}' /> == 1">
+										<f:then>{f:translate(key : 'widget_dateMenu_item')}</f:then>
+										<f:else>{f:translate(key : 'widget_dateMenu_items')}</f:else>
+									</f:if>
+									)
+								</li>
+							</f:groupedFor>
+						</ul>
+					</li>
 				</ul>
-            </f:groupedFor>
-        </div>
-    </div>
+			</f:groupedFor>
+		</div>
+	</div>
 </f:section>

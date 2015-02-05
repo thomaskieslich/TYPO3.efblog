@@ -1,10 +1,10 @@
 <?php
+namespace ThomasKieslich\Efblog\ViewHelpers\Format;
 
-/* * *************************************************************
+/***************************************************************
  *  Copyright notice
  *
- *  (c) 2010 Thomas Kieslich <thomaskieslich@gmx.net>
- *
+ *  (c) 2011-2014 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -15,6 +15,9 @@
  *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
+ *  A copy is found in the text file GPL.txt and important notices to the license
+ *  from the author is found in LICENSE.txt distributed with these scripts.
+ *
  *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +25,7 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * ************************************************************* */
+ ***************************************************************/
 
 /**
  * Property ViewHelper
@@ -30,16 +33,15 @@
  * @package Efblog
  * @subpackage ViewHelpers
  */
-class Tx_Efblog_ViewHelpers_Format_MonthNameViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class MonthNameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
-    /**
-    * @param string $month
-    * @return string
-    */
-    public function render($month) {
-        $monthName = strftime("%B", strtotime("$month/28/2000"));
+	/**
+	 * @param string $month
+	 * @return string
+	 */
+	public function render($month) {
+		$monthName = strftime("%B", strtotime("$month/28/2000"));
+
 		return $monthName;
 	}
-} 
-
-?>
+}

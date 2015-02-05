@@ -1,16 +1,24 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
-<f:layout name="Default" />
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<f:layout name="Default"/>
 <f:section name="content">
-    <div class="tx-efblog-archive-container">
-        <h1>
-	    {posts->f:count()} 
-	    <f:if condition="<f:count subject='{posts}' /> == 1">
-		<f:then>{f:translate(key : 'list_archive_result')}</f:then>
-		<f:else>{f:translate(key : 'list_archive_results')}</f:else>
-	    </f:if>
-	    <tk:format.monthName month="{month}" /> {year}
-	</h1>
-    </div>
+	<div class="tx-efblog-archive-container">
+		<h1>
+			{posts->f:count()}
+			<f:if condition="{posts -> f:count()} == 1">
+				<f:then>{f:translate(key : 'list_archive_result')}</f:then>
+				<f:else>{f:translate(key : 'list_archive_results')}</f:else>
+			</f:if>
+			<tk:format.monthName month="{month}"/>
+			{year}
+		</h1>
+	</div>
 
-    <f:render partial="List" arguments="{posts: posts, pagerConfig : pagerConfig, dam : dam}" />
+	<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
+		<f:for each="{paginatedPosts}" as="post">
+			<div class="tx-efblog-list-item">
+				<f:render partial="Post/ListItemBody" arguments="{post : post}"/>
+				<f:render partial="Post/ListItemFooter" arguments="{post : post}"/>
+			</div>
+		</f:for>
+	</tk:widget.paginate>
 </f:section>

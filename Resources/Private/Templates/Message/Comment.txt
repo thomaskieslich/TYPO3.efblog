@@ -1,4 +1,4 @@
-{namespace tk=Tx_Efblog_ViewHelpers}
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
 {post.title}
 {tk:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
 {tk:translate(key : 'comment_form_email', extensionName : 'Efblog')}: {newComment.email}
@@ -9,10 +9,9 @@
 {tk:translate(key : 'comment_message_message', extensionName : 'Efblog')}
 {newComment.message}
 
-{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}): 
+{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):
 <f:for each="{newComment.spamCategories}" as="spamcategory" key="label">
 	{label}: {spamcategory}<
 </f:for>
 <f:if condition='newComment.hidden'>{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}</f:if>
-Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Efblog', pluginName : 'fe1')}     
-        
+Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Efblog', pluginName : 'fe1')}

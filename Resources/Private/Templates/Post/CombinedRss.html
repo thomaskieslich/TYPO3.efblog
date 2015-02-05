@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-{namespace tk=Tx_Efblog_ViewHelpers}
-<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom"  xmlns:content="http://purl.org/rss/1.0/modules/content/">	
+{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>{settings.rss.title}</title>
 		<description>{settings.rss.description}</description>
@@ -11,7 +11,7 @@
 		<title>{settings.rss.title}</title>
 		<url>{settings.rss.image}</url>
 		</image>
-		<f:for each="{rssItems}" as="rssItem">            
+		<f:for each="{rssItems}" as="rssItem">
 			<item>
 				<title>{rssItem.title}</title>
 				<link><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{rssItem.detailUid}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></link>
