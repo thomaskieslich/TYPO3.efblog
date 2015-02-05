@@ -27,7 +27,7 @@
 									</numIndex>
 									<numIndex index="20" type="array">
 										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_list_search</numIndex>
-										<numIndex index="1">Post->searchList</numIndex>
+										<numIndex index="1">Post->searchForm;Post->searchResults</numIndex>
 									</numIndex>
 									<numIndex index="30" type="array">
 										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_list_category</numIndex>

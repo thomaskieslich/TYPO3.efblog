@@ -302,7 +302,7 @@ class Post extends AbstractEntity {
 	/**
 	 * Returns the content
 	 *
-	 * @return integer $content
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
 	 */
 	public function getContent() {
 		return $this->content;

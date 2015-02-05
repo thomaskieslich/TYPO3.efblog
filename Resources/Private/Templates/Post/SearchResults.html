@@ -5,20 +5,18 @@
 		<div class="result">
 			<f:if condition="{posts -> f:count()} > 0">
 				<f:then>
-					<tk:widget.paginate objects="{posts}" as="countPosts" configuration="{settings.listView.paginator}">
-						{countPosts->f:count()}
-						<f:if condition="{posts -> f:count()} == 1">
-							<f:then>{f:translate(key : 'view_search_result')}</f:then>
-							<f:else>{f:translate(key : 'view_search_results')}</f:else>
-						</f:if>
-					</tk:widget.paginate>
+					{posts->f:count()}
+					<f:if condition="{posts -> f:count()} == 1">
+						<f:then>{f:translate(key : 'view_search_result')}</f:then>
+						<f:else>{f:translate(key : 'view_search_results')}</f:else>
+					</f:if>
 					{searchPhrase}
 				</f:then>
 			</f:if>
 		</div>
 
 		<div class="search-field">
-			<f:form action="searchList" pageUid="{settings.searchUid}">
+			<f:form action="searchForm" noCache="1">
 				<f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
 				<input type="submit" alt="go" class="submitbtn" value="go">
 			</f:form>
