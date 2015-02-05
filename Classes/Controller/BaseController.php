@@ -50,4 +50,24 @@ class BaseController extends ActionController {
 	 */
 	protected $categoryRepository;
 
+	/**
+	 * @param array $elements
+	 * @param int $parentId
+	 * @return array
+	 */
+	protected function buildCategoryTree(array $elements, $parentId = 0) {
+		$branch = array();
+
+		foreach ($elements as $element) {
+			if ($element['parentId'] == $parentId) {
+				$children = $this->buildCategoryTree($elements, $element['uid']);
+				if ($children) {
+					$element['children'] = $children;
+				}
+				$branch[] = $element;
+			}
+		}
+
+		return $branch;
+	}
 }
