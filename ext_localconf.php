@@ -13,7 +13,7 @@ if (!defined('TYPO3_MODE')) {
 		'Widget' => 'latestPostsWidget, viewsWidget',
 	),
 	array(
-		'Post' => 'rss,ajaxCalendarMonth,ajaxCalendarDay',
+		'Post' => 'searchList,rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Comment' => 'create',
 	)
 );

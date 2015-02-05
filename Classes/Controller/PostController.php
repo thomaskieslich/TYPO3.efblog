@@ -111,32 +111,19 @@ class PostController extends BaseController {
 	}
 
 	/**
-	 * return search phrase
+	 * return search result
 	 *
 	 * @return void
 	 */
-	public function searchFormAction() {
+	public function searchListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['searchPhrase'])) {
 			$searchPhrase = $this->request->getArgument('searchPhrase');
-
-			$this->redirect('searchResults', 'Post', NULL, array('searchPhrase' => $searchPhrase));
-		}
-	}
-
-	/**
-	 * search results
-	 *
-	 * @return void
-	 */
-	public function searchResultsAction() {
-		$request = $this->request->getArguments();
-		if (isset($request['searchPhrase'])) {
-			$searchPhrase = htmlspecialchars($this->request->getArgument('searchPhrase'));
 			$this->settings['listView']['searchPhrase'] = $searchPhrase;
 			$results = $this->postRepository->findPosts($this->settings);
-			$this->view->assign('searchPhrase', htmlspecialchars_decode($searchPhrase));
+			$this->view->assign('searchPhrase', $searchPhrase);
 			$this->view->assign('posts', $results);
+			$this->view->assign('count', $results->count());
 		}
 	}
 
