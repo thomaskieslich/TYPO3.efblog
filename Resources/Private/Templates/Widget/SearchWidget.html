@@ -4,9 +4,9 @@
 		<h2>{f:translate(key : 'widget_search_header')}</h2>
 
 		<div class="tx-efblog-widget-content">
-			<f:form action="searchList" controller="Post" pageUid="{settings.searchUid}">
-				<f:form.textfield name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
-				<input type="image" alt="go" class="submitbtn" src="fileadmin/templates/css/images/submit.png">
+			<f:form controller="Post" pageUid="{settings.searchUid}">
+				<f:form.textfield  name="searchPhrase" value="{searchPhrase}" class="searchfield"/>
+				<input type="submit" alt="go" class="submitbtn" value="go">
 			</f:form>
 		</div>
 	</div>
