@@ -33,89 +33,20 @@ namespace ThomasKieslich\Efblog\Controller;
 class CategoryController extends BaseController {
 
 	public function categoryOverviewAction() {
-		$mainCategories = $this->categoryRepository->findMainCategories($this->settings);
-		$this->view->assign('maincategories', $mainCategories);
-
-		$categories = $this->createCategoryTree($mainCategories);
-		$this->view->assign('categories', $categories);
-	}
-
-	protected function createCategoryTree($mainCategories) {
+		$query = $this->categoryRepository->findAll()->toArray();
 		$categories = array();
-
-		foreach ($mainCategories as $key => $category) {
+		foreach ($query as $key => $category) {
 			$categories[$key]['title'] = $category->getTitle();
 			$categories[$key]['uid'] = $category->getUid();
+			$categories[$key]['description'] = $category->getDescription();
+			$categories[$key]['image'] = $category->getImage();
 			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
-			$categories[$key]['children'] = $this->findCategoryChilds($category, $key);
-		}
-
-		foreach ($categories as $key => $category) {
-			$updatedCategory = $this->updateCategoryValues($category);
-			$categories[$key] = $updatedCategory;
-		}
-
-		return $categories;
-	}
-
-	protected function findCategoryChilds($category, $parent = 0) {
-		$child = array();
-		$childs = $this->categoryRepository->findChilds($category);
-		if ($childs) {
-			foreach ($childs as $key => $category) {
-				$child[$key]['title'] = $category->getTitle();
-				$child[$key]['uid'] = $category->getUid();
-				$child[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
-				$child[$key]['parent'] = $parent;
-				$child[$key]['children'] = $this->findCategoryChilds($category, $key);
+			if ($category->getParentCategory()) {
+				$categories[$key]['parentId'] = $category->getParentCategory()->getUid();
 			}
 		}
-		return $child;
-	}
 
-	protected function findCategoryLevels($categories, $level = 0) {
-		$return = $level;
-		$level_new = 0;
-		foreach ($categories as $category) {
-			if (is_array($category)) {
-				$level_new = $this->findCategoryLevels($category, $level + 1);
-			}
-			if ($level_new > $return)
-				$return = $level_new;
-		}
-
-		return $return;
-	}
-
-	protected function updateCategoryValues($category) {
-		$categoryLevels = $this->findCategoryLevels($category);
-		$levels = ($categoryLevels - 1) / 2;
-		if ($levels == 1) {
-			$parent = $category;
-			$updated = $this->updateCategoryLevel($parent);
-			$category = $updated;
-		} elseif ($levels == 2) {
-			foreach ($category['children'] as $key => $child) {
-				if ($child['children']) {
-					$parent = $child;
-					$updated = $this->updateCategoryLevel($parent);
-					$category['children'][$key] = $updated;
-				}
-			}
-			//update Main
-			$parent = $category;
-			$updated = $this->updateCategoryLevel($parent);
-			$category = $updated;
-		}
-//		t3lib_utility_Debug::debug($category);
-		return $category;
-	}
-
-	protected function updateCategoryLevel($parent) {
-		foreach ($parent['children'] as $child) {
-			$parent['link'] .= ',' . $child['link'];
-			$parent['posts'] += $child['posts'];
-		}
-		return $parent;
+		$tree = $this->buildCategoryTree($categories);
+		$this->view->assign('categories', $tree);
 	}
 }

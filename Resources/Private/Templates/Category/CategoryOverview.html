@@ -1,7 +1,8 @@
 <f:layout name="Default"/>
 <f:section name="content">
 	<div class="tx-efblog-view-category">
-		<f:for each="{maincategories}" as="maincategory">
+		{categories -> f:debug()}
+		<f:for each="{categories}" as="maincategory">
 			<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
 				<div class="element {row}">
 					<h2>{maincategory.title}</h2>
