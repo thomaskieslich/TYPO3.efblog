@@ -15,7 +15,7 @@
 							<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}" groupKey="month">
 								<li id="d_{year}_{month}">
 									<f:link.page pageUid="{settings.dateMenuUid}" additionalParams="{tx_efblog_fe1:{year: year, month: month}}">
-										<tk:format.monthName month="{month}"/>{month}
+										<f:format.date date="10.{month}.2000" format="%B" />
 									</f:link.page>
 									<span class="count">({postsByMonth -> f:count()}
 									<f:if condition="<f:count subject='{postsByMonth}' /> == 1">
