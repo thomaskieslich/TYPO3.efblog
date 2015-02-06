@@ -56,13 +56,13 @@ $(function () {
 
 	$.each(expanded, function () {
 		$('#' + this).show();
-	})
+	});
 
 	$('.tx-efblog-widget-content .year').click(function () {
 		$(this).next().slideToggle('300', function () {
 			updateCookie(this);
 		});
-	})
+	});
 
 	// Update the Cookie
 	function updateCookie(el) {

@@ -28,7 +28,7 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Format;
  ***************************************************************/
 
 /**
- * Property ViewHelper
+ * Month Name ViewHelper
  *
  * @package Efblog
  * @subpackage ViewHelpers
@@ -40,7 +40,7 @@ class MonthNameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 	 * @return string
 	 */
 	public function render($month) {
-		$monthName = strftime("%B", strtotime("$month/28/2000"));
+		$monthName = strftime('%B', strtotime('$month/28/2000'));
 
 		return $monthName;
 	}
