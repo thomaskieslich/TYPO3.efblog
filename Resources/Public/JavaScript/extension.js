@@ -77,7 +77,6 @@ $(function () {
 			expires: cookieExpires
 		});
 	}
-
 });
 
 // Return a unique array.
