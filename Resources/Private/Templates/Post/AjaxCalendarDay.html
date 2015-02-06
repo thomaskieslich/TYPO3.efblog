@@ -1,0 +1,10 @@
+<h2>{date ->f:format.date(format: '%d. %B %Y')}</h2>
+<f:for each="{posts}" as="post">
+	<p class="toggler">{post.date->f:format.date(format: '%H:%m')} <a href="#">{post.title}</a><span class="foldSign">&nbsp;</span></p>
+	{post.content.1.header}
+	<div class="detail">
+		{post.content.0.bodytext -> f:format.html() ->
+				f:format.crop(maxCharacters: '{settings.listView.cropText}',
+				append: '{f:translate(key : "teaser_more")}')}
+	</div>
+</f:for>

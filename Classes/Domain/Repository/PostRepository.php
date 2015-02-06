@@ -80,7 +80,7 @@ class PostRepository extends Repository {
 		}
 
 		//date
-		if ($this->createDateTimeConstraint($query, $settings)) {
+		if ($settings['year'] || $settings['month'] || $settings['day']) {
 			$constraints[] = $this->createDateTimeConstraint($query, $settings);
 		}
 

@@ -1,0 +1,9 @@
+//Vars
+$image-path: '../Images/';
+$font-path: '../Fonts/';
+
+//Imports
+@import "Bourbon/bourbon";
+@import "Parts/Socialshareprivacy";
+@import "Parts/Datepick";
+@import "Parts/Extension";

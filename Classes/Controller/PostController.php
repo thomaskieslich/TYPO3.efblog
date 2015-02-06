@@ -170,50 +170,51 @@ class PostController extends BaseController {
 		$this->settings['listView']['sortDirection'] = asc;
 
 		$request = $this->request->getArguments();
-		if (isset($request['year'])) {
-			$this->settings['year'] = $this->request->getArgument('year');
+		if (isset($request['date'])) {
+			$date = date_parse($this->request->getArgument('date'));
+			$this->settings['year'] = $date['year'];
+			$this->settings['month'] = $date['month'];
+			$this->settings['day'] = $date['day'];
 		}
 
-		if (isset($request['month'])) {
-			$this->settings['month'] = $this->request->getArgument('month');
-		}
-
-		if (isset($request['day'])) {
-			$this->settings['day'] = $this->request->getArgument('day');
-		}
-
-		$dates = array();
 		$posts = $this->postRepository->findPosts($this->settings);
-		if ($posts->count() > 0) {
-			foreach ($posts as $post) {
-				$date = $post->getDate();
-				$contentObject = $this->configurationManager->getContentObject();
-				$content = $post->getContent()->toArray();
-				if ($content) {
-					$details = $content[0]->getBodytext();
-					$details = $contentObject->parseFunc($details, array(), '< lib.parseFunc_RTE');
-				} else {
-					$details = '';
-				}
-				$dates[] = array(
-						'date' => strftime('%e. %B %Y', $date->format('U')),
-						'time' => strftime('%H:%M', $date->format('U')),
-						'title' => $post->getTitle(),
-						'details' => $details,
-						'post' => $post->getUid()
-				);
-			}
-		} else {
-			$dates[] = array(
-					'date' => strftime('%e. %B %Y', time()),
-					'time' => '',
-					'title' => 'Keine Termine für diesen Tag.',
-					'details' => '',
-					'post' => 0
-			);
-		}
+		$this->view->assign('date', new \DateTime($this->request->getArgument('date')));
+		$this->view->assign('posts', $posts);
+		$html = $this->view->render();
+		return trim($html);
 
-		return json_encode($dates);
+
+//		$dates = array();
+//		if ($posts->count() > 0) {
+//			foreach ($posts as $post) {
+//				$date = $post->getDate();
+//				$contentObject = $this->configurationManager->getContentObject();
+//				$content = $post->getContent()->toArray();
+//				if ($content) {
+//					$details = $content[0]->getBodytext();
+//					$details = $contentObject->parseFunc($details, array(), '< lib.parseFunc_RTE');
+//				} else {
+//					$details = '';
+//				}
+//				$dates[] = array(
+//						'date' => strftime('%e. %B %Y', $date->format('U')),
+//						'time' => strftime('%H:%M', $date->format('U')),
+//						'title' => $post->getTitle(),
+//						'details' => $details,
+//						'post' => $post->getUid()
+//				);
+//			}
+//		} else {
+//			$dates[] = array(
+//					'date' => strftime('%e. %B %Y', time()),
+//					'time' => '',
+//					'title' => 'Keine Termine für diesen Tag.',
+//					'details' => '',
+//					'post' => 0
+//			);
+//		}
+//
+//		return json_encode($dates);
 	}
 
 	/**
@@ -237,10 +238,11 @@ class PostController extends BaseController {
 		$monthDates = array();
 		foreach ($this->postRepository->findPosts($this->settings) as $mposts) {
 			$date = $mposts->getDate();
-			$monthDates[] = $date->format('Y-m-d');
+			$date->setTime(12, 00, 00);
+			$monthDates[] = $date->format('U') * 1000;
 		}
 
-		return json_encode($monthDates);
+		return json_encode(array_unique($monthDates));
 	}
 
 	/**

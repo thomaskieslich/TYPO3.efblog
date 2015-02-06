@@ -1,12 +1,15 @@
 page {
 	includeCSS {
-		tx_efblog = EXT:efblog/Resources/Public/Styles/extension.css
-		tx_efblog_uibase = EXT:efblog/Resources/Public/Styles/uithemes/base/jquery.ui.base.css
-		tx_efblog_uitheme = EXT:efblog/Resources/Public/Styles/uithemes/smoothness/jquery-ui-1.8.14.custom.css
+		tx_efblog = EXT:efblog/Resources/Public/Styles/Extension.css
 	}
 	includeJSFooterlibs {
 		jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
 		jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
+		jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
+		datepick_plugin = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.plugin.min.js
+		datepick = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick.min.js
+		datepick_de = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick-de.js
+		calendar = EXT:efblog/Resources/Public/JavaScript/calendar.js
 		tx_efblog = EXT:efblog/Resources/Public/JavaScript/extension.js
 	}
 }
