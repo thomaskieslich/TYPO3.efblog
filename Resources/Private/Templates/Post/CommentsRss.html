@@ -5,7 +5,7 @@
 		<title>{post.title}</title>
 		<description>{settings.rss.description}</description>
 		<link>{baseUrl}</link>
-		<atom:link href="{f:uri.page(pageUid: '{settings.detailUid}', additionalParams: '{tx_efblog_fe1:{post : post}}', noCacheHash: '1', pageType: '101', absolute: 'TRUE') -> f:format.htmlentities()}" rel="self" type="application/rss+xml" />
+		<atom:link href="{f:uri.page(pageUid: '{pid}', additionalParams: '{tx_efblog_fe1:{post : post}}', noCacheHash: '1', pageType: '101', absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
 		<lastBuildDate>{date}</lastBuildDate>
 		<image>
 		<link>{baseUrl}</link>

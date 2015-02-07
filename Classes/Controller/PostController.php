@@ -314,6 +314,7 @@ class PostController extends BaseController {
 		$this->view->assign('rssItems', $rssItems);
 		$this->view->assign('date', date(DATE_RSS, $date));
 		$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
+		$this->view->assign('pid', intval($GLOBALS['TSFE']->id));
 	}
 
 	/**
@@ -348,6 +349,7 @@ class PostController extends BaseController {
 			$this->view->assign('rssItems', $rssItems);
 			$this->view->assign('date', date(DATE_RSS, $date));
 			$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
+			$this->view->assign('pid', intval($GLOBALS['TSFE']->id));
 		}
 	}
 
@@ -416,6 +418,7 @@ class PostController extends BaseController {
 		$this->view->assign('rssItems', $rssItems);
 		$this->view->assign('date', date(DATE_RSS, $date));
 		$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
+		$this->view->assign('pid', intval($GLOBALS['TSFE']->id));
 	}
 
 	/**

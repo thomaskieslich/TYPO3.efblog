@@ -5,7 +5,7 @@
 		<title>{settings.rss.title}</title>
 		<description>{settings.rss.description}</description>
 		<link>{baseUrl}</link>
-		<atom:link href="{f:uri.page(pageUid: '{settings.listUid}', pageType: '100', absolute: 'TRUE') -> f:format.htmlentities()}" rel="self" type="application/rss+xml" />
+		<atom:link href="{f:uri.page(pageUid: '{pid}', pageType: '100', absolute: 'TRUE')}" rel="self" type="application/rss+xml" />
 		<lastBuildDate>{date}</lastBuildDate>
 		<image>
 		<link>{baseUrl}</link>
