@@ -26,16 +26,19 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Widget\Controller;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 /**
  * Controller for Paginate
  */
-class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController {
+class PaginateController extends AbstractWidgetController {
 
 	/**
 	 * @var array
 	 */
-	protected $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99, 'addQueryStringMethod' => '');
+	protected $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE,
+			'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99, 'addQueryStringMethod' => '');
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
@@ -58,11 +61,21 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 	protected $numberOfPages = 1;
 
 	/**
+	 * @var int
+	 */
+	protected $displayRangeStart;
+
+	/**
+	 * @var int
+	 */
+	protected $displayRangeEnd;
+
+	/**
 	 * @return void
 	 */
 	public function initializeAction() {
 		$this->objects = $this->widgetConfiguration['objects'];
-		\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'], FALSE);
+		ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'], FALSE);
 		$this->numberOfPages = ceil(count($this->objects) / (int)$this->configuration['itemsPerPage']);
 		$this->maximumNumberOfLinks = (int)$this->configuration['maximumNumberOfLinks'];
 	}

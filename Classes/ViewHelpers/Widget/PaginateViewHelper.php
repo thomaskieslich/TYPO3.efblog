@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Widget;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
 
 /**
@@ -40,12 +41,13 @@ class PaginateViewHelper extends AbstractWidgetViewHelper {
 	protected $controller;
 
 	/**
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
+	 * @param QueryResultInterface $objects
 	 * @param string $as
 	 * @param array $configuration
 	 * @return string
 	 */
-	public function render(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects, $as, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99)) {
+	public function render(QueryResultInterface $objects, $as, array $configuration =
+	array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99)) {
 		return $this->initiateSubRequest();
 	}
 }

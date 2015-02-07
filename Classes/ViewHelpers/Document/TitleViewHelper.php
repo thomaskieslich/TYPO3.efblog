@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Document;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Title ViewHelper
@@ -33,7 +34,7 @@ namespace ThomasKieslich\Efblog\ViewHelpers\Document;
  * @package Efblog
  * @subpackage ViewHelpers
  */
-class TitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class TitleViewHelper extends AbstractViewHelper {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
@@ -60,7 +61,6 @@ class TitleViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
 		$this->contentObject = $this->configurationManager->getContentObject();
 		$renderedContent = $this->renderChildren();
 		$existingTitle = $GLOBALS['TSFE']->page['title'];
-		$newTitle = '';
 		if ($renderedContent) {
 			//reset noPageTitle
 			if ($GLOBALS['TSFE']->config['config']['noPageTitle'] > 0) {

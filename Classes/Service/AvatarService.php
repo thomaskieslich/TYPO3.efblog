@@ -35,7 +35,7 @@ class AvatarService implements SingletonInterface {
 
 	/**
 	 * @param $email
-	 * @return array|null
+	 * @return array
 	 */
 	static public function findAvatarByEmail($email) {
 		$avatar = NULL;
@@ -51,8 +51,8 @@ class AvatarService implements SingletonInterface {
 			$avatar = explode(',', $value['image']);
 
 			return $avatar[0];
-		} else {
-			return $avatar;
 		}
+
+		return $avatar;
 	}
 }

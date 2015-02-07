@@ -57,6 +57,8 @@ class MetaTagViewHelper extends AbstractTagBasedViewHelper {
 	 * @return void
 	*/
 	public function render($useCurrentDomain = FALSE, $forceAbsoluteUrl = FALSE) {
+		/** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $tsfe */
+		$tsfe = $GLOBALS['TSFE'];
 
 			// set current domain
 		if ($useCurrentDomain) {
@@ -72,9 +74,7 @@ class MetaTagViewHelper extends AbstractTagBasedViewHelper {
 		}
 
 		if (isset($this->arguments['content']) && !empty($this->arguments['content'])) {
-			$GLOBALS['TSFE']->getPageRenderer()->addMetaTag($this->tag->render());
+			$tsfe->getPageRenderer()->addMetaTag($this->tag->render());
 		}
 	}
 }
-
-?>
