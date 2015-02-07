@@ -4,7 +4,7 @@ namespace ThomasKieslich\Efblog\ViewHelpers;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011-2014 Thomas Kieslich
+ *  (c) 2011-2015 Thomas Kieslich
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
