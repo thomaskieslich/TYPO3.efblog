@@ -51,6 +51,8 @@ class BaseController extends ActionController {
 	protected $categoryRepository;
 
 	/**
+	 * Build Category Tree
+	 *
 	 * @param array $elements
 	 * @param int $parentId
 	 * @return array

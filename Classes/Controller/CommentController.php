@@ -80,8 +80,6 @@ class CommentController extends BaseController {
 		$this->redirect('detail', 'Post', NULL, array('post' => $post));
 	}
 
-
-
 	/**
 	 * check for possible spam
 	 *
@@ -104,19 +102,19 @@ class CommentController extends BaseController {
 			$authorPoints += substr_count($author, $keyword);
 		}
 		if ($authorPoints) {
-			$spampoints[authorPoints] = $authorPoints * $this->settings['comments']['spam']['authorKeywordsPoints'];
+			$spampoints['authorPoints'] = $authorPoints * $this->settings['comments']['spam']['authorKeywordsPoints'];
 		}
 
 		//email
 		$email = GeneralUtility::strtolower($newComment->getEmail());
 		if ($email && !substr_count($email, '@')) {
-			$spampoints[emailNoAt] = (int)$this->settings['comments']['spam']['emailNoAtPoints'];
+			$spampoints['emailNoAt'] = (int)$this->settings['comments']['spam']['emailNoAtPoints'];
 		}
 
 		//website
 		$websiteLength = strlen($newComment->getWebsite());
 		if ($websiteLength > $this->settings['comments']['spam']['websiteLength']) {
-			$spampoints[websiteLength] += $websiteLength - $this->settings['comments']['spam']['websiteLengthPoints'];
+			$spampoints['websiteLength'] += $websiteLength - $this->settings['comments']['spam']['websiteLengthPoints'];
 		}
 
 		//location
@@ -127,7 +125,7 @@ class CommentController extends BaseController {
 			$locationPoints += substr_count($location, $keyword);
 		}
 		if ($locationPoints) {
-			$spampoints[locationPoints] = $locationPoints * $this->settings['comments']['spam']['locationKeywordsPoints'];
+			$spampoints['locationPoints'] = $locationPoints * $this->settings['comments']['spam']['locationKeywordsPoints'];
 		}
 
 		//title
@@ -138,7 +136,7 @@ class CommentController extends BaseController {
 			$titlePoints += substr_count($title, $keyword);
 		}
 		if ($titlePoints) {
-			$spampoints[titlePoints] = $titlePoints * $this->settings['comments']['spam']['titleKeywordsPoints'];
+			$spampoints['titlePoints'] = $titlePoints * $this->settings['comments']['spam']['titleKeywordsPoints'];
 		}
 
 		//message
@@ -147,7 +145,7 @@ class CommentController extends BaseController {
 		//message length
 		$messageLength = strlen($message);
 		if ($messageLength < $this->settings['comments']['spam']['messageLength']) {
-			$spampoints[messageLength] += $this->settings['comments']['spam']['messageLengthPoints'];
+			$spampoints['messageLength'] += $this->settings['comments']['spam']['messageLengthPoints'];
 		}
 
 		//message start with
@@ -156,7 +154,7 @@ class CommentController extends BaseController {
 		$messageStartWords = GeneralUtility::trimExplode(',', $messageStartWith, TRUE);
 		$firstWord = in_array($messageArray[0], $messageStartWords);
 		if ($firstWord) {
-			$spampoints[messageStartWith] += $this->settings['comments']['spam']['messageStartWithPoints'];
+			$spampoints['messageStartWith'] += $this->settings['comments']['spam']['messageStartWithPoints'];
 		}
 
 		//message Keyword search
@@ -166,7 +164,7 @@ class CommentController extends BaseController {
 			$keywordPoints += substr_count($message, $keyword);
 		}
 		if ($keywordPoints) {
-			$spampoints[messageKeywords] += $keywordPoints * $this->settings['comments']['spam']['messageKeywordsPoints'];
+			$spampoints['messageKeywords'] += $keywordPoints * $this->settings['comments']['spam']['messageKeywordsPoints'];
 		}
 
 		//blockedIps
@@ -195,10 +193,12 @@ class CommentController extends BaseController {
 		}
 
 		if ($this->settings['comments']['messageSuperAdmin']) {
-			/** @var \ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository $htmlView */
+			/** @var \ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository */
 			$feuserRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository');
+			/** @var \TYPO3\CMS\Extbase\Persistence\QueryInterface $superAdmins */
 			$superAdmins = $feuserRepository->findByUsergroup((int)$this->settings['superAdminGroup']);
 			if (isset($superAdmins) && $superAdmins->count() > 0) {
+				/** @var \ThomasKieslich\Efblog\Domain\Model\Administrator $admin */
 				foreach ($superAdmins as $admin) {
 					$recipient[] = $admin->getEmail();
 				}
@@ -216,10 +216,12 @@ class CommentController extends BaseController {
 		$subject = 'new Comment: ' . $post->getTitle();
 
 		//render content
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$extbaseFrameworkConfiguration = $this->configurationManager->
+		getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 
 		//html Content
+		$htmlContent = NULL;
 		if ($this->settings['comments']['messageHtml']) {
 			$htmlTemplate = $this->settings['comments']['messsageHtmlTemplate'];
 			/** @var \TYPO3\CMS\Fluid\View\StandaloneView $htmlView */

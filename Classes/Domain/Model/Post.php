@@ -191,6 +191,9 @@ class Post extends AbstractEntity {
 		return $this->teaserLinkTitle;
 	}
 
+	/**
+	 * @return \DateTime
+	 */
 	public function getDate() {
 		return $this->date;
 	}

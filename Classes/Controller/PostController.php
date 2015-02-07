@@ -77,6 +77,7 @@ class PostController extends BaseController {
 	public function detailAction(Post $post = NULL) {
 
 		if ($post) {
+			/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content */
 			$content = $post->getContent();
 			$pages = array();
 			$divider = 0;
@@ -84,10 +85,10 @@ class PostController extends BaseController {
 			foreach ($content as $single) {
 				if ($single->getCtype() == $this->settings['detailView']['divType']) {
 					$divider++;
-					$pages[$divider][title] = $single->getHeader();
+					$pages[$divider]['title'] = $single->getHeader();
 				}
 				if ($single->getCtype() != $this->settings['detailView']['divType']) {
-					$pages[$divider][elements][] = $single;
+					$pages[$divider]['elements'][] = $single;
 				}
 			}
 			$this->view->assign('pages', $pages);
@@ -101,7 +102,7 @@ class PostController extends BaseController {
 			$this->view->assign('comments', $comments);
 
 			//Update Views
-			$views = $this->updateViews($post);
+			$this->updateViews($post);
 
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
@@ -135,9 +136,9 @@ class PostController extends BaseController {
 	public function categoryListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['category'])) {
-			$categoryRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\CategoryRepository');
-			$category = $categoryRepository->findByUid($this->request->getArgument('category'));
-			$categories = $this->findSubCategories($category, $categoryRepository);
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
+			$category = $this->categoryRepository->findByUid($this->request->getArgument('category'));
+			$categories = $this->findSubCategories($category);
 			$this->settings['listView']['category'] = $categories;
 			$this->view->assign('category', $category);
 		}
@@ -167,7 +168,7 @@ class PostController extends BaseController {
 	 */
 	public function ajaxCalendarDayAction() {
 		$this->settings['enableFuturePosts'] = 1;
-		$this->settings['listView']['sortDirection'] = asc;
+		$this->settings['listView']['sortDirection'] = 'asc';
 
 		$request = $this->request->getArguments();
 		if (isset($request['date'])) {
@@ -192,7 +193,7 @@ class PostController extends BaseController {
 	 */
 	public function ajaxCalendarMonthAction() {
 		$this->settings['enableFuturePosts'] = 1;
-		$this->settings['listView']['sortDirection'] = asc;
+		$this->settings['listView']['sortDirection'] = 'asc';
 
 		$request = $this->request->getArguments();
 		if (isset($request['year'])) {
@@ -205,6 +206,7 @@ class PostController extends BaseController {
 
 		$monthDates = array();
 		foreach ($this->postRepository->findPosts($this->settings) as $mposts) {
+			/** @var \DateTime $date */
 			$date = $mposts->getDate();
 			$date->setTime(12, 00, 00);
 			$monthDates[] = $date->format('U') * 1000;
@@ -255,15 +257,15 @@ class PostController extends BaseController {
 		$combinedSettings = array();
 
 		foreach ($combinedPid as $key => $value) {
-			$combinedSettings[$value][pid] = $combinedPid[$key];
-			$combinedSettings[$value][detail] = $detailUid[$key];
-			$combinedSettings[$value][name] = $combinedNames[$key];
+			$combinedSettings[$value]['pid'] = $combinedPid[$key];
+			$combinedSettings[$value]['detail'] = $detailUid[$key];
+			$combinedSettings[$value]['name'] = $combinedNames[$key];
 		}
 		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 
 		foreach ($posts as $post) {
-			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
-			$post->setBlogName($combinedSettings[$post->getPid()][name]);
+			$post->setDetailUid((int)$combinedSettings[$post->getPid()]['detail']);
+			$post->setBlogName($combinedSettings[$post->getPid()]['name']);
 			$combinedPosts->attach($post);
 		}
 		$this->view->assign('posts', $combinedPosts);
@@ -289,12 +291,15 @@ class PostController extends BaseController {
 			if ($rssDate > $date) {
 				$date = $rssDate;
 			}
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Content $content */
 			$content = $post->getContent();
 			//render Description
 			if ($post->getTeaserDescription()) {
 				$description = $post->getTeaserDescription();
 			} else {
 				$singleCounter = 0;
+				/** @var \ThomasKieslich\Efblog\Domain\Model\Content $element */
+				/** @var string $description */
 				foreach ($content as $element) {
 					if ($singleCounter == 0 && $element->getBodytext()) {
 						$description = $element->getBodytext();
@@ -304,7 +309,7 @@ class PostController extends BaseController {
 			}
 			$rssItems[$key]['description'] = strip_tags($description);
 			$categories = '';
-
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
 			foreach ($post->getCategories() as $category) {
 				$categories .= $category->getTitle() . ' ';
 			}
@@ -328,12 +333,15 @@ class PostController extends BaseController {
 			$postId = $request['post'];
 			$post = $this->postRepository->findByUid((int)$postId);
 			$rssItems = array();
+			/** @var float $date */
+			$date = 0;
 			if ($post->getComments()) {
 				$comments = $post->getComments()->toArray();
 				$comments = array_reverse($comments);
-				$date = 0;
+				/** @var \ThomasKieslich\Efblog\Domain\Model\Comment $comment */
 				foreach ($comments as $key => $comment) {
-					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . LocalizationUtility::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
+					$rssItems[$key]['title'] = $comment->getTitle() . ' ' .
+							LocalizationUtility::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
 					$rssItems[$key]['section'] = 'comment_' . $comment->getUid();
 					$rssItems[$key]['date'] = $comment->getDate();
 					$rssItems[$key]['message'] = $comment->getMessage();
@@ -367,38 +375,44 @@ class PostController extends BaseController {
 		$combinedNames = GeneralUtility::trimExplode(',', $this->settings['combinedNames'], TRUE);
 		$combinedSettings = array();
 		foreach ($combinedPid as $key => $value) {
-			$combinedSettings[$value][pid] = $combinedPid[$key];
-			$combinedSettings[$value][detail] = $detailUid[$key];
-			$combinedSettings[$value][name] = $combinedNames[$key];
+			$combinedSettings[$value]['pid'] = $combinedPid[$key];
+			$combinedSettings[$value]['detail'] = $detailUid[$key];
+			$combinedSettings[$value]['name'] = $combinedNames[$key];
 		}
 
 		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 		foreach ($posts as $post) {
-			$post->setDetailUid((int)$combinedSettings[$post->getPid()][detail]);
-			$post->setBlogName($combinedSettings[$post->getPid()][name]);
+			$post->setDetailUid((int)$combinedSettings[$post->getPid()]['detail']);
+			$post->setBlogName($combinedSettings[$post->getPid()]['name']);
 			$combinedPosts->attach($post);
 		}
 
 		$rssItems = array();
-
+		/** @var float $date */
 		$date = 0;
+		/** @var \ThomasKieslich\Efblog\Domain\Model\Post $post */
 		foreach ($combinedPosts as $key => $post) {
 			$rssItems[$key]['title'] = $post->getTitle();
 			$rssItems[$key]['date'] = $post->getDate();
 			$rssItems[$key]['post'] = $post->getUid();
 			$rssItems[$key]['comments'] = $post->getComments();
-			$rssItems[$key]['detailUid'] = $combinedSettings[$post->getPid()][detail];
+			$rssItems[$key]['detailUid'] = $combinedSettings[$post->getPid()]['detail'];
 			$rssDate = $post->getDate()->format('U');
 			if ($rssDate > $date) {
 				$date = $rssDate;
 			}
 
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Content $content */
 			$content = $post->getContent();
+
+			$description = '';
 			//render Description
 			if ($post->getTeaserDescription()) {
 				$description = $post->getTeaserDescription();
 			} else {
 				$singleCounter = 0;
+				/** @var \ThomasKieslich\Efblog\Domain\Model\Content $element */
+				/** @var string $description */
 				foreach ($content as $element) {
 					if ($singleCounter == 0 && $element->getBodytext()) {
 						$description = $element->getBodytext();
@@ -422,7 +436,11 @@ class PostController extends BaseController {
 	}
 
 	/**
-	 * @param $comments
+	 * Order Comments
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 *
+	 * @return array
 	 */
 	protected function orderComments($post) {
 		$comments = array();
@@ -442,7 +460,7 @@ class PostController extends BaseController {
 	/**
 	 * check comments allowed
 	 *
-	 * @param $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 * @return bool
 	 */
 	protected function checkAllowComments($post) {
@@ -481,7 +499,9 @@ class PostController extends BaseController {
 		}
 
 		//Superadmin
-		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) && in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])) {
+		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) &&
+				in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])
+		) {
 			$allowComments = TRUE;
 		}
 		if ($this->settings['comments']['allowComments'] == 0) {
@@ -494,12 +514,13 @@ class PostController extends BaseController {
 	/**
 	 * create Breadcrumb
 	 *
-	 * @param $post
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 * @return array
 	 */
 	protected function createBreadCrumb($post) {
 		$posts = $this->postRepository->findPosts($this->settings)->toArray();
 		$breadCrumb = array();
+		/** @var  \ThomasKieslich\Efblog\Domain\Model\Post $value */
 		foreach ($posts as $key => $value) {
 			if ($post->getUid() == $value->getUid()) {
 				$breadCrumb[0] = $posts[$key - 1];
@@ -531,7 +552,7 @@ class PostController extends BaseController {
 	 * create short description
 	 *
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Content $content
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ThomasKieslich\Efblog\Domain\Model\Content> $content
 	 * @return string
 	 */
 	protected function createDescription($post, $content) {
@@ -540,6 +561,8 @@ class PostController extends BaseController {
 			$description = $post->getTeaserDescription();
 		} else {
 			$singleCounter = 0;
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Content $element */
+			/** @var string $description */
 			foreach ($content as $element) {
 				if ($singleCounter == 0 && $element->getBodytext()) {
 					$description = $element->getBodytext();
@@ -547,7 +570,7 @@ class PostController extends BaseController {
 				}
 			}
 			$end = '.?!';
-			preg_match("/^[^{$end}]+[{$end}]/", $description, $sentence);
+			preg_match('/^[^{' . $end . '}]+[{' . $end . '}]/', $description, $sentence);
 			if ($sentence[0]) {
 				$description = strip_tags($sentence[0]);
 			}
@@ -561,21 +584,21 @@ class PostController extends BaseController {
 	/**
 	 * find Sub categories
 	 *
-	 * @param $category
-	 * @param $categoryRepository
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $parentCategory
 	 * @return string
 	 */
-	protected function findSubCategories($category, $categoryRepository) {
-		$subCategories = $category->getUid();
-		$childs = $categoryRepository->findChilds($category);
+	protected function findSubCategories($parentCategory) {
+		$subCategories = $parentCategory->getUid();
+		$childs = $this->categoryRepository->findChilds($parentCategory);
 		if ($childs) {
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
 			foreach ($childs as $category) {
 				$subCategories .= ',' . $category->getUid();
-				$childs = $categoryRepository->findChilds($category);
+				$childs = $this->categoryRepository->findChilds($category);
 				if ($childs) {
-					foreach ($childs as $category) {
-						$subCategories .= ',' . $category->getUid();
-						$childs = $categoryRepository->findChilds($category);
+					/** @var \ThomasKieslich\Efblog\Domain\Model\Category $childCategory */
+					foreach ($childs as $childCategory) {
+						$subCategories .= ',' . $childCategory->getUid();
 					}
 				}
 			}

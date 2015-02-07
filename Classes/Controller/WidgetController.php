@@ -49,7 +49,7 @@ class WidgetController extends BaseController {
 	 * @return void
 	 */
 	public function viewsWidgetAction() {
-		$this->settings['listView']['orderBy'] = views;
+		$this->settings['listView']['orderBy'] = 'views';
 		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
 	}
@@ -90,6 +90,7 @@ class WidgetController extends BaseController {
 	public function categoryWidgetAction() {
 		$query = $this->categoryRepository->findAll()->toArray();
 		$categories = array();
+		/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
 		foreach ($query as $key => $category) {
 			$categories[$key]['title'] = $category->getTitle();
 			$categories[$key]['uid'] = $category->getUid();

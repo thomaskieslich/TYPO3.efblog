@@ -287,7 +287,7 @@ class Comment extends AbstractEntity {
 	/**
 	 * Getter for date
 	 *
-	 * @return DateTime date
+	 * @return \DateTime date
 	 */
 	public function getDate() {
 		return $this->date;

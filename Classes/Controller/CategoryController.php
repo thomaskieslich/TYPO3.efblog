@@ -32,9 +32,16 @@ namespace ThomasKieslich\Efblog\Controller;
  */
 class CategoryController extends BaseController {
 
+	/**
+	 * Render Category Overview
+	 *
+	 * @return void
+	 */
 	public function categoryOverviewAction() {
 		$query = $this->categoryRepository->findAll()->toArray();
+		//** @var  $categories *
 		$categories = array();
+		/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
 		foreach ($query as $key => $category) {
 			$categories[$key]['title'] = $category->getTitle();
 			$categories[$key]['uid'] = $category->getUid();
