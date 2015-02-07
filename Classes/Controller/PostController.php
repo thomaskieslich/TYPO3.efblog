@@ -181,40 +181,8 @@ class PostController extends BaseController {
 		$this->view->assign('date', new \DateTime($this->request->getArgument('date')));
 		$this->view->assign('posts', $posts);
 		$html = $this->view->render();
+
 		return trim($html);
-
-
-//		$dates = array();
-//		if ($posts->count() > 0) {
-//			foreach ($posts as $post) {
-//				$date = $post->getDate();
-//				$contentObject = $this->configurationManager->getContentObject();
-//				$content = $post->getContent()->toArray();
-//				if ($content) {
-//					$details = $content[0]->getBodytext();
-//					$details = $contentObject->parseFunc($details, array(), '< lib.parseFunc_RTE');
-//				} else {
-//					$details = '';
-//				}
-//				$dates[] = array(
-//						'date' => strftime('%e. %B %Y', $date->format('U')),
-//						'time' => strftime('%H:%M', $date->format('U')),
-//						'title' => $post->getTitle(),
-//						'details' => $details,
-//						'post' => $post->getUid()
-//				);
-//			}
-//		} else {
-//			$dates[] = array(
-//					'date' => strftime('%e. %B %Y', time()),
-//					'time' => '',
-//					'title' => 'Keine Termine für diesen Tag.',
-//					'details' => '',
-//					'post' => 0
-//			);
-//		}
-//
-//		return json_encode($dates);
 	}
 
 	/**
@@ -311,12 +279,16 @@ class PostController extends BaseController {
 		$posts = $this->postRepository->findPosts($this->settings);
 		$rssItems = array();
 
+		$date = 0;
 		foreach ($posts as $key => $post) {
 			$rssItems[$key]['title'] = $post->getTitle();
 			$rssItems[$key]['date'] = $post->getDate();
 			$rssItems[$key]['post'] = $post->getUid();
 			$rssItems[$key]['comments'] = $post->getComments();
-
+			$rssDate = $post->getDate()->format('U');
+			if ($rssDate > $date) {
+				$date = $rssDate;
+			}
 			$content = $post->getContent();
 			//render Description
 			if ($post->getTeaserDescription()) {
@@ -340,6 +312,43 @@ class PostController extends BaseController {
 			$rssItems[$key]['views'] = $post->getViews();
 		}
 		$this->view->assign('rssItems', $rssItems);
+		$this->view->assign('date', date(DATE_RSS, $date));
+		$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
+	}
+
+	/**
+	 * get comments RSS
+	 *
+	 * @return void
+	 */
+	public function commentsRssAction() {
+		$request = $this->request->getArguments();
+		if (isset($request['post'])) {
+			$postId = $request['post'];
+			$post = $this->postRepository->findByUid((int)$postId);
+			$rssItems = array();
+			if ($post->getComments()) {
+				$comments = $post->getComments()->toArray();
+				$comments = array_reverse($comments);
+				$date = 0;
+				foreach ($comments as $key => $comment) {
+					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . LocalizationUtility::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
+					$rssItems[$key]['section'] = 'comment_' . $comment->getUid();
+					$rssItems[$key]['date'] = $comment->getDate();
+					$rssItems[$key]['message'] = $comment->getMessage();
+					$rssItems[$key]['post'] = $postId;
+					$rssDate = $comment->getDate()->format('U');
+					if ($rssDate > $date) {
+						$date = $rssDate;
+					}
+				}
+			}
+
+			$this->view->assign('post', $post);
+			$this->view->assign('rssItems', $rssItems);
+			$this->view->assign('date', date(DATE_RSS, $date));
+			$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
+		}
 	}
 
 	/**
@@ -370,12 +379,17 @@ class PostController extends BaseController {
 
 		$rssItems = array();
 
+		$date = 0;
 		foreach ($combinedPosts as $key => $post) {
 			$rssItems[$key]['title'] = $post->getTitle();
 			$rssItems[$key]['date'] = $post->getDate();
 			$rssItems[$key]['post'] = $post->getUid();
 			$rssItems[$key]['comments'] = $post->getComments();
 			$rssItems[$key]['detailUid'] = $combinedSettings[$post->getPid()][detail];
+			$rssDate = $post->getDate()->format('U');
+			if ($rssDate > $date) {
+				$date = $rssDate;
+			}
 
 			$content = $post->getContent();
 			//render Description
@@ -400,35 +414,8 @@ class PostController extends BaseController {
 			$rssItems[$key]['views'] = $post->getViews();
 		}
 		$this->view->assign('rssItems', $rssItems);
-	}
-
-	/**
-	 * get comments RSS
-	 *
-	 * @return void
-	 */
-	public function commentsRssAction() {
-		$request = $this->request->getArguments();
-		if (isset($request['post'])) {
-			$postId = $request['post'];
-			$post = $this->postRepository->findByUid((int)$postId);
-			$rssItems = array();
-			if ($post->getComments()) {
-				$comments = $post->getComments()->toArray();
-				$comments = array_reverse($comments);
-				foreach ($comments as $key => $comment) {
-					$rssItems[$key]['title'] = $comment->getTitle() . ' ' . LocalizationUtility::translate('comment_rss_from', $this->extensionName) . ' ' . $comment->getAuthor();
-					$rssItems[$key]['section'] = 'comment_' . $comment->getUid();
-					$rssItems[$key]['date'] = $comment->getDate();
-					$rssItems[$key]['message'] = $comment->getMessage();
-					$rssItems[$key]['post'] = $postId;
-				}
-			}
-
-			$this->view->assign('post', $post);
-			$this->view->assign('server', $_SERVER['SERVER_NAME']);
-			$this->view->assign('rssItems', $rssItems);
-		}
+		$this->view->assign('date', date(DATE_RSS, $date));
+		$this->view->assign('baseUrl', $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']);
 	}
 
 	/**

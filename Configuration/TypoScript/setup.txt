@@ -199,9 +199,7 @@ plugin.tx_efblog {
 			maxEntries = 25
 			title = Blog RSS
 			description = RSS for Blog
-			blogUrl =
-			atomUrl =
-			image =
+			image = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
 		}
 	}
 

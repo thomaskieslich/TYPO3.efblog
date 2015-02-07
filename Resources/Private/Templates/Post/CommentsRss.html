@@ -2,20 +2,21 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{f:translate(key : 'comment_rss_title')} {post.title}</title>
-		<description>Blog über TYPO3, Actionscript und andere Dinge.</description>
-		<link>http://{server}/</link>
-		<atom:link href="http://{server}/comments.xml" rel="self" type="application/rss+xml" />
+		<title>{post.title}</title>
+		<description>{settings.rss.description}</description>
+		<link>{baseUrl}</link>
+		<atom:link href="{f:uri.page(pageUid: '{settings.detailUid}', additionalParams: '{tx_efblog_fe1:{post : post}}', noCacheHash: '1', pageType: '101', absolute: 'TRUE') -> f:format.htmlentities()}" rel="self" type="application/rss+xml" />
+		<lastBuildDate>{date}</lastBuildDate>
 		<image>
-		<link>http://www.thomaskieslich.net</link>
-		<title>Blog Thomas Kieslich</title>
-		<url>http://www.thomaskieslich.net/fileadmin/media/layout/rss.png</url>
+		<link>{baseUrl}</link>
+		<title>{post.title}</title>
+		<url>{settings.rss.image}</url>
 		</image>
 		<f:for each="{rssItems}" as="rssItem">
 			<item>
 				<title>{rssItem.title}</title>
-				<link><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></link>
-				<guid><tk:format.raw value="<![CDATA[" />{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}<tk:format.raw value="]]>" /></guid>
+				<link><f:format.cdata>{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}</f:format.cdata></link>
+				<guid><f:format.cdata>{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : '{rssItem.section}', absolute: '1', noCacheHash : '1')}</f:format.cdata></guid>
 				<description>{rssItem.message -> f:format.crop(maxCharacters: '600')}</description>
 				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
 			</item>
