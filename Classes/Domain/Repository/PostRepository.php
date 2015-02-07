@@ -40,7 +40,7 @@ class PostRepository extends Repository {
 	 * find posts by Settings
 	 *
 	 * @param $settings
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findPosts($settings) {
 		$query = $this->createQuery();
@@ -66,6 +66,11 @@ class PostRepository extends Repository {
 	}
 
 	//Utilities
+	/**
+	 * @param QueryInterface $query
+	 * @param $settings
+	 * @return array
+	 */
 	protected function createConstraintsfromSettings(QueryInterface $query, $settings) {
 		$constraints = array();
 
@@ -161,7 +166,7 @@ class PostRepository extends Repository {
 		$archiveMode = $settings['listView']['displayArchived'];
 		// daysToArchive
 		if ($settings['listView']['daysToArchive']) {
-			$archiveDate = mktime(0, 0, 0, date("m"), date("d") - (int)$settings['listView']['daysToArchive'], date("Y"));
+			$archiveDate = mktime(0, 0, 0, date('m'), date('d') - (int)$settings['listView']['daysToArchive'], date('Y'));
 
 			if ($archiveMode == 'archived') {
 				$archiveConstraints[] = $query->lessThan('date', $archiveDate);
@@ -279,6 +284,10 @@ class PostRepository extends Repository {
 		return $orderings;
 	}
 
+	/**
+	 * @param Category $category
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function countCategoryPosts(Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
@@ -288,6 +297,10 @@ class PostRepository extends Repository {
 		return $query->execute();
 	}
 
+	/**
+	 * @param string $searchString
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function searchPost($searchString = '') {
 		$query = $this->createQuery();
 

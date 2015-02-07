@@ -72,6 +72,10 @@ class CommentRepository extends Repository {
 		return $query->execute();
 	}
 
+	/**
+	 * @param $settings
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function findLatestComments($settings) {
 		$query = $this->createQuery();
 

@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use ThomasKieslich\Efblog\Domain\Model\Category;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -35,6 +36,10 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CategoryRepository extends Repository {
 
+	/**
+	 * @param $settings
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
 	public function findMainCategories($settings) {
 		$query = $this->createQuery();
 		$constraint = NULL;
@@ -59,7 +64,11 @@ class CategoryRepository extends Repository {
 		return $query->execute();
 	}
 
-	public function findChilds(\ThomasKieslich\Efblog\Domain\Model\Category $category) {
+	/**
+	 * @param Category $category
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findChilds(Category $category) {
 		$query = $this->createQuery();
 		$query->matching(
 			$query->equals('parent_category', $category)
@@ -72,6 +81,11 @@ class CategoryRepository extends Repository {
 		return $query->execute();
 	}
 
+	/**
+	 * @param QueryInterface $query
+	 * @param $settings
+	 * @return null|object|\TYPO3\CMS\Extbase\Persistence\Generic\Qom\NotInterface
+	 */
 	protected function createCategoryConstraint(QueryInterface $query, $settings) {
 		$constraint = NULL;
 		$categoryConstraints = array();
