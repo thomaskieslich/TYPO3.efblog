@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -113,9 +114,12 @@ class Category extends AbstractEntity {
 	 * @return string $image
 	 */
 	public function getImage() {
-		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
-		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category', 'tx_efblog_domain_model_category_image', $this->getUid());
+		$fileRepository = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category',
+				'tx_efblog_domain_model_category_image',
+				$this->getUid());
 		$files = array();
+		/** @var \TYPO3\CMS\Core\Resource\FileReference $file */
 		foreach ($fileObjects as $file) {
 			$original = $file->getOriginalFile()->getProperties();
 			$reference = $file->getReferenceProperties();
@@ -124,15 +128,16 @@ class Category extends AbstractEntity {
 				$title = $original['title'];
 			}
 			$description = $reference['description'];
-			if (!description) {
+			if (!$description) {
 				$description = $original['description'];
 			}
 			$files[] = array(
-				'title' => $title,
-				'description' => $description,
-				'publicUrl' => $file->getPublicUrl(TRUE)
+					'title' => $title,
+					'description' => $description,
+					'publicUrl' => $file->getPublicUrl(TRUE)
 			);
 		}
+
 		return $files;
 	}
 

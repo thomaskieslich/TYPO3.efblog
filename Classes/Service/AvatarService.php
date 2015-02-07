@@ -33,7 +33,11 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class AvatarService implements SingletonInterface {
 
-	public function findAvatarByEmail($email) {
+	/**
+	 * @param $email
+	 * @return array|null
+	 */
+	static public function findAvatarByEmail($email) {
 		$avatar = NULL;
 
 		$select = 'image';
@@ -47,5 +51,6 @@ class AvatarService implements SingletonInterface {
 		} else {
 			return $avatar;
 		}
+		return FALSE;
 	}
 }

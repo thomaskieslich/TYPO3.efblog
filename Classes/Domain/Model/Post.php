@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -77,14 +78,14 @@ class Post extends AbstractEntity {
 	/**
 	 * start date
 	 *
-	 * @var DateTime $date
+	 * @var /DateTime $date
 	 */
 	protected $date;
 
 	/**
 	 * archive date
 	 *
-	 * @var DateTime $archive
+	 * @var /DateTime $archive
 	 */
 	protected $archive;
 
@@ -167,14 +168,23 @@ class Post extends AbstractEntity {
 	 */
 	protected $blogName;
 
+	/**
+	 * @return string
+	 */
 	public function getTitle() {
 		return $this->title;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getHidden() {
 		return $this->hidden;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getTeaserLink() {
 		$link = explode(' ', $this->teaserLink);
 		if (count($link) == 1) {
@@ -187,6 +197,9 @@ class Post extends AbstractEntity {
 		return $link;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getTeaserLinkTitle() {
 		return $this->teaserLinkTitle;
 	}
@@ -198,22 +211,37 @@ class Post extends AbstractEntity {
 		return $this->date;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getArchive() {
 		return $this->archive;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getTags() {
 		return $this->tags;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getAllowComments() {
 		return $this->allowComments;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getTeaserOptions() {
 		return $this->teaserOptions;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getTeaserDescription() {
 		return $this->teaserDescription;
 	}
@@ -224,10 +252,12 @@ class Post extends AbstractEntity {
 	 * @return string void
 	 */
 	public function getTeaserImage() {
-		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
-		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'tx_efblog_domain_model_post_teaser_image', $this->getUid());
+		$fileRepository = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_post', 'tx_efblog_domain_model_post_teaser_image',
+				$this->getUid());
 
 		$files = array();
+		/** @var \TYPO3\CMS\Core\Resource\FileReference $file */
 		foreach ($fileObjects as $file) {
 			$original = $file->getOriginalFile()->getProperties();
 			$reference = $file->getReferenceProperties();
@@ -238,7 +268,7 @@ class Post extends AbstractEntity {
 			}
 
 			$description = $reference['description'];
-			if (!description) {
+			if (!$description) {
 				$description = $original['description'];
 			}
 
@@ -289,7 +319,7 @@ class Post extends AbstractEntity {
 	/**
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $comment
 	 */
-	public function addComment(\ThomasKieslich\Efblog\Domain\Model\Comment $comment) {
+	public function addComment($comment) {
 		$this->comments->attach($comment);
 	}
 
@@ -311,6 +341,9 @@ class Post extends AbstractEntity {
 		return $this->content;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getDetailUid() {
 		return $this->detailUid;
 	}
@@ -322,6 +355,9 @@ class Post extends AbstractEntity {
 		$this->detailUid = $detailUid;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getBlogName() {
 		return $this->blogName;
 	}
@@ -341,15 +377,24 @@ class Post extends AbstractEntity {
 	}
 
 	//Helper
+	/**
+	 * @return mixed
+	 */
 	public function getYearOf() {
-		return $this->date->format('Y');
+		return $this->getDate()->format('Y');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getMonthOf() {
-		return $this->date->format('m');
+		return $this->getDate()->format('m');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getDayOf() {
-		return $this->date->format('d');
+		return $this->getDate()->format('d');
 	}
 }

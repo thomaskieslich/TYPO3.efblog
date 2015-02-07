@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use ThomasKieslich\Efblog\Service\AvatarService;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -91,7 +92,7 @@ class Comment extends AbstractEntity {
 	protected $link;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $date;
 
@@ -123,11 +124,16 @@ class Comment extends AbstractEntity {
 	 */
 	protected $avatar;
 
-
+	/**
+	 * @return int
+	 */
 	public function getHidden() {
 		return $this->hidden;
 	}
 
+	/**
+	 * @param $hidden
+	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
 	}
@@ -277,10 +283,10 @@ class Comment extends AbstractEntity {
 	/**
 	 * Setter for date
 	 *
-	 * @param DateTime $date date
+	 * @param \DateTime $date
 	 * @return void
 	 */
-	public function setDate(DateTime $date) {
+	public function setDate($date) {
 		$this->date = $date;
 	}
 
@@ -293,10 +299,16 @@ class Comment extends AbstractEntity {
 		return $this->date;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getSpampoints() {
 		return $this->spampoints;
 	}
 
+	/**
+	 * @param $spampoints
+	 */
 	public function setSpampoints($spampoints) {
 		$this->spampoints = $spampoints;
 	}
@@ -311,6 +323,9 @@ class Comment extends AbstractEntity {
 		$this->spamCategories = serialize($spamCategories);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getSpamCategories() {
 		return unserialize($this->spamCategories);
 	}
@@ -354,11 +369,13 @@ class Comment extends AbstractEntity {
 	}
 
 	//helper
-
+	/**
+	 * @return array|null
+	 */
 	public function getAvatar() {
 		$avatarImage = NULL;
 		if ($this->email) {
-			$avatarImage = \ThomasKieslich\Efblog\Service\AvatarService::findAvatarByEmail($this->email);
+			$avatarImage = AvatarService::findAvatarByEmail($this->email);
 		}
 		return $avatarImage;
 	}

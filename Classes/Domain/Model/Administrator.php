@@ -39,6 +39,9 @@ class Administrator extends FrontendUser {
 	 */
 	protected $profilepage;
 
+	/**
+	 * @return int
+	 */
 	public function getProfilepage() {
 		return $this->profilepage;
 	}
