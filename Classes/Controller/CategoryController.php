@@ -39,7 +39,6 @@ class CategoryController extends BaseController {
 	 */
 	public function categoryOverviewAction() {
 		$query = $this->categoryRepository->findAll()->toArray();
-		//** @var  $categories *
 		$categories = array();
 		/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
 		foreach ($query as $key => $category) {

@@ -1,13 +1,19 @@
-<f:layout name="Default" />
-<f:section name="content">
-    <div class="tx-efblog-widget-container">
-		<h1>{f:translate(key : 'widget_category_header')}</h1>
-        <div class="tx-efblog-widget-content">
-			<ul>
-				<f:for each="{categories}" as="category">
-					<f:render partial="CategoryElement" arguments="{category : category}" />
-				</f:for>
-			</ul>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<div class="tx-efblog-widget-container">
+			<h1>{f:translate(key : 'widget_category_header')}</h1>
+
+			<div class="tx-efblog-widget-content">
+				<ul>
+					<f:for each="{categories}" as="category">
+						<f:render partial="CategoryElement" arguments="{category : category}" section="main"/>
+					</f:for>
+				</ul>
+			</div>
 		</div>
-    </div>
-</f:section>
+	</f:section>
+
+</div>

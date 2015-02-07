@@ -1,133 +1,139 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-    <meta type="array">
-        <type>module</type>
-        <description>Language labels for the Simple Blog extension in the FRONTEND</description>
-        <generator>LFEditor</generator>
-        <attributes type="array">
-            <source-language>en</source-language>
-            <target-language>de</target-language>
-            <datatype>plaintext</datatype>
-            <original>messages</original>
-            <date>2015-01-31T21:07:06Z</date>
-        </attributes>
-    </meta>
-    <data type="array">
-        <languageKey index="default" type="array">
-            <label index="category">Category</label>
-            <label index="comment">Comment</label>
-            <label index="comment_form_author">Name*</label>
-            <label index="comment_form_disclaimer">note, some comments must be approved.</label>
-            <label index="comment_form_email">Email (for Garvatar, not public)</label>
-            <label index="comment_form_link">Link</label>
-            <label index="comment_form_location">Location</label>
-            <label index="comment_form_message">your message*</label>
-            <label index="comment_form_submit">submit Comment</label>
-            <label index="comment_form_title">Title*</label>
-            <label index="comment_form_website">Website</label>
-            <label index="comment_message_hidden">Hidden, must be aproved.</label>
-            <label index="comment_message_message">message:</label>
-            <label index="comment_message_spampoints">Spampoints</label>
-            <label index="comment_rss_from">from</label>
-            <label index="comment_rss_title">Comments for Post:</label>
-            <label index="comments_add">add Comment</label>
-            <label index="comments_author">(author)</label>
-            <label index="comments_comment">Comment</label>
-            <label index="comments_comments">Comments</label>
-            <label index="comments_from">from</label>
-            <label index="comments_reply">reply to this comment</label>
-            <label index="comments_reply_prefix">@</label>
-            <label index="comments_rss">subscribe to comment RSSt</label>
-            <label index="comments_wrote">wrote at</label>
-            <label index="detail_backto_list">Listview</label>
-            <label index="detail_from">from</label>
-            <label index="detail_related_post">related posts</label>
-            <label index="detail_views">Views</label>
-            <label index="link_backTo">back</label>
-            <label index="list_archive_result">Result for</label>
-            <label index="list_archive_results">Results for</label>
-            <label index="list_category_result">Result for Category:</label>
-            <label index="list_category_results">Results for Category:</label>
-            <label index="notice_error">Error!</label>
-            <label index="notice_noPost">There is no Post to show!</label>
-            <label index="post">Post</label>
-            <label index="post_category">post categories</label>
-            <label index="post_comments">post comments</label>
-            <label index="post_title">title</label>
-            <label index="property_author">Name</label>
-            <label index="property_comment">Comment</label>
-            <label index="property_email">E-Mail</label>
-            <label index="read_more">more</label>
-            <label index="teaser_more">…</label>
-            <label index="view_search_result">Result for</label>
-            <label index="view_search_results">Results for</label>
-            <label index="widget.pagination.first">first</label>
-            <label index="widget.pagination.last">last</label>
-            <label index="widget.pagination.next">next</label>
-            <label index="widget.pagination.previous">previous</label>
-            <label index="widget_category_header">Categories</label>
-            <label index="widget_category_more">…</label>
-            <label index="widget_dateMenu_header">by Date</label>
-            <label index="widget_dateMenu_item">Item</label>
-            <label index="widget_dateMenu_items">Items</label>
-            <label index="widget_latestComments_header">Latest Comments</label>
-            <label index="widget_latestComments_more">…</label>
-            <label index="widget_latestPosts_header">Latest Posts</label>
-            <label index="widget_latestPosts_more">…</label>
-            <label index="widget_search_header">Search Post</label>
-            <label index="widget_views_header">Most Views</label>
-            <label index="widget_views_more">…</label>
-        </languageKey>
-        <languageKey index="af"></languageKey>
-        <languageKey index="ar"></languageKey>
-        <languageKey index="bs"></languageKey>
-        <languageKey index="bg"></languageKey>
-        <languageKey index="ca"></languageKey>
-        <languageKey index="ch"></languageKey>
-        <languageKey index="cs"></languageKey>
-        <languageKey index="da"></languageKey>
-        <languageKey index="de">EXT:efblog/Resources/Private/Language/de.locallang.xml</languageKey>
-        <languageKey index="el"></languageKey>
-        <languageKey index="eo"></languageKey>
-        <languageKey index="es"></languageKey>
-        <languageKey index="et"></languageKey>
-        <languageKey index="eu"></languageKey>
-        <languageKey index="fa"></languageKey>
-        <languageKey index="fi"></languageKey>
-        <languageKey index="fo"></languageKey>
-        <languageKey index="fr"></languageKey>
-        <languageKey index="fr_CA"></languageKey>
-        <languageKey index="gl"></languageKey>
-        <languageKey index="he"></languageKey>
-        <languageKey index="hi"></languageKey>
-        <languageKey index="hr"></languageKey>
-        <languageKey index="hu"></languageKey>
-        <languageKey index="is"></languageKey>
-        <languageKey index="it"></languageKey>
-        <languageKey index="ja"></languageKey>
-        <languageKey index="ka"></languageKey>
-        <languageKey index="kl"></languageKey>
-        <languageKey index="km"></languageKey>
-        <languageKey index="ko"></languageKey>
-        <languageKey index="lt"></languageKey>
-        <languageKey index="lv"></languageKey>
-        <languageKey index="ms"></languageKey>
-        <languageKey index="nl"></languageKey>
-        <languageKey index="no"></languageKey>
-        <languageKey index="pl"></languageKey>
-        <languageKey index="pt"></languageKey>
-        <languageKey index="pt_BR"></languageKey>
-        <languageKey index="ro"></languageKey>
-        <languageKey index="ru"></languageKey>
-        <languageKey index="sk"></languageKey>
-        <languageKey index="sl"></languageKey>
-        <languageKey index="sq"></languageKey>
-        <languageKey index="sr"></languageKey>
-        <languageKey index="sv"></languageKey>
-        <languageKey index="th"></languageKey>
-        <languageKey index="tr"></languageKey>
-        <languageKey index="uk"></languageKey>
-        <languageKey index="vi"></languageKey>
-        <languageKey index="zh"></languageKey>
-    </data>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Simple Blog extension in the FRONTEND</description>
+		<generator>LFEditor</generator>
+		<attributes type="array">
+			<source-language>en</source-language>
+			<target-language>de</target-language>
+			<datatype>plaintext</datatype>
+			<original>messages</original>
+			<date>2015-01-31T21:07:06Z</date>
+		</attributes>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="category">Category</label>
+			<label index="comment">Comment</label>
+			<label index="comment_add">add Comment</label>
+			<label index="comment_author">(author)</label>
+			<label index="comment_comment">Comment</label>
+			<label index="comment_comments">Comments</label>
+			<label index="comment_form_author">Name*</label>
+			<label index="comment_form_disclaimer">note, some comments must be approved.</label>
+			<label index="comment_form_email">Email (for Garvatar, not public)</label>
+			<label index="comment_form_link">Link</label>
+			<label index="comment_form_location">Location</label>
+			<label index="comment_form_message">your message*</label>
+			<label index="comment_form_submit">submit Comment</label>
+			<label index="comment_form_title">Title*</label>
+			<label index="comment_form_website">Website</label>
+			<label index="comment_from">from</label>
+			<label index="comment_message_hidden">Hidden, must be aproved.</label>
+			<label index="comment_message_message">message:</label>
+			<label index="comment_message_spampoints">Spampoints</label>
+			<label index="comment_reply">reply to this comment</label>
+			<label index="comment_reply_prefix">@</label>
+			<label index="comment_rss">subscribe to comment RSSt</label>
+			<label index="comment_rss_from">from</label>
+			<label index="comment_rss_title">Comments for Post:</label>
+			<label index="comment_wrote">wrote at</label>
+			<label index="detail_backto_list">Listview</label>
+			<label index="detail_from">from</label>
+			<label index="detail_related_post">related posts</label>
+			<label index="detail_views">Views</label>
+			<label index="error_Comment.createAction">Comment could not created.</label>
+			<label index="error_errorsOccurred">Errors</label>
+			<label index="link_backTo">back</label>
+			<label index="list_archive_result">Result for</label>
+			<label index="list_archive_results">Results for</label>
+			<label index="list_category_result">Result for Category:</label>
+			<label index="list_category_results">Results for Category:</label>
+			<label index="notice_error">Error!</label>
+			<label index="notice_noPost">There is no Post to show!</label>
+			<label index="post">Post</label>
+			<label index="post_category">post categories</label>
+			<label index="post_comments">post comments</label>
+			<label index="post_title">title</label>
+			<label index="property_author">Name</label>
+			<label index="property_comment">Comment</label>
+			<label index="property_email">E-Mail</label>
+			<label index="property_location">City</label>
+			<label index="property_message">Comment</label>
+			<label index="property_title">Title</label>
+			<label index="property_website">Website</label>
+			<label index="read_more">more</label>
+			<label index="teaser_more">…</label>
+			<label index="view_search_result">Result for</label>
+			<label index="view_search_results">Results for</label>
+			<label index="widget_category_header">Categories</label>
+			<label index="widget_category_more">…</label>
+			<label index="widget_dateMenu_header">by Date</label>
+			<label index="widget_dateMenu_item">Item</label>
+			<label index="widget_dateMenu_items">Items</label>
+			<label index="widget_latestComments_header">Latest Comments</label>
+			<label index="widget_latestComments_more">…</label>
+			<label index="widget_latestPosts_header">Latest Posts</label>
+			<label index="widget_latestPosts_more">…</label>
+			<label index="widget_pagination.first">first</label>
+			<label index="widget_pagination.last">last</label>
+			<label index="widget_pagination.next">next</label>
+			<label index="widget_pagination.previous">previous</label>
+			<label index="widget_search_header">Search Post</label>
+			<label index="widget_views_header">Most Views</label>
+			<label index="widget_views_more">…</label>
+		</languageKey>
+		<languageKey index="af"></languageKey>
+		<languageKey index="ar"></languageKey>
+		<languageKey index="bs"></languageKey>
+		<languageKey index="bg"></languageKey>
+		<languageKey index="ca"></languageKey>
+		<languageKey index="ch"></languageKey>
+		<languageKey index="cs"></languageKey>
+		<languageKey index="da"></languageKey>
+		<languageKey index="de">EXT:efblog/Resources/Private/Language/de.locallang.xml</languageKey>
+		<languageKey index="el"></languageKey>
+		<languageKey index="eo"></languageKey>
+		<languageKey index="es"></languageKey>
+		<languageKey index="et"></languageKey>
+		<languageKey index="eu"></languageKey>
+		<languageKey index="fa"></languageKey>
+		<languageKey index="fi"></languageKey>
+		<languageKey index="fo"></languageKey>
+		<languageKey index="fr"></languageKey>
+		<languageKey index="fr_CA"></languageKey>
+		<languageKey index="gl"></languageKey>
+		<languageKey index="he"></languageKey>
+		<languageKey index="hi"></languageKey>
+		<languageKey index="hr"></languageKey>
+		<languageKey index="hu"></languageKey>
+		<languageKey index="is"></languageKey>
+		<languageKey index="it"></languageKey>
+		<languageKey index="ja"></languageKey>
+		<languageKey index="ka"></languageKey>
+		<languageKey index="kl"></languageKey>
+		<languageKey index="km"></languageKey>
+		<languageKey index="ko"></languageKey>
+		<languageKey index="lt"></languageKey>
+		<languageKey index="lv"></languageKey>
+		<languageKey index="ms"></languageKey>
+		<languageKey index="nl"></languageKey>
+		<languageKey index="no"></languageKey>
+		<languageKey index="pl"></languageKey>
+		<languageKey index="pt"></languageKey>
+		<languageKey index="pt_BR"></languageKey>
+		<languageKey index="ro"></languageKey>
+		<languageKey index="ru"></languageKey>
+		<languageKey index="sk"></languageKey>
+		<languageKey index="sl"></languageKey>
+		<languageKey index="sq"></languageKey>
+		<languageKey index="sr"></languageKey>
+		<languageKey index="sv"></languageKey>
+		<languageKey index="th"></languageKey>
+		<languageKey index="tr"></languageKey>
+		<languageKey index="uk"></languageKey>
+		<languageKey index="vi"></languageKey>
+		<languageKey index="zh"></languageKey>
+	</data>
 </T3locallang>

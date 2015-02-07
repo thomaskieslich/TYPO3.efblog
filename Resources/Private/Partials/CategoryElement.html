@@ -1,45 +1,51 @@
-<f:if condition="{category.children}">
-	<f:then>
-		<f:if condition="{settings.categoryWidget.viewEmpty}">
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:section name="main">
+		<f:if condition="{category.children}">
+
 			<f:then>
-				<li>
-					<f:render section="categoryLink" arguments="{category : category}"/>
+				<f:if condition="{settings.categoryWidget.viewEmpty}">
+					<f:then>
+						<li><f:render section="categoryLink" arguments="{category : category}"/>
+					</f:then>
+					<f:else>
+						<f:if condition="{category.posts} > 0">
+							<li><f:render section="categoryLink" arguments="{category : category}"/>
+						</f:if>
+					</f:else>
+				</f:if>
+				<ul>
+					<f:for each="{category.children}" as="child">
+						<f:render section="main" arguments="{category : child}"/>
+					</f:for>
+				</ul>
+				</li>
 			</f:then>
+
 			<f:else>
-				<f:if condition="{category.posts} > 0">
-					<li>
-						<f:render section="categoryLink" arguments="{category : category}"/>
+				<f:if condition="{settings.categoryWidget.viewEmpty}">
+					<f:then>
+						<li><f:render section="categoryLink" arguments="{category : category}"/>
+					</f:then>
+					<f:else>
+						<f:if condition="{category.posts} > 0">
+							<li><f:render section="categoryLink" arguments="{category : category}"/>
+						</f:if>
+					</f:else>
 				</f:if>
 			</f:else>
+
 		</f:if>
-		<ul>
-			<f:for each="{category.children}" as="child">
-				<f:render partial="CategoryElement" arguments="{category : child}"/>
-			</f:for>
-		</ul>
-		</li>
-	</f:then>
-	<f:else>
+	</f:section>
 
-		<f:if condition="{settings.categoryWidget.viewEmpty}">
-			<f:then>
-				<li>
-					<f:render section="categoryLink" arguments="{category : category}"/>
-			</f:then>
-			<f:else>
-				<f:if condition="{category.posts} > 0">
-					<li>
-						<f:render section="categoryLink" arguments="{category : category}"/>
-				</f:if>
-			</f:else>
-		</f:if>
+	<f:section name="categoryLink">
+		<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category.uid}}" title="{category.title}">
+			<f:format.crop maxCharacters="{settings.categoryWidget.cropLink}" append="{f:translate(key : 'widget_category_more')}">
+				{category.title}
+			</f:format.crop>
+			<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
+		</f:link.page>
+	</f:section>
 
-	</f:else>
-</f:if>
-
-<f:section name="categoryLink">
-	<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category.uid}}" title="{category.title}">
-		{category.title -> f:format.crop(maxCharacters: '{settings.categoryWidget.cropLink}', append: "{f:translate(key : 'widget_category_more')}")}
-		<f:if condition="{settings.categoryWidget.viewCounts}">({category.posts})</f:if>
-	</f:link.page>
-</f:section>
+</div>

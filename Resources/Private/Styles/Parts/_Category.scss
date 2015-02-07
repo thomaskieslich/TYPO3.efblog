@@ -1,0 +1,21 @@
+.tx-efblog-category-overview {
+	.odd {
+		float: left;
+		margin: 0 16px 16px 0;
+		}
+	.even {
+		float: left;
+		margin: 0 0 16px 0;
+		}
+	.element {
+		border: 1px solid #666;
+		border-radius: 16px;
+		height: 250px;
+		padding: 12px;
+		width: 45%;
+		overflow: auto;
+		}
+	.menu {
+		margin: 6px 0;
+		}
+	}
