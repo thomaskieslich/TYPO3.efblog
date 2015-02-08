@@ -11,14 +11,15 @@
 					<f:render partial="Post/DetailBreadCrumb" section="main" arguments="{breadCrumb: breadCrumb}"/>
 				</f:if>
 
-				<f:render partial="Post/DetailBody" arguments="{post: post, pages: pages}"/>
+				<f:render partial="Post/DetailBody" section="main" arguments="{post: post, pages: pages}"/>
 
 				<!--Social-->
 				<f:if condition="{settings.detailView.showSocial}">
-					<f:render partial="Post/DetailSocial" arguments="{post: post, description : description}"/>
+					<f:render partial="Post/DetailSocial" section="meta" arguments="{post: post, description : description}"/>
+					<f:render partial="Post/DetailSocial" section="main"/>
 				</f:if>
 
-				<f:render partial="Post/DetailFooter" arguments="{post: post}"/>
+				<f:render partial="Post/DetailFooter" section="main" arguments="{post: post}"/>
 
 				<f:if condition="{post.relatedPosts}">
 					<f:render partial="Post/DetailRelated" arguments="{post: post}"/>

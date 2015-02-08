@@ -28,24 +28,34 @@
 
 			</div>
 			<div class="info">
-				{post.views} {f:translate(key : 'detail_views')} |
-				{post.date -> f:format.date(format:'%d. %B %Y')} |
-				<f:for each="{post.categories}" as="category" iteration="catIterator">
-					<f:if condition="{catIterator.isLast}">
-						<f:then>
-							<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-								{category.title}
-							</f:link.page>
-						</f:then>
-						<f:else>
-							<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-								{category.title},
-							</f:link.page>
-						</f:else>
-					</f:if>
-				</f:for>
-
+				<f:if condition="{post.views} > 1">
+					<f:then>
+						{post.views} {f:translate(key : 'list_views')}
+					</f:then>
+					<f:else>
+						{post.views} {f:translate(key : 'list_view')}
+					</f:else>
+				</f:if>
 				|
+				{post.date -> f:format.date(format:'%d. %B %Y')} |
+				<f:if condition="{post.categories}">
+					<f:for each="{post.categories}" as="category" iteration="catIterator">
+						<f:if condition="{catIterator.isLast}">
+							<f:then>
+								<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+									{category.title}
+								</f:link.page>
+							</f:then>
+							<f:else>
+								<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+									{category.title},
+								</f:link.page>
+							</f:else>
+						</f:if>
+					</f:for>
+					|
+				</f:if>
+
 				<f:if condition="{post.comments -> f:count()} > 1">
 					<f:then>
 						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>

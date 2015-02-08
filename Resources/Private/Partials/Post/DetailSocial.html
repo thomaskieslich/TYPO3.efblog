@@ -1,28 +1,37 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<f:if condition="{settings.openGraph.allowOpenGraph}">
-	<tk:metaTag property="og:title" content="{post.title}" />
-	<tk:metaTag property="og:type" content="{settings.openGraph.type}" />
-	<tk:metaTag property="og:url" content="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}" />
-	<tk:metaTag property="og:site_name" content="{settings.blogTitle}" />
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-	<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
-		<f:if condition="{imageIterator.cycle} == 1">
-			<tk:metaTag property="og:image" content="{f:uri.image(src:'{image.publicUrl}', maxWidth:'100')}" forceAbsoluteUrl="1"/>
+	<f:section name="meta">
+		<f:if condition="{settings.openGraph.allowOpenGraph}">
+			<tk:metaTag property="og:title" content="{post.title}"/>
+			<tk:metaTag property="og:type" content="{settings.openGraph.type}"/>
+			<tk:metaTag property="og:url" content="{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:post}}', pageUid : '{settings.detailUid}', absolute: '1', noCacheHash : '1')}"/>
+			<tk:metaTag property="og:site_name" content="{settings.blogTitle}"/>
+
+			<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+				<f:if condition="{imageIterator.cycle} == 1">
+					<tk:metaTag property="og:image" content="{f:uri.image(src:'{image.publicUrl}', maxWidth:'100')}" forceAbsoluteUrl="1"/>
+				</f:if>
+			</f:for>
+			<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
+				<tk:metaTag property="og:image" content="{f:uri.image(src:'{settings.openGraph.defaultImage}', maxWidth:'100')}" forceAbsoluteUrl="1"/>
+			</f:if>
+
+			<tk:metaTag property="og:description" content="{description-> f:format.crop(maxCharacters: '{settings.openGraph.cropDescription}')}"/>
+			<tk:metaTag property="fb:admins" content="{settings.openGraph.admins}"/>
+			<tk:metaTag property="fb:app_id" content="{settings.openGraph.appId}"/>
+
+			<tk:metaTag property="og:latitude" content="{settings.openGraph.latitude}"/>
+			<tk:metaTag property="og:longitude" content="{settings.openGraph.longitude}"/>
+			<tk:metaTag property="og:locality" content="{settings.openGraph.locality}"/>
+			<tk:metaTag property="og:region" content="{settings.openGraph.region}"/>
+			<tk:metaTag property="og:country-name" content="{settings.openGraph.country-name}"/>
 		</f:if>
-	</f:for>
-	<f:if condition="<f:count subject='{post.teaserImage}' /> == 0">
-		<tk:metaTag property="og:image" content="{f:uri.image(src:'{settings.openGraph.defaultImage}', maxWidth:'100')}" forceAbsoluteUrl="1" />
-	</f:if>
+	</f:section>
 
-	<tk:metaTag property="og:description" content="{description-> f:format.crop(maxCharacters: '{settings.openGraph.cropDescription}')}" />
-	<tk:metaTag property="fb:admins" content="{settings.openGraph.admins}" />
-	<tk:metaTag property="fb:app_id" content="{settings.openGraph.appId}" />
+	<f:section name="main">
+		<div class="tx-efblog-detail-social"></div>
+	</f:section>
 
-	<tk:metaTag property="og:latitude" content="{settings.openGraph.latitude}" />
-	<tk:metaTag property="og:longitude" content="{settings.openGraph.longitude}" />
-	<tk:metaTag property="og:locality" content="{settings.openGraph.locality}" />
-	<tk:metaTag property="og:region" content="{settings.openGraph.region}" />
-	<tk:metaTag property="og:country-name" content="{settings.openGraph.country-name}" />
-</f:if>
-
-<div class="tx-efblog-detail-social"></div>
+</div>

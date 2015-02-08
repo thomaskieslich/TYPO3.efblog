@@ -735,17 +735,15 @@ button.datepick-cmd {
 .tx-efblog-list-body h2 {
   font-weight: normal; }
 
-.tx-efblog-list-footer {
+.tx-efblog-list-footer, .tx-efblog-detail-footer {
   clear: both;
   border-top: 1px solid #333;
   margin-top: 0.5em;
   padding-top: 0.5em; }
-
-.tx-efblog-list-footer .more {
-  float: left; }
-
-.tx-efblog-list-footer .info {
-  text-align: right; }
+  .tx-efblog-list-footer .more, .tx-efblog-detail-footer .more {
+    float: left; }
+  .tx-efblog-list-footer .info, .tx-efblog-detail-footer .info {
+    text-align: right; }
 
 .tx-efblog-detail-breadCrumb {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -783,6 +781,30 @@ button.datepick-cmd {
     text-align: right; }
     .tx-efblog-detail-breadCrumb .right:last-child {
       margin-right: 0; }
+
+.tx-efblog-detail-body .detailpager {
+  overflow: auto;
+  border-radius: 3px;
+  border: 1px solid #333;
+  padding: 0.3em;
+  background: #FFF;
+  margin: 0.75em 0; }
+  .tx-efblog-detail-body .detailpager ul.tabs {
+    float: left;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%; }
+    .tx-efblog-detail-body .detailpager ul.tabs li {
+      float: left;
+      line-height: 1.5;
+      padding-right: 0.75em; }
+      .tx-efblog-detail-body .detailpager ul.tabs li a {
+        color: #333; }
+        .tx-efblog-detail-body .detailpager ul.tabs li a:hover {
+          color: #82a7db; }
+      .tx-efblog-detail-body .detailpager ul.tabs li.active a {
+        color: #82a7db; }
 
 .tx-efblog-category-overview .odd {
   float: left;

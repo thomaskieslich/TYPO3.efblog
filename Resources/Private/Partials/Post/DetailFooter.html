@@ -1,28 +1,55 @@
-<div id="tx-efblog-detail-footer">
-	<div class="more">
-		<f:if condition="{post.teaserLink.link}">
-			{f:if(condition: '{post.teaserLink.target}', then:
-			"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-			else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
-		</f:if>
-	</div>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-	<div class="info">
-		{post.views} {f:translate(key : 'detail_views')} |
-		{post.date -> f:format.date(format:'%d. %B %Y')} |
-		<f:for each="{post.categories}" as="category" iteration="catIterator">
-			<f:if condition="{catIterator.isLast}">
-				<f:then>
-					<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-						{category.title}
-					</f:link.page>
-				</f:then>
-				<f:else>
-					<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-						{category.title},
-					</f:link.page>
-				</f:else>
-			</f:if>
-		</f:for>
-	</div>
+	<f:section name="main">
+		<div class="tx-efblog-detail-footer">
+			<div class="more">
+				<f:if condition="{post.teaserLink.link}">
+					<f:if condition="{post.teaserLink.target}">
+						<f:then>
+							<f:link.page pageUid="{post.teaserLink.link}" target="{post.teaserLink.target}">
+								{post.teaserLinkTitle}
+							</f:link.page>
+						</f:then>
+						<f:else>
+							<f:link.page pageUid="{post.teaserLink.link}">
+								{post.teaserLinkTitle}
+							</f:link.page>
+						</f:else>
+					</f:if>
+				</f:if>
+			</div>
+
+			<div class="info">
+				<f:if condition="{post.views} > 1">
+					<f:then>
+						{post.views} {f:translate(key : 'list_views')}
+					</f:then>
+					<f:else>
+						{post.views} {f:translate(key : 'list_view')}
+					</f:else>
+				</f:if>
+				|
+				{post.date -> f:format.date(format:'%d. %B %Y')} |
+				<f:if condition="{post.categories}">
+					<f:for each="{post.categories}" as="category" iteration="catIterator">
+						<f:if condition="{catIterator.isLast}">
+							<f:then>
+								<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+									{category.title}
+								</f:link.page>
+							</f:then>
+							<f:else>
+								<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+									{category.title},
+								</f:link.page>
+							</f:else>
+						</f:if>
+					</f:for>
+				</f:if>
+			</div>
+		</div>
+
+	</f:section>
+
 </div>

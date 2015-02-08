@@ -1,34 +1,46 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<h2>{post.title}</h2>
-<f:if condition="<f:count subject='{pages}' /> > 1">
-	<div class="detailpager">
-		<ul class="tabs">
-			<f:for each="{pages}" as="page" key="count">
-				<li><a href="#" id="tab{count}">{page.title}</a></li>
-			</f:for>
-		</ul>
-	</div>
-</f:if>
 
-<div class="tab_container">
-	<f:for each="{pages}" as="page" iteration="elementIterator">
-		<div class="tab_content" id="tab{elementIterator.cycle}">
-			<f:for each="{page.elements}" as="element">
-				{tk:Content(uid: '{element.uid}')}
-			</f:for>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:section name="main">
+
+		<div class="tx-efblog-detail-body">
+			<h2>{post.title}</h2>
+			<f:if condition="{pages -> f:count()} > 1">
+				<div class="detailpager">
+					<ul class="tabs">
+						<f:for each="{pages}" as="page" key="count">
+							<li><a href="#" id="tab{count}">{page.title}</a></li>
+						</f:for>
+					</ul>
+				</div>
+			</f:if>
+
+			<div class="tab_container">
+				<f:for each="{pages}" as="page" iteration="elementIterator">
+					<div class="tab_content" id="tab{elementIterator.cycle}">
+						<f:for each="{page.elements}" as="element">
+							{tk:Content(uid: '{element.uid}')}
+						</f:for>
+					</div>
+				</f:for>
+			</div>
+
+			<h3>{f:translate(key : 'detail_from')}
+				<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
+					<f:if condition="{authorIterator.isLast}">
+						<f:then>
+							{pauthor.name}
+						</f:then>
+						<f:else>
+							{pauthor.name},
+						</f:else>
+					</f:if>
+				</f:for>
+			</h3>
 		</div>
-	</f:for>
-</div>
-<h3>{f:translate(key : 'detail_from')}
-	<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
-		<f:if condition="{authorIterator.isLast}">
-			<f:then>
-				{pauthor.name}
-			</f:then>
-			<f:else>
-				{pauthor.name},
-			</f:else>
-		</f:if>
 
-	</f:for>
-</h3>
+	</f:section>
+
+</div>

@@ -22,14 +22,12 @@
 	border-top: 1px solid $base-border-color;
 	margin-top: $base-spacing / 3;
 	padding-top: $base-spacing / 3;
-	}
-
-.tx-efblog-list-footer .more {
-	float: left;
-	}
-
-.tx-efblog-list-footer .info {
-	text-align: right;
+	.more {
+		float: left;
+		}
+	.info {
+		text-align: right;
+		}
 	}
 
 //detail breadcrump
@@ -51,4 +49,41 @@
 		@include span-columns(5);
 		text-align: right;
 		}
+	}
+
+.tx-efblog-detail-body .detailpager {
+	overflow: auto;
+	border-radius: $base-border-radius;
+	border: 1px solid $dark-gray;
+	padding: $base-spacing * 0.2;
+	background: #FFF;
+	margin: $base-spacing * 0.5 0;
+	ul.tabs {
+		float: left;
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		li {
+			float: left;
+			line-height: $base-line-height;
+			padding-right: $base-spacing * 0.5;
+			a {
+				color: $base-font-color;
+				&:hover {
+					color: $hover-link-color;
+					}
+				}
+			&.active a {
+				color: $hover-link-color;
+				}
+			}
+		}
+	}
+
+.tx-efblog-detail-social {
+	}
+
+.tx-efblog-detail-footer {
+	@extend .tx-efblog-list-footer;
 	}
