@@ -6,12 +6,23 @@
 			<div class="more">
 				<f:if condition="{post.teaserLink.link}">
 					<f:then>
-						{f:if(condition: '{post.teaserLink.target}', then:
-						"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
+						<f:if condition="{post.teaserLink.target}">
+							<f:then>
+								<f:link.page pageUid="{post.teaserLink.link}" target="{post.teaserLink.target}">
+									{post.teaserLinkTitle}
+								</f:link.page>
+							</f:then>
+							<f:else>
+								<f:link.page pageUid="{post.teaserLink.link}">
+									{post.teaserLinkTitle}
+								</f:link.page>
+							</f:else>
+						</f:if>
 					</f:then>
 					<f:else>
-						{f:translate(key : "read_more") -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}
+						<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post : post}}">
+							{f:translate(key : "read_more")}
+						</f:link.page>
 					</f:else>
 				</f:if>
 
