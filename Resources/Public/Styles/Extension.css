@@ -7,13 +7,13 @@ button {
   appearance: none;
   -webkit-font-smoothing: antialiased;
   background-color: #477dca;
-  border-radius: 3px;
+  border-radius: 12px;
   border: none;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1;
   padding: 0.75em 1em;
@@ -42,7 +42,7 @@ label,
 select {
   display: block;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1em; }
+  font-size: 1rem; }
 
 label {
   font-weight: 600;
@@ -57,11 +57,11 @@ select[multiple=multiple],
 textarea {
   background-color: #fff;
   border: 1px solid #333;
-  border-radius: 3px;
+  border-radius: 12px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
   margin-bottom: 0.75em;
   padding: 0.5em;
   transition: border-color;
@@ -147,7 +147,7 @@ body {
   -webkit-font-smoothing: antialiased;
   color: #333;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
   line-height: 1.5; }
 
 h1,
@@ -157,7 +157,7 @@ h4,
 h5,
 h6 {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
   line-height: 1.2;
   margin: 0 0 0.75em; }
 
@@ -184,16 +184,6 @@ img,
 picture {
   margin: 0;
   max-width: 100%; }
-
-html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit; }
 
 .social_share_privacy_area {
   clear: both;
@@ -747,44 +737,25 @@ button.datepick-cmd {
 
 .tx-efblog-detail-breadCrumb {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 0.95em;
+  font-size: 0.95rem;
   margin-bottom: 1.2em;
-  max-width: 68em;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%; }
-  .tx-efblog-detail-breadCrumb::after {
-    clear: both;
-    content: "";
-    display: table; }
   .tx-efblog-detail-breadCrumb .left {
     float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 40.29137%;
+    width: 40%;
     min-height: 0.01em; }
-    .tx-efblog-detail-breadCrumb .left:last-child {
-      margin-right: 0; }
   .tx-efblog-detail-breadCrumb .center {
     float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 14.70196%;
+    width: 20%;
     text-align: center; }
-    .tx-efblog-detail-breadCrumb .center:last-child {
-      margin-right: 0; }
   .tx-efblog-detail-breadCrumb .right {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 40.29137%;
+    float: right;
+    width: 40%;
     text-align: right; }
-    .tx-efblog-detail-breadCrumb .right:last-child {
-      margin-right: 0; }
 
 .tx-efblog-detail-body .detailpager {
   overflow: auto;
-  border-radius: 3px;
+  border-radius: 12px;
   border: 1px solid #333;
   padding: 0.3em;
   background: #FFF;
@@ -807,7 +778,58 @@ button.datepick-cmd {
         color: #82a7db; }
 
 .tx-efblog-detail-relatedPost h3 {
-  font-size: 1.2em; }
+  font-size: 1.2rem; }
+
+.tx-efblog-detail-comments h3 {
+  font-size: 1.2rem; }
+
+.tx-efblog-comments-list {
+  margin: 1.5em 0; }
+  .tx-efblog-comments-list .item {
+    margin: 0px 0px 8px;
+    padding: 5px;
+    min-height: 3.75rem; }
+    .tx-efblog-comments-list .item::after {
+      clear: both;
+      content: "";
+      display: table; }
+  .tx-efblog-comments-list .odd,
+  .tx-efblog-comments-list .even {
+    border-radius: 12px;
+    border: 1px solid #333;
+    padding: 1.5em;
+    background: #FFF; }
+  .tx-efblog-comments-list .answers {
+    margin-left: 3.75rem; }
+  .tx-efblog-comments-list .header::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tx-efblog-comments-list .number {
+    display: inline-block;
+    border-radius: 12px;
+    background: none repeat scroll 0% 0% #F88601;
+    line-height: 3.125rem;
+    height: 3.125rem;
+    width: 3.125rem;
+    margin-right: 0.625rem;
+    text-align: center;
+    vertical-align: top; }
+    .tx-efblog-comments-list .number a {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #FFF; }
+  .tx-efblog-comments-list .info, .tx-efblog-comments-list .info a {
+    display: inline-block; }
+    .tx-efblog-comments-list .info .name, .tx-efblog-comments-list .info a .name {
+      font-weight: 700; }
+  .tx-efblog-comments-list .gravatar {
+    float: right;
+    vertical-align: top;
+    width: 3.125rem;
+    height: 3.125rem; }
+  .tx-efblog-comments-list .comment h2 {
+    font-size: 1.1rem; }
 
 .tx-efblog-category-overview .odd {
   float: left;

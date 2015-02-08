@@ -30,8 +30,9 @@
 					</f:else>
 				</f:if>
 				|
-				{post.date -> f:format.date(format:'%d. %B %Y')} |
+				{post.date -> f:format.date(format:'%d. %B %Y')}
 				<f:if condition="{post.categories}">
+					|
 					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>

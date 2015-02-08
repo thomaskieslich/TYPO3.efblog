@@ -1,56 +1,83 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<div class="header">
-	<div class="gravatar">
-		<f:if condition="{comment.avatar}">
-			<f:then>
-				<f:if condition="{comment.website}">
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:section name="main">
+		<div class="header">
+			<div class="number">
+				<a name="comment_{comment.uid}">#{comIterator.cycle}</a>
+			</div>
+
+			<div class="info">
+				<div class="author">
+					<span class="name">
+					<f:if condition="{comment.website}">
+						<f:then>
+							<f:link.external uri="{comment.website}" target="_blank">
+								{comment.author}
+							</f:link.external>
+						</f:then>
+						<f:else>
+							{comment.author}
+						</f:else>
+					</f:if>
+						</span>
+					{f:translate(key : 'comment_wrote')}
+					{comment.date -> f:format.date(format:'d.m.Y, H:m')}
+
+					<f:if condition="{comment.location}">
+						{f:translate(key : 'comment_from')}
+						<span class="location">{f:translate(key : 'comments_from')} {comment.location}</span>
+					</f:if>
+				</div>
+
+				<f:if condition="{isMainComment}">
+					<f:if condition="{allowComments}">
+						<div class="answer">
+							<a href="#comment-form" data-comment="{comment.uid}" data-title="{comment.title}" data-post="{post.uid}">
+								{f:translate(key : 'comment_reply')}
+							</a>
+						</div>
+					</f:if>
+				</f:if>
+			</div>
+
+			<div class="gravatar">
+				<f:if condition="{comment.avatar}">
 					<f:then>
-						<f:link.external uri="{comment.website}" target="_blank">
-							<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}c" height="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
-						</f:link.external>
+						<f:if condition="{comment.website}">
+							<f:then>
+								<f:link.external uri="{comment.website}" target="_blank">
+									<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}c" height="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
+								</f:link.external>
+							</f:then>
+							<f:else>
+								<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}c" height="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
+							</f:else>
+						</f:if>
 					</f:then>
 					<f:else>
-						<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}c" height="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
+						<f:if condition="{comment.website}">
+							<f:then>
+								<f:link.external uri="{comment.website}" target="_blank">
+									<tk:gravatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}m" class="tx-efblog-gravatar"/>
+								</f:link.external>
+							</f:then>
+							<f:else>
+								<tk:gravatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}m" class="tx-efblog-gravatar"/>
+							</f:else>
+						</f:if>
 					</f:else>
 				</f:if>
-			</f:then>
-			<f:else>
-				<f:if condition="{comment.website}">
-					<f:then>
-						<f:link.external uri="{comment.website}" target="_blank">
-							<tk:gravatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}m" class="tx-efblog-gravatar"/>
-						</f:link.external>
-					</f:then>
-					<f:else>
-						<tk:gravatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}m" class="tx-efblog-gravatar"/>
-					</f:else>
-				</f:if>
-			</f:else>
-		</f:if>
 
-	</div>
-	<div class="number">
-		{comment.uid}
-		<a name="comment_{comment.uid}">#{comIterator.cycle}</a>
-	</div>
-	<div class="author">
-		{f:if(condition: '{comment.website}',
-		then: "{comment.author -> f:link.external(uri: '{comment.website}', target: '_blank')}",
-		else: '{comment.author}')}
-		{f:translate(key : 'comments_wrote')}
-		{comment.date -> f:format.date(format:'d.m.Y, H:m')}
-		{f:if(condition: '{comment.location}',
-		then: "<br>{f:translate(key : 'comments_from')} {comment.location}")}
+			</div>
 
-		<f:if condition="{isMainComment}">
-			<f:if condition="{allowComments}">
-				<br><a href="#comment-form" class="new-comment" data-comment="{comment.uid}" data-title="{comment.title}" data-post="{post.uid}">{f:translate(key : 'comments_reply')}</a>
-			</f:if>
-		</f:if>
-	</div>
-</div>
-<div class="comment">
-	{f:if(condition: '{comment.title}',
-	then: "<h2>{comment.title}</h2>")}
-	{comment.message -> f:format.html()}
+		</div>
+		<div class="comment">
+			{f:if(condition: '{comment.title}',
+			then: "<h2>{comment.title}</h2>")}
+			{comment.message -> f:format.html()}
+		</div>
+
+	</f:section>
 </div>

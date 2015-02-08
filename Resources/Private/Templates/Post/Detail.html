@@ -28,7 +28,7 @@
 		</f:if>
 
 		<f:if condition="{post.comments}">
-			<f:render partial="Post/DetailComments" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
+			<f:render partial="Post/DetailComments" section="main" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
 		</f:if>
 
 		<f:if condition='{allowComments}'>

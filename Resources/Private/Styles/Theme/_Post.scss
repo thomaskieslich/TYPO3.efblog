@@ -35,18 +35,19 @@
 	font-family: $base-font-family;
 	font-size: $base-font-size * 0.95;
 	margin-bottom: $base-spacing * 0.8;
-	@include outer-container();
 	width: 100%;
-	.left {
-		@include span-columns(5);
+	.left {float: left;
+		width: 40%;
 		min-height: 0.01em;
 		}
 	.center {
-		@include span-columns(2);
+		float: left;
+		width:20%;
 		text-align: center;
 		}
 	.right {
-		@include span-columns(5);
+		float: right;
+		width: 40%;
 		text-align: right;
 		}
 	}

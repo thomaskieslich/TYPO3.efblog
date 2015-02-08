@@ -1,0 +1,61 @@
+.tx-efblog-detail-comments {
+	h3 {
+		font-size: $base-font-size * 1.2;
+		}
+	}
+
+.tx-efblog-comments-list {
+	margin: $base-spacing 0;
+	.item {
+		margin: 0px 0px 8px;
+		padding: 5px;
+		min-height: rem(60);
+		@include clearfix;
+		}
+	.odd,
+	.even {
+		border-radius: $base-border-radius;
+		border: 1px solid $base-border-color;
+		padding: $base-spacing;
+		background: #FFF;
+		}
+	.answers{
+		margin-left: rem(60);
+		}
+	.header {
+		@include clearfix;
+		}
+	.number {
+		display: inline-block;
+		border-radius: $base-border-radius;
+		background: none repeat scroll 0% 0% #F88601;
+		line-height: rem(50);
+		@include size(rem(50));
+		margin-right: rem(10);
+		text-align: center;
+		vertical-align: top;
+		a {
+			font-size: rem(28);
+			font-weight: $font-weight-bold;
+			color: #FFF;
+			}
+		}
+	.info, .info a {
+		display: inline-block;
+		.name {
+			font-weight: $font-weight-bold;
+			}
+		}
+
+	.gravatar {
+		float: right;
+		vertical-align: top;
+		width: rem(50);
+		height: rem(50);
+		}
+	.comment {
+		h2 {
+			font-size: $base-font-size * 1.1;
+			}
+		}
+	}
