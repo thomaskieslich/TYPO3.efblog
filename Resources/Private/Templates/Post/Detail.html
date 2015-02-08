@@ -1,38 +1,41 @@
-{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<f:layout name="Default"/>
-<f:section name="content">
-	<f:flashMessages renderMode="div"/>
-	<f:if condition="{post}">
-		<f:render partial="Post/DetailMeta" arguments="{post: post, description: description}"/>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-		<div class="tx-efblog-detail-container" data-uid="{post.uid}">
-			<f:if condition="{settings.detailView.showBreadCrumb}">
-				<f:render partial="Post/DetailBreadCrumb" arguments="{breadCrumb: breadCrumb}"/>
-			</f:if>
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<f:if condition="{post}">
+			<f:render partial="Post/DetailMeta" section="main" arguments="{post: post, description: description}"/>
 
-			<f:render partial="Post/DetailBody" arguments="{post: post, pages: pages}"/>
+			<div class="tx-efblog-detail-container" data-uid="{post.uid}">
+				<f:if condition="{settings.detailView.showBreadCrumb}">
+					<f:render partial="Post/DetailBreadCrumb" section="main" arguments="{breadCrumb: breadCrumb}"/>
+				</f:if>
 
-			<!--Social-->
-			<f:if condition="{settings.detailView.showSocial}">
-				<f:render partial="Post/DetailSocial" arguments="{post: post, description : description}"/>
-			</f:if>
+				<f:render partial="Post/DetailBody" arguments="{post: post, pages: pages}"/>
 
-			<f:render partial="Post/DetailFooter" arguments="{post: post}"/>
+				<!--Social-->
+				<f:if condition="{settings.detailView.showSocial}">
+					<f:render partial="Post/DetailSocial" arguments="{post: post, description : description}"/>
+				</f:if>
 
-			<f:if condition="{post.relatedPosts}">
-				<f:render partial="Post/DetailRelated" arguments="{post: post}"/>
-			</f:if>
-		</div>
-	</f:if>
+				<f:render partial="Post/DetailFooter" arguments="{post: post}"/>
 
-	<f:if condition="{post.comments}">
-		<f:render partial="Post/DetailComments" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
-	</f:if>
+				<f:if condition="{post.relatedPosts}">
+					<f:render partial="Post/DetailRelated" arguments="{post: post}"/>
+				</f:if>
+			</div>
+		</f:if>
 
-	<f:if condition='{allowComments}'>
-		<div class="addComment">
-			<h3>{f:translate(key : 'comments_add')}</h3>
-		</div>
-		<f:render partial='CommentForm' arguments="{post: post}"/>
-	</f:if>
-</f:section>
+		<f:if condition="{post.comments}">
+			<f:render partial="Post/DetailComments" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
+		</f:if>
+
+		<f:if condition='{allowComments}'>
+			<div class="addComment">
+				<h3>{f:translate(key : 'comments_add')}</h3>
+			</div>
+			<f:render partial='CommentForm' arguments="{post: post}"/>
+		</f:if>
+	</f:section>
+
+</div>

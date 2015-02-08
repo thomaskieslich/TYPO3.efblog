@@ -1,9 +1,15 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
-<f:if condition="{settings.replaceKeywords}">
-	<tk:metaTag property="keywords" content="{post.tags}"/>
-	</f:if>
-<f:if condition="{settings.replaceDescription}">
-	<tk:metaTag property="description" content="{description -> f:format.crop(maxCharacters: '180', append: '{f:translate(key : teaser_more)}', respectHtml: 0)}"/>
-</f:if>
+	<f:section name="main">
+		{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
+		<f:if condition="{settings.replaceKeywords}">
+			<tk:metaTag property="keywords" content="{post.tags}"/>
+		</f:if>
+		<f:if condition="{settings.replaceDescription}">
+			<tk:metaTag property="description" content="{description -> f:format.crop(maxCharacters: '180', append: '{f:translate(key : teaser_more)}', respectHtml: 0)}"/>
+		</f:if>
+	</f:section>
+
+</div>

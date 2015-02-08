@@ -1,29 +1,28 @@
-<div class="tx-efblog-detail-breadCrumb">
-	<div class="left">
-		<f:if condition="{breadCrumb.0}">
-			<f:then>
-				{breadCrumb.0.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-				-> f:link.page(additionalParams : '{tx_efblog_fe1:{post : breadCrumb.0}}', pageUid : '{settings.detailUid}', title: '{breadCrumb.0.title}')}
-			</f:then>
-			<f:else>
-				&nbsp;
-			</f:else>
-		</f:if>
-	</div>
-	<div class="center">
-		<f:if condition="{settings.backUid}">
-			{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
-		</f:if>
-	</div>
-	<div class="right">
-		<f:if condition="{breadCrumb.1}">
-			<f:then>
-				{breadCrumb.1.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}', respectHtml: 0)
-				-> f:link.action(additionalParams : '{tx_efblog_fe1:{post : breadCrumb.1}}', pageUid : '{settings.detailUid}', title: '{breadCrumb.1.title}')}
-			</f:then>
-			<f:else>
-				&nbsp;
-			</f:else>
-		</f:if>
-	</div>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:section name="main">
+		<div class="tx-efblog-detail-breadCrumb">
+			<div class="left">
+				<f:if condition="{breadCrumb.0}">
+					<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post : breadCrumb.0}}" title="{breadCrumb.0.title}">
+						{breadCrumb.0.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}')}
+					</f:link.page>
+				</f:if>
+			</div>
+			<div class="center">
+				<f:if condition="{settings.backUid}">
+					{f:translate(key : 'detail_backto_list')-> f:link.page(pageUid : '{settings.listUid}')}
+				</f:if>
+			</div>
+			<div class="right">
+				<f:if condition="{breadCrumb.1}">
+					<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post : breadCrumb.1}}" title="{breadCrumb.1.title}">
+						{breadCrumb.1.title -> f:format.crop(maxCharacters: '28', append: '{f:translate(key : "teaser_more")}')}
+					</f:link.page>
+				</f:if>
+			</div>
+		</div>
+	</f:section>
+
 </div>
