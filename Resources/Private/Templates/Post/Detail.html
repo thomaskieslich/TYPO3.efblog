@@ -33,9 +33,9 @@
 
 		<f:if condition='{allowComments}'>
 			<div class="addComment">
-				<h3>{f:translate(key : 'comments_add')}</h3>
+				<h3>{f:translate(key : 'comment_add')}</h3>
 			</div>
-			<f:render partial='CommentForm' arguments="{post: post}"/>
+			<f:render partial='CommentForm' section="main" arguments="{post: post}"/>
 		</f:if>
 	</f:section>
 

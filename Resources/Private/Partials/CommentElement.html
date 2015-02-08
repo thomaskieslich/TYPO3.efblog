@@ -74,9 +74,10 @@
 
 		</div>
 		<div class="comment">
-			{f:if(condition: '{comment.title}',
-			then: "<h2>{comment.title}</h2>")}
-			{comment.message -> f:format.html()}
+			<f:if condition="{comment.title}">
+				<h2 class="title">{comment.title}</h2>
+			</f:if>
+			<div class="comment">{comment.message -> f:format.html()}</div>
 		</div>
 
 	</f:section>
