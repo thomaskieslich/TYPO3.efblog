@@ -32,8 +32,8 @@ button {
     opacity: 0.5; }
 
 fieldset {
-  background-color: #f7f7f7;
-  border: 1px solid #ddd;
+  background-color: #4d4d4d;
+  border: 1px solid #333;
   margin: 0 0 0.75em;
   padding: 1.5em; }
 
@@ -56,7 +56,7 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
 select[multiple=multiple],
 textarea {
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #333;
   border-radius: 3px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
@@ -69,7 +69,7 @@ textarea {
   input[type="email"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="url"]:hover, input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="month"]:hover, input[type="time"]:hover, input[type="week"]:hover,
   select[multiple=multiple]:hover,
   textarea:hover {
-    border-color: #c4c4c4; }
+    border-color: #1a1a1a; }
   input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus,
   select[multiple=multiple]:focus,
   textarea:focus {
@@ -125,13 +125,13 @@ table {
   width: 100%; }
 
 th {
-  border-bottom: 1px solid #b7b7b7;
+  border-bottom: 1px solid #0d0d0d;
   font-weight: 600;
   padding: 0.75em 0;
   text-align: left; }
 
 td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #333;
   padding: 0.75em 0; }
 
 tr,
@@ -174,7 +174,7 @@ a {
     outline: none; }
 
 hr {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #333;
   border-left: none;
   border-right: none;
   border-top: none;
@@ -727,14 +727,12 @@ button.datepick-cmd {
 
 .tx-efblog-list-footer {
   clear: both;
-  border-top: 1px solid #353333;
-  margin: 3px 0px 0px 0px;
-  padding: 3px 0px 0px 0px; }
+  border-top: 1px solid #333;
+  margin-top: 0.5em;
+  padding-top: 0.5em; }
 
 .tx-efblog-list-footer .more {
-  float: left;
-  padding-right: 18px;
-  background: url(../Images/breadcrumb_right.png) no-repeat top right; }
+  float: left; }
 
 .tx-efblog-list-footer .info {
   text-align: right; }

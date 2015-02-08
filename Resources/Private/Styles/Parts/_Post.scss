@@ -5,7 +5,7 @@
 
 .tx-efblog-list-images {
 	float: right;
-	margin: rem(12) 0  rem(16) rem(16);
+	margin: rem(12) 0 rem(16) rem(16);
 	width: rem(80);
 	}
 
@@ -19,15 +19,13 @@
 
 .tx-efblog-list-footer {
 	clear: both;
-	border-top: 1px solid #353333;
-	margin: 3px 0px 0px 0px;
-	padding: 3px 0px 0px 0px;
+	border-top: 1px solid $base-border-color;
+	margin-top: $base-spacing / 3;
+	padding-top: $base-spacing / 3;
 	}
 
 .tx-efblog-list-footer .more {
 	float: left;
-	padding-right: 18px;
-	background: url(#{$image-path}breadcrumb_right.png) no-repeat top right;
 	}
 
 .tx-efblog-list-footer .info {
