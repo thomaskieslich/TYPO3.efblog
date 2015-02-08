@@ -806,6 +806,9 @@ button.datepick-cmd {
       .tx-efblog-detail-body .detailpager ul.tabs li.active a {
         color: #82a7db; }
 
+.tx-efblog-detail-relatedPost h3 {
+  font-size: 1.2em; }
+
 .tx-efblog-category-overview .odd {
   float: left;
   margin: 0 16px 16px 0; }

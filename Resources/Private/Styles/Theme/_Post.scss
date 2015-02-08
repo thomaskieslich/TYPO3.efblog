@@ -84,6 +84,12 @@
 .tx-efblog-detail-social {
 	}
 
+.tx-efblog-detail-relatedPost {
+	h3{
+		font-size: $base-font-size * 1.2;
+		}
+	}
+
 .tx-efblog-detail-footer {
 	@extend .tx-efblog-list-footer;
 	}

@@ -22,7 +22,7 @@
 				<f:render partial="Post/DetailFooter" section="main" arguments="{post: post}"/>
 
 				<f:if condition="{post.relatedPosts}">
-					<f:render partial="Post/DetailRelated" arguments="{post: post}"/>
+					<f:render partial="Post/DetailRelated" section="main" arguments="{post: post}"/>
 				</f:if>
 			</div>
 		</f:if>
