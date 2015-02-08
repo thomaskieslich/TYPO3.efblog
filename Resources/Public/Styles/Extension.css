@@ -801,10 +801,12 @@ button.datepick-cmd {
     background: #FFF; }
   .tx-efblog-comments-list .answers {
     margin-left: 3.75rem; }
-  .tx-efblog-comments-list .header::after {
-    clear: both;
-    content: "";
-    display: table; }
+  .tx-efblog-comments-list .header {
+    margin: 0.75em 0; }
+    .tx-efblog-comments-list .header::after {
+      clear: both;
+      content: "";
+      display: table; }
   .tx-efblog-comments-list .number {
     display: inline-block;
     border-radius: 12px;
@@ -828,6 +830,8 @@ button.datepick-cmd {
     vertical-align: top;
     width: 3.125rem;
     height: 3.125rem; }
+    .tx-efblog-comments-list .gravatar img {
+      border-radius: 12px; }
   .tx-efblog-comments-list .comment h2 {
     font-size: 1.1rem; }
 
