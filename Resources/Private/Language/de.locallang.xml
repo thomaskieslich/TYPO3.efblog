@@ -65,6 +65,8 @@
 			<label index="widget_pagination.last">letzter</label>
 			<label index="widget_pagination.next">nächster</label>
 			<label index="widget_pagination.previous">vorheriger</label>
+			<label index="widget_pagination.less">…</label>
+			<label index="widget_pagination.more">…</label>
 			<label index="widget_search_header">Suche</label>
 			<label index="widget_views_header">Beliebte Artikel</label>
 			<label index="widget_views_more">…</label>

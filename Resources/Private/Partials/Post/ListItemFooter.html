@@ -1,49 +1,54 @@
-{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-<div class="tx-efblog-list-footer">
-	<div class="more">
-		<f:if condition="{post.teaserLink.link}">
-			<f:then>
-				{f:if(condition: '{post.teaserLink.target}', then:
-				"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
-				else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
-			</f:then>
-			<f:else>
-				{f:translate(key : "read_more") -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}
-			</f:else>
-		</f:if>
+	<f:section name="main">
+		<div class="tx-efblog-list-footer">
+			<div class="more">
+				<f:if condition="{post.teaserLink.link}">
+					<f:then>
+						{f:if(condition: '{post.teaserLink.target}', then:
+						"{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}', target: '{post.teaserLink.target}')}",
+						else: "{post.teaserLinkTitle -> f:link.page(pageUid : '{post.teaserLink.link}')}")}
+					</f:then>
+					<f:else>
+						{f:translate(key : "read_more") -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}
+					</f:else>
+				</f:if>
 
-	</div>
-	<div class="info">
-		{post.views} {f:translate(key : 'detail_views')} |
-		{post.date -> f:format.date(format:'%d. %B %Y')} |
-		<f:for each="{post.categories}" as="category" iteration="catIterator">
-			<f:if condition="{catIterator.isLast}">
-				<f:then>
-					<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-						{category.title}
-					</f:link.page>
-				</f:then>
-				<f:else>
-					<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
-						{category.title},
-					</f:link.page>
-				</f:else>
-			</f:if>
-		</f:for>
+			</div>
+			<div class="info">
+				{post.views} {f:translate(key : 'detail_views')} |
+				{post.date -> f:format.date(format:'%d. %B %Y')} |
+				<f:for each="{post.categories}" as="category" iteration="catIterator">
+					<f:if condition="{catIterator.isLast}">
+						<f:then>
+							<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+								{category.title}
+							</f:link.page>
+						</f:then>
+						<f:else>
+							<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : category}}" title="{category.title}">
+								{category.title},
+							</f:link.page>
+						</f:else>
+					</f:if>
+				</f:for>
 
-		|
-		<f:if condition="{post.comments -> f:count()} > 1">
-			<f:then>
-				<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
-				</f:link.page>
-			</f:then>
-			<f:else>
-				<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
-					{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
-				</f:link.page>
-			</f:else>
-		</f:if>
-	</div>
+				|
+				<f:if condition="{post.comments -> f:count()} > 1">
+					<f:then>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
+							{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+						</f:link.page>
+					</f:then>
+					<f:else>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
+							{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+						</f:link.page>
+					</f:else>
+				</f:if>
+			</div>
+		</div>
+	</f:section>
+
 </div>

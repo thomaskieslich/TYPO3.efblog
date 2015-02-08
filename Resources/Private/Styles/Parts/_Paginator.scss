@@ -1,0 +1,39 @@
+.tx-efblog-widget-paginator {
+	position: relative;
+	text-align: center;
+	list-style: inside none none;
+	width: 100%;
+	li {
+		display: inline-block;
+		background: none;
+		padding-left: 1em;
+		margin: 0;
+		&.first {
+			position: absolute;
+			left: 0;
+			text-align: left;
+			padding-left: 0;
+			}
+		&.previous {
+			position: absolute;
+			left: rem(90);
+			}
+		&.next {
+			position: absolute;
+			right: rem(90);
+			}
+		&.last {
+			position: absolute;
+			right: 0;
+			text-align: right;
+			}
+		&.previous,
+		&.next {
+			min-width: 20%;
+			}
+		&.first,
+		&.last {
+			min-width: 15%;
+			}
+		}
+	}

@@ -1,7 +1,9 @@
 @import "Bourbon/bourbon";
-@import "Parts/Variables";
+@import "base/base";
 @import "Parts/Mixins";
 @import "Parts/Socialshareprivacy";
 @import "Parts/Datepick";
 
+@import "Parts/Paginator";
+@import "Parts/Post";
 @import "Parts/Category";

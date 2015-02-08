@@ -78,14 +78,14 @@ class Post extends AbstractEntity {
 	/**
 	 * start date
 	 *
-	 * @var /DateTime $date
+	 * @var DateTime $date
 	 */
 	protected $date;
 
 	/**
 	 * archive date
 	 *
-	 * @var /DateTime $archive
+	 * @var DateTime $archive
 	 */
 	protected $archive;
 

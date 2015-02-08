@@ -1,53 +1,59 @@
-<div class="tx-efblog-list-body">
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-	<f:switch expression="{post.teaserOptions}">
-		<f:case value="0">
-			<f:if condition="{post.teaserImage}">
-				<f:render section="image" arguments="{post: post}"/>
-			</f:if>
-			<div class="tx-efblog-list-text">
-				<f:render section="title" arguments="{post: post}"/>
-			</div>
-		</f:case>
+	<f:section name="main">
+		<div class="tx-efblog-list-body">
 
-		<f:case value="1">
-			<f:if condition="{post.teaserImage}">
-				<f:render section="image" arguments="{post: post}"/>
-			</f:if>
-			<div class="tx-efblog-list-text">
-				<f:render section="title" arguments="{post: post}"/>
-				<f:render section="teaser" arguments="{post: post}"/>
-			</div>
-		</f:case>
+			<f:switch expression="{post.teaserOptions}">
+				<f:case value="0">
+					<f:if condition="{post.teaserImage}">
+						<f:render section="image" arguments="{post: post}"/>
+					</f:if>
+					<div class="tx-efblog-list-text">
+						<f:render section="title" arguments="{post: post}"/>
+					</div>
+				</f:case>
 
-		<f:case value="2">
-			<f:render section="title" arguments="{post: post}"/>
-			<f:if condition="{post.content.0.ctype} != {settings.detailView.divType}">
-				<f:then>
-					<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.0}"/>
-				</f:then>
-				<f:else>
-					<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.1}"/>
-				</f:else>
-			</f:if>
-		</f:case>
+				<f:case value="1">
+					<f:if condition="{post.teaserImage}">
+						<f:render section="image" arguments="{post: post}"/>
+					</f:if>
+					<div class="tx-efblog-list-text">
+						<f:render section="title" arguments="{post: post}"/>
+						<f:render section="teaser" arguments="{post: post}"/>
+					</div>
+				</f:case>
 
-		<f:case value="3">
-			<f:render section="title" arguments="{post: post}"/>
-			<f:for each="{post.content}" as="element">
-				<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}"/>
-			</f:for>
-		</f:case>
-		<f:case default="TRUE">
-			<f:if condition="{post.teaserImage}">
-				<f:render section="image" arguments="{post: post}"/>
-			</f:if>
-			<div class="tx-efblog-list-text">
-				<f:render section="title" arguments="{post: post}"/>
-				<f:render section="teaser" arguments="{post: post}"/>
-			</div>
-		</f:case>
-	</f:switch>
+				<f:case value="2">
+					<f:render section="title" arguments="{post: post}"/>
+					<f:if condition="{post.content.0.ctype} != {settings.detailView.divType}">
+						<f:then>
+							<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.0}"/>
+						</f:then>
+						<f:else>
+							<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{post.content.1}"/>
+						</f:else>
+					</f:if>
+				</f:case>
+
+				<f:case value="3">
+					<f:render section="title" arguments="{post: post}"/>
+					<f:for each="{post.content}" as="element">
+						<f:cObject typoscriptObjectPath="plugin.tx_efblog.renderElement" data="{element}"/>
+					</f:for>
+				</f:case>
+				<f:case default="TRUE">
+					<f:if condition="{post.teaserImage}">
+						<f:render section="image" arguments="{post: post}"/>
+					</f:if>
+					<div class="tx-efblog-list-text">
+						<f:render section="title" arguments="{post: post}"/>
+						<f:render section="teaser" arguments="{post: post}"/>
+					</div>
+				</f:case>
+			</f:switch>
+		</div>
+	</f:section>
 
 	<f:section name="title">
 		<h2>{post.title -> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid : '{settings.detailUid}')}</h2>
@@ -86,4 +92,5 @@
 			</f:else>
 		</f:if>
 	</f:section>
+
 </div>
