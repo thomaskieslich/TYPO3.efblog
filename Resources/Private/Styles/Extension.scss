@@ -1,9 +1,12 @@
-@import "Bourbon/bourbon";
-@import "base/base";
-@import "Parts/Mixins";
-@import "Parts/Socialshareprivacy";
-@import "Parts/Datepick";
+@import "Frameworks/Bourbon/bourbon";
+@import "Frameworks/Neat/neat-helpers";
+@import "Theme/Variables";
+@import "Frameworks/base/base";
+@import "Frameworks/Neat/neat";
+@import "Theme/Mixins";
+@import "Theme/Socialshareprivacy";
+@import "Theme/Datepick";
 
-@import "Parts/Paginator";
-@import "Parts/Post";
-@import "Parts/Category";
+@import "Theme/Paginator";
+@import "Theme/Post";
+@import "Theme/Category";

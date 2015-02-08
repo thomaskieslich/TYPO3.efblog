@@ -31,3 +31,24 @@
 .tx-efblog-list-footer .info {
 	text-align: right;
 	}
+
+//detail breadcrump
+.tx-efblog-detail-breadCrumb {
+	font-family: $base-font-family;
+	font-size: $base-font-size * 0.95;
+	margin-bottom: $base-spacing * 0.8;
+	@include outer-container();
+	width: 100%;
+	.left {
+		@include span-columns(5);
+		min-height: 0.01em;
+		}
+	.center {
+		@include span-columns(2);
+		text-align: center;
+		}
+	.right {
+		@include span-columns(5);
+		text-align: right;
+		}
+	}
