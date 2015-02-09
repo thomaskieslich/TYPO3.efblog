@@ -156,11 +156,12 @@ class PostController extends BaseController {
 	/**
 	 * list post for single category
 	 *
-	 * @param Category $maincategory
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $maincategory
 	 *
 	 * @return void
 	 */
 	public function categoryListAction(Category $maincategory = NULL) {
+		DebuggerUtility::var_dump($maincategory);
 		$this->view->assign('maincategory', $maincategory);
 		$this->settings['listView']['category'] = $maincategory->getUid();
 		$posts = $this->postRepository->findPosts($this->settings);
