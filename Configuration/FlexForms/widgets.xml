@@ -1,0 +1,54 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <general>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets</label>
+                            <config>
+                                <type>select</type>
+                                <items type="array">
+                                    <numIndex index="60" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latestPosts</numIndex>
+                                        <numIndex index="1">Widget->latestPostsWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="70" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_latestComments</numIndex>
+                                        <numIndex index="1">Widget->latestCommentsWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="80" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_views</numIndex>
+                                        <numIndex index="1">Widget->viewsWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="90" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_category</numIndex>
+                                        <numIndex index="1">Widget->categoryWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="100" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_search</numIndex>
+                                        <numIndex index="1">Widget->searchWidget</numIndex>
+                                    </numIndex>
+                                    <numIndex index="110" type="array">
+                                        <numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_dateMenu</numIndex>
+                                        <numIndex index="1">Widget->dateMenuWidget</numIndex>
+                                    </numIndex>
+                                </items>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+                </el>
+            </ROOT>
+        </general>
+    </sheets>
+</T3DataStructure>

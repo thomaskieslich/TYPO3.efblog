@@ -10,10 +10,20 @@ if (!defined('TYPO3_MODE')) {
 		'Post' => 'list,detail,categoryList,rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Category' => 'categoryOverview',
 		'Comment' => 'create',
-		'Widget' => 'latestPostsWidget, viewsWidget',
 	),
 	array(
 		'Post' => 'searchList,rss,ajaxCalendarMonth,ajaxCalendarDay',
 		'Comment' => 'create',
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'ThomasKieslich.' . $_EXTKEY,
+	'Fe2',
+	array(
+		'Widget' => 'latestPostsWidget, viewsWidget',
+	),
+	array(
+
 	)
 );

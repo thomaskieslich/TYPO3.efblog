@@ -1,0 +1,63 @@
+
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<general>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<switchableControllerActions>
+						<TCEforms>
+							<label>LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_post.list</numIndex>
+										<numIndex index="1">Post->list</numIndex>
+									</numIndex>
+									<numIndex index="10" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_post.detail</numIndex>
+										<numIndex index="1">Post->detail</numIndex>
+									</numIndex>
+									<numIndex index="20" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_post_search</numIndex>
+										<numIndex index="1">Post->searchList</numIndex>
+									</numIndex>
+									<numIndex index="30" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_post.category_list</numIndex>
+										<numIndex index="1">Post->categoryList</numIndex>
+									</numIndex>
+									<numIndex index="40" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_post.date_list</numIndex>
+										<numIndex index="1">Post->dateList</numIndex>
+									</numIndex>
+									<numIndex index="45" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_view_post.calendar_view</numIndex>
+										<numIndex index="1">Post->calendarView</numIndex>
+									</numIndex>
+									<numIndex index="50" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_view_category.overview</numIndex>
+										<numIndex index="1">Category->categoryOverview</numIndex>
+									</numIndex>
+									<numIndex index="60" type="array">
+										<numIndex index="0">LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_view_comment.create</numIndex>
+										<numIndex index="1">Comment->create</numIndex>
+									</numIndex>
+								</items>
+								<size>9</size>
+								<maxitems>9</maxitems>
+								<minitems>1</minitems>
+							</config>
+						</TCEforms>
+					</switchableControllerActions>
+				</el>
+			</ROOT>
+		</general>
+	</sheets>
+</T3DataStructure>

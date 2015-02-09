@@ -242,7 +242,7 @@ class PostController extends BaseController {
 	 *
 	 * @return void
 	 */
-	public function dateMenuListAction() {
+	public function dateListAction() {
 		$request = $this->request->getArguments();
 		if (isset($request['year'])) {
 			$this->settings['year'] = $this->request->getArgument('year');
