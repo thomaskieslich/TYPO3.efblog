@@ -18,6 +18,7 @@
 			<label index="comment_form_submit">submit Comment</label>
 			<label index="comment_form_title">Title*</label>
 			<label index="comment_form_website">Website</label>
+			<label index="comment_form_error.occurred">following errors occurred</label>
 			<label index="comment_from">from</label>
 			<label index="comment_message_hidden">Hidden, must be aproved.</label>
 			<label index="comment_message_message">message:</label>

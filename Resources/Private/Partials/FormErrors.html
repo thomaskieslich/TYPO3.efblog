@@ -3,26 +3,32 @@
 
 	<f:section name="form">
 
-		<f:form.validationResults>
-			<div class="errors">
-				<h2><f:translate key="error.errorsOccurred">[following errors occurred:]</f:translate></h2>
-				<f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
-					<ul>
+		<f:form.validationResults for="{object}">
+			<f:if condition="{validationResults.flattenedErrors}">
+				<div class="errors">
+					<h2>{f:translate(key: 'comment_form_error.occurred')}</h2>
+					<f:for each="{validationResults.flattenedErrors}" key="propertyName" as="errors">
+						<strong>{f:translate(key: 'property_{propertyName}')}</strong><br>
 						<f:for each="{errors}" as="error">
-							{error}:{title}
-							<br/>
+							{error}<br>
 						</f:for>
-					</ul>
-				</f:for>
-			</div>
+					</f:for>
+				</div>
+			</f:if>
 		</f:form.validationResults>
 
 	</f:section>
 
 	<f:section name="field">
 		<div class="error">
-			<f:form.validationResults for="{path}" as="property">
-				{property.flattenedErrors -> f:debug()}
+			<f:form.validationResults for="{object}">
+				<f:for each="{validationResults.flattenedErrors}" key="property" as="errors">
+					<f:if condition="{property} == {field}">
+						<f:for each="{errors}" as="error">
+							<span class="field-error">{error}</span>
+						</f:for>
+					</f:if>
+				</f:for>
 			</f:form.validationResults>
 		</div>
 	</f:section>

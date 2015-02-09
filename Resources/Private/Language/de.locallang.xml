@@ -15,6 +15,7 @@
 			<label index="comment_form_submit">Kommentar absenden</label>
 			<label index="comment_form_title">Titel*</label>
 			<label index="comment_form_website">Webseite</label>
+			<label index="comment_form_error.occurred">Folgende Fehler sind aufgetreten.</label>
 			<label index="comment_from">aus</label>
 			<label index="comment_message_hidden">Versteckt, muss freigeschaltet werden.</label>
 			<label index="comment_message_message">nachricht:</label>

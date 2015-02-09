@@ -4,7 +4,6 @@
 	<f:section name="main">
 
 		<div id="tx-efblog-comment-form">
-			<f:render partial="FormErrors" section="form"/>
 			<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="tx-efblog-comment-form" arguments="{post: post}" noCacheHash="1" noCache="1">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
 				<div class="form-row">
@@ -13,7 +12,7 @@
 					</div>
 					<div class="field">
 						{f:form.textfield(property:"author", id: "tx-efblog-author", title: "test")}
-						<f:render partial="FormErrors" section="field" arguments="{path: 'newComment.author'}" />
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'author'}" />
 					</div>
 				</div>
 
@@ -23,6 +22,7 @@
 					</div>
 					<div class="field">
 						{f:form.textfield(property:"email", id: "tx-efblog-email")}
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'email'}" />
 					</div>
 				</div>
 
@@ -59,6 +59,7 @@
 					</div>
 					<div class="field">
 						{f:form.textfield(property:"title", id: "tx-efblog-title")}
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'title'}" />
 					</div>
 				</div>
 
@@ -68,12 +69,12 @@
 					</div>
 					<div class="field">
 						{f:form.textarea(property: "message", id: "tx-efblog-message", rows: "8", cols: "46")}
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'message'}" />
 					</div>
 				</div>
 
 				<div class="form-row submit">
 					<f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}"/>
-					<input class="button" type="submit" name="" value="Submit"/>
 				</div>
 			</f:form>
 			<p class="disclaimer">{f:translate(key : 'comment_form_disclaimer')}</p>
