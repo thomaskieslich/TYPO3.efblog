@@ -264,15 +264,8 @@ class PostController extends BaseController {
 			$this->view->assign('month', $this->request->getArgument('month'));
 		}
 
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-
-		$pagerConfig = array(
-				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-				'insertAbove' => $this->settings['listView']['insertAbove'],
-				'insertBelow' => $this->settings['listView']['insertBelow'],
-				'maxPages' => $this->settings['listView']['maxPages']
-		);
-		$this->view->assign('pagerConfig', $pagerConfig);
+		$posts = $this->postRepository->findPosts($this->settings);
+		$this->view->assign('posts', $posts);
 	}
 
 	/**
