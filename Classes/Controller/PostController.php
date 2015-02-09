@@ -29,7 +29,6 @@ namespace ThomasKieslich\Efblog\Controller;
 use ThomasKieslich\Efblog\Domain\Model\Category;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -144,7 +143,6 @@ class PostController extends BaseController {
 		$request = $this->request->getArguments();
 		if (isset($request['searchPhrase'])) {
 			$searchPhrase = $this->request->getArgument('searchPhrase');
-			DebuggerUtility::var_dump($searchPhrase);
 			$this->settings['listView']['searchPhrase'] = $searchPhrase;
 			$results = $this->postRepository->findPosts($this->settings);
 			$this->view->assign('searchPhrase', htmlspecialchars($searchPhrase));
@@ -161,7 +159,6 @@ class PostController extends BaseController {
 	 * @return void
 	 */
 	public function categoryListAction(Category $maincategory = NULL) {
-		DebuggerUtility::var_dump($maincategory);
 		$this->view->assign('maincategory', $maincategory);
 		$this->settings['listView']['category'] = $maincategory->getUid();
 		$posts = $this->postRepository->findPosts($this->settings);
