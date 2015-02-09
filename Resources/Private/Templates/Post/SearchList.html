@@ -1,38 +1,51 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<f:layout name="Default"/>
-<f:section name="content">
-	<div class="tx-efblog-search-container">
-		<div class="result">
+
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<div class="tx-efblog-search-container">
+			<div class="result">
+				<f:if condition="{posts -> f:count()} > 0">
+					<f:then>
+						{posts->f:count()}
+						<f:if condition="{posts -> f:count()} == 1">
+							<f:then>{f:translate(key : 'view_search_result')}</f:then>
+							<f:else>{f:translate(key : 'view_search_results')}</f:else>
+						</f:if>
+						{searchPhrase}
+					</f:then>
+				</f:if>
+			</div>
+
+			<div class="search-field">
+				<f:form  action="searchList" pageUid="{settings.searchUid}" noCache="1" noCacheHash="1">
+					<f:form.textfield name="searchPhrase" value="{searchPhrase}"/>
+					<f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}"/>
+				</f:form>
+			</div>
+
+			<div class="search-field">
+				<form action="{f:uri.page(pageUid: '{settings.searchUid}')}" method="get">
+					<input type="hidden" name="id" value="{settings.searchUid}">
+					<input type="hidden" name="noCache" value="1">
+					<input type="text" name="tx_efblog_fe1[searchPhrase]" value="{searchPhrase}" class="searchfield">
+					<input type="submit" alt="go" class="submitbtn" value="go">
+				</form>
+			</div>
+
 			<f:if condition="{posts -> f:count()} > 0">
-				<f:then>
-					{posts->f:count()}
-					<f:if condition="{posts -> f:count()} == 1">
-						<f:then>{f:translate(key : 'view_search_result')}</f:then>
-						<f:else>{f:translate(key : 'view_search_results')}</f:else>
-					</f:if>
-					{searchPhrase}
-				</f:then>
+				<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
+					<f:for each="{paginatedPosts}" as="post">
+						<div class="tx-efblog-list-item">
+							<f:render partial="Post/ListItemBody" section="main" arguments="{post : post}"/>
+							<f:render partial="Post/ListItemFooter" section="main" arguments="{post : post}"/>
+						</div>
+					</f:for>
+				</tk:widget.paginate>
 			</f:if>
 		</div>
+	</f:section>
 
-		<div class="search-field">
-			<form action="{f:uri.page(pageUid: '{settings.searchUid}')}" method="get">
-				<input type="hidden" name="id" value="{settings.searchUid}">
-				<input type="hidden" name="noCache" value="1">
-				<input type="text"name="tx_efblog_fe1[searchPhrase]" value="{searchPhrase}" class="searchfield">
-				<input type="submit" alt="go" class="submitbtn" value="go">
-			</form>
-		</div>
-
-		<f:if condition="{posts -> f:count()} > 0">
-			<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
-				<f:for each="{paginatedPosts}" as="post">
-					<div class="tx-efblog-list-item">
-						<f:render partial="Post/ListItemBody" arguments="{post : post}"/>
-						<f:render partial="Post/ListItemFooter" arguments="{post : post}"/>
-					</div>
-				</f:for>
-			</tk:widget.paginate>
-		</f:if>
-	</div>
-</f:section>
+</div>
