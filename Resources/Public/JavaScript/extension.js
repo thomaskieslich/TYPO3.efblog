@@ -39,12 +39,10 @@ $(function () {
 	}
 
 	//Commentform
-	$('#tx-efblog-comment-form #tx-efblog-link').parent().hide();
+	$('.tx-efblog-comment-form #tx-efblog-link').parent().parent().hide();
 
 	$('.tx-efblog-comments-list').on('click', '.new-comment', function () {
-		$('#comment-form #tx-efblog-title').val('@' + $(this).data('title'));
 		$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
-
 	});
 
 	//Archive menu

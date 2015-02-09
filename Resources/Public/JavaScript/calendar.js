@@ -1,23 +1,26 @@
-var highlightedDates = [];
-getDates();
-
 $(function () {
-	$.datepick.setDefaults($.datepick.regionalOptions['de']);
 
-	$("#datepicker").datepick({
-		dateFormat: 'yy-mm-dd',
-		onShow: function (picker) {
-			setDays(picker);
-		},
-		onSelect: function (dates) {
-			getDayDates(dates);
-		},
-		onChangeMonthYear: function (year, month) {
-			getDates(year, month);
-		}
-	});
-	getDayDates();
+	if ($("#datepicker").length) {
+		getDates();
+		$.datepick.setDefaults($.datepick.regionalOptions['de']);
+
+		$("#datepicker").datepick({
+			dateFormat: 'yy-mm-dd',
+			onShow: function (picker) {
+				setDays(picker);
+			},
+			onSelect: function (dates) {
+				getDayDates(dates);
+			},
+			onChangeMonthYear: function (year, month) {
+				getDates(year, month);
+			}
+		});
+		getDayDates();
+	}
 });
+
+var highlightedDates = [];
 
 function getDates(year, month) {
 	// if no month and year set it to current
@@ -62,7 +65,6 @@ function getDayDates(dates) {
 			$('#todayEntries').html(result);
 		}
 	});
-
 
 	$('#todayEntries .toggler').click(function () {
 		$(this).next('.details').slideToggle('fast');

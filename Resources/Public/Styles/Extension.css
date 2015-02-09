@@ -835,6 +835,26 @@ button.datepick-cmd {
   .tx-efblog-comments-list .comment h2 {
     font-size: 1.1rem; }
 
+.tx-efblog-comment-form {
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.5em;
+  background: #FFF; }
+  .tx-efblog-comment-form .form-row.full::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tx-efblog-comment-form .form-row.full .label {
+    float: right;
+    width: 35%; }
+  .tx-efblog-comment-form .form-row.full .field {
+    width: 60%; }
+  .tx-efblog-comment-form .form-row.half {
+    display: inline-block;
+    width: 49%; }
+    .tx-efblog-comment-form .form-row.half.right {
+      float: right; }
+
 .tx-efblog-category-overview .odd {
   float: left;
   margin: 0 16px 16px 0; }

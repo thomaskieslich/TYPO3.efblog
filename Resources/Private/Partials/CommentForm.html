@@ -3,10 +3,10 @@
 
 	<f:section name="main">
 
-		<div id="tx-efblog-comment-form">
+		<div class="tx-efblog-comment-form">
 			<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="tx-efblog-comment-form" arguments="{post: post}" noCacheHash="1" noCache="1">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
-				<div class="form-row">
+				<div class="form-row half">
 					<div class="label">
 						<label for="tx-efblog-author">{f:translate(key : 'comment_form_author')}</label>
 					</div>
@@ -16,7 +16,7 @@
 					</div>
 				</div>
 
-				<div class="form-row">
+				<div class="form-row half right">
 					<div class="label">
 						<label for="tx-efblog-email">{f:translate(key : 'comment_form_email')}</label>
 					</div>
@@ -26,40 +26,12 @@
 					</div>
 				</div>
 
-				<div class="form-row">
-					<div class="label">
-						<label for="tx-efblog-website">{f:translate(key : 'comment_form_website')}</label>
-					</div>
-					<div class="field">
-						{f:form.textfield(property:"website", id: "tx-efblog-website")}
-					</div>
-				</div>
-
-				<div class="form-row">
+				<div class="form-row link">
 					<div class="label">
 						<label for="tx-efblog-link">{f:translate(key : 'comment_form_link')}</label>
 					</div>
 					<div class="field">
 						{f:form.textfield(property:"link", id: "tx-efblog-link")}
-					</div>
-				</div>
-
-				<div class="form-row">
-					<div class="label">
-						<label for="tx-efblog-location">{f:translate(key : 'comment_form_location')}</label>
-					</div>
-					<div class="field">
-						{f:form.textfield(property:"location", id: "tx-efblog-location")}
-					</div>
-				</div>
-
-				<div class="form-row">
-					<div class="label">
-						<label for="tx-efblog-title">{f:translate(key : 'comment_form_title')}</label>
-					</div>
-					<div class="field">
-						{f:form.textfield(property:"title", id: "tx-efblog-title")}
-						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'title'}" />
 					</div>
 				</div>
 
@@ -70,6 +42,28 @@
 					<div class="field">
 						{f:form.textarea(property: "message", id: "tx-efblog-message", rows: "8", cols: "46")}
 						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'message'}" />
+					</div>
+				</div>
+				<f:if condition="{settings.comment.allowRte">
+					<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+					<script src="typo3conf/ext/efblog/Resources/Public/JavaScript/tinymce.js"></script>
+				</f:if>
+
+				<div class="form-row half">
+					<div class="label">
+						<label for="tx-efblog-website">{f:translate(key : 'comment_form_website')}</label>
+					</div>
+					<div class="field">
+						{f:form.textfield(property:"website", id: "tx-efblog-website")}
+					</div>
+				</div>
+
+				<div class="form-row half right">
+					<div class="label">
+						<label for="tx-efblog-location">{f:translate(key : 'comment_form_location')}</label>
+					</div>
+					<div class="field">
+						{f:form.textfield(property:"location", id: "tx-efblog-location")}
 					</div>
 				</div>
 

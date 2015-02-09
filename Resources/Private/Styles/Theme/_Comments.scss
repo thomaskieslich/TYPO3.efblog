@@ -19,7 +19,7 @@
 		padding: $base-spacing;
 		background: #FFF;
 		}
-	.answers{
+	.answers {
 		margin-left: rem(60);
 		}
 	.header {
@@ -53,7 +53,7 @@
 		vertical-align: top;
 		width: rem(50);
 		height: rem(50);
-		img{
+		img {
 			border-radius: $base-border-radius;
 			}
 		}
@@ -61,5 +61,39 @@
 		h2 {
 			font-size: $base-font-size * 1.1;
 			}
+		}
+	}
+
+.tx-efblog-comment-form {
+	border: $base-border;
+	border-radius: $base-border-radius;
+	padding: $base-spacing;
+	background: #FFF;
+	.form-row {
+		&.full{
+			@include clearfix;
+			.label {
+			float: right;
+			width: 35%;
+			}
+			.field{
+				width: 60%;
+				}
+			}
+		&.half{
+			display: inline-block;
+			width: 49%;
+			&.right{
+				float: right;
+				}
+			.label {
+//			float: right;
+//			width: 35%;
+			}
+			.field{
+//				width: 60%;
+				}
+			}
+
 		}
 	}
