@@ -19,12 +19,12 @@
 			<label index="comment_form_title">Title*</label>
 			<label index="comment_form_website">Website</label>
 			<label index="comment_form_error.occurred">following errors occurred</label>
+			<label index="comment_from_author">Author</label>
 			<label index="comment_from">from</label>
 			<label index="comment_message_hidden">Hidden, must be aproved.</label>
 			<label index="comment_message_message">message:</label>
 			<label index="comment_message_spampoints">Spampoints</label>
 			<label index="comment_reply">reply to this comment</label>
-			<label index="comment_reply_prefix">@</label>
 			<label index="comment_rss">subscribe to comment RSSt</label>
 			<label index="comment_rss_from">from</label>
 			<label index="comment_rss_title">Comments for Post:</label>

@@ -27,6 +27,7 @@ namespace ThomasKieslich\Efblog\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use ThomasKieslich\Efblog\Service\AvatarService;
+use ThomasKieslich\Efblog\Service\FindAuthorService;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -123,6 +124,11 @@ class Comment extends AbstractEntity {
 	 * @var string
 	 */
 	protected $avatar;
+
+	/**
+	 * @var bool
+	 */
+	protected $isAuthor;
 
 	/**
 	 * @return int
@@ -377,6 +383,16 @@ class Comment extends AbstractEntity {
 		if ($this->email) {
 			$avatarImage = AvatarService::findAvatarByEmail($this->email);
 		}
+
 		return $avatarImage;
+	}
+
+	public function getIsAuthor() {
+		$isAuthor = FALSE;
+		if ($this->post->getAuthor() && $this->email && $this->author) {
+			$isAuthor = FindAuthorService::findAuthor($this->post->getAuthor(), $this->email, $this->author);
+		}
+
+		return $isAuthor;
 	}
 }

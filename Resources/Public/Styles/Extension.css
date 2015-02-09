@@ -785,11 +785,11 @@ button.datepick-cmd {
 
 .tx-efblog-comments-list {
   margin: 1.5em 0; }
-  .tx-efblog-comments-list .item {
+  .tx-efblog-comments-list .maincomment {
     margin: 0px 0px 8px;
     padding: 5px;
     min-height: 3.75rem; }
-    .tx-efblog-comments-list .item::after {
+    .tx-efblog-comments-list .maincomment::after {
       clear: both;
       content: "";
       display: table; }
@@ -799,8 +799,10 @@ button.datepick-cmd {
     border: 1px solid #333;
     padding: 1.5em;
     background: #FFF; }
-  .tx-efblog-comments-list .answers {
+  .tx-efblog-comments-list .answer {
     margin-left: 3.75rem; }
+  .tx-efblog-comments-list .author-comment .number {
+    border: 2px solid #900; }
   .tx-efblog-comments-list .header {
     margin: 0.75em 0; }
     .tx-efblog-comments-list .header::after {
@@ -825,6 +827,8 @@ button.datepick-cmd {
     display: inline-block; }
     .tx-efblog-comments-list .info .name, .tx-efblog-comments-list .info a .name {
       font-weight: 700; }
+    .tx-efblog-comments-list .info .location, .tx-efblog-comments-list .info a .location {
+      display: inline-block; }
   .tx-efblog-comments-list .gravatar {
     float: right;
     vertical-align: top;
@@ -854,6 +858,9 @@ button.datepick-cmd {
     width: 49%; }
     .tx-efblog-comment-form .form-row.half.right {
       float: right; }
+  .tx-efblog-comment-form .field-error {
+    color: #d00;
+    font-weight: 700; }
 
 .tx-efblog-category-overview .odd {
   float: left;

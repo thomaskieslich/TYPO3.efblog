@@ -41,7 +41,8 @@ $(function () {
 	//Commentform
 	$('.tx-efblog-comment-form #tx-efblog-link').parent().parent().hide();
 
-	$('.tx-efblog-comments-list').on('click', '.new-comment', function () {
+	$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
+		console.log($(this).data('comment'));
 		$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
 	});
 

@@ -3,15 +3,19 @@
 
 	<f:section name="main">
 
-		<div class="tx-efblog-comment-form">
-			<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="tx-efblog-comment-form" arguments="{post: post}" noCacheHash="1" noCache="1">
+		<div class="tx-efblog-comment-form" id="comment-form">
+			<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="comment-form" arguments="{post: post}" noCacheHash="1" noCache="1">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
 				<div class="form-row half">
 					<div class="label">
 						<label for="tx-efblog-author">{f:translate(key : 'comment_form_author')}</label>
 					</div>
 					<div class="field">
-						{f:form.textfield(property:"author", id: "tx-efblog-author", title: "test")}
+						<f:if condition="{feUser.name}">
+							<f:then>{f:form.textfield(property:"author", id: "tx-efblog-author", value: '{feUser.name}')}</f:then>
+							<f:else>{f:form.textfield(property:"author", id: "tx-efblog-author")}</f:else>
+						</f:if>
+
 						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'author'}" />
 					</div>
 				</div>
@@ -21,7 +25,10 @@
 						<label for="tx-efblog-email">{f:translate(key : 'comment_form_email')}</label>
 					</div>
 					<div class="field">
-						{f:form.textfield(property:"email", id: "tx-efblog-email")}
+						<f:if condition="{feUser.email}">
+							<f:then>{f:form.textfield(property:"email", id: "tx-efblog-email", value: "{feUser.email}")}</f:then>
+							<f:else>{f:form.textfield(property:"email", id: "tx-efblog-email")}</f:else>
+						</f:if>
 						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'email'}" />
 					</div>
 				</div>
@@ -53,7 +60,11 @@
 						<label for="tx-efblog-website">{f:translate(key : 'comment_form_website')}</label>
 					</div>
 					<div class="field">
-						{f:form.textfield(property:"website", id: "tx-efblog-website")}
+						<f:if condition="{feUser.www}">
+							<f:then>{f:form.textfield(property:"website", id: "tx-efblog-website", value: "{feUser.www}")}</f:then>
+							<f:else>{f:form.textfield(property:"website", id: "tx-efblog-website")}</f:else>
+							</f:if>
+
 					</div>
 				</div>
 
@@ -62,7 +73,11 @@
 						<label for="tx-efblog-location">{f:translate(key : 'comment_form_location')}</label>
 					</div>
 					<div class="field">
-						{f:form.textfield(property:"location", id: "tx-efblog-location")}
+						<f:if condition="{feUser.city}">
+							<f:then>{f:form.textfield(property:"location", id: "tx-efblog-location", value: "{feUser.city}")}</f:then>
+							<f:else>{f:form.textfield(property:"location", id: "tx-efblog-location")}</f:else>
+							</f:if>
+
 					</div>
 				</div>
 

@@ -106,6 +106,28 @@ class PostController extends BaseController {
 
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
+
+			//prefill fe_user
+			if (isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser) {
+				$loginUser = $GLOBALS['TSFE']->fe_user->user;
+				$feUser = array();
+				if ($loginUser['name']) {
+					$feUser['name'] = $loginUser['name'];
+				} else {
+					$feUser['name'] = $loginUser['first_name'] . ' ' . $loginUser['middle_name'] . ' ' . $loginUser['last_name'];
+				}
+				if ($loginUser['email']) {
+					$feUser['email'] = $loginUser['email'];
+				}
+				if ($loginUser['www']) {
+					$feUser['www'] = $loginUser['www'];
+				}
+				if ($loginUser['city']) {
+					$feUser['city'] = $loginUser['city'];
+				}
+
+				$this->view->assign('feUser', $feUser);
+			}
 		} else {
 			$this->addFlashMessage(LocalizationUtility::translate('notice_noPost', $this->extensionName));
 		}

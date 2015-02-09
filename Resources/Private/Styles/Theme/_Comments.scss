@@ -6,7 +6,7 @@
 
 .tx-efblog-comments-list {
 	margin: $base-spacing 0;
-	.item {
+	.maincomment {
 		margin: 0px 0px 8px;
 		padding: 5px;
 		min-height: rem(60);
@@ -19,8 +19,11 @@
 		padding: $base-spacing;
 		background: #FFF;
 		}
-	.answers {
+	.answer {
 		margin-left: rem(60);
+		}
+	.author-comment .number{
+		border: 2px solid #900;
 		}
 	.header {
 		margin: $base-spacing * 0.5 0;
@@ -45,6 +48,9 @@
 		display: inline-block;
 		.name {
 			font-weight: $font-weight-bold;
+			}
+		.location{
+			display: inline-block;
 			}
 		}
 
@@ -87,13 +93,14 @@
 				float: right;
 				}
 			.label {
-//			float: right;
-//			width: 35%;
 			}
 			.field{
-//				width: 60%;
 				}
 			}
 
+		}
+	.field-error{
+		color: #d00;
+		font-weight: $font-weight-bold;
 		}
 	}
