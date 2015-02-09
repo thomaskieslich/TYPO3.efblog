@@ -45,8 +45,7 @@
 					</div>
 				</div>
 				<f:if condition="{settings.comment.allowRte">
-					<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-					<script src="typo3conf/ext/efblog/Resources/Public/JavaScript/tinymce.js"></script>
+					<f:render partial="CommentFormRte"/>
 				</f:if>
 
 				<div class="form-row half">
