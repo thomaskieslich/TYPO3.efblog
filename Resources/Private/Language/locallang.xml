@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
 	<meta type="array">
-		<type>module</type>
-		<description>Language labels for the Simple Blog extension in the FRONTEND</description>
 		<generator>LFEditor</generator>
-		<attributes type="array">
-			<source-language>en</source-language>
-			<target-language>de</target-language>
-			<datatype>plaintext</datatype>
-			<original>messages</original>
-			<date>2015-01-31T21:07:06Z</date>
-		</attributes>
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="category">Category</label>
-			<label index="comment">Comment</label>
 			<label index="comment_add">add Comment</label>
-			<label index="comment_author">(author)</label>
 			<label index="comment_comment">Comment</label>
 			<label index="comment_comments">Comments</label>
 			<label index="comment_form_author">Name*</label>
@@ -51,7 +40,6 @@
 			<label index="list_views">Views</label>
 			<label index="notice_error">Error!</label>
 			<label index="notice_noPost">There is no Post to show!</label>
-			<label index="post">Post</label>
 			<label index="post_category">post categories</label>
 			<label index="post_comments">post comments</label>
 			<label index="post_title">title</label>

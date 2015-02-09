@@ -1,32 +1,30 @@
-<f:form.errors>
-    <div class="errors">
-	<h2><f:translate key="error.errorsOccurred">[following errors occurred:]</f:translate></h2>
-	<ul>
-	    <f:for each="{error.errors}" as="propertyErrors">
-		<f:if condition="{propertyErrors.errors}">
-		    <f:then>
-			<f:for each="{propertyErrors.errors}" as="errorDetail">
-			    <li>
-			    <f:translate key="error.code.{errorDetail.code}" arguments="{0: '{f:translate(key: \'property_{propertyErrors.propertyName}\')}'}" htmlEscape="false">[{errorDetail.message} ({errorDetail.code})]</f:translate>
-			    </li>
-			</f:for>
-		    </f:then>
-		    <f:else>
-			<f:for each="{error.errors}" as="errorDetail">
-			    <f:if condition="{errorDetail.errors}">
-				<f:then>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-				</f:then>
-				<f:else>
-				    <li>
-					{errorDetail.message}
-				    </li>
-				</f:else>
-			    </f:if>
-			</f:for>
-		    </f:else>
-		</f:if>
-	    </f:for>
-	</ul>
-    </div>
-</f:form.errors>
+	<f:section name="form">
+
+		<f:form.validationResults>
+			<div class="errors">
+				<h2><f:translate key="error.errorsOccurred">[following errors occurred:]</f:translate></h2>
+				<f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+					<ul>
+						<f:for each="{errors}" as="error">
+							{error}:{title}
+							<br/>
+						</f:for>
+					</ul>
+				</f:for>
+			</div>
+		</f:form.validationResults>
+
+	</f:section>
+
+	<f:section name="field">
+		<div class="error">
+			<f:form.validationResults for="{path}" as="property">
+				{property.flattenedErrors -> f:debug()}
+			</f:form.validationResults>
+		</div>
+	</f:section>
+
+</div>

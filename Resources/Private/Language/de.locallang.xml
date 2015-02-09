@@ -4,11 +4,10 @@
 		<languageKey index="de" type="array">
 			<label index="category">Kategorie</label>
 			<label index="comment_add">schreibe einen Kommentar</label>
-			<label index="comment_author">(autor)</label>
 			<label index="comment_comment">Kommentar</label>
 			<label index="comment_comments">Kommentare</label>
 			<label index="comment_form_author">Name*</label>
-			<label index="comment_form_disclaimer">Bitte beachtet, das einige Kommentare erst freigeschaltet werden&lt;br /&gt;                müssen.&lt;br /&gt;            </label>
+			<label index="comment_form_disclaimer">Bitte beachtet, das einige Kommentare erst freigeschaltet werden müssen.</label>
 			<label index="comment_form_email">Mail (für Gravatar, nicht öffentlich)</label>
 			<label index="comment_form_link">Link</label>
 			<label index="comment_form_location">Ort</label>
@@ -42,6 +41,7 @@
 			<label index="post_comments">Post Kommentare</label>
 			<label index="post_title">Titel</label>
 			<label index="property_author">Name</label>
+			<label index="property_comment">Kommentar</label>
 			<label index="property_email">Mail</label>
 			<label index="property_location">Ort</label>
 			<label index="property_message">Kommentar</label>
