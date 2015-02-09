@@ -1,44 +1,48 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<f:layout name="Default"/>
-<f:section name="content">
-	<div class="tx-efblog-category-container">
-		<h1>
-			{posts->f:count()}
-			<f:if condition="<f:count subject='{posts}' /> == 1">
-				<f:then>{f:translate(key : 'list_category_result')}</f:then>
-				<f:else>{f:translate(key : 'list_category_results')}</f:else>
-			</f:if>
-		</h1>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers">
 
-		<div class="tx-efblog-category-infos">
-			<div class="image">
-				<f:for each="{category.image}" as="image" iteration="imageIterator">
-					<f:if condition="{image}">
-						{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "120m", height: "120m")}
-					</f:if>
-				</f:for>
-			</div>
-			<div class="text">
-				<h2>{category.title}</h2>
-				{category.description -> f:format.html()}
-			</div>
-			<div class="sub">
-				<f:if condition="{category.children}">
-					<ul>
-						<f:for each="{category.children}" as="child">
-							<li>{child.title-> f:link.action(action : 'categoryList', controller : 'Post', arguments : '{category:child}', pageUid : '{settings.categoryUid}')}</li>
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<div class="tx-efblog-maincategory-container">
+			<h1>
+				{posts->f:count()}
+				<f:if condition="<f:count subject='{posts}' /> == 1">
+					<f:then>{f:translate(key : 'list_category_result')}</f:then>
+					<f:else>{f:translate(key : 'list_category_results')}</f:else>
+				</f:if>
+			</h1>
+
+			<div class="tx-efblog-maincategory-infos">
+				<div class="text">
+					<h2>{maincategory.title}</h2>
+					{maincategory.description -> f:format.html()}
+				</div>
+				<div class="image">
+					<f:for each="{maincategory.image}" as="image" iteration="imageIterator">
+						<f:if condition="{image}">
+							{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "120m", height: "120m")}
+						</f:if>
+					</f:for>
+				</div>
+
+				<f:if condition="{subcategories}">
+					<ul class="menu">
+						<f:for each="{subcategories}" as="category">
+							<f:render partial="CategoryElement" arguments="{category : category}" section="main"/>
 						</f:for>
 					</ul>
 				</f:if>
 			</div>
 		</div>
-	</div>
-	<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
-		<f:for each="{paginatedPosts}" as="post">
-			<div class="tx-efblog-list-item">
-				<f:render partial="Post/ListItemBody" arguments="{post : post}"/>
-				<f:render partial="Post/ListItemFooter" arguments="{post : post}"/>
-			</div>
-		</f:for>
-	</tk:widget.paginate>
-</f:section>
+		<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
+			<f:for each="{paginatedPosts}" as="post">
+				<div class="tx-efblog-list-item">
+					<f:render partial="Post/ListItemBody" section="main" arguments="{post : post}"/>
+					<f:render partial="Post/ListItemFooter" section="main" arguments="{post : post}"/>
+				</div>
+			</f:for>
+		</tk:widget.paginate>
+	</f:section>
+
+</div>

@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use ThomasKieslich\Efblog\Domain\Model\Category;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -151,28 +152,37 @@ class PostController extends BaseController {
 	}
 
 	/**
-	 * list by category
+	 * list post for single category
+	 *
+	 * @param Category $maincategory
 	 *
 	 * @return void
 	 */
-	public function categoryListAction() {
-		$request = $this->request->getArguments();
-		if (isset($request['category'])) {
-			/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
-			$category = $this->categoryRepository->findByUid($this->request->getArgument('category'));
-			$categories = $this->findSubCategories($category);
-			$this->settings['listView']['category'] = $categories;
-			$this->view->assign('category', $category);
-		}
-		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
+	public function categoryListAction(Category $maincategory = NULL) {
+		$this->view->assign('maincategory', $maincategory);
+		$this->settings['listView']['category'] = $maincategory->getUid();
+		$posts = $this->postRepository->findPosts($this->settings);
+		$this->view->assign('posts', $posts);
 
-		$pagerConfig = array(
-				'itemsPerPage' => $this->settings['listView']['itemsPerPage'],
-				'insertAbove' => $this->settings['listView']['insertAbove'],
-				'insertBelow' => $this->settings['listView']['insertBelow'],
-				'maxPages' => $this->settings['listView']['maxPages']
-		);
-		$this->view->assign('pagerConfig', $pagerConfig);
+		$query = $this->categoryRepository->findAll()->toArray();
+		$categories = array();
+		/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
+		foreach ($query as $key => $category) {
+			$categories[$key]['title'] = $category->getTitle();
+			$categories[$key]['uid'] = $category->getUid();
+			$categories[$key]['description'] = $category->getDescription();
+			$categories[$key]['image'] = $category->getImage();
+			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
+			if ($category->getParentCategory()) {
+				$categories[$key]['parentId'] = $category->getParentCategory()->getUid();
+			}
+		}
+
+		$subcategories = $this->buildCategoryTree($categories, $maincategory->getUid());
+		$this->view->assign('subcategories', $subcategories);
+
+
+
 	}
 
 	/**
