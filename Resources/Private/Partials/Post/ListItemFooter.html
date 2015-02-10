@@ -30,14 +30,15 @@
 			<div class="info">
 				<f:if condition="{post.views} > 1">
 					<f:then>
-						{post.views} {f:translate(key : 'list_views')}
+						<span class="views">{post.views} <label>{f:translate(key : 'list_views')}</label></span>
 					</f:then>
 					<f:else>
-						{post.views} {f:translate(key : 'list_view')}
+						<span class="view">{post.views} <label>{f:translate(key : 'list_view')}</label></span>
 					</f:else>
 				</f:if>
 				|
-				{post.date -> f:format.date(format:'%d. %B %Y')} |
+				<span class="date">{post.date -> f:format.date(format:'%d. %B %Y')}</span>
+				|
 				<f:if condition="{post.categories}">
 					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
