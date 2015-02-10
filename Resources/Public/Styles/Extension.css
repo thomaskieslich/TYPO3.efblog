@@ -902,4 +902,28 @@ button.datepick-cmd {
   .tx-efblog-widget-content li {
     font-size: 0.9rem; }
 
+.tx-efblog-combined {
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.5em;
+  background: #FFF; }
+
+.tx-efblog-combined-entry {
+  display: block;
+  min-height: 50px;
+  margin-bottom: 0.75em; }
+  .tx-efblog-combined-entry::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tx-efblog-combined-entry .title h2 {
+    font-weight: 500;
+    font-size: 1rem; }
+    .tx-efblog-combined-entry .title h2 a {
+      color: #333; }
+
+.tx-efblog-combined-image {
+  float: right;
+  width: 50px; }
+
 /*# sourceMappingURL=Extension.css.map */

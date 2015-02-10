@@ -1,0 +1,25 @@
+.tx-efblog-combined {
+	border: 1px solid $base-border-color;
+	border-radius: $base-border-radius;
+	padding: $base-spacing;
+	background: #FFF;
+	}
+
+.tx-efblog-combined-entry {
+	display: block;
+	min-height: 50px;
+	margin-bottom: $base-spacing * 0.5;
+	@include clearfix;
+	.title h2 {
+		font-weight: $font-weight-normal;
+		font-size: $base-font-size;
+		a {
+			color: $base-font-color;
+			}
+		}
+	}
+
+.tx-efblog-combined-image {
+	float: right;
+	width: 50px;
+	}
