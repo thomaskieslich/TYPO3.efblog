@@ -36,8 +36,8 @@
 						</h2>
 					</div>
 					<div class="infos">
-						<span class="date"> {post.date -> f:format.date(format:'%d.%m.%y')} |</span>
-						<span class="views">{post.views} {f:translate(key : 'detail_views')}|</span>
+						<span class="date"> {post.date -> f:format.date(format:'%d.%m.%y')}</span>|
+						<span class="views">{post.views} {f:translate(key : 'detail_views')}</span>|
 						<f:if condition="{post.comments -> f:count()} > 1">
 							<f:then>
 								<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments' class="comments">
