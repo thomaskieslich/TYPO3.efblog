@@ -7,6 +7,7 @@
 	<f:section name="content">
 		<div class="tx-efblog-search-container">
 			<div class="result">
+				<h2>
 				<f:if condition="{posts -> f:count()} > 0">
 					<f:then>
 						{posts->f:count()}
@@ -14,25 +15,18 @@
 							<f:then>{f:translate(key : 'view_search_result')}</f:then>
 							<f:else>{f:translate(key : 'view_search_results')}</f:else>
 						</f:if>
-						{searchPhrase}
 					</f:then>
+					<f:else>{f:translate(key : 'view_search_no_results')}</f:else>
 				</f:if>
+					: {searchPhrase -> f:format.raw()}
+				</h2>
 			</div>
 
 			<div class="search-field">
 				<f:form  action="searchList" pageUid="{settings.searchUid}" noCache="1" noCacheHash="1">
-					<f:form.textfield name="searchPhrase" value="{searchPhrase}"/>
-					<f:form.submit class="button" value="{f:translate(key: 'comment_form_submit', default: '[submit]')}"/>
+					<f:form.textfield name="searchPhrase" value="{searchPhrase -> f:format.htmlentitiesDecode()}"/>
+					<f:form.submit class="button" value="{f:translate(key: 'view_search_submit')}"/>
 				</f:form>
-			</div>
-
-			<div class="search-field">
-				<form action="{f:uri.page(pageUid: '{settings.searchUid}')}" method="get">
-					<input type="hidden" name="id" value="{settings.searchUid}">
-					<input type="hidden" name="noCache" value="1">
-					<input type="text" name="tx_efblog_fe1[searchPhrase]" value="{searchPhrase}" class="searchfield">
-					<input type="submit" alt="go" class="submitbtn" value="go">
-				</form>
 			</div>
 
 			<f:if condition="{posts -> f:count()} > 0">

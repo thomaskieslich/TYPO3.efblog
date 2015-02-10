@@ -56,6 +56,7 @@
 			<label index="teaser_more">…</label>
 			<label index="view_search_result">Result for</label>
 			<label index="view_search_results">Results for</label>
+			<label index="view_search_submit">Search Posts</label>
 			<label index="widget_category_header">Categories</label>
 			<label index="widget_category_more">…</label>
 			<label index="widget_dateMenu_header">by Date</label>

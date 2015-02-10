@@ -53,6 +53,7 @@
 			<label index="teaser_more">…</label>
 			<label index="view_search_result">Ergebnis für</label>
 			<label index="view_search_results">Ergebnisse für</label>
+			<label index="view_search_submit">Beiträge suchen</label>
 			<label index="widget_category_header">Kategorien</label>
 			<label index="widget_category_more">…</label>
 			<label index="widget_dateMenu_header">Archiv</label>
