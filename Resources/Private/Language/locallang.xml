@@ -54,6 +54,7 @@
 			<label index="property_website">Website</label>
 			<label index="read_more">more</label>
 			<label index="teaser_more">…</label>
+			<label index="view_search_no_results">No Results for</label>
 			<label index="view_search_result">Result for</label>
 			<label index="view_search_results">Results for</label>
 			<label index="view_search_submit">Search Posts</label>
