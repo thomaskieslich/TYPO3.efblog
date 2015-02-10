@@ -1,55 +1,60 @@
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<f:layout name="Default"/>
-<f:section name="content">
-	<div class="tx-efblog-combined">
-		<f:for each="{posts}" as="post">
-			<div class="tx-efblog-combined-entry">
-				<div class="tx-efblog-combined-image">
-					<f:if condition="{post.teaserImage}">
-						<f:then>
-							<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
-								<f:if condition="{post.teaserImage}">
-									<f:if condition="{imageIterator.cycle} == 1">
-										<figure style="width: 40px; height: 40px;">
-											{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "40c", height: "40c")}
-										</figure>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<div class="tx-efblog-combined">
+			<f:for each="{posts}" as="post">
+				<div class="tx-efblog-combined-entry">
+					<div class="tx-efblog-combined-image">
+						<f:if condition="{post.teaserImage}">
+							<f:then>
+								<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+									<f:if condition="{post.teaserImage}">
+										<f:if condition="{imageIterator.cycle} == 1">
+											<figure style="width: 40px; height: 40px;">
+												{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "40c", height: "40c")}
+											</figure>
+										</f:if>
 									</f:if>
-								</f:if>
-							</f:for>
-						</f:then>
-						<f:else>
-							<figure style="width: 40px; height: 40px;">
-								{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "40c", height: "40c")}
-							</figure>
-						</f:else>
-					</f:if>
-				</div>
+								</f:for>
+							</f:then>
+							<f:else>
+								<figure style="width: 40px; height: 40px;">
+									{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "40c", height: "40c")}
+								</figure>
+							</f:else>
+						</f:if>
+					</div>
 
-				<div class="title">
-					<h2>
-						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid="{post.detailUid}">
-							{post.title -> f:format.crop(maxCharacters: '44', append: '{f:translate(key : "teaser_more")}')}
-						</f:link.page>
-					</h2>
-				</div>
-				<div class="infos">{post.date -> f:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
-					<f:if condition="{post.comments -> f:count()} > 1">
-						<f:then>
-							<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
-								{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
-							</f:link.action>
-						</f:then>
-						<f:else>
-							<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
-								{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
-							</f:link.action>
-						</f:else>
-					</f:if>
-					|
-					{post.blogName}
-				</div>
+					<div class="title">
+						<h2>
+							<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid="{post.detailUid}">
+								{post.title -> f:format.crop(maxCharacters: '44', append: '{f:translate(key : "teaser_more")}')}
+							</f:link.page>
+						</h2>
+					</div>
+					<div class="infos">{post.date -> f:format.date(format:'%d.%m.%y')} | {post.views} {f:translate(key : 'detail_views')}|
+						<f:if condition="{post.comments -> f:count()} > 1">
+							<f:then>
+								<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
+									{post.comments -> f:count()} {f:translate(key : 'comments_comments')}
+								</f:link.action>
+							</f:then>
+							<f:else>
+								<f:link.action action='detail' arguments='{post:post}' pageUid='{post.detailUid}' section='comments'>
+									{post.comments -> f:count()} {f:translate(key : 'comments_comment')}
+								</f:link.action>
+							</f:else>
+						</f:if>
+						|
+						{post.blogName}
+					</div>
 
-			</div>
-		</f:for>
-	</div>
-</f:section>
+				</div>
+			</f:for>
+		</div>
+	</f:section>
+
+</div>

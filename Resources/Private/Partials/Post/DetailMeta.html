@@ -7,8 +7,21 @@
 		<f:if condition="{settings.replaceKeywords}">
 			<tk:metaTag name="keywords" content="{post.tags}"/>
 		</f:if>
+
 		<f:if condition="{settings.replaceDescription}">
 			<tk:metaTag name="description" content="{description -> f:format.crop(maxCharacters: '180', append: '{f:translate(key : teaser_more)}', respectHtml: 0)}"/>
+		</f:if>
+
+		<f:if condition="{settings.addDateMeta}">
+			<tk:metaTag name="publication_date" content="{post.date -> f:format.date(format: 'Y-m-d')}"/>
+		</f:if>
+
+		<f:if condition="{settings.replaceAuthor}">
+			<f:for each="{post.author}" as="pauthor" iteration="authorIterator">
+				<f:if condition="{authorIterator.isFirst}">
+					<tk:metaTag name="author" content="{pauthor.name}"/>
+				</f:if>
+			</f:for>
 		</f:if>
 	</f:section>
 

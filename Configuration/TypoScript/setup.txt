@@ -48,6 +48,7 @@ plugin.tx_efblog {
 		replaceDescription = 1
 		replaceKeywords = 1
 		replaceAuthor = 1
+		addDateMeta = 1
 
 		listView {
 			//Sorting
