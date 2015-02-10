@@ -103,7 +103,7 @@ class PostController extends BaseController {
 			$this->view->assign('comments', $comments);
 
 			//Update Views
-			$this->updateViews($post);
+//			$this->updateViews($post);
 
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
@@ -132,6 +132,25 @@ class PostController extends BaseController {
 		} else {
 			$this->addFlashMessage(LocalizationUtility::translate('notice_no_post', $this->extensionName));
 		}
+	}
+
+	/**
+	 * update Post views
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 *
+	 * @return bool
+	 */
+	public function updateViewsAction(Post $post) {
+		if (!$GLOBALS['BE_USER']->user['uid']) {
+			$currentViews = $post->getViews();
+			$post->setViews($currentViews + 1);
+			$this->postRepository->update($post);
+
+			return 'true';
+		}
+
+		return 'false';
 	}
 
 	/**
@@ -559,23 +578,6 @@ class PostController extends BaseController {
 		}
 
 		return $breadCrumb;
-	}
-
-	/**
-	 * update Post views
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
-	 */
-	protected function updateViews(Post $post) {
-		$useragent = strtolower(GeneralUtility::getIndpEnv('HTTP_USER_AGENT'));
-		if (!$GLOBALS['BE_USER']->user['uid'] &&
-				isset($useragent) &&
-				!preg_match('/bot|crawl|slurp|spider/i', $useragent)
-		) {
-			$currentViews = $post->getViews();
-			$post->setViews($currentViews + 1);
-			$this->postRepository->update($post);
-		}
 	}
 
 	/**

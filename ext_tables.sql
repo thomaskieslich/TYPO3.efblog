@@ -127,7 +127,7 @@ CREATE TABLE tx_efblog_domain_model_comment (
 	website varchar(255) DEFAULT '' NOT NULL,
 	location varchar(255) DEFAULT '' NOT NULL,
 	title text NOT NULL,
-	message text NOT NULL,
+	message mediumtext NOT NULL,
 	date int(11) DEFAULT '0' NOT NULL,
 	spampoints int(11) DEFAULT '0' NOT NULL,
 	spam_categories text,
