@@ -15,13 +15,13 @@
 										<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 											<f:if condition="{post.teaserImage}">
 												<f:if condition="{imageIterator.cycle} == 1">
-													{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "50c", height: "50c")}
+													{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "40c", height: "40c")}
 												</f:if>
 											</f:if>
 										</f:for>
 									</f:then>
 									<f:else>
-										{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "50c", height: "50c")}
+										{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "40c", height: "40c")}
 									</f:else>
 								</f:if>
 							</f:link.page>
