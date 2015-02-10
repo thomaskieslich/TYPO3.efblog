@@ -8,24 +8,26 @@
 			<f:for each="{posts}" as="post">
 				<div class="tx-efblog-combined-entry">
 					<div class="tx-efblog-combined-image">
-						<f:if condition="{post.teaserImage}">
-							<f:then>
-								<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
-									<f:if condition="{post.teaserImage}">
-										<f:if condition="{imageIterator.cycle} == 1">
-											<figure style="width: 40px; height: 40px;">
-												{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "40c", height: "40c")}
-											</figure>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid="{post.detailUid}">
+							<f:if condition="{post.teaserImage}">
+								<f:then>
+									<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
+										<f:if condition="{post.teaserImage}">
+											<f:if condition="{imageIterator.cycle} == 1">
+												<figure>
+													{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "40c", height: "40c")}
+												</figure>
+											</f:if>
 										</f:if>
-									</f:if>
-								</f:for>
-							</f:then>
-							<f:else>
-								<figure style="width: 40px; height: 40px;">
-									{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "40c", height: "40c")}
-								</figure>
-							</f:else>
-						</f:if>
+									</f:for>
+								</f:then>
+								<f:else>
+									<figure>
+										{f:image(src: "typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png", alt: "{post.title}", width: "40c", height: "40c")}
+									</figure>
+								</f:else>
+							</f:if>
+						</f:link.page>
 					</div>
 
 					<div class="title">
