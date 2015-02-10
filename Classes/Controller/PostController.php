@@ -102,9 +102,6 @@ class PostController extends BaseController {
 			$comments = $this->orderComments($post);
 			$this->view->assign('comments', $comments);
 
-			//Update Views
-//			$this->updateViews($post);
-
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 

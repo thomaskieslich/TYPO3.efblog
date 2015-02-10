@@ -4,7 +4,12 @@
 	<f:layout name="Default"/>
 	<f:section name="content">
 		<div class="tx-efblog-widget-container">
-			<h1>{f:translate(key : 'widget_category_header')}</h1>
+			<div class="tx-efblog-widget-heade">
+				<f:if condition="{header}">
+					<f:then><h2>{header}</h2></f:then>
+					<f:else><h2>{f:translate(key : 'widget_category_header')}</h2></f:else>
+				</f:if>
+			</div>
 
 			<div class="tx-efblog-widget-content">
 				<ul>

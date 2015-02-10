@@ -1,20 +1,30 @@
-<f:layout name="Default"/>
-<f:section name="content">
-	<div class="tx-efblog-widget-container">
-		<h1>{f:translate(key : 'widget_latestComments_header')}</h1>
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
 
-		<div class="tx-efblog-widget-content">
-			<ul>
-				<f:for each="{comments}" as="comment">
-					<li>
-						<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:comment.post}}" title="{comment.title}" section="comment_{comment.uid}">
-							{comment.author} |
-							{comment.post.title -> f:format.crop(maxCharacters: '{settings.latestCommentsWidget.cropLink}',
-							append: "{f:translate(key : 'widget_latestComments_more')}")}
-						</f:link.page>
-					</li>
-				</f:for>
-			</ul>
+	<f:layout name="Default"/>
+	<f:section name="content">
+		<div class="tx-efblog-widget-container">
+			<div class="tx-efblog-widget-heade">
+				<f:if condition="{header}">
+					<f:then><h2>{header}</h2></f:then>
+					<f:else><h2>{f:translate(key : 'widget_latestComments_header')}</h2></f:else>
+				</f:if>
+			</div>
+
+			<div class="tx-efblog-widget-content">
+				<ul>
+					<f:for each="{comments}" as="comment">
+						<li>
+							<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:comment.post}}" title="{comment.title}" section="comment_{comment.uid}">
+								{comment.author} |
+								{comment.post.title -> f:format.crop(maxCharacters: '{settings.latestCommentsWidget.cropLink}',
+								append: "{f:translate(key : 'widget_latestComments_more')}")}
+							</f:link.page>
+						</li>
+					</f:for>
+				</ul>
+			</div>
 		</div>
-	</div>
-</f:section>
+	</f:section>
+
+</div>

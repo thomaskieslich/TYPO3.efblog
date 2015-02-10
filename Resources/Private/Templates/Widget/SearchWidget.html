@@ -5,7 +5,12 @@
 	<f:section name="content">
 		<f:link.page pageUid=""></f:link.page>
 		<div class="tx-efblog-widget-container">
-			<h2>{f:translate(key : 'widget_search_header')}</h2>
+			<div class="tx-efblog-widget-heade">
+				<f:if condition="{header}">
+					<f:then><h2>{header}</h2></f:then>
+					<f:else><h2>{f:translate(key : 'widget_search_header')}</h2></f:else>
+				</f:if>
+			</div>
 
 			<div class="tx-efblog-widget-content">
 				<div class="search-field">
@@ -17,4 +22,5 @@
 			</div>
 		</div>
 	</f:section>
+
 </div>

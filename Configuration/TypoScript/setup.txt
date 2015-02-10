@@ -157,6 +157,10 @@ plugin.tx_efblog {
 			}
 		}
 
+		widgets{
+			useCeHeader = 0
+		}
+
 		latestPostsWidget {
 			//Sorting
 			orderBy = date,title
@@ -168,7 +172,6 @@ plugin.tx_efblog {
 		}
 
 		latestCommentsWidget {
-
 			maxEntries = 12
 			cropLink = 33
 			showGravatar = 1
