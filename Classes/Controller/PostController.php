@@ -265,8 +265,12 @@ class PostController extends BaseController {
 			$this->view->assign('month', $this->request->getArgument('month'));
 		}
 
-		$posts = $this->postRepository->findPosts($this->settings);
-		$this->view->assign('posts', $posts);
+		if (isset($request['year']) || isset($request['month'])) {
+			$posts = $this->postRepository->findPosts($this->settings);
+			$this->view->assign('posts', $posts);
+		} else {
+			$this->addFlashMessage(LocalizationUtility::translate('notice_no_post', $this->extensionName));
+		}
 	}
 
 	/**
