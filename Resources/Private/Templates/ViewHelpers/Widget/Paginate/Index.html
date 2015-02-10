@@ -21,10 +21,6 @@
 				</f:if>
 			</li>
 
-			<li class="less">
-				<f:if condition="{pagination.hasLessPages}"><f:translate key="widget_pagination.less"/></f:if>
-			</li>
-
 			<li class="previous">
 				<f:if condition="{pagination.previousPage}">
 					<f:if condition="{pagination.previousPage} > 1">
@@ -41,6 +37,10 @@
 						</f:else>
 					</f:if>
 				</f:if>
+			</li>
+
+			<li class="less">
+				<f:if condition="{pagination.hasLessPages}"><f:translate key="widget_pagination.less"/></f:if>
 			</li>
 
 			<f:for each="{pagination.pages}" as="page">
@@ -69,6 +69,10 @@
 				</f:if>
 			</f:for>
 
+			<li class="more">
+				<f:if condition="{pagination.hasMorePages}"><f:translate key="widget_pagination.more"/></f:if>
+			</li>
+
 			<li class="next">
 				<f:if condition="{pagination.nextPage}">
 					<f:widget.link arguments="{currentPage: pagination.nextPage}"
@@ -76,10 +80,6 @@
 						<f:translate key="widget_pagination.next"/>
 					</f:widget.link>
 				</f:if>
-			</li>
-
-			<li class="more">
-				<f:if condition="{pagination.hasMorePages}"><f:translate key="widget_pagination.more"/></f:if>
 			</li>
 
 			<li class="last">
