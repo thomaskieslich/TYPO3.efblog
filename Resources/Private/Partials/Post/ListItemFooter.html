@@ -40,6 +40,7 @@
 				<span class="date">{post.date -> f:format.date(format:'%d. %B %Y')}</span>
 				|
 				<f:if condition="{post.categories}">
+					<span class="category">
 					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
@@ -54,17 +55,18 @@
 							</f:else>
 						</f:if>
 					</f:for>
+					</span>
 					|
 				</f:if>
 
 				<f:if condition="{post.comments -> f:count()} > 1">
 					<f:then>
-						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comments">
 							{post.comments -> f:count()} {f:translate(key : 'comment_comments')}
 						</f:link.page>
 					</f:then>
 					<f:else>
-						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments'>
+						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comment">
 							{post.comments -> f:count()} {f:translate(key : 'comment_comment')}
 						</f:link.page>
 					</f:else>
