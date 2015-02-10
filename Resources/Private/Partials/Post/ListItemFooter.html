@@ -62,12 +62,12 @@
 				<f:if condition="{post.comments -> f:count()} > 1">
 					<f:then>
 						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comments">
-							{post.comments -> f:count()} {f:translate(key : 'comment_comments')}
+							{post.comments -> f:count()} <span class="label">{f:translate(key : 'comment_comments')}</span>
 						</f:link.page>
 					</f:then>
 					<f:else>
 						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comment">
-							{post.comments -> f:count()} {f:translate(key : 'comment_comment')}
+							{post.comments -> f:count()} <span class="label">{f:translate(key : 'comment_comment')}</span>
 						</f:link.page>
 					</f:else>
 				</f:if>
