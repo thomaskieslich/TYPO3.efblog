@@ -878,4 +878,28 @@ button.datepick-cmd {
 .tx-efblog-category-overview .menu {
   margin: 6px 0; }
 
+.tx-efblog-widget-container {
+  margin-top: 1.5em;
+  width: 100%; }
+  .tx-efblog-widget-container.date .tx-efblog-widget-content h3 {
+    font-size: 1rem; }
+
+.tx-efblog-widget-header {
+  background-color: #333;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border: 1px solid #333;
+  padding: 0.75em; }
+  .tx-efblog-widget-header h2 {
+    font-size: 1rem;
+    color: #ddd; }
+
+.tx-efblog-widget-content {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border: 1px solid #333;
+  padding: 0.75em; }
+  .tx-efblog-widget-content li {
+    font-size: 0.9rem; }
+
 /*# sourceMappingURL=Extension.css.map */

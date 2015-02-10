@@ -1,0 +1,31 @@
+.tx-efblog-widget-container{
+	margin-top: $base-spacing;
+	width: 100%;
+
+	&.date{
+		.tx-efblog-widget-content{
+			h3{
+				font-size: $base-font-size;
+				}
+			}
+		}
+	}
+.tx-efblog-widget-header{
+	background-color: $dark-gray;
+	@include border-top-radius($base-border-radius);
+	border: $base-border;
+	padding: $base-spacing * 0.5;
+	h2{
+		font-size: $base-font-size;
+		color: $light-gray;
+		}
+	}
+
+.tx-efblog-widget-content{
+	@include border-bottom-radius($base-border-radius);
+	border: $base-border;
+	padding: $base-spacing * 0.5;
+	li{
+		font-size: $base-font-size * 0.9;
+		}
+	}
