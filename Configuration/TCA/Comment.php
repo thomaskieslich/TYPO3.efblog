@@ -116,6 +116,7 @@ $TCA['tx_efblog_domain_model_comment'] = array(
 								'rows' => 15,
 								'eval' => 'trim'
 						),
+						'defaultExtras' => 'richtext[]'
 				),
 				'date' => array(
 						'exclude' => 0,

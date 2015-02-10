@@ -16,7 +16,7 @@
 					<span class="name">
 					<f:if condition="{comment.website}">
 						<f:then>
-							<f:link.external uri="{comment.website}" target="_blank">
+							<f:link.external uri="{comment.website}" target="_blank" rel="nofollow">
 								{comment.author}
 							</f:link.external>
 						</f:then>
@@ -52,7 +52,7 @@
 						<f:then>
 							<f:if condition="{comment.website}">
 								<f:then>
-									<f:link.external uri="{comment.website}" target="_blank">
+									<f:link.external uri="{comment.website}" target="_blank" rel="nofollow">
 										<f:image src="uploads/pics/{comment.avatar}" alt="{comment.author}" width="{settings.comments.gravatarSize}" height="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
 									</f:link.external>
 								</f:then>
@@ -64,7 +64,7 @@
 						<f:else>
 							<f:if condition="{comment.website}">
 								<f:then>
-									<f:link.external uri="{comment.website}" target="_blank">
+									<f:link.external uri="{comment.website}" target="_blank" rel="nofollow">
 										<tk:gravatar emailAddress="{comment.email}" defaultImageUri="{settings.comments.defaultGravatar}" size="{settings.comments.gravatarSize}c" class="tx-efblog-gravatar"/>
 									</f:link.external>
 								</f:then>
