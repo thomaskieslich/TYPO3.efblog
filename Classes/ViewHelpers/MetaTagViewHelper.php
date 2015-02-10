@@ -30,12 +30,27 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
- * ViewHelper to render meta tags.
+ * ViewHelper to render meta tags
+ *
+ * # Example: Basic Example: News title as og:title meta tag
+ * <code>
+ * <n:metaTag property="og:title" content="{newsItem.title}" />
+ * </code>
+ * <output>
+ * <meta property="og:title" content="TYPO3 is awesome" />
+ * </output>
+ *
+ * # Example: Force the attribute "name"
+ * <code>
+ * <n:metaTag name="keywords" content="{newsItem.keywords}" />
+ * </code>
+ * <output>
+ * <meta name="keywords" content="news 1, news 2" />
+ * </output>
  */
 class MetaTagViewHelper extends AbstractTagBasedViewHelper {
-
 	/**
-	 * @var	string
+	 * @var string
 	 */
 	protected $tagName = 'meta';
 
@@ -46,26 +61,24 @@ class MetaTagViewHelper extends AbstractTagBasedViewHelper {
 	 */
 	public function initializeArguments() {
 		$this->registerTagAttribute('property', 'string', 'Property of meta tag');
+		$this->registerTagAttribute('name', 'string', 'Content of meta tag using the name attribute');
 		$this->registerTagAttribute('content', 'string', 'Content of meta tag');
 	}
 
-
 	/**
 	 * Renders a meta tag
+	 *
 	 * @param boolean $useCurrentDomain If set, current domain is used
 	 * @param boolean $forceAbsoluteUrl If set, absolute url is forced
 	 * @return void
-	*/
+	 */
 	public function render($useCurrentDomain = FALSE, $forceAbsoluteUrl = FALSE) {
-		/** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $tsfe */
-		$tsfe = $GLOBALS['TSFE'];
-
-			// set current domain
+		// set current domain
 		if ($useCurrentDomain) {
-			$this->tag->addAttribute('content', GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
+			$this->tag->addAttribute('content', GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
 		}
 
-			// prepend current domain
+		// prepend current domain
 		if ($forceAbsoluteUrl) {
 			$path = $this->arguments['content'];
 			if (!GeneralUtility::isFirstPartOfStr($path, GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
@@ -73,8 +86,8 @@ class MetaTagViewHelper extends AbstractTagBasedViewHelper {
 			}
 		}
 
-		if (isset($this->arguments['content']) && !empty($this->arguments['content'])) {
-			$tsfe->getPageRenderer()->addMetaTag($this->tag->render());
+		if ($useCurrentDomain || (isset($this->arguments['content']) && !empty($this->arguments['content']))) {
+			$GLOBALS['TSFE']->getPageRenderer()->addMetaTag($this->tag->render());
 		}
 	}
 }

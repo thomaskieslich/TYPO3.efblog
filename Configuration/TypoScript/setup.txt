@@ -101,11 +101,6 @@ plugin.tx_efblog {
 			defaultImage = typo3conf/ext/efblog/Resources/Public/Icons/openGraphDefault.png
 			admins =
 			appId =
-			latitude =
-			longitude =
-			locality =
-			region =
-			country-name =
 		}
 
 		comments {

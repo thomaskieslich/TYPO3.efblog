@@ -5,10 +5,10 @@
 	<f:section name="main">
 		{post.title -> f:if(condition: '{settings.replaceTitle}') -> tk:document.title(mode: 'replace')}
 		<f:if condition="{settings.replaceKeywords}">
-			<tk:metaTag property="keywords" content="{post.tags}"/>
+			<tk:metaTag name="keywords" content="{post.tags}"/>
 		</f:if>
 		<f:if condition="{settings.replaceDescription}">
-			<tk:metaTag property="description" content="{description -> f:format.crop(maxCharacters: '180', append: '{f:translate(key : teaser_more)}', respectHtml: 0)}"/>
+			<tk:metaTag name="description" content="{description -> f:format.crop(maxCharacters: '180', append: '{f:translate(key : teaser_more)}', respectHtml: 0)}"/>
 		</f:if>
 	</f:section>
 
