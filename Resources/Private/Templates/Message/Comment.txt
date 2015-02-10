@@ -1,17 +1,17 @@
-{namespace tk=ThomasKieslich\Efblog\ViewHelpers}
 {post.title}
-{tk:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
-{tk:translate(key : 'comment_form_email', extensionName : 'Efblog')}: {newComment.email}
-{tk:translate(key : 'comment_form_website', extensionName : 'Efblog')}: {newComment.website}
-{tk:translate(key : 'comment_form_location', extensionName : 'Efblog')}: {newComment.location}
-{tk:translate(key : 'comment_form_title', extensionName : 'Efblog')}: {newComment.title}
+{f:translate(key : 'comment_form_author', extensionName : 'Efblog')}: {newComment.author}
+{f:translate(key : 'comment_form_email', extensionName : 'Efblog')}: {newComment.email}
+{f:translate(key : 'comment_form_website', extensionName : 'Efblog')}: {newComment.website}
+{f:translate(key : 'comment_form_location', extensionName : 'Efblog')}: {newComment.location}
 
-{tk:translate(key : 'comment_message_message', extensionName : 'Efblog')}
-{newComment.message}
+{f:translate(key : 'comment_message_message', extensionName : 'Efblog')}
+{newComment.message -> f:format.stripTags()}
 
-{tk:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):
+{f:translate(key : 'comment_message_spampoints', extensionName : 'Efblog')} ({newComment.spampoints}):
 <f:for each="{newComment.spamCategories}" as="spamcategory" key="label">
-	{label}: {spamcategory}<
+	{label}: {spamcategory}
 </f:for>
-<f:if condition='newComment.hidden'>{tk:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}</f:if>
-Link: {f:uri.action(action : 'detail', arguments : '{post : post}', absolute : '1', extensionName : 'Efblog', pluginName : 'fe1')}
+<f:if condition='{newComment.hidden}'>
+	{f:translate(key : 'comment_message_hidden', extensionName : 'Efblog')}
+</f:if>
+Link: <f:uri.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:post}}" absolute="1" noCacheHash="1" />
