@@ -23,10 +23,10 @@
 			<div class="info">
 				<f:if condition="{post.views} > 1">
 					<f:then>
-						<span class="views">{post.views} <label>{f:translate(key : 'list_views')}</label></span>
+						<span class="views">{post.views} <span class="label">{f:translate(key : 'list_views')}</span></span>
 					</f:then>
 					<f:else>
-						<span class="view">{post.views} <label>{f:translate(key : 'list_view')}</label></span>
+						<span class="view">{post.views} <span class="label">{f:translate(key : 'list_view')}</span></span>
 					</f:else>
 				</f:if>
 				|
