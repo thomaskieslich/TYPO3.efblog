@@ -9,15 +9,15 @@
 			<label index="comment_form_author">Name*</label>
 			<label index="comment_form_disclaimer">Bitte beachtet, das einige Kommentare erst freigeschaltet werden müssen.</label>
 			<label index="comment_form_email">Mail (für Gravatar, nicht öffentlich)</label>
+			<label index="comment_form_error.occurred">Folgende Fehler sind aufgetreten.</label>
 			<label index="comment_form_link">Link</label>
 			<label index="comment_form_location">Ort</label>
 			<label index="comment_form_message">dein Kommentar*</label>
 			<label index="comment_form_submit">Kommentar absenden</label>
 			<label index="comment_form_title">Titel*</label>
 			<label index="comment_form_website">Webseite</label>
-			<label index="comment_form_error.occurred">Folgende Fehler sind aufgetreten.</label>
-			<label index="comment_from_author">Autor</label>
 			<label index="comment_from">aus</label>
+			<label index="comment_from_author">Autor</label>
 			<label index="comment_message_hidden">Versteckt, muss freigeschaltet werden.</label>
 			<label index="comment_message_message">nachricht:</label>
 			<label index="comment_message_spampoints">Spampoints</label>
@@ -37,7 +37,8 @@
 			<label index="list_view">Ansicht</label>
 			<label index="list_views">Ansichten</label>
 			<label index="notice_error">Fehler!</label>
-			<label index="notice_noPost">Es ist kein Beitrag vorhanden!</label>
+			<label index="notice_no_category">Es ist keine Kategorie ausgewählt!</label>
+			<label index="notice_no_post">Es ist kein Beitrag vorhanden!</label>
 			<label index="post_category">Post Kategorien</label>
 			<label index="post_comments">Post Kommentare</label>
 			<label index="post_title">Titel</label>

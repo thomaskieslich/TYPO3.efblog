@@ -3,6 +3,7 @@
 
 	<f:layout name="Default"/>
 	<f:section name="content">
+	<f:flashMessages renderMode="div" />
 		<f:if condition="{post}">
 			<f:render partial="Post/DetailMeta" section="main" arguments="{post: post, description: description}"/>
 

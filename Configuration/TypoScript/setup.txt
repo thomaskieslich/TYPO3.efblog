@@ -19,12 +19,12 @@ plugin.tx_efblog {
 		throwPageNotFoundExceptionIfActionCantBeResolved = 1
 	}
 	features {
-#		rewrittenPropertyMapper = 1
+		rewrittenPropertyMapper = 1
 		skipDefaultArguments = 1
-#		ignoreAllEnableFieldsInBe = 0
+		ignoreAllEnableFieldsInBe = 0
 	}
 	legacy {
-#		enableLegacyFlashMessageHandling = 1
+		enableLegacyFlashMessageHandling = 0
 	}
 	settings {
 		##targets

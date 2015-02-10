@@ -4,6 +4,8 @@
 
 	<f:layout name="Default"/>
 	<f:section name="content">
+		<f:flashMessages renderMode="div"/>
+		<f:if condition="{maincategory}">
 		<div class="tx-efblog-maincategory-container">
 			<h1>
 				{posts->f:count()}
@@ -43,6 +45,7 @@
 				</div>
 			</f:for>
 		</tk:widget.paginate>
+		</f:if>
 	</f:section>
 
 </div>

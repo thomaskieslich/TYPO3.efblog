@@ -12,15 +12,15 @@
 			<label index="comment_form_author">Name*</label>
 			<label index="comment_form_disclaimer">note, some comments must be approved.</label>
 			<label index="comment_form_email">Email (for Garvatar, not public)</label>
+			<label index="comment_form_error.occurred">following errors occurred</label>
 			<label index="comment_form_link">Link</label>
 			<label index="comment_form_location">Location</label>
 			<label index="comment_form_message">your message*</label>
 			<label index="comment_form_submit">submit Comment</label>
 			<label index="comment_form_title">Title*</label>
 			<label index="comment_form_website">Website</label>
-			<label index="comment_form_error.occurred">following errors occurred</label>
-			<label index="comment_from_author">Author</label>
 			<label index="comment_from">from</label>
+			<label index="comment_from_author">Author</label>
 			<label index="comment_message_hidden">Hidden, must be aproved.</label>
 			<label index="comment_message_message">message:</label>
 			<label index="comment_message_spampoints">Spampoints</label>
@@ -40,7 +40,8 @@
 			<label index="list_view">View</label>
 			<label index="list_views">Views</label>
 			<label index="notice_error">Error!</label>
-			<label index="notice_noPost">There is no Post to show!</label>
+			<label index="notice_no_category">There is no Category to show!</label>
+			<label index="notice_no_post">There is no Post to show!</label>
 			<label index="post_category">post categories</label>
 			<label index="post_comments">post comments</label>
 			<label index="post_title">title</label>

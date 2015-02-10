@@ -130,7 +130,7 @@ class PostController extends BaseController {
 				$this->view->assign('feUser', $feUser);
 			}
 		} else {
-			$this->addFlashMessage(LocalizationUtility::translate('notice_noPost', $this->extensionName));
+			$this->addFlashMessage(LocalizationUtility::translate('notice_no_post', $this->extensionName));
 		}
 	}
 
@@ -154,35 +154,36 @@ class PostController extends BaseController {
 	/**
 	 * list post for single category
 	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $maincategory
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Category $category
 	 *
 	 * @return void
 	 */
-	public function categoryListAction(Category $maincategory = NULL) {
-		$this->view->assign('maincategory', $maincategory);
-		$this->settings['listView']['category'] = $maincategory->getUid();
-		$posts = $this->postRepository->findPosts($this->settings);
-		$this->view->assign('posts', $posts);
+	public function categoryListAction(Category $category = NULL) {
+		if ($category) {
+			$this->view->assign('maincategory', $category);
+			$this->settings['listView']['category'] = $category->getUid();
+			$posts = $this->postRepository->findPosts($this->settings);
+			$this->view->assign('posts', $posts);
 
-		$query = $this->categoryRepository->findAll()->toArray();
-		$categories = array();
-		/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
-		foreach ($query as $key => $category) {
-			$categories[$key]['title'] = $category->getTitle();
-			$categories[$key]['uid'] = $category->getUid();
-			$categories[$key]['description'] = $category->getDescription();
-			$categories[$key]['image'] = $category->getImage();
-			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
-			if ($category->getParentCategory()) {
-				$categories[$key]['parentId'] = $category->getParentCategory()->getUid();
+			$query = $this->categoryRepository->findAll()->toArray();
+			$categories = array();
+			/** @var \ThomasKieslich\Efblog\Domain\Model\Category $category */
+			foreach ($query as $key => $subcategory) {
+				$categories[$key]['title'] = $subcategory->getTitle();
+				$categories[$key]['uid'] = $subcategory->getUid();
+				$categories[$key]['description'] = $subcategory->getDescription();
+				$categories[$key]['image'] = $subcategory->getImage();
+				$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($subcategory)->count();
+				if ($subcategory->getParentCategory()) {
+					$categories[$key]['parentId'] = $subcategory->getParentCategory()->getUid();
+				}
 			}
+
+			$subcategories = $this->buildCategoryTree($categories, $category->getUid());
+			$this->view->assign('subcategories', $subcategories);
+		} else {
+			$this->addFlashMessage(LocalizationUtility::translate('notice_no_category', $this->extensionName));
 		}
-
-		$subcategories = $this->buildCategoryTree($categories, $maincategory->getUid());
-		$this->view->assign('subcategories', $subcategories);
-
-
-
 	}
 
 	/**
