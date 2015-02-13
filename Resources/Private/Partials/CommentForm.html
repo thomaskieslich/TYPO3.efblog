@@ -4,6 +4,10 @@
 	<f:section name="main">
 
 		<div class="tx-efblog-comment-form" id="comment-form">
+			<div class="addComment">
+				<h3>{f:translate(key : 'comment_add')}</h3>
+			</div>
+
 			<f:form controller="Comment" action="create" name="newComment" id="comment-form" section="comment-form" arguments="{post: post}" noCacheHash="1" noCache="1">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
 				<div class="form-row half">
@@ -16,7 +20,7 @@
 							<f:else>{f:form.textfield(property:"author", id: "tx-efblog-author")}</f:else>
 						</f:if>
 
-						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'author'}" />
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'author'}"/>
 					</div>
 				</div>
 
@@ -29,7 +33,7 @@
 							<f:then>{f:form.textfield(property:"email", id: "tx-efblog-email", value: "{feUser.email}")}</f:then>
 							<f:else>{f:form.textfield(property:"email", id: "tx-efblog-email")}</f:else>
 						</f:if>
-						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'email'}" />
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'email'}"/>
 					</div>
 				</div>
 
@@ -48,7 +52,7 @@
 					</div>
 					<div class="field">
 						{f:form.textarea(property: "message", id: "tx-efblog-message", rows: "8", cols: "46")}
-						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'message'}" />
+						<f:render partial="FormErrors" section="field" arguments="{object: 'newComment' field: 'message'}"/>
 					</div>
 				</div>
 				<f:if condition="{settings.comment.allowRte">
@@ -63,7 +67,7 @@
 						<f:if condition="{feUser.www}">
 							<f:then>{f:form.textfield(property:"website", id: "tx-efblog-website", value: "{feUser.www}")}</f:then>
 							<f:else>{f:form.textfield(property:"website", id: "tx-efblog-website")}</f:else>
-							</f:if>
+						</f:if>
 
 					</div>
 				</div>
@@ -76,7 +80,7 @@
 						<f:if condition="{feUser.city}">
 							<f:then>{f:form.textfield(property:"location", id: "tx-efblog-location", value: "{feUser.city}")}</f:then>
 							<f:else>{f:form.textfield(property:"location", id: "tx-efblog-location")}</f:else>
-							</f:if>
+						</f:if>
 
 					</div>
 				</div>
