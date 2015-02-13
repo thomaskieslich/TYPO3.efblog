@@ -51,16 +51,14 @@
 	</f:section>
 
 	<f:section name="image">
-		<div class="tx-efblog-list-images">
+		<div class="tx-efblog-combined-image">
 			<!-- Post Image-->
 			<f:for each="{post.teaserImage}" as="image" iteration="imageIterator">
 				<f:if condition="{post.teaserImage}">
 					<f:if condition="{image}">
-						<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
-							<div class="tx-efblog-list-imagerow">
+						<f:if condition="{imageIterator.first} <= {settings.listView.images}">
 								{f:image(src: "{image.publicUrl}", alt: "{post.title}", width:"{settings.listView.imageWidth}", height: "{settings.listView.imageHeight}")
 								-> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid: '{settings.detailUid}')}
-							</div>
 						</f:if>
 					</f:if>
 				</f:if>
