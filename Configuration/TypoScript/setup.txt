@@ -170,7 +170,7 @@ plugin.tx_efblog {
 
 		latestCommentsWidget {
 			maxEntries = 12
-			cropLink = 33
+			cropLink = 22
 			showGravatar = 1
 		}
 
