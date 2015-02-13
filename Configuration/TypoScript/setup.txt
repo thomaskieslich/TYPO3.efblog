@@ -2,6 +2,7 @@ page {
 	includeCSS {
 		tx_efblog = EXT:efblog/Resources/Public/Styles/Extension.css
 	}
+
 	includeJSFooterlibs {
 		jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
 		jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
@@ -13,19 +14,21 @@ page {
 	}
 }
 
-
 plugin.tx_efblog {
 	mvc {
 		throwPageNotFoundExceptionIfActionCantBeResolved = 1
 	}
+
 	features {
 		rewrittenPropertyMapper = 1
 		skipDefaultArguments = 1
 		ignoreAllEnableFieldsInBe = 0
 	}
+
 	legacy {
 		enableLegacyFlashMessageHandling = 0
 	}
+
 	settings {
 		##targets
 		listUid =
@@ -41,7 +44,8 @@ plugin.tx_efblog {
 		superAdminGroup = 4
 
 		enableFuturePosts = 0
-
+		//days for auto archive
+		daysToArchive =
 
 		//Page
 		replaceTitle = 1
@@ -56,10 +60,8 @@ plugin.tx_efblog {
 			//asc, desc
 			sortDirection = desc
 			maxEntries = 100
-			//active,archived or empty for all
-			displayArchived =
-			//days for auto archive
-			daysToArchive =
+			//active, archived, all
+			displayArchived = active
 			//or, notor, notand, and
 			categoryMode = or
 			category =
@@ -78,9 +80,13 @@ plugin.tx_efblog {
 				insertBelow = 1
 				maximumNumberOfLinks = 5
 			}
+		}
 
-			//Search
-			searchFields = title, content.header, content.bodytext
+		searchList {
+			//content.header, content.bodytext, title
+			searchFields = content.header, content.bodytext, title
+			//active,archived, all
+			displayArchived = all
 		}
 
 		detailView {
@@ -144,7 +150,6 @@ plugin.tx_efblog {
 				messageKeywords = http,www,viagra, penis, casino
 				messageKeywordsPoints = 10
 
-
 				blockedIps =
 				ipPoints = 60
 
@@ -181,6 +186,7 @@ plugin.tx_efblog {
 		}
 
 		searchWidget {
+
 		}
 
 		dateMenuWidget {
@@ -188,7 +194,10 @@ plugin.tx_efblog {
 			orderBy = date
 			//asc, desc
 			sortDirection = desc
+			//active,archived or empty for all
+			displayArchived =
 		}
+
 		rss {
 			maxEntries = 25
 			title = Blog RSS
@@ -208,6 +217,7 @@ plugin.tx_efblog {
 					}
 				}
 			}
+
 			ThomasKieslich\Efblog\Domain\Model\Administrator {
 				mapping {
 					tableName = fe_users
@@ -247,6 +257,7 @@ txefblogAjax {
 		extensionName = Efblog
 		vendorName = ThomasKieslich
 	}
+
 	config {
 		disableAllHeaderCode = 1
 		xhtml_cleaning = 0
@@ -272,6 +283,7 @@ postRss {
 				1 = postRss
 			}
 		}
+
 		settings =< plugin.tx_efblog.settings
 		persistence =< plugin.tx_efblog.persistence
 		view =< plugin.tx_efblog.view
@@ -299,6 +311,7 @@ commentsRss {
 				1 = commentsRss
 			}
 		}
+
 		settings =< plugin.tx_efblog.settings
 		persistence =< plugin.tx_efblog.persistence
 		view =< plugin.tx_efblog.view
@@ -310,7 +323,6 @@ commentsRss {
 		xhtml_cleaning = 0
 		admPanel = 0
 	}
-
 }
 
 combinedRss = PAGE
@@ -327,6 +339,7 @@ combinedRss {
 				1 = combinedRss
 			}
 		}
+
 		settings =< plugin.tx_efblog.settings
 		persistence =< plugin.tx_efblog.persistence
 		view =< plugin.tx_efblog.view

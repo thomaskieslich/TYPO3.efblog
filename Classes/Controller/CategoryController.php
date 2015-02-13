@@ -46,7 +46,7 @@ class CategoryController extends BaseController {
 			$categories[$key]['uid'] = $category->getUid();
 			$categories[$key]['description'] = $category->getDescription();
 			$categories[$key]['image'] = $category->getImage();
-			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category)->count();
+			$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($category, $this->settings)->count();
 			if ($category->getParentCategory()) {
 				$categories[$key]['parentId'] = $category->getParentCategory()->getUid();
 			}

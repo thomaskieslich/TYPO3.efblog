@@ -156,10 +156,13 @@ class PostController extends BaseController {
 	 * @return void
 	 */
 	public function searchListAction() {
+		if ($this->settings['searchList']['displayArchived']) {
+			$this->settings['listView']['displayArchived'] = $this->settings['searchList']['displayArchived'];
+		}
 		$request = $this->request->getArguments();
-		if (isset($request['searchPhrase'])) {
+		if ($request['searchPhrase']) {
 			$searchPhrase = $this->request->getArgument('searchPhrase');
-			$this->settings['listView']['searchPhrase'] = $searchPhrase;
+			$this->settings['searchList']['searchPhrase'] = $searchPhrase;
 			$results = $this->postRepository->findPosts($this->settings);
 			$this->view->assign('searchPhrase', htmlspecialchars($searchPhrase));
 			$this->view->assign('posts', $results);
@@ -189,7 +192,7 @@ class PostController extends BaseController {
 				$categories[$key]['uid'] = $subcategory->getUid();
 				$categories[$key]['description'] = $subcategory->getDescription();
 				$categories[$key]['image'] = $subcategory->getImage();
-				$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($subcategory)->count();
+				$categories[$key]['posts'] = $this->postRepository->countCategoryPosts($subcategory, $this->settings)->count();
 				if ($subcategory->getParentCategory()) {
 					$categories[$key]['parentId'] = $subcategory->getParentCategory()->getUid();
 				}
@@ -279,6 +282,10 @@ class PostController extends BaseController {
 		if (isset($request['month'])) {
 			$this->settings['month'] = $this->request->getArgument('month');
 			$this->view->assign('month', $this->request->getArgument('month'));
+		}
+
+		if ($this->settings['dateMenuWidget']['displayArchived']) {
+			$this->settings['listView']['displayArchived'] = $this->settings['dateMenuWidget']['displayArchived'];
 		}
 
 		if (isset($request['year']) || isset($request['month'])) {

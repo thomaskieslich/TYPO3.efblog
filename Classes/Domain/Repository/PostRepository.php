@@ -39,7 +39,7 @@ class PostRepository extends Repository {
 	/**
 	 * find posts by Settings
 	 *
-	 * @param $settings
+	 * @param array $settings
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findPosts($settings) {
@@ -80,7 +80,7 @@ class PostRepository extends Repository {
 		}
 
 		//search
-		if ($settings['listView']['searchPhrase']) {
+		if ($settings['searchList']['searchPhrase']) {
 			$constraints[] = $this->createSearchConstraint($query, $settings);
 		}
 
@@ -90,7 +90,7 @@ class PostRepository extends Repository {
 		}
 
 		//archive
-		if ($settings['listView']['displayArchived']) {
+		if ($settings['listView']['displayArchived'] && $settings['listView']['displayArchived'] != 'all') {
 			$constraints[] = $this->createArchiveConstraint($query, $settings);
 		}
 
@@ -162,25 +162,39 @@ class PostRepository extends Repository {
 	protected function createArchiveConstraint(QueryInterface $query, $settings) {
 		$constraints = NULL;
 		$archiveConstraints = array();
+		$now = $GLOBALS['EXEC_TIME'];
 
 		$archiveMode = $settings['listView']['displayArchived'];
+
 		// daysToArchive
-		if ($settings['listView']['daysToArchive']) {
-			$archiveDate = mktime(0, 0, 0, date('m'), date('d') - (int)$settings['listView']['daysToArchive'], date('Y'));
+		if ($settings['daysToArchive']) {
+			$archiveDate = mktime(0, 0, 0, date('m'), date('d') - (int)$settings['daysToArchive'], date('Y'));
 
 			if ($archiveMode == 'archived') {
-				$archiveConstraints[] = $query->lessThan('date', $archiveDate);
+				$archiveConstraints[] = $query->logicalOr(
+						$query->lessThan('date', $archiveDate),
+						$query->logicalAnd(
+								$query->greaterThan('archive', 0),
+								$query->lessThan('archive', $now)
+						)
+				);
 			} elseif ($archiveMode == 'active') {
-				$archiveConstraints[] = $query->greaterThanOrEqual('date', $archiveDate);
+				$archiveConstraints[] = $query->greaterThan('date', $archiveDate);
+				$archiveConstraints[] = $query->logicalOr(
+						$query->greaterThan('archive', $now),
+						$query->equals('archive', 0)
+				);
 			}
 		} else {
 			if ($archiveMode == 'archived') {
 				$archiveConstraints[] = $query->logicalAnd(
-						$query->lessThan('archive', $GLOBALS['EXEC_TIME']), $query->greaterThan('archive', 0)
+						$query->lessThan('archive', $now),
+						$query->greaterThan('archive', 0)
 				);
 			} elseif ($archiveMode == 'active') {
 				$archiveConstraints[] = $query->logicalOr(
-						$query->greaterThanOrEqual('archive', $GLOBALS['EXEC_TIME']), $query->equals('archive', 0)
+						$query->greaterThanOrEqual('archive', $now),
+						$query->equals('archive', 0)
 				);
 			}
 		}
@@ -238,15 +252,15 @@ class PostRepository extends Repository {
 	 * search constraints
 	 *
 	 * @param QueryInterface $query
-	 * @param $settings
+	 * @param array $settings
 	 * @return null|object
 	 */
 	protected function createSearchConstraint(QueryInterface $query, $settings) {
 
 		$constraint = NULL;
 		$searchConstraints = array();
-		$terms = GeneralUtility::trimExplode(' ', $settings['listView']['searchPhrase'], TRUE);
-		$fields = GeneralUtility::trimExplode(',', $settings['listView']['searchFields'], TRUE);
+		$terms = GeneralUtility::trimExplode(' ', $settings['searchList']['searchPhrase'], TRUE);
+		$fields = GeneralUtility::trimExplode(',', $settings['searchList']['searchFields'], TRUE);
 
 		foreach ($terms as $term) {
 			foreach ($fields as $field) {
@@ -286,12 +300,18 @@ class PostRepository extends Repository {
 
 	/**
 	 * @param Category $category
+	 * @param array $settings
+	 *
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function countCategoryPosts(Category $category) {
+	public function countCategoryPosts(Category $category, $settings) {
 		$query = $this->createQuery();
+		if ($settings['listView']['displayArchived']) {
+			$constraints[] = $this->createArchiveConstraint($query, $settings);
+		}
+		$constraints[] = $query->contains('categories', $category);
 		$query->matching(
-				$query->contains('categories', $category)
+				$query->logicalAnd($constraints)
 		);
 
 		return $query->execute();
@@ -299,24 +319,24 @@ class PostRepository extends Repository {
 
 	/**
 	 * @param string $searchString
+	 *
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function searchPost($searchString = '') {
-		$query = $this->createQuery();
-
-		$terms = GeneralUtility::trimExplode(' ', $searchString, TRUE);
-		$constraints = array();
-		if ($terms) {
-			foreach ($terms as $term) {
-				$constraints[] = $query->like('title', '%' . $term . '%');
-				$constraints[] = $query->like('content.header', '%' . $term . '%');
-				$constraints[] = $query->like('content.bodytext', '%' . $term . '%');
-			}
-		}
-		$query->matching(
-				$query->logicalOr($constraints)
-		);
-
-		return $query->execute();
-	}
+//	public function searchPost($searchString = '') {
+//		$query = $this->createQuery();
+//		$terms = GeneralUtility::trimExplode(' ', $searchString, TRUE);
+//		$constraints = array();
+//		if ($terms) {
+//			foreach ($terms as $term) {
+//				$constraints[] = $query->like('title', '%' . $term . '%');
+//				$constraints[] = $query->like('content.header', '%' . $term . '%');
+//				$constraints[] = $query->like('content.bodytext', '%' . $term . '%');
+//			}
+//		}
+//		$query->matching(
+//				$query->logicalOr($constraints)
+//		);
+//
+//		return $query->execute();
+//	}
 }
