@@ -26,6 +26,7 @@ namespace ThomasKieslich\Efblog\Controller;
 	 *
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Controller for the Widgets
@@ -50,7 +51,12 @@ class WidgetController extends BaseController {
 	 * @return void
 	 */
 	public function latestCommentsWidgetAction() {
-		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
+		if ($this->settings['latestCommentsWidget']['displayArchived']) {
+			$this->settings['listView']['displayArchived'] = $this->settings['latestCommentsWidget']['displayArchived'];
+		}
+		$posts = $this->postRepository->findPosts($this->settings);
+		$comments = $this->commentRepository->findLatestComments($posts, $this->settings);
+		$this->view->assign('comments', $comments);
 	}
 
 	/**

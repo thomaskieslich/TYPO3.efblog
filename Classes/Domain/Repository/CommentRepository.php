@@ -73,11 +73,17 @@ class CommentRepository extends Repository {
 	}
 
 	/**
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $posts
 	 * @param $settings
+	 *
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findLatestComments($settings) {
+	public function findLatestComments($posts, $settings) {
 		$query = $this->createQuery();
+
+		$query->matching(
+				$query->in('post', $posts)
+		);
 
 		$query->setOrderings(
 			array(

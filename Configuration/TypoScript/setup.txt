@@ -195,7 +195,7 @@ plugin.tx_efblog {
 			//asc, desc
 			sortDirection = desc
 			//active,archived or empty for all
-			displayArchived =
+			displayArchived = archived
 		}
 
 		rss {
