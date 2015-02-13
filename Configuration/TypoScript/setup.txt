@@ -153,10 +153,6 @@ plugin.tx_efblog {
 			}
 		}
 
-		widgets{
-			useCeHeader = 0
-		}
-
 		latestPostsWidget {
 			//Sorting
 			orderBy = date,title

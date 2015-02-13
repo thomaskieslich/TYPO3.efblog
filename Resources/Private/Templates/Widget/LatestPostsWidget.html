@@ -5,8 +5,8 @@
 	<f:section name="content">
 		<div class="tx-efblog-widget-container posts">
 			<div class="tx-efblog-widget-header">
-				<f:if condition="{header}">
-					<f:then><h2>{header}</h2></f:then>
+				<f:if condition="{settings.title}">
+					<f:then><h2>{settings.title}</h2></f:then>
 					<f:else><h2>{f:translate(key : 'widget_latestPosts_header')}</h2></f:else>
 				</f:if>
 			</div>

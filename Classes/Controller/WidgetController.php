@@ -33,27 +33,6 @@ namespace ThomasKieslich\Efblog\Controller;
 class WidgetController extends BaseController {
 
 	/**
-	 * @var string
-	 */
-	protected $header;
-
-	/**
-	 * init
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		if ($this->settings['widgets']['useCeHeader']) {
-			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-			$configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
-			$cObj = $configurationManager->getContentObject();
-			if ($cObj->data['header'] && $cObj->data['header_layout'] == '100') {
-				$this->header = $cObj->data['header'];
-			}
-		}
-	}
-
-	/**
 	 * return latest posts for widget
 	 *
 	 * @return void
@@ -63,7 +42,6 @@ class WidgetController extends BaseController {
 		$this->settings['listView']['orderBy'] = $this->settings['latestPostsWidget']['orderBy'];
 		$this->settings['listView']['sortDirection'] = $this->settings['latestPostsWidget']['sortDirection'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-		$this->view->assign('header', $this->header);
 	}
 
 	/**
@@ -73,7 +51,6 @@ class WidgetController extends BaseController {
 	 */
 	public function latestCommentsWidgetAction() {
 		$this->view->assign('comments', $this->commentRepository->findLatestComments($this->settings));
-		$this->view->assign('header', $this->header);
 	}
 
 	/**
@@ -85,7 +62,6 @@ class WidgetController extends BaseController {
 		$this->settings['listView']['orderBy'] = 'views';
 		$this->settings['listView']['maxEntries'] = $this->settings['viewsWidget']['maxEntries'];
 		$this->view->assign('posts', $this->postRepository->findPosts($this->settings));
-		$this->view->assign('header', $this->header);
 	}
 
 	/**
@@ -109,7 +85,6 @@ class WidgetController extends BaseController {
 		$tree = $this->buildCategoryTree($categories);
 
 		$this->view->assign('categories', $tree);
-		$this->view->assign('header', $this->header);
 	}
 
 	/**

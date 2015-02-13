@@ -47,6 +47,16 @@
                             </config>
                         </TCEforms>
                     </switchableControllerActions>
+                    <settings.title>
+						<TCEforms>
+							<label>LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:flexform_options_general_widgets_title</label>
+							<config>
+								<type>input</type>
+								<size>22</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.title>
                 </el>
             </ROOT>
         </general>

@@ -8,8 +8,8 @@
 
 		<div class="tx-efblog-widget-container date">
 			<div class="tx-efblog-widget-header">
-				<f:if condition="{header}">
-					<f:then><h2>{header}</h2></f:then>
+				<f:if condition="{settings.title}">
+					<f:then><h2>{settings.title}</h2></f:then>
 					<f:else><h2>{f:translate(key : 'widget_dateMenu_header')}</h2></f:else>
 				</f:if>
 			</div>

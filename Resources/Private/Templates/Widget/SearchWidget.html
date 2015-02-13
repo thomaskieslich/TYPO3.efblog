@@ -6,8 +6,8 @@
 		<f:link.page pageUid=""></f:link.page>
 		<div class="tx-efblog-widget-container search">
 			<div class="tx-efblog-widget-header">
-				<f:if condition="{header}">
-					<f:then><h2>{header}</h2></f:then>
+				<f:if condition="{settings.title}">
+					<f:then><h2>{settings.title}</h2></f:then>
 					<f:else><h2>{f:translate(key : 'widget_search_header')}</h2></f:else>
 				</f:if>
 			</div>

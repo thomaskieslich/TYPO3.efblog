@@ -36,6 +36,7 @@
 			<label index="flexform_options_general_widgets_latestComments">Widget - Letzte Kommentare</label>
 			<label index="flexform_options_general_widgets_latestPosts">Widget - Letzte Posts</label>
 			<label index="flexform_options_general_widgets_search">Widget - Suche</label>
+			<label index="flexform_options_general_widgets_title">Titel (optional)</label>
 			<label index="flexform_options_general_widgets_views">Widget - Meiste Ansichten</label>
 			<label index="hidden">Versteckt</label>
 			<label index="plugin_fe1_title">EF-Blog</label>
