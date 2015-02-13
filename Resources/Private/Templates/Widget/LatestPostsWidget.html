@@ -16,7 +16,7 @@
 					<f:for each="{posts}" as="post">
 						<li>
 							<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:post}}" title="{post.title}">
-								{post.title -> f:format.crop(maxCharacters: '{settings.latestPostsWidget.cropLink}', append: "{f:translate(key : 'widget_latestPosts_more')}")}
+								{post.title -> f:format.crop(maxCharacters: '{settings.latestPostsWidget.cropLink}', append: "…")}
 								<f:if condition="{settings.latestPostsWidget.showViews}">({post.views})</f:if>
 							</f:link.page>
 						</li>
