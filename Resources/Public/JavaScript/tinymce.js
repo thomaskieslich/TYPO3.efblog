@@ -2,7 +2,7 @@ tinymce.init({
 	selector: '#tx-efblog-message',
 	paste_as_text: true,
 	valid_elements: "p,br,strong/b,em,blockquote,a[href|target=_blank|rel],img[src]",
-	content_css: 'typo3conf/ext/theme_dev/Resources/Public/Styles/Rte.css',
+	content_css: '/typo3conf/ext/theme_dev/Resources/Public/Styles/Rte.css',
 
 	plugins: [
 		'link code fullscreen wordcount'

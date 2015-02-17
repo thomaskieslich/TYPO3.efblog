@@ -864,6 +864,12 @@ button.datepick-cmd {
     color: #d00;
     font-weight: 700; }
 
+div.mce-fullscreen {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 10001 !important; }
+
 .tx-efblog-category-overview .odd {
   float: left;
   margin: 0 16px 16px 0; }
