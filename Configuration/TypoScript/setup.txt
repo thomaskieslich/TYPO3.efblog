@@ -208,7 +208,7 @@ plugin.tx_efblog {
 	}
 
 	persistence {
-		storagePid = {$plugin.tx_efblog.persistence.storagePid}
+		storagePid =
 		classes {
 			ThomasKieslich\Efblog\Domain\Model\Content {
 				mapping {
@@ -231,9 +231,16 @@ plugin.tx_efblog {
 	}
 
 	view {
-		templateRootPath = {$plugin.tx_efblog.view.templateRootPath}
-		partialRootPath = {$plugin.tx_efblog.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_efblog.view.layoutRootPath}
+		templateRootPaths {
+			10 = EXT:efblog/Resources/Private/Templates/
+		}
+		partialRootPaths {
+			10 = EXT:efblog/Resources/Private/Partials/
+		}
+		layoutRootPaths {
+			10 = EXT:efblog/Resources/Private/Layouts/
+		}
+		messageRootPath = EXT:efblog/Resources/Private/Templates/
 	}
 
 	renderElement = COA
@@ -251,7 +258,7 @@ plugin.tx_efblog {
 pageAjax = PAGE
 pageAjax {
 	typeNum = 911
-		config {
+	config {
 		disableAllHeaderCode = 1
 		xhtml_cleaning = 0
 		admPanel = 0

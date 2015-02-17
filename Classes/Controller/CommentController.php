@@ -221,7 +221,7 @@ class CommentController extends BaseController {
 		//render content
 		$extbaseFrameworkConfiguration = $this->configurationManager->
 		getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$templateRootPath = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['messageRootPath']);
 
 		//html Content
 		$htmlContent = NULL;
