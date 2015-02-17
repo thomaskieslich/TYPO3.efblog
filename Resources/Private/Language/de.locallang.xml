@@ -6,6 +6,9 @@
 			<label index="comment_add">schreibe einen Kommentar</label>
 			<label index="comment_comment">Kommentar</label>
 			<label index="comment_comments">Kommentare</label>
+			<label index="comment_created">Der Kommentar wurde erstellt</label>
+			<label index="comment_created.hidden">Kommentar wurde erstellt. Muss freigeschalten werden.</label>
+			<label index="comment_created.show">ansehen</label>
 			<label index="comment_form_author">Name*</label>
 			<label index="comment_form_disclaimer">Bitte beachtet, das einige Kommentare erst freigeschaltet werden müssen.</label>
 			<label index="comment_form_email">Mail (für Gravatar, nicht öffentlich)</label>

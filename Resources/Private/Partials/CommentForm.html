@@ -8,7 +8,7 @@
 				<h3>{f:translate(key : 'comment_add')}</h3>
 			</div>
 
-			<f:form controller="Comment" action="create" additionalAttributes="{type: '911'}" name="newComment" section="comment-form" object="{newComment}" id="comment-form" arguments="{post: post}">
+			<f:form controller="Comment" action="create" name="newComment" section="comment-form" object="{newComment}" id="comment-form" arguments="{post: post}">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
 				<div class="form-row half">
 					<div class="label">
@@ -90,6 +90,19 @@
 				</div>
 			</f:form>
 			<p class="disclaimer">{f:translate(key : 'comment_form_disclaimer')}</p>
+		</div>
+	</f:section>
+
+	<f:section name="newComment">
+		<div class="tx-efblog-comment-form" id="comment-form">
+			<f:if condition="{newComment.spampoints} < {settings.comments.spam.spampointsToHide}">
+				<f:then>
+					{f:translate(key : 'comment_created')} <a href="#comment_{newComment.uid}">({f:translate(key : 'comment_created.show')}).</a>
+				</f:then>
+				<f:else>
+					{f:translate(key : 'comment_created.hidden')
+				</f:else>
+			</f:if>
 		</div>
 	</f:section>
 </div>

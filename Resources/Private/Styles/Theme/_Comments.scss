@@ -22,7 +22,7 @@
 	.answer {
 		margin-left: rem(60);
 		}
-	.author-comment .number{
+	.author-comment .number {
 		border: 2px solid #900;
 		}
 	.header {
@@ -38,18 +38,16 @@
 		margin-right: rem(10);
 		text-align: center;
 		vertical-align: top;
-		a {
-			font-size: rem(28);
-			font-weight: $font-weight-bold;
-			color: #FFF;
-			}
+		font-size: rem(28);
+		font-weight: $font-weight-bold;
+		color: #FFF;
 		}
 	.info, .info a {
 		display: inline-block;
 		.name {
 			font-weight: $font-weight-bold;
 			}
-		.location{
+		.location {
 			display: inline-block;
 			}
 		}
@@ -76,30 +74,30 @@
 	padding: $base-spacing;
 	background: #FFF;
 	.form-row {
-		&.full{
+		&.full {
 			@include clearfix;
 			.label {
-			float: right;
-			width: 35%;
-			}
-			.field{
+				float: right;
+				width: 35%;
+				}
+			.field {
 				width: 60%;
 				}
 			}
-		&.half{
+		&.half {
 			display: inline-block;
 			width: 49%;
-			&.right{
+			&.right {
 				float: right;
 				}
 			.label {
-			}
-			.field{
+				}
+			.field {
 				}
 			}
 
 		}
-	.field-error{
+	.field-error {
 		color: #d00;
 		font-weight: $font-weight-bold;
 		}

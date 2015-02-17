@@ -32,7 +32,15 @@
 		</f:if>
 
 		<f:if condition='{allowComments}'>
-			<f:render partial='CommentForm' section="main" arguments="{post: post, feUser: feUser}"/>
+			<f:if condition="{newComment}">
+				<f:then>
+					<f:render partial='CommentForm' section="newComment" arguments="{newComment: newComment}"/>
+				</f:then>
+				<f:else>
+					<f:render partial='CommentForm' section="main" arguments="{post: post, feUser: feUser, newComment: newComment}"/>
+				</f:else>
+			</f:if>
+
 		</f:if>
 	</f:section>
 

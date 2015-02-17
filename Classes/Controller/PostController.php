@@ -27,6 +27,7 @@ namespace ThomasKieslich\Efblog\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use ThomasKieslich\Efblog\Domain\Model\Category;
+use ThomasKieslich\Efblog\Domain\Model\Comment;
 use ThomasKieslich\Efblog\Domain\Model\Post;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -73,10 +74,11 @@ class PostController extends BaseController {
 	 * post detail
 	 *
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @param Comment $newComment
 	 *
 	 * @return void
 	 */
-	public function detailAction(Post $post = NULL) {
+	public function detailAction(Post $post = NULL, Comment $newComment = NULL) {
 
 		if ($post) {
 			/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $content */
@@ -106,6 +108,10 @@ class PostController extends BaseController {
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 
+			if($newComment){
+				$this->view->assign('newComment', $newComment);
+			}
+
 			//prefill fe_user
 			if (isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser) {
 				$loginUser = $GLOBALS['TSFE']->fe_user->user;
@@ -128,7 +134,7 @@ class PostController extends BaseController {
 				$this->view->assign('feUser', $feUser);
 			}
 		} else {
-			$this->addFlashMessage(LocalizationUtility::translate('notice_no_post', $this->extensionName));
+			$this->view->assign('error', LocalizationUtility::translate('notice_no_post', $this->extensionName));
 		}
 	}
 

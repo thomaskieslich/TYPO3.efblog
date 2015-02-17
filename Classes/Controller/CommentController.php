@@ -68,6 +68,8 @@ class CommentController extends BaseController {
 			if ($spampoints < $this->settings['comments']['spam']['spampointsToDie']) {
 				$post->addComment($newComment);
 				$this->postRepository->update($post);
+				$this->persistenceManager->persistAll();
+				$this->cacheService->clearPageCache(array($this->settings['detailUid'],$this->settings['listUid']));
 			}
 
 			if ($this->settings['comments']['messageAuthor'] || $this->settings['comments']['messageSuperAdmin']) {
@@ -78,7 +80,7 @@ class CommentController extends BaseController {
 				}
 			}
 		}
-		$this->redirect('detail', 'Post', NULL, array('post' => $post));
+		$this->redirect('detail', 'Post', NULL, array('post' => $post, 'newComment' => $newComment));
 	}
 
 	/**

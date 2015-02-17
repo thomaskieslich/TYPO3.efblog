@@ -9,6 +9,9 @@
 			<label index="comment_add">add Comment</label>
 			<label index="comment_comment">Comment</label>
 			<label index="comment_comments">Comments</label>
+			<label index="comment_created">Comment created</label>
+			<label index="comment_created.hidden">Comment created. Needs review.</label>
+			<label index="comment_created.show">show</label>
 			<label index="comment_form_author">Name*</label>
 			<label index="comment_form_disclaimer">note, some comments must be approved.</label>
 			<label index="comment_form_email">Email (for Garvatar, not public)</label>

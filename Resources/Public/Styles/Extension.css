@@ -821,11 +821,10 @@ button.datepick-cmd {
     width: 3.125rem;
     margin-right: 0.625rem;
     text-align: center;
-    vertical-align: top; }
-    .tx-efblog-comments-list .number a {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #FFF; }
+    vertical-align: top;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #FFF; }
   .tx-efblog-comments-list .info, .tx-efblog-comments-list .info a {
     display: inline-block; }
     .tx-efblog-comments-list .info .name, .tx-efblog-comments-list .info a .name {
