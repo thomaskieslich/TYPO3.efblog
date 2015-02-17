@@ -306,7 +306,7 @@ class PostRepository extends Repository {
 	 */
 	public function countCategoryPosts(Category $category, $settings) {
 		$query = $this->createQuery();
-		if ($settings['listView']['displayArchived']) {
+		if ($settings['listView']['displayArchived'] && $settings['listView']['displayArchived'] != 'all') {
 			$constraints[] = $this->createArchiveConstraint($query, $settings);
 		}
 		$constraints[] = $query->contains('categories', $category);
@@ -316,27 +316,4 @@ class PostRepository extends Repository {
 
 		return $query->execute();
 	}
-
-	/**
-	 * @param string $searchString
-	 *
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-//	public function searchPost($searchString = '') {
-//		$query = $this->createQuery();
-//		$terms = GeneralUtility::trimExplode(' ', $searchString, TRUE);
-//		$constraints = array();
-//		if ($terms) {
-//			foreach ($terms as $term) {
-//				$constraints[] = $query->like('title', '%' . $term . '%');
-//				$constraints[] = $query->like('content.header', '%' . $term . '%');
-//				$constraints[] = $query->like('content.bodytext', '%' . $term . '%');
-//			}
-//		}
-//		$query->matching(
-//				$query->logicalOr($constraints)
-//		);
-//
-//		return $query->execute();
-//	}
 }
