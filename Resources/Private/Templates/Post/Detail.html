@@ -3,14 +3,10 @@
 
 	<f:layout name="Default"/>
 	<f:section name="content">
-		<f:flashMessages renderMode="div"/>
 		<f:if condition="{post}">
 			<f:render partial="Post/DetailMeta" section="main" arguments="{post: post, description: description}"/>
 
 			<div class="tx-efblog-detail-container" data-uid="{post.uid}">
-				<script>
-					var updateViewsUri = '<f:uri.action action="updateViews" pageType="6661" noCacheHash="TRUE" />'
-				</script>
 				<f:if condition="{settings.detailView.showBreadCrumb}">
 					<f:render partial="Post/DetailBreadCrumb" section="main" arguments="{breadCrumb: breadCrumb}"/>
 				</f:if>

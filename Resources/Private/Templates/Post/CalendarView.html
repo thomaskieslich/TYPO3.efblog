@@ -4,13 +4,9 @@
 
 	<f:layout name="Default"/>
 	<f:section name="content">
-		<div class="tx-efblog-calendar-container">
-			<script>
-				var datepickDataUri = '<f:uri.action action="ajaxCalendarMonth" pageType="6661" noCacheHash="TRUE" />'
-				var datepickDayUri = '<f:uri.action action="ajaxCalendarDay" pageType="6661" noCacheHash="TRUE" />'
-			</script>
-			<div id="datepicker"></div>
-			<div id="calEntries">
+		<div class="tx-efblog-calendar-container" data-pid="{settings.currentPid}">
+			<div class="datepicker"></div>
+			<div class="calEntries">
 				<div id="todayEntries">
 					<p>Keine Termine für diesen Tag.</p>
 				</div>

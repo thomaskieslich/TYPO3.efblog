@@ -234,6 +234,10 @@ button.datepick-cmd {
 	background-color: #dadada;
 	}
 
+.datepick-month td .has-date {
+	background-color: #90ff77;
+	}
+
 .datepick-month td .datepick-selected {
 	background-color: #fcc;
 	}
@@ -246,3 +250,4 @@ button.datepick-cmd {
 .datepick-clear-fix {
 	clear: both;
 	}
+

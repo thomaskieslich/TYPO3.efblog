@@ -47,6 +47,7 @@ class CommentController extends BaseController {
 	 *
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Comment $newComment
+	 *
 	 * @return void
 	 */
 	public function createAction(Post $post, Comment $newComment) {

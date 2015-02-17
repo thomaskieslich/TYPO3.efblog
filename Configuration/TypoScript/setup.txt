@@ -4,13 +4,14 @@ page {
 	}
 
 	includeJSFooterlibs {
-		jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
-		jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
-		datepick_plugin = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.plugin.min.js
-		datepick = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick.min.js
-		datepick_de = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick-de.js
-		calendar = EXT:efblog/Resources/Public/JavaScript/calendar.js
-		tx_efblog = EXT:efblog/Resources/Public/JavaScript/extension.js
+		efblog-jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
+		efblog-jquery_social = EXT:efblog/Resources/Public/JavaScript/jquery.socialshareprivacy.min.js
+		efblog-datepick_plugin = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.plugin.min.js
+		efblog-datepick = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick.min.js
+		efblog-datepick_de = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick-de.js
+		efblog-calendar = EXT:efblog/Resources/Public/JavaScript/calendar.js
+		efblog-ajax = EXT:efblog/Resources/Public/JavaScript/ajax.js
+		efblog = EXT:efblog/Resources/Public/JavaScript/extension.js
 	}
 }
 
@@ -247,24 +248,24 @@ plugin.tx_efblog {
 }
 
 //###Ajax Page
-txefblogAjax = PAGE
-txefblogAjax {
-	typeNum = 6661
-	10 = USER
-	10 {
-		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-		pluginName = Fe1
-		extensionName = Efblog
-		vendorName = ThomasKieslich
-	}
-
-	config {
+pageAjax = PAGE
+pageAjax {
+	typeNum = 911
+		config {
 		disableAllHeaderCode = 1
 		xhtml_cleaning = 0
 		admPanel = 0
 		debug = 0
 		no_cache = 1
 		additionalHeaders = Content-type: text/plain
+	}
+
+	10 = USER
+	10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		pluginName = Fe1
+		extensionName = Efblog
+		vendorName = ThomasKieslich
 	}
 }
 

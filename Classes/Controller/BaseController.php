@@ -51,6 +51,17 @@ class BaseController extends ActionController {
 	protected $categoryRepository;
 
 	/**
+	 * Base init
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		//set current Pid
+		$this->settings['currentPid'] = $GLOBALS['TSFE']->id;
+
+	}
+
+	/**
 	 * Build Category Tree
 	 *
 	 * @param array $elements

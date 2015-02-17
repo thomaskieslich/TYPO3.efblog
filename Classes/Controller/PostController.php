@@ -73,6 +73,7 @@ class PostController extends BaseController {
 	 * post detail
 	 *
 	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 *
 	 * @return void
 	 */
 	public function detailAction(Post $post = NULL) {
@@ -129,25 +130,6 @@ class PostController extends BaseController {
 		} else {
 			$this->addFlashMessage(LocalizationUtility::translate('notice_no_post', $this->extensionName));
 		}
-	}
-
-	/**
-	 * update Post views
-	 *
-	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
-	 *
-	 * @return bool
-	 */
-	public function updateViewsAction(Post $post) {
-		if (!$GLOBALS['BE_USER']->user['uid']) {
-			$currentViews = $post->getViews();
-			$post->setViews($currentViews + 1);
-			$this->postRepository->update($post);
-
-			return 'true';
-		}
-
-		return 'false';
 	}
 
 	/**
@@ -211,60 +193,6 @@ class PostController extends BaseController {
 	 * @return void
 	 */
 	public function calendarViewAction() {
-	}
-
-	/**
-	 * show day
-	 *
-	 * @return string
-	 */
-	public function ajaxCalendarDayAction() {
-		$this->settings['enableFuturePosts'] = 1;
-		$this->settings['listView']['sortDirection'] = 'asc';
-
-		$request = $this->request->getArguments();
-		if (isset($request['date'])) {
-			$date = date_parse($this->request->getArgument('date'));
-			$this->settings['year'] = $date['year'];
-			$this->settings['month'] = $date['month'];
-			$this->settings['day'] = $date['day'];
-		}
-
-		$posts = $this->postRepository->findPosts($this->settings);
-		$this->view->assign('date', new \DateTime($this->request->getArgument('date')));
-		$this->view->assign('posts', $posts);
-		$html = $this->view->render();
-
-		return trim($html);
-	}
-
-	/**
-	 * show month
-	 *
-	 * @return string
-	 */
-	public function ajaxCalendarMonthAction() {
-		$this->settings['enableFuturePosts'] = 1;
-		$this->settings['listView']['sortDirection'] = 'asc';
-
-		$request = $this->request->getArguments();
-		if (isset($request['year'])) {
-			$this->settings['year'] = $this->request->getArgument('year');
-		}
-
-		if (isset($request['month'])) {
-			$this->settings['month'] = $this->request->getArgument('month');
-		}
-
-		$monthDates = array();
-		foreach ($this->postRepository->findPosts($this->settings) as $mposts) {
-			/** @var \DateTime $date */
-			$date = $mposts->getDate();
-			$date->setTime(12, 00, 00);
-			$monthDates[] = $date->format('U') * 1000;
-		}
-
-		return json_encode(array_unique($monthDates));
 	}
 
 	/**
