@@ -115,10 +115,9 @@ plugin.tx_efblog {
 			allowComments = 1
 			defaultGravatar = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
 			gravatarSize = 50
-			allowRte = 1
 
-			messageSuperAdmin = 1
-			messageAuthor = 1
+			messageSuperAdmin = 0
+			messageAuthor = 0
 			messageSender = admin@example.org
 			messageSenderName = Blog admin
 			messageHtml = 1

@@ -81,7 +81,7 @@ class Comment extends AbstractEntity {
 
 	/**
 	 * @var string
-	 * @validate NotEmpty
+	 * @validate NotEmpty, Text, StringLength(maximum = 2500)
 	 */
 	protected $message;
 
