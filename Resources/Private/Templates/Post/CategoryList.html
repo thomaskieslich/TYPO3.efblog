@@ -23,7 +23,7 @@
 				<div class="image">
 					<f:for each="{maincategory.image}" as="image" iteration="imageIterator">
 						<f:if condition="{image}">
-							{f:image(src: "{image.publicUrl}", alt: "{post.title}", width: "120m", height: "120m")}
+							<f:image image="{image}" alt="{post.title}" width="120" height="120c"/>
 						</f:if>
 					</f:for>
 				</div>

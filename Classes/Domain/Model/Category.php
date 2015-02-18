@@ -118,27 +118,8 @@ class Category extends AbstractEntity {
 		$fileObjects = $fileRepository->findByRelation('tx_efblog_domain_model_category',
 				'tx_efblog_domain_model_category_image',
 				$this->getUid());
-		$files = array();
-		/** @var \TYPO3\CMS\Core\Resource\FileReference $file */
-		foreach ($fileObjects as $file) {
-			$original = $file->getOriginalFile()->getProperties();
-			$reference = $file->getReferenceProperties();
-			$title = $reference['title'];
-			if (!$title) {
-				$title = $original['title'];
-			}
-			$description = $reference['description'];
-			if (!$description) {
-				$description = $original['description'];
-			}
-			$files[] = array(
-					'title' => $title,
-					'description' => $description,
-					'publicUrl' => $file->getPublicUrl(TRUE)
-			);
-		}
 
-		return $files;
+		return $fileObjects;
 	}
 
 	/**

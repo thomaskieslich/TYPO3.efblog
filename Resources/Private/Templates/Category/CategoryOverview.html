@@ -14,7 +14,7 @@
 						<f:for each="{maincategory.image}" as="image" iteration="imageIterator">
 							<f:if condition="{image}">
 								<f:link.page pageUid="{settings.categoryUid}" additionalParams="{tx_efblog_fe1:{category : maincategory.uid}}">
-									<f:image src="{image.publicUrl}" alt="{post.title}" width="80m" height="80m"/>
+									<f:image image="{image}" alt="{post.title}" width="80c" height="80"/>
 								</f:link.page>
 							</f:if>
 						</f:for>
