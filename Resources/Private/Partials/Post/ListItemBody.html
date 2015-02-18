@@ -66,9 +66,9 @@
 					<f:if condition="{image}">
 						<f:if condition="{imageIterator.cycle} <= {settings.listView.images}">
 							<div class="tx-efblog-list-imagerow">
-								{f:image(src: "{image.publicUrl}", alt: "{post.title}", width:"{settings.listView.imageWidth}",
-								height: "{settings.listView.imageHeight}")
-								-> f:link.page(additionalParams : '{tx_efblog_fe1:{post : post}}', pageUid: '{settings.detailUid}')}
+								<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post : post}}">
+									<f:image image="{image}" alt="{post.title}" width="{settings.listView.imageWidth}" height="{settings.listView.imageHeight}"/>
+								</f:link.page>
 							</div>
 						</f:if>
 					</f:if>

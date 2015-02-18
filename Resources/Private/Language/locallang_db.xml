@@ -83,8 +83,8 @@
 			<label index="post_teaserLink_title">Teaserlink Title</label>
 			<label index="post_teaser_image">Teaser Images</label>
 			<label index="post_teaser_options">Teaser Options</label>
-			<label index="post_teaser_options.I.0">none</label>
-			<label index="post_teaser_options.I.1">Crop Teaser</label>
+			<label index="post_teaser_options.I.0">Title and Images only</label>
+			<label index="post_teaser_options.I.1">Crop first Element Text</label>
 			<label index="post_teaser_options.I.2">Show first Content Element</label>
 			<label index="post_teaser_options.I.3">Show all Content Elements</label>
 			<label index="post_title">Title</label>

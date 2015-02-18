@@ -95,6 +95,12 @@ class PostController extends BaseController {
 					$pages[$divider]['elements'][] = $single;
 				}
 			}
+
+			//remove first element if teaserOption2
+			if ($post->getTeaserOptions() == 2 && $pages[0]['elements'][0]) {
+				unset($pages[0]['elements'][0]);
+			}
+
 			$this->view->assign('pages', $pages);
 			$this->view->assign('post', $post);
 			$this->view->assign('breadCrumb', $this->createBreadCrumb($post));
@@ -108,7 +114,7 @@ class PostController extends BaseController {
 			//render Description
 			$this->view->assign('description', $this->createDescription($post, $content));
 
-			if($newComment){
+			if ($newComment) {
 				$this->view->assign('newComment', $newComment);
 			}
 

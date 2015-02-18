@@ -72,9 +72,9 @@
 			<label index="post_teaserLink_title">Teaserlink Titel</label>
 			<label index="post_teaser_image">Teaser Bilder</label>
 			<label index="post_teaser_options">Teaser Optionen</label>
-			<label index="post_teaser_options.I.0">nichts</label>
-			<label index="post_teaser_options.I.1">Teaser einkürzen</label>
-			<label index="post_teaser_options.I.2">zeige erstes Inhaltselement komplett</label>
+			<label index="post_teaser_options.I.0">nur Titel und Bild</label>
+			<label index="post_teaser_options.I.1">Erstes Element eingekürzt</label>
+			<label index="post_teaser_options.I.2">erstes Element komplett (erscheint nicht in der Detailansicht)</label>
 			<label index="post_teaser_options.I.3">zeige alle Inhaltselemente</label>
 			<label index="post_title">Titel</label>
 			<label index="post_views">Ansichten</label>
