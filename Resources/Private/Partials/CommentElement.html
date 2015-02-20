@@ -26,7 +26,7 @@
 					</f:if>
 						</span>
 						{f:translate(key : 'comment_wrote')}
-						{comment.date -> f:format.date(format:'d.m.Y, H:m')}
+						{comment.date -> f:format.date(format:'{settings.comments.dateFormat}')}
 
 						<f:if condition="{comment.location}">
 							{f:translate(key : 'comment_from')}

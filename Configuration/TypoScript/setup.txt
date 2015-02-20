@@ -97,7 +97,7 @@ plugin.tx_efblog {
 			hideDivider = 1
 			showSocial = 1
 			closeCommentsAfter = 120
-			dateFormat = %d. %m. %Y
+			dateFormat = %d. %B %Y
 		}
 
 		calendarView {
@@ -117,6 +117,7 @@ plugin.tx_efblog {
 			allowComments = 1
 			defaultGravatar = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
 			gravatarSize = 50
+			dateFormat = %d.%m.%Y, %H:%m
 
 			messageSuperAdmin = 0
 			messageAuthor = 0
