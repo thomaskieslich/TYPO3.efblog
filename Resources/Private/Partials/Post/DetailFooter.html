@@ -23,14 +23,15 @@
 			<div class="info">
 				<f:if condition="{post.views} > 1">
 					<f:then>
-						<span class="views">{post.views} <span class="label">{f:translate(key : 'list_views')}</span></span>
+						<span class="views">{post.views} <span class="label">{f:translate(key : 'list_views')} |</span>
 					</f:then>
 					<f:else>
-						<span class="view">{post.views} <span class="label">{f:translate(key : 'list_view')}</span></span>
+						<span class="view">{post.views} <span class="label">{f:translate(key : 'list_view')} |</span>
 					</f:else>
 				</f:if>
-				|
+
 				<span class="date">{post.date -> f:format.date(format:'{settings.detailView.dateFormat}')}</span>
+
 				<f:if condition="{post.categories}">
 					|
 					<f:for each="{post.categories}" as="category" iteration="catIterator">

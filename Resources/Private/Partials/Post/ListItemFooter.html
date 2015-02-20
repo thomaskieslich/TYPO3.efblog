@@ -1,4 +1,4 @@
-<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" lang="en"
 	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
 
 	<f:section name="main">
@@ -30,17 +30,17 @@
 			<div class="info">
 				<f:if condition="{post.views} > 1">
 					<f:then>
-						<span class="views">{post.views} <span class="label">{f:translate(key : 'list_views')}</span></span>
+						<span class="views">{post.views} <span class="label">{f:translate(key : 'list_views')} |</span>
 					</f:then>
 					<f:else>
-						<span class="view">{post.views} <span class="label">{f:translate(key : 'list_view')}</span></span>
+						<span class="view">{post.views} <span class="label">{f:translate(key : 'list_view')} |</span>
 					</f:else>
 				</f:if>
-				|
+
 				<span class="date">{post.date -> f:format.date(format:'{settings.listView.dateFormat}')}</span>
-				|
+
 				<f:if condition="{post.categories}">
-					<span class="category">
+					<span class="category">|
 					<f:for each="{post.categories}" as="category" iteration="catIterator">
 						<f:if condition="{catIterator.isLast}">
 							<f:then>
@@ -56,21 +56,22 @@
 						</f:if>
 					</f:for>
 					</span>
-					|
 				</f:if>
 
 				<f:if condition="{post.comments -> f:count()} > 1">
-					<f:then>
+					<span class="comments">
+					<f:then>|
 						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comments">
 							{post.comments -> f:count()} <span class="label">{f:translate(key : 'comment_comments')}</span>
 						</f:link.page>
 					</f:then>
-					<f:else>
+					<f:else>|
 						<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid='{settings.detailUid}' section='comments' class="comment">
 							{post.comments -> f:count()} <span class="label">{f:translate(key : 'comment_comment')}</span>
 						</f:link.page>
 					</f:else>
 				</f:if>
+				</span>
 			</div>
 		</div>
 	</f:section>
