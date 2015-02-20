@@ -30,7 +30,7 @@
 					</f:else>
 				</f:if>
 				|
-				<span class="date">{post.date -> f:format.date(format:'%d. %B %Y')}</span>
+				<span class="date">{post.date -> f:format.date(format:'{settings.detailView.dateFormat}')}</span>
 				<f:if condition="{post.categories}">
 					|
 					<f:for each="{post.categories}" as="category" iteration="catIterator">

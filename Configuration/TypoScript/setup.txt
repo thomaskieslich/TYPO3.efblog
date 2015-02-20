@@ -71,8 +71,9 @@ plugin.tx_efblog {
 			//Teaser Rendering
 			cropText = 300
 			images = 4
-			imageWidth = 80m
-			imageHeight =
+			imageWidth = 120
+			imageHeight = 80c
+			dateFormat = %d. %B %Y
 
 			//Paginator
 			paginator {
@@ -96,6 +97,7 @@ plugin.tx_efblog {
 			hideDivider = 1
 			showSocial = 1
 			closeCommentsAfter = 120
+			dateFormat = %d. %m. %Y
 		}
 
 		calendarView {

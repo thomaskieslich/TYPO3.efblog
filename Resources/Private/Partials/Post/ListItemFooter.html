@@ -37,7 +37,7 @@
 					</f:else>
 				</f:if>
 				|
-				<span class="date">{post.date -> f:format.date(format:'%d. %B %Y')}</span>
+				<span class="date">{post.date -> f:format.date(format:'{settings.listView.dateFormat}')}</span>
 				|
 				<f:if condition="{post.categories}">
 					<span class="category">
