@@ -845,7 +845,8 @@ button.datepick-cmd {
   border: 1px solid #333;
   border-radius: 12px;
   padding: 1.5em;
-  background: #FFF; }
+  background: #FFF;
+  margin-top: 1.5em; }
   .tx-efblog-comment-form .form-row.full::after {
     clear: both;
     content: "";

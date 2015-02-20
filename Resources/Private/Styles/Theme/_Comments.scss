@@ -73,6 +73,7 @@
 	border-radius: $base-border-radius;
 	padding: $base-spacing;
 	background: #FFF;
+	margin-top: $base-spacing;
 	.form-row {
 		&.full {
 			@include clearfix;
