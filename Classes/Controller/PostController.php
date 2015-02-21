@@ -415,6 +415,11 @@ class PostController extends BaseController {
 				}
 			}
 			$rssItems[$key]['description'] = strip_tags($description);
+			//get Teaser Image
+			$images = $post->getTeaserImage();
+			if (!empty($images)) {
+				$rssItems[$key]['image'] = $images[0];
+			}
 			$categories = '';
 
 			foreach ($post->getCategories() as $category) {
