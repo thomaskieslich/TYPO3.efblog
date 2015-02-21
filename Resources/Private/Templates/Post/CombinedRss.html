@@ -20,8 +20,9 @@
 				<description>{rssItem.description -> f:format.crop(maxCharacters: '280')}</description>
 				<f:if condition="{rssItem.categories}"><category>{rssItem.categories}</category></f:if>
 				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
-				<media:thumbnail width="120" height="120" url="{baseUrl}<f:uri.image image="{rssItem.image}" width="120" height="120c"/>"/>
-
+				<f:if condition="{rssItem.image}">
+					<media:thumbnail width="120" height="120" url="{baseUrl}<f:uri.image image="{rssItem.image}" width="120" height="120c"/>"/>
+				</f:if>
 				<comments><f:format.cdata>{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{rssItem.detailUid}', section : 'comments', absolute: '1', noCacheHash : '1')}</f:format.cdata></comments>
 				<slash:comments>{rssItem.comments -> f:count()}</slash:comments>
 			</item>
