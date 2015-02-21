@@ -46,12 +46,12 @@
 			<f:for each="{pagination.pages}" as="page">
 				<f:if condition="{page.isCurrent}">
 					<f:then>
-						<li class="current">
+						<li class="page current">
 							{page.number}
 						</li>
 					</f:then>
 					<f:else>
-						<li>
+						<li class="page">
 							<f:if condition="{page.number} > 1">
 								<f:then>
 									<f:widget.link arguments="{currentPage: page.number}"
