@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 {namespace tk=ThomasKieslich\Efblog\ViewHelpers}
-<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>{settings.rss.title}</title>
 		<description>{settings.rss.description}</description>
@@ -21,7 +21,7 @@
 				<f:if condition="{rssItem.categories}"><category>{rssItem.categories}</category></f:if>
 				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
 				<f:if condition="{rssItem.image}">
-					<media:thumbnail width="120" height="120" url="{baseUrl}<f:uri.image image="{rssItem.image}" width="120" height="120c"/>"/>
+					<enclosure type="{rssItem.image.MimeType}" url="{baseUrl}<f:uri.image image="{rssItem.image}" width="120" height="120c"/>"/>
 				</f:if>
 				<comments><f:format.cdata>{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{rssItem.detailUid}', section : 'comments', absolute: '1', noCacheHash : '1')}</f:format.cdata></comments>
 				<slash:comments>{rssItem.comments -> f:count()}</slash:comments>
