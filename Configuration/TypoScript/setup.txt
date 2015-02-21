@@ -349,10 +349,6 @@ combinedRss {
 				1 = combinedRss
 			}
 		}
-
-		settings =< plugin.tx_efblog.settings
-		persistence =< plugin.tx_efblog.persistence
-		view =< plugin.tx_efblog.view
 	}
 
 	config {

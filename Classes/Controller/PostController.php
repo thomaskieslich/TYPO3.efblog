@@ -242,6 +242,7 @@ class PostController extends BaseController {
 	 * @return void
 	 */
 	public function combinedListAction() {
+		$this->settings['listView']['maxEntries'] = $this->settings['rss']['maxEntries'];
 		$posts = $this->postRepository->findPosts($this->settings);
 
 		$combinedPid = GeneralUtility::trimExplode(',', $this->settings['combinedPid'], TRUE);
