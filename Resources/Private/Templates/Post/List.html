@@ -7,6 +7,10 @@
 		<f:if condition="{settings.replaceTitle}">
 			{settings.blogTitle -> tk:document.title(mode: 'replace')}
 		</f:if>
+		<tk:headerData>
+			<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<f:uri.page additionalParams="{type:100}"/>" />
+		</tk:headerData>
+
 
 		<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
 			<f:for each="{paginatedPosts}" as="post">

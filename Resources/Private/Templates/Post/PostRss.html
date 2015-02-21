@@ -10,7 +10,7 @@
 		<image>
 		<link>{baseUrl}</link>
 		<title>{settings.rss.title}</title>
-		<url>{settings.rss.image}</url>
+		<url>{baseUrl}{settings.rss.image}</url>
 		</image>
 		<f:for each="{rssItems}" as="rssItem">
 			<item>
@@ -20,6 +20,9 @@
 				<description>{rssItem.description -> f:format.crop(maxCharacters: '280')}</description>
 				<f:if condition="{rssItem.categories}"><category>{rssItem.categories}</category></f:if>
 				<pubDate>{rssItem.date -> f:format.date(format:'r')}</pubDate>
+				<f:if condition="{rssItem.image}">
+					<enclosure type="{rssItem.image.MimeType}" length="{rssItem.image.Size}" url="{baseUrl}<f:uri.image image="{rssItem.image}" width="120" height="120c"/>"/>
+				</f:if>
 				<comments><f:format.cdata>{f:uri.page(additionalParams : '{tx_efblog_fe1:{post:rssItem.post}}', pageUid : '{settings.detailUid}', section : 'comments', absolute: '1', noCacheHash : '1')}</f:format.cdata></comments>
 				<slash:comments>{rssItem.comments -> f:count()}</slash:comments>
 			</item>
