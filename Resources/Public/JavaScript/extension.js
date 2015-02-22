@@ -40,10 +40,29 @@ $(function () {
 
 	//social
 	if ($('.tx-efblog-detail-social').length > 0) {
-		$.fn.socialSharePrivacy.settings.order = ['facebook', 'twitter', 'gplus',];
-		$.fn.socialSharePrivacy.settings.path_prefix = 'typo3conf/ext/efblog/Resources/Public/Social/';
-
-		$('.tx-efblog-detail-social').socialSharePrivacy();
+		$('.tx-efblog-detail-social').socialSharePrivacy({
+			path_prefix: 'typo3conf/ext/efblog/Resources/Public/Social/',
+			layout: 'line',
+			"services": {
+				"buffer":{"status":false},
+				"delicious":{"status":false},
+				"disqus":{"status":false},
+				"facebook":{"status":true},
+				"fbshare":{"status":true},
+				"flattr":{"status":false},
+				"gplus":{"status":true},
+				"hackernews":{"status":false},
+				"linkedin":{"status":false},
+				"mail":{"status":false},
+				"pinterest":{"status":false},
+				"reddit":{"status":false},
+				"stumbleupon":{"status":false},
+				"tumblr":{"status":false},
+				"twitter":{"status":true},
+				"xing":{"status":false}
+			},
+			order: ['facebook', 'twitter', 'gplus']
+		});
 	}
 
 	// Update the Cookie
