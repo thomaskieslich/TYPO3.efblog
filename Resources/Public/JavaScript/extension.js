@@ -63,7 +63,7 @@ $(function () {
 				"twitter":{"status":true},
 				"xing":{"status":false}
 			},
-			order: ['facebook', 'twitter', 'gplus']
+			order: ['facebook', 'fbshare', 'twitter', 'gplus']
 		});
 	}
 
