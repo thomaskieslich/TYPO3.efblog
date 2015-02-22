@@ -43,6 +43,8 @@ $(function () {
 		$('.tx-efblog-detail-social').socialSharePrivacy({
 			path_prefix: 'typo3conf/ext/efblog/Resources/Public/Social/',
 			layout: 'line',
+			info_link: '',
+			language: 'de',
 			"services": {
 				"buffer":{"status":false},
 				"delicious":{"status":false},
