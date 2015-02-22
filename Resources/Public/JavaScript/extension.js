@@ -41,10 +41,9 @@ $(function () {
 	//social
 	if ($('.tx-efblog-detail-social').length > 0) {
 		$.fn.socialSharePrivacy.settings.order = ['facebook', 'twitter', 'gplus',];
-		$.fn.socialSharePrivacy.settings.path_prefix = '../';
+		$.fn.socialSharePrivacy.settings.path_prefix = 'typo3conf/ext/efblog/Resources/Public/Social/';
 
-		$('.share').socialSharePrivacy();
-		$('#other').socialSharePrivacy({uri: 'http://example.com/'});
+		$('.tx-efblog-detail-social').socialSharePrivacy();
 	}
 
 	// Update the Cookie
