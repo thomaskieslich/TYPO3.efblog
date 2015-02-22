@@ -15,18 +15,7 @@ $(function () {
 		return false;
 	});
 
-	//Social
-	if ($('.tx-efblog-detail-social').length > 0) {
-		$('.tx-efblog-detail-social').socialSharePrivacy({
-			'css_path': '',
-			'lang_path': '/typo3conf/ext/efblog/Resources/Public/JavaScript/socialshareprivacy/lang/',
-			'language': 'de'
-		});
-	}
-
 	//Commentform
-	$('.tx-efblog-comment-form #tx-efblog-link').parent().parent().hide();
-
 	$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
 		console.log($(this).data('comment'));
 		$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
