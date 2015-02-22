@@ -1,15 +1,15 @@
 <f:if condition="{configuration.insertAbove}">
-	<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration}"/>
+	<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration class: 'top'}"/>
 </f:if>
 
 <f:renderChildren arguments="{contentArguments}"/>
 
 <f:if condition="{configuration.insertBelow}">
-	<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration}"/>
+	<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration, class: 'bottom'}"/>
 </f:if>
 
 <f:section name="paginator">
-	<div class="tx-efblog-widget-paginator">
+	<div class="tx-efblog-widget-paginator {class}">
 		<ul>
 			<li class="first">
 				<f:if condition="{pagination.displayRangeStart} > 1">
