@@ -38,6 +38,15 @@ $(function () {
 		});
 	});
 
+	//social
+	if ($('.tx-efblog-detail-social').length > 0) {
+		$.fn.socialSharePrivacy.settings.order = ['facebook', 'twitter', 'gplus',];
+		$.fn.socialSharePrivacy.settings.path_prefix = '../';
+
+		$('.share').socialSharePrivacy();
+		$('#other').socialSharePrivacy({uri: 'http://example.com/'});
+	}
+
 	// Update the Cookie
 	function updateCookie(el) {
 		var tmp = expanded.getUnique();
