@@ -46,6 +46,7 @@ $(function () {
 			layout: 'line',
 			info_link: '',
 			language: 'de',
+			cookie_path: '/',
 			"services": {
 				"buffer": {"status": false},
 				"delicious": {"status": false},
