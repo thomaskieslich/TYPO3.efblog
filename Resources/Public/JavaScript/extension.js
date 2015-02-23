@@ -96,6 +96,6 @@ Array.prototype.getUnique = function (sort) {
 		u[this[i]] = 1;
 	}
 	return (sort) ? a.sort() : a;
-}
+};
 
 
