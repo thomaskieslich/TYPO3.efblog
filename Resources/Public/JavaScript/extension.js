@@ -42,26 +42,27 @@ $(function () {
 	if ($('.tx-efblog-detail-social').length > 0) {
 		$('.tx-efblog-detail-social').socialSharePrivacy({
 			path_prefix: 'typo3conf/ext/efblog/Resources/Public/Social/',
+			css_path: 'socialshareprivacy.css',
 			layout: 'line',
 			info_link: '',
 			language: 'de',
 			"services": {
-				"buffer":{"status":false},
-				"delicious":{"status":false},
-				"disqus":{"status":false},
-				"facebook":{"status":true},
-				"fbshare":{"status":true},
-				"flattr":{"status":false},
-				"gplus":{"status":true},
-				"hackernews":{"status":false},
-				"linkedin":{"status":false},
-				"mail":{"status":false},
-				"pinterest":{"status":false},
-				"reddit":{"status":false},
-				"stumbleupon":{"status":false},
-				"tumblr":{"status":false},
-				"twitter":{"status":true},
-				"xing":{"status":false}
+				"buffer": {"status": false},
+				"delicious": {"status": false},
+				"disqus": {"status": false},
+				"facebook": {"status": true},
+				"fbshare": {"status": true},
+				"flattr": {"status": false},
+				"gplus": {"status": true},
+				"hackernews": {"status": false},
+				"linkedin": {"status": false},
+				"mail": {"status": false},
+				"pinterest": {"status": false},
+				"reddit": {"status": false},
+				"stumbleupon": {"status": false},
+				"tumblr": {"status": false},
+				"twitter": {"status": true},
+				"xing": {"status": false}
 			},
 			order: ['facebook', 'fbshare', 'twitter', 'gplus']
 		});
