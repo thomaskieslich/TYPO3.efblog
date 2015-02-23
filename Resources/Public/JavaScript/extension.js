@@ -40,14 +40,14 @@ $(function () {
 
 	//social
 	if ($('.tx-efblog-detail-social').length > 0) {
-		$.fn.socialSharePrivacy.settings.cookie_path = "/";
-		$.fn.socialSharePrivacy.settings.cookie_expires = 90;
 		$('.tx-efblog-detail-social').socialSharePrivacy({
 			path_prefix: 'typo3conf/ext/efblog/Resources/Public/Social/',
 			css_path: 'socialshareprivacy.css',
 			layout: 'line',
 			info_link: '',
 			language: 'de',
+			cookie_path: '/',
+			cookie_expires: 365,
 			"services": {
 				"buffer": {"status": false},
 				"delicious": {"status": false},
