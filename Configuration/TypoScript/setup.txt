@@ -4,7 +4,7 @@ page {
 	}
 
 	includeJSFooterlibs {
-#		efblog-jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
+		efblog-jquery_cookie = EXT:efblog/Resources/Public/JavaScript/jquery.cookie-1.4.1.min.js
 		efblog-datepick_plugin = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.plugin.min.js
 		efblog-datepick = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick.min.js
 		efblog-datepick_de = EXT:efblog/Resources/Public/JavaScript/datepicker/jquery.datepick-de.js
