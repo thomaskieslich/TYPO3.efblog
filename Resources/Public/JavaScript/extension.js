@@ -46,8 +46,7 @@ $(function () {
 			layout: 'line',
 			info_link: '',
 			language: 'de',
-			cookie_path: '/',
-			cookie_expires: 365,
+			'perma_option': true,
 			"services": {
 				"buffer": {"status": false},
 				"delicious": {"status": false},
