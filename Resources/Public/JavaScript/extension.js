@@ -31,7 +31,6 @@ $(function () {
 		});
 	}
 
-	txEfblogArchive = [];
 	$('.tx-efblog-widget-content .year').click(function () {
 		$(this).next().slideToggle('300', function () {
 			if ($(this).is(':hidden')) {
