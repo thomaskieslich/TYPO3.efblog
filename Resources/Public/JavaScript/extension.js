@@ -24,17 +24,24 @@ $(function () {
 	//Archive menu
 	$('.tx-efblog-widget-content .year').next().hide();
 
-	var cookie = $.cookie('txEfblogArchive'),
-			expanded = cookie ? cookie.split('|').getUnique() : [],
-			cookieExpires = 7;
+	var txEfblogArchive = (getLocalStorage('txEfblogArchive')) ? getLocalStorage('txEfblogArchive') : [];
+	if (txEfblogArchive) {
+		$.each(txEfblogArchive, function (index, value) {
+			$('#' + value).show();
+		});
+	}
 
-	$.each(expanded, function () {
-		$('#' + this).show();
-	});
-
+	txEfblogArchive = [];
 	$('.tx-efblog-widget-content .year').click(function () {
 		$(this).next().slideToggle('300', function () {
-			updateCookie(this);
+			if ($(this).is(':hidden')) {
+				txEfblogArchive.remove($(this).attr('id'));
+			} else {
+				txEfblogArchive.push($(this).attr('id'));
+			}
+
+			//set for 7 days
+			setLocalStorage('txEfblogArchive', txEfblogArchive.unique(), 1440 * 7);
 		});
 	});
 
@@ -68,33 +75,69 @@ $(function () {
 			order: ['facebook', 'fbshare', 'twitter', 'gplus']
 		});
 	}
-
-	// Update the Cookie
-	function updateCookie(el) {
-		var tmp = expanded.getUnique();
-		if ($(el).is(':hidden')) {
-			tmp.splice(tmp.indexOf(el.id), 1);
-		} else {
-			tmp.push(el.id);
-		}
-		expanded = tmp.getUnique();
-		$.cookie('txEfblogArchive', expanded.join('|'), {
-			expires: cookieExpires
-		});
-	}
 });
 
-// Return a unique array.
-Array.prototype.getUnique = function (sort) {
-	var u = {}, a = [], i, l = this.length;
-	for (i = 0; i < l; ++i) {
-		if (this[i] in u) {
-			continue;
-		}
-		a.push(this[i]);
-		u[this[i]] = 1;
+//localStorage
+/**
+ *
+ * @param key
+ * @param jsonData
+ * @param expires in minutes
+ * @returns {*}
+ */
+function setLocalStorage(key, jsonData, expires) {
+	if (!window.localStorage) return false;
+	if (expires == undefined || expires == 'null') { expires = 1440 * 7; }
+	var expirationMS = expires * 60 * 1000;
+	var record = {value: JSON.stringify(jsonData), expires: new Date().getTime() + expirationMS}
+	localStorage.setItem(key, JSON.stringify(record));
+	return jsonData;
+}
+
+/**
+ *
+ * @param key
+ * @returns {*}
+ */
+function getLocalStorage(key) {
+	if (!window.localStorage) return false;
+	var record = JSON.parse(localStorage.getItem(key));
+	if (!record) {return false;}
+	if (new Date().getTime() < record.expires) {
+		return JSON.parse(record.value)
+	} else {
+		localStorage.removeItem(key);
 	}
-	return (sort) ? a.sort() : a;
+}
+
+/**
+ * remove by value
+ * @returns {Array}
+ */
+Array.prototype.remove = function () {
+	var what, a = arguments, L = a.length, ax;
+	while (L && this.length) {
+		what = a[--L];
+		while ((ax = this.indexOf(what)) !== -1) {
+			this.splice(ax, 1);
+		}
+	}
+	return this;
+};
+
+/**
+ * Return unique Array
+ * @returns {Array}
+ */
+Array.prototype.unique = function () {
+	var n = {}, r = [];
+	for (var i = 0; i < this.length; i++) {
+		if (!n[this[i]]) {
+			n[this[i]] = true;
+			r.push(this[i]);
+		}
+	}
+	return r;
 };
 
 
