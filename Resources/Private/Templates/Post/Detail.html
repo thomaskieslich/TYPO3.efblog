@@ -4,31 +4,31 @@
 	<f:layout name="Default"/>
 	<f:section name="content">
 		<f:if condition="{post}">
-			<f:render partial="Post/DetailMeta" section="main" arguments="{post: post, description: description}"/>
+			<f:render partial="DetailMeta" section="main" arguments="{post: post, description: description}"/>
 
 			<div class="tx-efblog-detail-container" data-uid="{post.uid}">
 				<f:if condition="{settings.detailView.showBreadCrumb}">
-					<f:render partial="Post/DetailBreadCrumb" section="main" arguments="{breadCrumb: breadCrumb}"/>
+					<f:render partial="DetailBreadCrumb" section="main" arguments="{breadCrumb: breadCrumb}"/>
 				</f:if>
 
-				<f:render partial="Post/DetailBody" section="main" arguments="{post: post, pages: pages}"/>
+				<f:render partial="DetailBody" section="main" arguments="{post: post, pages: pages}"/>
 
 				<!--Social-->
 				<f:if condition="{settings.detailView.showSocial}">
-					<f:render partial="Post/DetailSocial" section="meta" arguments="{post: post, description : description}"/>
-					<f:render partial="Post/DetailSocial" section="main"/>
+					<f:render partial="DetailSocial" section="meta" arguments="{post: post, description : description}"/>
+					<f:render partial="DetailSocial" section="main"/>
 				</f:if>
 
-				<f:render partial="Post/DetailFooter" section="main" arguments="{post: post}"/>
+				<f:render partial="DetailFooter" section="main" arguments="{post: post}"/>
 
 				<f:if condition="{post.relatedPosts}">
-					<f:render partial="Post/DetailRelated" section="main" arguments="{post: post}"/>
+					<f:render partial="DetailRelated" section="main" arguments="{post: post}"/>
 				</f:if>
 			</div>
 		</f:if>
 
 		<f:if condition="{post.comments}">
-			<f:render partial="Post/DetailComments" section="main" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
+			<f:render partial="DetailComments" section="main" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
 		</f:if>
 
 		<f:if condition='{allowComments}'>

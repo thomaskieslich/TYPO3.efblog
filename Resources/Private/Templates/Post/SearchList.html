@@ -33,8 +33,8 @@
 				<tk:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.listView.paginator}">
 					<f:for each="{paginatedPosts}" as="post">
 						<div class="tx-efblog-list-item">
-							<f:render partial="Post/ListItemBody" section="main" arguments="{post : post}"/>
-							<f:render partial="Post/ListItemFooter" section="main" arguments="{post : post}"/>
+							<f:render partial="ListItemBody" section="main" arguments="{post : post}"/>
+							<f:render partial="ListItemFooter" section="main" arguments="{post : post}"/>
 						</div>
 					</f:for>
 				</tk:widget.paginate>
