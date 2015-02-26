@@ -15,7 +15,6 @@ $(function () {
 				$('.tx-efblog-detail-social .fb-like-container #fb-like-btn').removeClass('off')
 			} else {
 				loadFbLike();
-				alert('load like');
 			}
 		} else {
 			setLocalStorage('txEfblogSocial-fblike', false, 1);
@@ -42,7 +41,6 @@ $(function () {
 				$('.tx-efblog-detail-social .fb-share-container #fb-share-btn').removeClass('off')
 			} else {
 				loadFbShare();
-				alert('load share');
 			}
 		} else {
 			setLocalStorage('txEfblogSocial-fbshare', false, 1);
