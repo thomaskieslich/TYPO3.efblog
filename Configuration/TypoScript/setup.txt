@@ -90,6 +90,11 @@ plugin.tx_efblog {
 			displayArchived = all
 		}
 
+		categoryList {
+			imageWidth = 120
+			imageHeight = 120c
+		}
+
 		detailView {
 			showBreadCrumb = 1
 			divType = div
@@ -235,12 +240,15 @@ plugin.tx_efblog {
 		templateRootPaths {
 			10 = EXT:efblog/Resources/Private/Templates/
 		}
+
 		partialRootPaths {
 			10 = EXT:efblog/Resources/Private/Partials/
 		}
+
 		layoutRootPaths {
 			10 = EXT:efblog/Resources/Private/Layouts/
 		}
+
 		messageRootPath = EXT:efblog/Resources/Private/Templates/
 	}
 
@@ -352,6 +360,7 @@ combinedRss {
 				1 = combinedRss
 			}
 		}
+
 		settings =< plugin.tx_efblog.settings
 		persistence =< plugin.tx_efblog.persistence
 		view =< plugin.tx_efblog.view
