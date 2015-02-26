@@ -1,0 +1,89 @@
+.tx-efblog-detail-social {
+	.switch {
+		@include size(rem(30) rem(20));
+		float: left;
+		background-size: rem(30) rem(20);
+		background-image: url(#{$image-path}social/btn-off.png);
+		background-repeat: no-repeat;
+		background-position: left top;
+		background-color: #fff;
+		cursor: pointer;
+		&.on {
+			background-image: url(#{$image-path}social/btn-on.png);
+			}
+		}
+	.fb-like-container {
+		height: rem(20);
+		overflow: hidden;
+		line-height: 1;
+		float: left;
+		.off {
+			display: none;
+			}
+		.dummyButtonContainer {
+			margin-left: rem(35);
+			width: rem(80);
+			background-color: $medium-gray;
+			.dummyButtonImage {
+				float: left;
+				@include size(rem(14));
+				margin: rem(3);
+				background-size: rem(14);
+				background-image: url(#{$image-path}social/fb-dummy.png);
+				background-repeat: no-repeat;
+				background-position: center top;
+				}
+			.dummyButtonLabel {
+				font-weight: bold;
+				font-size: rem(11);
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				height: rem(20);
+				line-height: rem(20);
+				white-space: nowrap;
+				color: #fff;
+				}
+			}
+		#fb-like-btn {
+			margin-left: rem(35);
+			min-width: rem(110);
+			}
+		}
+
+	.fb-share-container {
+		height: rem(20);
+		overflow: hidden;
+		line-height: 1;
+		float: left;
+		.off {
+			display: none;
+			}
+		.dummyButtonContainer {
+			margin-left: rem(35);
+			width: rem(80);
+			background-color: $medium-gray;
+			.dummyButtonImage {
+				float: left;
+				@include size(rem(14));
+				margin: rem(3);
+				background-size: rem(14);
+				background-image: url(#{$image-path}social/fb-dummy.png);
+				background-repeat: no-repeat;
+				background-position: center top;
+				}
+			.dummyButtonLabel {
+				font-weight: bold;
+				font-size: rem(11);
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				height: rem(20);
+				line-height: rem(20);
+				white-space: nowrap;
+				color: #fff;
+				}
+			}
+		#fb-share-btn {
+			margin-left: rem(35);
+			min-width: rem(110);
+			}
+		}
+
+	}

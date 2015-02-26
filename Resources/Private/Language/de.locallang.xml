@@ -53,8 +53,10 @@
 			<label index="property_title">Titel</label>
 			<label index="property_website">Webseite</label>
 			<label index="read_more">mehr</label>
+			<label index="social_fb.like">Gefällt mir</label>
+			<label index="social_fb.share">Teilen</label>
 			<label index="teaser_more">…</label>
-			<label index="view_search_no_results">Keine Suchergebnisse für </label>
+			<label index="view_search_no_results">Keine Suchergebnisse für</label>
 			<label index="view_search_result">Ergebnis für</label>
 			<label index="view_search_results">Ergebnisse für</label>
 			<label index="view_search_submit">Beiträge suchen</label>

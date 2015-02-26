@@ -648,4 +648,79 @@ div.mce-fullscreen {
 .tx-efblog-calendar-container .calEntries {
   display: inline-block; }
 
+.tx-efblog-detail-social .switch {
+  height: 1.25rem;
+  width: 1.875rem;
+  float: left;
+  background-size: 1.875rem 1.25rem;
+  background-image: url(../Images/social/btn-off.png);
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-color: #fff;
+  cursor: pointer; }
+  .tx-efblog-detail-social .switch.on {
+    background-image: url(../Images/social/btn-on.png); }
+.tx-efblog-detail-social .fb-like-container {
+  height: 1.25rem;
+  overflow: hidden;
+  line-height: 1;
+  float: left; }
+  .tx-efblog-detail-social .fb-like-container .off {
+    display: none; }
+  .tx-efblog-detail-social .fb-like-container .dummyButtonContainer {
+    margin-left: 2.1875rem;
+    width: 5rem;
+    background-color: #999; }
+    .tx-efblog-detail-social .fb-like-container .dummyButtonContainer .dummyButtonImage {
+      float: left;
+      height: 0.875rem;
+      width: 0.875rem;
+      margin: 0.1875rem;
+      background-size: 0.875rem;
+      background-image: url(../Images/social/fb-dummy.png);
+      background-repeat: no-repeat;
+      background-position: center top; }
+    .tx-efblog-detail-social .fb-like-container .dummyButtonContainer .dummyButtonLabel {
+      font-weight: bold;
+      font-size: 0.6875rem;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      height: 1.25rem;
+      line-height: 1.25rem;
+      white-space: nowrap;
+      color: #fff; }
+  .tx-efblog-detail-social .fb-like-container #fb-like-btn {
+    margin-left: 2.1875rem;
+    min-width: 6.875rem; }
+.tx-efblog-detail-social .fb-share-container {
+  height: 1.25rem;
+  overflow: hidden;
+  line-height: 1;
+  float: left; }
+  .tx-efblog-detail-social .fb-share-container .off {
+    display: none; }
+  .tx-efblog-detail-social .fb-share-container .dummyButtonContainer {
+    margin-left: 2.1875rem;
+    width: 5rem;
+    background-color: #999; }
+    .tx-efblog-detail-social .fb-share-container .dummyButtonContainer .dummyButtonImage {
+      float: left;
+      height: 0.875rem;
+      width: 0.875rem;
+      margin: 0.1875rem;
+      background-size: 0.875rem;
+      background-image: url(../Images/social/fb-dummy.png);
+      background-repeat: no-repeat;
+      background-position: center top; }
+    .tx-efblog-detail-social .fb-share-container .dummyButtonContainer .dummyButtonLabel {
+      font-weight: bold;
+      font-size: 0.6875rem;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      height: 1.25rem;
+      line-height: 1.25rem;
+      white-space: nowrap;
+      color: #fff; }
+  .tx-efblog-detail-social .fb-share-container #fb-share-btn {
+    margin-left: 2.1875rem;
+    min-width: 6.875rem; }
+
 /*# sourceMappingURL=Extension.css.map */
