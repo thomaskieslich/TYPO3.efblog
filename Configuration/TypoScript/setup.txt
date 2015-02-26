@@ -94,7 +94,7 @@ plugin.tx_efblog {
 			showBreadCrumb = 1
 			divType = div
 			hideDivider = 1
-			showSocial = 1
+			showSocial = 0
 			closeCommentsAfter = 120
 			dateFormat = %d. %B %Y
 		}

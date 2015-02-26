@@ -47,50 +47,8 @@
 		</f:if>
 	</f:section>
 
-	<f:section name="shariff">
-		<div class="tx-efblog-detail-social">
-			<tk:includeFile file="{f:uri.resource(path: 'Styles/shariff.min.css')}"/>
-			<tk:includeFile file="{f:uri.resource(path: 'JavaScript/shariff.min.js')}" footer="TRUE"/>
-			<div class="shariff"data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]" data-theme="standard" data-orientation="horizontal"></div>
-		</div>
-	</f:section>
-
-	<f:section name="lazy">
-		<div class="tx-efblog-detail-social">
-			<tk:includeFile file="{f:uri.resource(path: 'Social/social.js')}" footer="TRUE"/>
-			<f:render section="fb-like"/>
-			<f:render section="fb-share"/>
-		</div>
-	</f:section>
-
 	<f:section name="main">
 		<div class="tx-efblog-detail-social"></div>
-		<tk:includeFile file="{f:uri.resource(path: 'Social/javascripts/jquery.socialshareprivacy.min.autoload.js')}" footer="TRUE"/>
-		<tk:includeFile file="{f:uri.resource(path: 'Social/javascripts/jquery.socialshareprivacy.min.de.js')}" footer="TRUE"/>
-		<tk:includeFile file="{f:uri.resource(path: 'Social/javascripts/localstorage.js')}" footer="TRUE"/>
-		<tk:includeFile file="{f:uri.resource(path: 'Social/stylesheets/socialshareprivacy.css')}"/>
-	</f:section>
-
-	<f:section name="fb-like">
-		<div class="fb-like-container">
-			<span class="switch" id="fb-switch"> </span>
-			<div class="dummyButtonContainer">
-				<div class="dummyButtonImage" title="{f:translate(key: 'social_fb.like')}"></div>
-				<span class="dummyButtonLabel">{f:translate(key: 'social_fb.like')}</span>
-			</div>
-			<div id="fb-like-btn"></div>
-		</div>
-	</f:section>
-
-	<f:section name="fb-share">
-		<div class="fb-share-container">
-			<span class="switch" id="fb-switch"> </span>
-			<div class="dummyButtonContainer">
-				<div class="dummyButtonImage" title="{f:translate(key: 'social_fb.share')}"></div>
-				<span class="dummyButtonLabel">{f:translate(key: 'social_fb.share')}</span>
-			</div>
-			<div id="fb-share-btn"></div>
-		</div>
 	</f:section>
 
 </div>
