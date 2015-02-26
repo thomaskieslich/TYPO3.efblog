@@ -15,6 +15,7 @@ $(function () {
 				$('.tx-efblog-detail-social .fb-like-container #fb-like-btn').removeClass('off')
 			} else {
 				loadFbLike();
+				alert('load like');
 			}
 		} else {
 			setLocalStorage('txEfblogSocial-fblike', false, 1);
@@ -41,9 +42,10 @@ $(function () {
 				$('.tx-efblog-detail-social .fb-share-container #fb-share-btn').removeClass('off')
 			} else {
 				loadFbShare();
+				alert('load share');
 			}
 		} else {
-			setLocalStorage('txEfblogSocial-fblike', false, 1);
+			setLocalStorage('txEfblogSocial-fbshare', false, 1);
 			$('.tx-efblog-detail-social .fb-share-container .dummyButtonContainer').removeClass('off');
 			$('.tx-efblog-detail-social .fb-share-container #fb-share-btn').addClass('off');
 		}
@@ -56,5 +58,5 @@ function loadFbLike() {
 }
 
 function loadFbShare() {
-	$("#fb-like-btn").load("typo3conf/ext/efblog/Resources/Public/Social/fb-share.html");
+	$("#fb-share-btn").load("typo3conf/ext/efblog/Resources/Public/Social/fb-share.html");
 }
