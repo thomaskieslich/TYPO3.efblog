@@ -27,6 +27,28 @@ $(function () {
 			});
 		}
 	}
+
+	if ($('.tx-efblog-detail-comments-container').length > 0) {
+		var pid = $('.tx-efblog').data('pid') + "";
+		var postUid = $('.tx-efblog-detail-container').data('uid') + "";
+		$.ajax({
+			dataType: "html",
+			url: baseUrl + '&id=' + pid,
+			data: {
+				'tx_efblog_fe1[action]': 'loadComments',
+				'tx_efblog_fe1[post]': postUid
+			},
+			success: function (result) {
+				$('.tx-efblog-detail-comments-container').html(result);
+				$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
+					$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
+				});
+				if (location.hash) {
+					location.href = location.hash;
+				}
+			}
+		});
+	}
 });
 
 //###Calendar

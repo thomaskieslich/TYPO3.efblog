@@ -52,7 +52,26 @@ class AjaxController extends BaseController {
 		return 'false';
 	}
 
-		/**
+	/**
+	 * @param Post $post
+	 *
+	 * @return string
+	 */
+	public function loadCommentsAction(Post $post = NULL) {
+		$this->view->assign('post', $post);
+
+		$comments = $this->orderComments($post);
+		$this->view->assign('comments', $comments);
+
+		$allowComments = $this->checkAllowComments($post);
+		$this->view->assign('allowComments', $allowComments);
+
+		$html = $this->view->render();
+
+		return trim($html);
+	}
+
+	/**
 	 * show day
 	 *
 	 * @return string
@@ -105,5 +124,4 @@ class AjaxController extends BaseController {
 
 		return json_encode(array_unique($monthDates));
 	}
-
 }

@@ -16,17 +16,17 @@ page {
 
 plugin.tx_efblog {
 	mvc {
-		throwPageNotFoundExceptionIfActionCantBeResolved = 1
+#		throwPageNotFoundExceptionIfActionCantBeResolved = 1
 	}
 
 	features {
-		rewrittenPropertyMapper = 1
+#		rewrittenPropertyMapper = 1
 		skipDefaultArguments = 1
-		ignoreAllEnableFieldsInBe = 0
+#		ignoreAllEnableFieldsInBe = 0
 	}
 
 	legacy {
-		enableLegacyFlashMessageHandling = 0
+#		enableLegacyFlashMessageHandling = 0
 	}
 
 	settings {
@@ -119,6 +119,7 @@ plugin.tx_efblog {
 
 		comments {
 			allowComments = 1
+			loadAjaxComments = 1
 			defaultGravatar = typo3conf/ext/efblog/Resources/Public/Icons/gravatar_default.png
 			gravatarSize = 50
 			dateFormat = %d.%m.%Y, %H:%m

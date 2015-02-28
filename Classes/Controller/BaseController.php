@@ -58,7 +58,6 @@ class BaseController extends ActionController {
 	public function initializeAction() {
 		//set current Pid
 		$this->settings['currentPid'] = $GLOBALS['TSFE']->id;
-
 	}
 
 	/**
@@ -82,5 +81,81 @@ class BaseController extends ActionController {
 		}
 
 		return $branch;
+	}
+
+	/**
+	 * check comments allowed
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 * @return bool
+	 */
+	protected function checkAllowComments($post) {
+		$allowComments = FALSE;
+		if ($post->getAllowComments() == 0) {
+			$allowComments = TRUE;
+		}
+
+		if ($this->settings['detailView']['closeCommentsAfter'] > 0) {
+			$days = ($this->settings['detailView']['closeCommentsAfter'] * 24 * 60 * 60);
+			$postDate = (int)$post->getDate()->format('U');
+			if (($postDate + $days) > time()) {
+				$allowComments = TRUE;
+			} else {
+				$allowComments = FALSE;
+			}
+		}
+
+		if ($post->getAllowComments() == 1 || $this->settings['detailView']['closeCommentsAfter'] < 0) {
+			$allowComments = FALSE;
+		}
+
+		if ($post->getAllowComments() == 2) {
+			$allowComments = TRUE;
+		}
+
+		if ($post->getAllowComments() == 3 && isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser) {
+			$allowComments = TRUE;
+		}
+
+		//Post Owner
+		foreach ($post->getAuthor() as $author) {
+			if ($author && $GLOBALS['TSFE']->fe_user->user['uid'] == $author->getUid()) {
+				$allowComments = TRUE;
+			}
+		}
+
+		//Superadmin
+		if (is_array($GLOBALS['TSFE']->fe_user->groupData['uid']) &&
+				in_array($this->settings['superAdminGroup'], $GLOBALS['TSFE']->fe_user->groupData['uid'])
+		) {
+			$allowComments = TRUE;
+		}
+		if ($this->settings['comments']['allowComments'] == 0) {
+			$allowComments = FALSE;
+		}
+
+		return $allowComments;
+	}
+
+	/**
+	 * Order Comments
+	 *
+	 * @param \ThomasKieslich\Efblog\Domain\Model\Post $post
+	 *
+	 * @return array
+	 */
+	protected function orderComments($post) {
+		$comments = array();
+		$mainComments = $this->commentRepository->findMainComments($post)->toArray();
+
+		foreach ($mainComments as $key => $mainComment) {
+			$childs = $this->commentRepository->findAllChildren($mainComment)->toArray();
+			$comments[$key]['main'] = $mainComment;
+			if ($childs) {
+				$comments[$key]['childs'] = $childs;
+			}
+		}
+
+		return $comments;
 	}
 }

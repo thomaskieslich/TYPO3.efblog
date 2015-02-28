@@ -28,7 +28,14 @@
 		</f:if>
 
 		<f:if condition="{post.comments}">
-			<f:render partial="DetailComments" section="main" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
+			<f:if condition="{settings.comments.loadAjaxComments} == 1">
+				<f:then>
+					<div class="tx-efblog-detail-comments-container"></div>
+				</f:then>
+				<f:else>
+					<f:render partial="DetailComments" section="main" arguments="{comments: comments, post: post, allowComments: allowComments}"/>
+				</f:else>
+			</f:if>
 		</f:if>
 
 		<f:if condition='{allowComments}'>

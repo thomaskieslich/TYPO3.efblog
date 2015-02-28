@@ -16,6 +16,7 @@ $(function () {
 	});
 
 	//Commentform
+	$('.tx-efblog #comment-form .form-row.link').hide();
 	$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
 		$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
 	});

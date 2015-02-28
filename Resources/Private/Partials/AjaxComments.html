@@ -1,0 +1,39 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	 xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+	<f:section name="main">
+		<div class="tx-efblog-detail-comments" id="comments">
+			<f:if condition="{post.comments -> f:count()} > 1">
+				<f:then>
+					<h3>{post.comments -> f:count()} {f:translate(key : 'comment_comments')}</h3>
+				</f:then>
+				<f:else>
+					<h3>{post.comments -> f:count()} {f:translate(key : 'comment_comment')}</h3>
+				</f:else>
+			</f:if>
+			<p class="tx-efblog-comments-rss">
+				<f:link.page pageUid="{settings.detailUid}" pageType="101" additionalParams="{tx_efblog_fe1:{post : post}}">
+					{f:translate(key : 'comments_rss')}
+				</f:link.page>
+			</p>
+		</div>
+
+		<div class="tx-efblog-comments-list">
+			<f:for each="{comments}" as="comment" iteration="comIterator">
+				<f:cycle as="row" values="{0: 'odd', 1: 'even'}">
+					<div class="maincomment {row}" id="comment_{comment.main.uid}">
+						<f:render partial="CommentElement" section="main" arguments="{comment: comment.main, comIterator : comIterator, isMainComment : 1, allowComments: allowComments, post : post}"/>
+						<f:if condition="{comment.childs}">
+							<f:for each="{comment.childs}" as="answer" iteration="answerIterator">
+								<div class="answer">
+									<f:render partial="CommentElement" section="main" arguments="{comment : answer, comIterator : comIterator, isMainComment : 0, post : post}"/>
+								</div>
+							</f:for>
+						</f:if>
+					</div>
+				</f:cycle>
+			</f:for>
+		</div>
+	</f:section>
+
+</div>
