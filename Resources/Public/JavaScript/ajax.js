@@ -47,7 +47,7 @@ $(function () {
 					$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
 				});
 				if (location.hash){
-					location.reload();
+					$("html, body").animate({ scrollTop: $(location.hash).offset().top }, 1000);
 				}
 			}
 		});
