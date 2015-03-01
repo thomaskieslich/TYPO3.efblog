@@ -46,8 +46,8 @@ $(function () {
 				$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
 					$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
 				});
-				if (location.hash){
-					$("html, body").animate({ scrollTop: $(location.hash).offset().top }, 1000);
+				if (location.hash) {
+					$('html, body').animate({scrollTop: $(location.hash).offset().top}, 500);
 				}
 			}
 		});
