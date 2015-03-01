@@ -28,6 +28,9 @@ $(function () {
 		}
 	}
 
+	/**
+	 * load comments
+	 */
 	if ($('.tx-efblog-detail-comments-container').length > 0) {
 		var pid = $('.tx-efblog').data('pid') + "";
 		var postUid = $('.tx-efblog-detail-container').data('uid') + "";
@@ -43,8 +46,8 @@ $(function () {
 				$('.tx-efblog-comments-list').on('click', '.create-answer a', function () {
 					$('#comment-form #tx-efblog-parentComment').val($(this).data('comment'));
 				});
-				if (location.hash) {
-					location.href = location.hash;
+				if (location.hash){
+					location.reload();
 				}
 			}
 		});
