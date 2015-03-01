@@ -39,7 +39,7 @@
 					<f:if condition="{isMainComment}">
 						<f:if condition="{allowComments}">
 							<div class="create-answer">
-								<f:link.page pageUid="{settings.detailUid}" additionalParams="{tx_efblog_fe1:{post:comment.post}}" section="comment_{comment.uid}">
+								<f:link.page pageUid="{settings.detailUid}" section="comment-form" additionalParams="{tx_efblog_fe1:{post:comment.post}}" additionalAttributes="{data-comment: '{comment.uid}',data-post: '{post.uid}'}">
 									{f:translate(key : 'comment_reply')}
 								</f:link.page>
 							</div>
