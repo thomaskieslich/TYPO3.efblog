@@ -12,11 +12,11 @@
 					<h3>{post.comments -> f:count()} {f:translate(key : 'comment_comment')}</h3>
 				</f:else>
 			</f:if>
-			<p class="tx-efblog-comments-rss">
+			<div class="tx-efblog-comments-rss">
 				<f:link.page pageUid="{settings.detailUid}" pageType="101" additionalParams="{tx_efblog_fe1:{post : post}}">
 					{f:translate(key : 'comment_rss')}
 				</f:link.page>
-			</p>
+			</div>
 
 			<div class="tx-efblog-comments-list">
 				<f:for each="{comments}" as="comment" iteration="comIterator">
