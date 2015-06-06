@@ -210,7 +210,7 @@ plugin.tx_efblog {
 			maxEntries = 25
 			title = Blog RSS
 			description = RSS for Blog
-			image = typo3conf/ext/efblog/Resources/Public/Icons/rssdefault.png
+			image = EXT:efblog/Resources/Public/Icons/rss-default.png
 		}
 	}
 
