@@ -4,8 +4,27 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-$TCA['tx_efblog_domain_model_comment'] = array(
-		'ctrl' => $TCA['tx_efblog_domain_model_comment']['ctrl'],
+return array(
+		'ctrl' => array(
+				'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment',
+				'label' => 'author',
+				'label_alt' => 'title',
+				'label_alt_force' => 1,
+				'tstamp' => 'tstamp',
+				'crdate' => 'crdate',
+				'versioningWS' => 2,
+				'versioning_followPages' => TRUE,
+				'origUid' => 't3_origuid',
+				'languageField' => 'sys_language_uid',
+				'transOrigPointerField' => 'l18n_parent',
+				'transOrigDiffSourceField' => 'l18n_diffsource',
+				'default_sortby' => 'ORDER BY date DESC',
+				'delete' => 'deleted',
+				'enablecolumns' => array(
+						'disabled' => 'hidden'
+				),
+				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('efblog') . 'Resources/Public/Icons/tx_efblog_domain_model_comment.gif'
+		),
 		'interface' => array(
 				'showRecordFieldList' => 'author,email,website,location,title,message,date,spampoints,ip,parent_comment',
 		),

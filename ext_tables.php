@@ -34,80 +34,8 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Simple Blog');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_efblog_domain_model_post');
-$TCA['tx_efblog_domain_model_post'] = array(
-	'ctrl' => array(
-		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post',
-		'label' => 'title',
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'versioningWS' => 2,
-		'versioning_followPages' => TRUE,
-		'origUid' => 't3_origuid',
-		'languageField' => 'sys_language_uid',
-		'transOrigPointerField' => 'l18n_parent',
-		'transOrigDiffSourceField' => 'l18n_diffsource',
-		'default_sortby' => 'ORDER BY date DESC',
-		'delete' => 'deleted',
-		'enablecolumns' => array(
-			'disabled' => 'hidden',
-			'fe_group' => 'fe_group',
-		),
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Post.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_post.gif',
-		'dividers2tabs' => 1
-	)
-);
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_efblog_domain_model_category');
-$TCA['tx_efblog_domain_model_category'] = array(
-	'ctrl' => array(
-		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:category',
-		'label' => 'title',
-		'label_alt' => 'parent_category',
-		'label_alt_force' => 1,
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'versioningWS' => 2,
-		'versioning_followPages' => TRUE,
-		'origUid' => 't3_origuid',
-		'languageField' => 'sys_language_uid',
-		'transOrigPointerField' => 'l18n_parent',
-		'transOrigDiffSourceField' => 'l18n_diffsource',
-		'default_sortby' => 'ORDER BY title ASC',
-		'delete' => 'deleted',
-		'enablecolumns' => array(
-			'disabled' => 'hidden'
-		),
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Category.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_category.gif',
-		'dividers2tabs' => 1
-	)
-);
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_efblog_domain_model_comment');
-$TCA['tx_efblog_domain_model_comment'] = array(
-	'ctrl' => array(
-		'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:comment',
-		'label' => 'author',
-		'label_alt' => 'title',
-		'label_alt_force' => 1,
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'versioningWS' => 2,
-		'versioning_followPages' => TRUE,
-		'origUid' => 't3_origuid',
-		'languageField' => 'sys_language_uid',
-		'transOrigPointerField' => 'l18n_parent',
-		'transOrigDiffSourceField' => 'l18n_diffsource',
-		'default_sortby' => 'ORDER BY date DESC',
-		'delete' => 'deleted',
-		'enablecolumns' => array(
-			'disabled' => 'hidden'
-		),
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Comment.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_efblog_domain_model_comment.gif'
-	)
-);
 
 //extend fe_users
 $tempFeusers = array(

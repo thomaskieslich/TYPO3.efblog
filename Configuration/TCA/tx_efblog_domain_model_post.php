@@ -6,8 +6,27 @@ if (!defined('TYPO3_MODE')) {
 
 $ll = 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:';
 
-$TCA['tx_efblog_domain_model_post'] = array(
-		'ctrl' => $TCA['tx_efblog_domain_model_post']['ctrl'],
+return array(
+		'ctrl' => array(
+				'title' => 'LLL:EXT:efblog/Resources/Private/Language/locallang_db.xml:post',
+				'label' => 'title',
+				'tstamp' => 'tstamp',
+				'crdate' => 'crdate',
+				'versioningWS' => 2,
+				'versioning_followPages' => TRUE,
+				'origUid' => 't3_origuid',
+				'languageField' => 'sys_language_uid',
+				'transOrigPointerField' => 'l18n_parent',
+				'transOrigDiffSourceField' => 'l18n_diffsource',
+				'default_sortby' => 'ORDER BY date DESC',
+				'delete' => 'deleted',
+				'enablecolumns' => array(
+						'disabled' => 'hidden',
+						'fe_group' => 'fe_group',
+				),
+				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('efblog') . 'Resources/Public/Icons/tx_efblog_domain_model_post.gif',
+				'dividers2tabs' => 1
+		),
 		'interface' => array(
 				'showRecordFieldList' => 'title,author,date'
 		),
