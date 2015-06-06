@@ -18,7 +18,7 @@
 					<div class="title">
 						<h2>
 							<f:link.page additionalParams="{tx_efblog_fe1:{post : post}}" pageUid="{post.detailUid}">
-								{post.title -> f:format.crop(maxCharacters: '44', append: '{f:translate(key : "teaser_more")}')}
+								{post.title -> f:format.crop(maxCharacters: '{settings.listView.cropText}', append: '{f:translate(key : "teaser_more")}')}
 							</f:link.page>
 						</h2>
 					</div>
