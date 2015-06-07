@@ -36,7 +36,6 @@ plugin.tx_efblog {
 		searchUid =
 		categoryUid =
 		dateMenuUid =
-		backUid =
 
 		blogTitle = efblog Title
 
