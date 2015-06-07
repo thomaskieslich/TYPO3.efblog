@@ -197,7 +197,7 @@ class CommentController extends BaseController {
 
 		if ($this->settings['comments']['messageSuperAdmin']) {
 			/** @var \ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository */
-			$feuserRepository = $this->objectManager->get('\ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository');
+			$feuserRepository = $this->objectManager->get('ThomasKieslich\Efblog\Domain\Repository\AdministratorRepository');
 			/** @var \TYPO3\CMS\Extbase\Persistence\QueryInterface $superAdmins */
 			$superAdmins = $feuserRepository->findByUsergroup((int)$this->settings['superAdminGroup']);
 			if (isset($superAdmins) && $superAdmins->count() > 0) {

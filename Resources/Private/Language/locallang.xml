@@ -28,7 +28,7 @@
 			<label index="comment_message_message">message:</label>
 			<label index="comment_message_spampoints">Spampoints</label>
 			<label index="comment_reply">reply to this comment</label>
-			<label index="comment_rss">subscribe to comment RSSt</label>
+			<label index="comment_rss">subscribe to comment RSS</label>
 			<label index="comment_rss_from">from</label>
 			<label index="comment_rss_title">Comments for Post:</label>
 			<label index="comment_wrote">wrote at</label>
