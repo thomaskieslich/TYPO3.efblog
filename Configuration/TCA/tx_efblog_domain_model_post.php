@@ -159,22 +159,26 @@ return array(
 				'teaser_link' => Array(
 						'exclude' => 1,
 						'label' => $ll . 'post_teaserLink',
-						'config' => Array(
+						'config' => array(
 								'type' => 'input',
-								'max' => '255',
-								'size' => '150',
+								'size' => 50,
+								'max' => 1024,
 								'eval' => 'trim',
 								'wizards' => array(
-										'_PADDING' => 2,
 										'link' => array(
 												'type' => 'popup',
-												'title' => 'Link',
+												'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' =>
-														'height=300,width=500,status=0,menubar=0,scrollbars=1'
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
 										)
-								)
+								),
+								'softref' => 'typolink'
 						)
 				),
 				'teaser_link_title' => array(
