@@ -6,17 +6,17 @@
 	<f:section name="content">
 		<f:if condition="{maincategory}">
 		<div class="tx-efblog-maincategory-container">
-			<h1>
+			<h2>
 				{posts->f:count()}
 				<f:if condition="<f:count subject='{posts}' /> == 1">
 					<f:then>{f:translate(key : 'list_category_result')}</f:then>
 					<f:else>{f:translate(key : 'list_category_results')}</f:else>
 				</f:if>
-			</h1>
+			</h2>
 
 			<div class="tx-efblog-maincategory-infos">
 				<div class="text">
-					<h2>{maincategory.title}</h2>
+					<h1>{maincategory.title}</h1>
 					{maincategory.description -> f:format.html()}
 				</div>
 				<div class="image">
