@@ -15,16 +15,17 @@
 			</h2>
 
 			<div class="tx-efblog-maincategory-infos">
-				<div class="text">
-					<h1>{maincategory.title}</h1>
-					{maincategory.description -> f:format.html()}
-				</div>
 				<div class="image">
 					<f:for each="{maincategory.image}" as="image" iteration="imageIterator">
 						<f:if condition="{image}">
 							<f:image image="{image}" alt="{post.title}" width="{settings.categoryList.imageWidth}" height="{settings.categoryList.imageheight}"/>
 						</f:if>
 					</f:for>
+				</div>
+
+				<div class="text">
+					<h1>{maincategory.title}</h1>
+					{maincategory.description -> f:format.html()}
 				</div>
 
 				<f:if condition="{subcategories}">
