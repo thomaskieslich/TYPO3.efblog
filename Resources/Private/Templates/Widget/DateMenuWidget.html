@@ -16,7 +16,7 @@
 				<f:groupedFor each="{posts}" as="postsByYear" groupBy="yearOf{date}" groupKey="year">
 					<ul>
 						<li>
-							<h3 class="year"><a href="#dateMenu">{year} ({postsByYear -> f:count()})</a></h3>
+							<h3 class="year"><a href="javascript:void(0)">{year} ({postsByYear -> f:count()})</a></h3>
 							<ul id="y_{year}">
 								<f:groupedFor each="{postsByYear}" as="postsByMonth" groupBy="monthOf{date}" groupKey="month">
 									<li id="d_{year}_{month}">
