@@ -248,7 +248,7 @@ return array(
 								'allowed' => 'tx_efblog_domain_model_post',
 								'foreign_table' => 'tx_efblog_domain_model_post',
 								'MM_opposite_field' => 'related_from',
-								'size' => 4,
+								'size' => 2,
 								'minitems' => 0,
 								'maxitems' => 99,
 								'MM' => 'tx_efblog_post_post_mm',
@@ -271,7 +271,7 @@ return array(
 								'internal_type' => 'db',
 								'foreign_table' => 'tx_efblog_domain_model_post',
 								'allowed' => 'tx_efblog_domain_model_post',
-								'size' => 4,
+								'size' => 2,
 								'minitems' => 0,
 								'maxitems' => 99,
 								'MM' => 'tx_efblog_post_post_mm',
@@ -330,8 +330,8 @@ return array(
 						'label' => $ll . 'post_description',
 						'config' => Array(
 								'type' => 'text',
-								'cols' => '60',
-								'rows' => '1'
+								'cols' => '48',
+								'rows' => '3'
 						)
 				),
 				'teaser_options' => Array(
@@ -379,7 +379,6 @@ return array(
 				'post' => array(
 						'showitem' => '
 						title;' . $ll . 'post_title, --linebreak--,
-						author;' . $ll . 'post_author, --linebreak--,
 						content;' . $ll . 'post_content,
 				'
 				),
@@ -400,6 +399,7 @@ return array(
 				),
 				'relations' => array(
 						'showitem' => '
+						author;' . $ll . 'post_author, --linebreak--,
 						related_posts;' . $ll . 'post_related_post, --linebreak--,
 						related_from;' . $ll . 'post_related_post_from, --linebreak--,
 						comments;' . $ll . 'post_comments, --linebreak--,

@@ -58,7 +58,7 @@ return array(
 										array('', 0),
 								),
 								'foreign_table' => 'tx_efblog_domain_model_comment',
-								'foreign_table_where' => 'AND tx_efblog_domain_model_comment.uid=###REC_FIELD_l18n_parent### AND tx_efblog_domain_model_comment.sys_language_uid IN (-1,0)',
+								'foreign_table_where' => ' AND tx_efblog_domain_model_comment.uid=###REC_FIELD_l18n_parent### AND tx_efblog_domain_model_comment.sys_language_uid IN (-1,0)',
 						)
 				),
 				'l18n_diffsource' => array(
