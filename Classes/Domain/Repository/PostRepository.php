@@ -84,8 +84,9 @@ class PostRepository extends Repository {
 			$constraints[] = $this->createSearchConstraint($query, $settings);
 		}
 
+//		DebuggerUtility::var_dump($settings);
 		//date
-		if ($settings['year'] || $settings['month'] || $settings['day']) {
+		if ($settings['year'] || $settings['month'] || $settings['day'] || $settings['enableFuturePosts'] == 0) {
 			$constraints[] = $this->createDateTimeConstraint($query, $settings);
 		}
 
@@ -112,10 +113,6 @@ class PostRepository extends Repository {
 		//no future posts
 		if ($settings['enableFuturePosts'] == 0) {
 			$dateConstraints[] = $query->lessThan('date', $today);
-		}
-
-		if ($settings['startDate']) {
-			$dateConstraints[] = $query->greaterThanOrEqual('date', $settings['startDate']);
 		}
 
 		$start = '';
