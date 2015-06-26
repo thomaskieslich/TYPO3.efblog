@@ -312,7 +312,6 @@ return array(
 						'label' => $ll . 'tx_efblog_domain_model_post.post_teaserImage',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('tx_efblog_domain_model_post_teaser_image', array(
 								'appearance' => array(
-										'useSortable' => FALSE,
 										'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
 								),
 								'foreign_types' => array(
