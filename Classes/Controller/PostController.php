@@ -381,7 +381,7 @@ class PostController extends BaseController {
 			$combinedSettings[$value]['name'] = $combinedNames[$key];
 		}
 
-		$combinedPosts = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$combinedPosts = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 		foreach ($posts as $post) {
 			$post->setDetailUid((int)$combinedSettings[$post->getPid()]['detail']);
 			$post->setBlogName($combinedSettings[$post->getPid()]['name']);
