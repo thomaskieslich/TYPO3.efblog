@@ -186,15 +186,15 @@ class Post extends AbstractEntity {
 	 * @return array
 	 */
 	public function getTeaserLink() {
-		$link = explode(' ', $this->teaserLink);
-		if (count($link) == 1) {
-			$link['link'] = $link[0];
-		} else {
-			$link['link'] = $link[0];
-			$link['target'] = $link[1];
-		}
+//		$link = explode(' ', $this->teaserLink);
+//		if (count($link) == 1) {
+//			$link['link'] = $link[0];
+//		} else {
+//			$link['link'] = $link[0];
+//			$link['target'] = $link[1];
+//		}
 
-		return $link;
+		return $this->teaserLink;
 	}
 
 	/**
