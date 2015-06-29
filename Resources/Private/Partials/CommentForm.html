@@ -8,7 +8,7 @@
 				<h3>{f:translate(key : 'comment_add')}</h3>
 			</div>
 
-			<f:form controller="Comment" action="create" name="newComment" section="comment-form" id="comment-form" arguments="{post: post}">
+			<f:form controller="Comment" action="create" name="newComment" section="comment-form" id="comment-form" arguments="{post: post}" noCacheHash="true">
 				{f:form.hidden(property:"parentComment", id: "tx-efblog-parentComment")}
 				<div class="form-row half">
 					<div class="label">
