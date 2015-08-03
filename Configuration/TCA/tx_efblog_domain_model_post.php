@@ -369,8 +369,8 @@ return array(
 						--palette--;;metadata,
 					--div--;' . $ll . 'post_tab_relations,
 						--palette--;;relations,
-					--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
-						--palette--;;access,
+					--div--;' . $ll . 'post_tab_access,
+						--palette--;;access
 					'
 				)
 		),

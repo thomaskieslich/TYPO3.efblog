@@ -78,6 +78,7 @@
 			<label index="post_tab_post">Post</label>
 			<label index="post_tab_relations">Relations</label>
 			<label index="post_tab_teaser">Teaser</label>
+			<label index="post_tab_access">Access</label>
 			<label index="post_tags">Meta Keywords (comma separated list)</label>
 			<label index="post_teaserLink">Teaserlink</label>
 			<label index="post_teaserLink_title">Teaserlink Title</label>
