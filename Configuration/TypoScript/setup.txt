@@ -39,7 +39,7 @@ plugin.tx_efblog {
 		blogTitle = efblog Title
 
 		//Admin roles
-		superAdminGroup = 4
+		superAdminGroup = 3
 
 		enableFuturePosts = 0
 		//days for auto archive
@@ -122,9 +122,9 @@ plugin.tx_efblog {
 			gravatarSize = 50
 			dateFormat = %d.%m.%Y, %H:%m
 
-			messageSuperAdmin = 0
+			messageSuperAdmin = 1
 			messageAuthor = 0
-			messageSender = admin@example.org
+			messageSender = info@thomaskieslich.de
 			messageSenderName = Blog admin
 			messageHtml = 1
 			messsageHtmlTemplate = Message/Comment.html

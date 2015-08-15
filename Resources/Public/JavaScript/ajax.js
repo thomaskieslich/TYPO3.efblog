@@ -1,4 +1,4 @@
-var baseUrl = '?type=911&tx_efblog_fe1[controller]=Ajax';
+var baseUrl = '/?type=911&tx_efblog_fe1[controller]=Ajax';
 
 $(function () {
 	//update Post views
